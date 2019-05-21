@@ -3,7 +3,7 @@
     <md-toolbar md-elevation="0" class="md-transparent md-toolbar-absolute">
       <div class="md-toolbar-row md-offset">
         <div class="md-toolbar-section-start">
-          <h3 class="md-title">{{ $route.name }}</h3>
+          <!-- <h3 class="md-title">Choose your role</h3> -->
         </div>
         <div class="md-toolbar-section-end">
           <md-button
@@ -20,7 +20,7 @@
             class="md-collapse"
             :class="{ 'off-canvas-sidebar': responsive }"
           >
-            <md-list>
+            <!-- <md-list>
               <md-list-item href="/">
                 <md-icon>dashboard</md-icon>
                 Dashboard
@@ -41,7 +41,7 @@
                 <md-icon>lock_open</md-icon>
                 lock
               </md-list-item>
-            </md-list>
+            </md-list> -->
           </div>
         </div>
       </div>
@@ -63,7 +63,7 @@
         </div>
         <footer class="footer">
           <div class="container md-offset">
-            <nav>
+            <!-- <nav>
               <ul>
                 <li>
                   <router-link :to="{ path: '/dashboard' }">Home</router-link>
@@ -84,14 +84,14 @@
                   </a>
                 </li>
               </ul>
-            </nav>
+            </nav> -->
             <div class="copyright text-center">
               &copy; {{ new Date().getFullYear() }}
               <a
-                href="https://www.creative-tim.com/?ref=mdf-vuejs"
+                href="#"
                 target="_blank"
-                >Creative Tim</a
-              >, made with <i class="fa fa-heart heart"></i> for a better web
+                >OrangeLimo</a
+              >
             </div>
           </div>
         </footer>
@@ -129,7 +129,7 @@ export default {
   computed: {
     setBgImage() {
       let images = {
-        Pricing: "./img/bg-pricing.jpg",
+        Role: "./img/limo.jpg",
         Login: "./img/login.jpg",
         Register: "./img/register.jpg",
         Lock: "./img/lock.jpg"
@@ -225,5 +225,9 @@ $zoomOutEnd: 0.46;
 }
 .wrapper-full-page .zoomOut {
   animation-name: zoomOut8;
+}
+
+.full-page .container {
+    // width: auto !important;
 }
 </style>

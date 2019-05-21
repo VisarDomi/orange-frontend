@@ -3,10 +3,13 @@ import AuthLayout from "@/pages/Dashboard/Pages/AuthLayout.vue";
 
 // Dashboard pages
 import Dashboard from "@/pages/Dashboard/Dashboard.vue";
-
+import Reservations from "@/pages/Dashboard/Reservations.vue";
+import Drivers from "@/pages/Dashboard/Drivers.vue";
+import CreateDriver from "@/pages/Dashboard/Pages/CreateDriver.vue";
+import Invoice from "@/pages/Dashboard/Invoice.vue";
 // Pages
 import User from "@/pages/Dashboard/Pages/UserProfile.vue";
-import Pricing from "@/pages/Dashboard/Pages/Pricing.vue";
+import Role from "@/pages/Dashboard/Pages/Role.vue";
 import TimeLine from "@/pages/Dashboard/Pages/TimeLinePage.vue";
 import RtlSupport from "@/pages/Dashboard/Pages/RtlSupport.vue";
 import Login from "@/pages/Dashboard/Pages/Login.vue";
@@ -212,9 +215,9 @@ let authPages = {
       component: Register
     },
     {
-      path: "/pricing",
-      name: "Pricing",
-      component: Pricing
+      path: "/role",
+      name: "Role",
+      component: Role
     },
     {
       path: "/lock",
@@ -227,7 +230,7 @@ let authPages = {
 const routes = [
   {
     path: "/",
-    redirect: "/dashboard",
+    redirect: "/reservations",
     name: "Home"
   },
   componentsMenu,
@@ -241,7 +244,27 @@ const routes = [
     component: DashboardLayout,
     children: [
       {
-        path: "dashboard",
+        path: "reservations",
+        name: "Reservations",
+        components: { default: Reservations }
+      },
+      {
+        path: "drivers",
+        name: "Drivers",
+        components: {default: Drivers }
+      },
+      {
+        path: "createdriver",
+        name: "CreateDriver",
+        components: {default: CreateDriver}
+      },
+      {
+        path: "invoice",
+        name: "Invoice",
+        components: {default: Invoice}
+      },
+      {
+        path: "main",
         name: "Dashboard",
         components: { default: Dashboard }
       },

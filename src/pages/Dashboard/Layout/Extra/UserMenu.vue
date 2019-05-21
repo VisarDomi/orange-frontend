@@ -10,17 +10,14 @@
         @click.stop="toggleMenu"
         @click.capture="clicked"
       >
-        <span v-if="$route.meta.rtlActive">
-          {{ rtlTitle }}
-          <b class="caret"></b>
-        </span>
-        <span v-else>
+       
+        <span>
           {{ title }}
-          <b class="caret"></b>
+          
         </span>
       </a>
 
-      <collapse-transition>
+      <!-- <collapse-transition>
         <div v-show="!isClosed">
           <ul class="nav">
             <slot>
@@ -57,7 +54,7 @@
             </slot>
           </ul>
         </div>
-      </collapse-transition>
+      </collapse-transition> -->
     </div>
   </div>
 </template>
@@ -71,7 +68,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: "Tania Andrew"
+      default: "Administrator"
     },
     rtlTitle: {
       type: String,
@@ -79,7 +76,7 @@ export default {
     },
     avatar: {
       type: String,
-      default: "./img/faces/avatar.jpg"
+      default: "./img/faces/card-profile1-square.jpg"
     }
   },
   data() {

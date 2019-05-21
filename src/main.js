@@ -13,6 +13,19 @@ import routes from "./routes/routes";
 Vue.use(VueRouter);
 Vue.use(DashboardPlugin);
 
+// filter
+Vue.filter('money', function (value) {
+  if (typeof value !== "number") {
+      return value;
+  }
+  var formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'EUR',
+      minimumFractionDigits: 0
+  });
+  return formatter.format(value);
+});
+
 // configure router
 const router = new VueRouter({
   routes, // short for routes: routes

@@ -1,7 +1,7 @@
 <template>
   <footer class="footer">
     <div class="container">
-      <nav>
+      <!-- <nav>
         <ul>
           <li>
             <router-link
@@ -39,12 +39,12 @@
             </a>
           </li>
         </ul>
-      </nav>
+      </nav> -->
       <div class="copyright text-center">
         &copy; {{ new Date().getFullYear() }}
-        <a href="https://www.creative-tim.com/?ref=mdp-vuejs" target="_blank"
-          >Creative Tim</a
-        >, made with <i class="fa fa-heart heart"></i> for a better web
+        <a href="#" target="_blank"
+          >OrangeLimo</a
+        >
       </div>
     </div>
   </footer>

@@ -4,7 +4,7 @@
       class="md-layout-item md-size-33 md-medium-size-50 md-small-size-70 md-xsmall-size-100"
     >
       <login-card header-color="green">
-        <h4 slot="title" class="title">Administrator Log in</h4>
+        <h4 slot="title" class="title">Company Log in</h4>
         <!-- <md-button
           slot="buttons"
           href="#facebook"
