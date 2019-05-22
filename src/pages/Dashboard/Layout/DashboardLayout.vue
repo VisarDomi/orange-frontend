@@ -2,8 +2,7 @@
   <div
     class="wrapper"
     :class="[
-      { 'nav-open': $sidebar.showSidebar },
-      { rtl: $route.meta.rtlActive }
+      { 'nav-open': $sidebar.showSidebar }
     ]"
   >
     <notifications></notifications>
@@ -88,7 +87,7 @@ export default {
       sidebarBackgroundColor: "black",
       sidebarBackground: "green",
       sidebarBackgroundImage: "./img/sidebar-2.jpg",
-      sidebarMini: true,
+      sidebarMini: false,
       sidebarImg: true
     };
   },

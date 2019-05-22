@@ -67,7 +67,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: "Vue MD PRO"
+      default: "Orange Limo"
     },
     rtlTitle: {
       type: String,
@@ -103,7 +103,7 @@ export default {
     },
     logo: {
       type: String,
-      default: "./img/vue-logo.png"
+      default: "./img/orange_placeholder.png"
     },
     sidebarLinks: {
       type: Array,

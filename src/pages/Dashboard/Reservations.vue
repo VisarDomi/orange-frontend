@@ -75,7 +75,7 @@
               </md-table-cell> -->
             </md-table-row>
           </md-table>
-          <!-- <div class="footer-table md-table">
+          <div class="footer-table md-table">
             <table>
               <tfoot>
                 <tr>
@@ -93,7 +93,7 @@
                 </tr>
               </tfoot>
             </table>
-          </div> -->
+          </div>
         </md-card-content>
         <md-card-actions md-alignment="space-between">
           <div class="">
@@ -156,12 +156,12 @@ export default {
       currentSort: "name",
       currentSortOrder: "asc",
       pagination: {
-        perPage: 5,
+        perPage: 10,
         currentPage: 1,
         perPageOptions: [5, 10, 25, 50],
         total: 0
       },
-      footerTable: ["Name", "Email", "Age", "Salary", "Actions"],
+      footerTable: ["Name", "Email", "Driver", "Company"],
       searchQuery: "",
       propsToSearch: ["name", "email", "age"],
       tableData: users,

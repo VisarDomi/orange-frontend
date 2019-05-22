@@ -6,81 +6,94 @@
         :class="getClass(headerColor)"
       >
         <div class="card-icon">
-          <md-icon>perm_identity</md-icon>
+          <md-icon>card_travel</md-icon>
         </div>
         <h4 class="title">
-          Edit Profile - <small>Complete your profile</small>
+          Itinerary  - <small>Details</small>
         </h4>
       </md-card-header>
 
       <md-card-content>
-        <div class="md-layout">
-          <div class="md-layout-item md-small-size-100 md-size-33">
+
+        <div class="md-layout md-gutter">
+
+        <div class="md-layout md-layout-item md-small-size-100">
+          <div class="md-layout-item md-small-size-100 md-size-100">
             <md-field>
-              <label>Company (disabled)</label>
-              <md-input v-model="disabled" disabled></md-input>
-            </md-field>
-          </div>
-          <div class="md-layout-item md-small-size-100 md-size-33">
-            <md-field>
-              <label>User Name</label>
-              <md-input v-model="username" type="text"></md-input>
-            </md-field>
-          </div>
-          <div class="md-layout-item md-small-size-100 md-size-33">
-            <md-field>
-              <label>Email Address</label>
-              <md-input v-model="emailadress" type="email"></md-input>
-            </md-field>
-          </div>
-          <div class="md-layout-item md-small-size-100 md-size-50">
-            <md-field>
-              <label>First Name</label>
-              <md-input v-model="firstname" type="text"></md-input>
-            </md-field>
-          </div>
-          <div class="md-layout-item md-small-size-100 md-size-50">
-            <md-field>
-              <label>Last Name</label>
-              <md-input v-model="lastname" type="text"></md-input>
+              <label>Pickup Address</label>
+              <md-input v-model="pickup" disabled></md-input>
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100 md-size-100">
             <md-field>
-              <label>Adress</label>
-              <md-input v-model="address" type="text"></md-input>
+              <label>Destination</label>
+              <md-input v-model="destination" disabled></md-input>
             </md-field>
           </div>
-          <div class="md-layout-item md-small-size-100 md-size-33">
+          <div class="md-layout-item md-small-size-100 md-size-100">
             <md-field>
-              <label>City</label>
-              <md-input v-model="city" type="text"></md-input>
+              <label>Date of pickup</label>
+              <md-input v-model="date"  disabled></md-input>
             </md-field>
           </div>
-          <div class="md-layout-item md-small-size-100 md-size-33">
+          <div class="md-layout-item md-small-size-100 md-size-100">
             <md-field>
-              <label>Country</label>
-              <md-input v-model="country" type="text"></md-input>
+              <label>Time of pickup</label>
+              <md-input v-model="time" disabled></md-input>
             </md-field>
           </div>
-          <div class="md-layout-item md-small-size-100 md-size-33">
+          <div class="md-layout-item md-small-size-100 md-size-100">
             <md-field>
-              <label>Postal Code</label>
-              <md-input v-model="code" type="number"></md-input>
+              <label>Company</label>
+              <md-input v-model="company" disabled></md-input>
             </md-field>
           </div>
-          <div class="md-layout-item md-size-100">
-            <md-field maxlength="5">
-              <label>About Me</label>
-              <md-textarea v-model="aboutme"></md-textarea>
-            </md-field>
-          </div>
-          <div class="md-layout-item md-size-100 text-right">
-            <md-button class="md-raised md-success mt-4"
-              >Update Profile</md-button
-            >
-          </div>
+
+          
+
         </div>
+
+        <div class="md-layout md-layout-item md-small-size-100">
+                    <div class="md-layout-item md-small-size-100 md-size-100">
+            <md-field>
+              <label>Status</label>
+              <md-input v-model="status" disabled></md-input>
+            </md-field>
+          </div>
+
+          <div class="md-layout-item md-small-size-100 md-size-100">
+            <md-field>
+              <label>Driver</label>
+              <md-input v-model="driver" disabled></md-input>
+            </md-field>
+          </div>
+
+          <div class="md-layout-item md-size-100 " style="text-align:center;" >
+            <md-field>
+              
+              <md-autocomplete v-model="selectedEmployee" :md-options="employees" :md-open-on-focus="false" class="nounderline">
+                <label>Drivers</label>
+              </md-autocomplete>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <md-button class="md-raised md-success mt-4">Assign Driver</md-button>
+
+
+              </md-field>
+              
+          </div>
+
+          <!-- <div class="md-layout-item md-size-100 text-right">
+            
+          </div> -->
+        </div>
+
+        </div>
+
+
+
+
+
+
       </md-card-content>
     </md-card>
   </form>
@@ -97,16 +110,30 @@ export default {
   data() {
     return {
       username: null,
-      disabled: null,
-      emailadress: null,
-      lastname: null,
-      firstname: null,
-      address: null,
-      city: null,
-      country: null,
-      code: null,
-      aboutme:
-        "Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo."
+      pickup: "some address",
+      destination: "some destination",
+      date: "23-04-2019",
+      time: "15:40",
+      company: "Pepsi & CO",
+      status: "unassigned",
+      driver: "unassigned",
+      
+      employees: [
+        'Jim Halpert',
+        'Dwight Schrute',
+        'Michael Scott',
+        'Pam Beesly',
+        'Angela Martin',
+        'Kelly Kapoor',
+        'Ryan Howard',
+        'Kevin Malone',
+        'Creed Bratton',
+        'Oscar Nunez',
+        'Toby Flenderson',
+        'Stanley Hudson',
+        'Meredith Palmer',
+        'Phyllis Lapin-Vance'
+      ]
     };
   },
   methods: {
@@ -116,4 +143,15 @@ export default {
   }
 };
 </script>
-<style></style>
+<style scoped>
+
+.underlined ::after{
+  height:1px !important;
+}
+.nounderline ::after{
+height:0px !important;
+}
+
+
+
+</style>

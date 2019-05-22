@@ -7,6 +7,7 @@ import Reservations from "@/pages/Dashboard/Reservations.vue";
 import Drivers from "@/pages/Dashboard/Drivers.vue";
 import CreateDriver from "@/pages/Dashboard/Pages/CreateDriver.vue";
 import Invoice from "@/pages/Dashboard/Invoice.vue";
+import ReservationDetail from "@/pages/Dashboard/ReservationDetail.vue"
 // Pages
 import User from "@/pages/Dashboard/Pages/UserProfile.vue";
 import Role from "@/pages/Dashboard/Pages/Role.vue";
@@ -262,6 +263,11 @@ const routes = [
         path: "invoice",
         name: "Invoice",
         components: {default: Invoice}
+      },
+      {
+        path: "reservationdetail",
+        name: "ReservationDetail",
+        components: {default: ReservationDetail}
       },
       {
         path: "main",

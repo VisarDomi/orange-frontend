@@ -1,9 +1,13 @@
 <template>
 <div class="content-wrapper">
-
+<div class="md-layout" style="margin-bottom:50px;">
+	<div class="md-layout-item ">
+		<md-button class="md-success" @click="exportPDF()">Generate PDF</md-button>
+	</div>
+</div>
 
 					<!-- Row start -->
-					<div class="row gutters">
+					<div class="row gutters generate">
 						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
 							<div class="card">
 								<div class="card-body p-0">
@@ -19,12 +23,10 @@
 												</div>
 												<div class="col-lg-6 col-md-6 col-sm-6">
 													<div class="btn-group float-right">
-														<a href="#" @click="exportPDF()" class="btn btn-outline-info btn-sm">
-															<i class="icon-export"></i> Export PDF
-														</a>
-														<a href="#" class="btn btn-outline-danger btn-sm ml-2">
+														
+														<!-- <a href="#" class="btn btn-outline-danger btn-sm ml-2">
 															<i class="icon-printer"></i> Print
-														</a>
+														</a> -->
 													</div>
 												</div>
 											</div>
@@ -55,7 +57,8 @@
 												<div class="col-lg-4 col-md-4 col-sm-4">
 													<div class="invoice-details">
 														<small>Invoice No - <span class="badge badge-info">#00099</span></small><br>
-														<small>March 35th 2019</small><br>
+														<small>Sent - March 35th 2019</small><br>
+														<small>Due - April 20th 2019</small><br>
 													</div>
 												</div>
 											</div>
@@ -68,7 +71,7 @@
 											<div class="row gutters">
 												<div class="col-lg-6 col-md-6 col-sm-6">
 													<p><b>Hello, James</b></p>
-													<p>Thank you for shopping from our store and for your order.</p>
+													<p>Thank you for riding with us and for your order.</p>
 												</div>
 												<div class="col-lg-6 col-md-6 col-sm-6">
 													
@@ -92,7 +95,7 @@
 															<tbody>
 																<tr>
 																	<td>
-																		Retail Monitor
+																		Limo Ride to Airport
 																		<p class="m-0 text-muted">
 																			<small>Reference site about Lorem Ipsum, giving information on its origins</small>
 																		</p>
@@ -103,7 +106,7 @@
 																</tr>
 																<tr>
 																	<td>
-																		Retail Admin Dashboard
+																		Refreshing drinks
 																		<p class="m-0 text-muted">
 																			<small>As well as a random Lipsum generator.</small>
 																		</p>
@@ -114,7 +117,7 @@
 																</tr>
 																<tr>
 																	<td>
-																		Retail Web App
+																		Environment tax
 																		<p class="m-0 text-muted">
 																			<small>Lorem ipsum has become the industry standard.</small>
 																		</p>
@@ -192,7 +195,7 @@ export default {
   },
   methods: {
     exportPDF() {
-      const element = document.querySelector('.content-wrapper');
+      const element = document.querySelector('.generate');
       const opt = {
         margin: 8,
         filename: 'invoice.pdf',
