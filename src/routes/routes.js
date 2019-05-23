@@ -7,7 +7,17 @@ import Reservations from "@/pages/Dashboard/Reservations.vue";
 import Drivers from "@/pages/Dashboard/Drivers.vue";
 import CreateDriver from "@/pages/Dashboard/Pages/CreateDriver.vue";
 import Invoice from "@/pages/Dashboard/Invoice.vue";
+import InvoicePreview from "@/pages/Dashboard/InvoicePreview.vue"
 import ReservationDetail from "@/pages/Dashboard/ReservationDetail.vue"
+import CreateInvoice from "@/pages/Dashboard/CreateInvoice.vue"
+
+import CompanyDashboardLayout from "@/pages/Dashboard/Layout/CompanyDashboardLayout.vue"
+import CompanyReservations from "@/pages/Dashboard/CompanyReservations.vue"
+import CompanyCreateReservation from "@/pages/Dashboard/CompanyCreateReservation.vue"
+import CompanyAddEmployee from "@/pages/Dashboard/CompanyAddEmployee.vue"
+import CompanyEmployees from "@/pages/Dashboard/CompanyEmployees.vue"
+import CompanyInvoices from "@/pages/Dashboard/CompanyInvoices.vue"
+import CompanyInvoicePreview from "@/pages/Dashboard/CompanyInvoicePreview.vue"
 // Pages
 import User from "@/pages/Dashboard/Pages/UserProfile.vue";
 import Role from "@/pages/Dashboard/Pages/Role.vue";
@@ -241,6 +251,42 @@ const routes = [
   pagesMenu,
   authPages,
   {
+    path: "/company/",
+    component: CompanyDashboardLayout,
+    children:[
+      {
+        path: "reservations",
+        name: "Reservations",
+        components: { default: CompanyReservations }
+      },
+      {
+        path: "createreservation",
+        name: "Create Reservation",
+        components: { default: CompanyCreateReservation }
+      },
+      {
+        path: "addemployee",
+        name: "Add Employee",
+        components: {default: CompanyAddEmployee }
+      },
+      {
+        path: "employees",
+        name: "Employees",
+        components: { default: CompanyEmployees }
+      },
+      {
+        path: "invoices",
+        name: "Invoices",
+        components: { default: CompanyInvoices }
+      },
+      {
+        path: "invoicepreview",
+        name: "Invoice Preview",
+        components: { default: CompanyInvoicePreview }
+      }
+    ]
+  },
+  {
     path: "/",
     component: DashboardLayout,
     children: [
@@ -256,13 +302,23 @@ const routes = [
       },
       {
         path: "createdriver",
-        name: "CreateDriver",
+        name: "Create Driver",
         components: {default: CreateDriver}
       },
       {
         path: "invoice",
         name: "Invoice",
         components: {default: Invoice}
+      },
+      {
+        path: "invoicepreview",
+        name: "Invoice Preview",
+        components: {default: InvoicePreview}
+      },
+      {
+        path: "createinvoice",
+        name: "Create Invoice",
+        components: {default: CreateInvoice}
       },
       {
         path: "reservationdetail",
