@@ -134,6 +134,7 @@ import Fuse from "fuse.js";
 import swal from "sweetalert2";
 
 export default {
+  name: "Invoice",
   components: {
     Pagination
   },

@@ -33,6 +33,7 @@ var y = today.getFullYear();
 var m = today.getMonth();
 var d = today.getDate();
 export default {
+  name: "Calendar",
   data() {
     return {
       events: [

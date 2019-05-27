@@ -190,7 +190,7 @@ import * as html2pdf from 'html2pdf.js';
 // const moment = require('moment');
 
 export default {
-  name: 'Invoice',
+  name: 'InvoicePreview',
   components: {
   },
   methods: {

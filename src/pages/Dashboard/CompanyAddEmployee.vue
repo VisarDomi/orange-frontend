@@ -46,6 +46,7 @@
 </template>
 <script>
 export default {
+  name: "CompanyAddEmployee",
   components: {},
     props: {
     regularImg: {

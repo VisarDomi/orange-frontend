@@ -347,6 +347,7 @@ import {
 } from "@/components";
 
 export default {
+  name: "Dashboard",
   components: {
     StatsCard,
     ChartCard,

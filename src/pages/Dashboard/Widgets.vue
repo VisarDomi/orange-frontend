@@ -239,6 +239,7 @@ import {
 } from "@/components";
 
 export default {
+  name: "Widgets",
   components: {
     NavTabsCard,
     PricingCard,

@@ -176,6 +176,7 @@
 <script>
 import { ChartCard } from "@/components";
 export default {
+  name: "Charts",
   components: {
     ChartCard
   },

@@ -1,23 +1,6 @@
 import DashboardLayout from "@/pages/Dashboard/Layout/DashboardLayout.vue";
 import AuthLayout from "@/pages/Dashboard/Pages/AuthLayout.vue";
 
-// Dashboard pages
-import Dashboard from "@/pages/Dashboard/Dashboard.vue";
-import Reservations from "@/pages/Dashboard/Reservations.vue";
-import Drivers from "@/pages/Dashboard/Drivers.vue";
-import CreateDriver from "@/pages/Dashboard/Pages/CreateDriver.vue";
-import Invoice from "@/pages/Dashboard/Invoice.vue";
-import InvoicePreview from "@/pages/Dashboard/InvoicePreview.vue"
-import ReservationDetail from "@/pages/Dashboard/ReservationDetail.vue"
-import CreateInvoice from "@/pages/Dashboard/CreateInvoice.vue"
-
-import CompanyDashboardLayout from "@/pages/Dashboard/Layout/CompanyDashboardLayout.vue"
-import CompanyReservations from "@/pages/Dashboard/CompanyReservations.vue"
-import CompanyCreateReservation from "@/pages/Dashboard/CompanyCreateReservation.vue"
-import CompanyAddEmployee from "@/pages/Dashboard/CompanyAddEmployee.vue"
-import CompanyEmployees from "@/pages/Dashboard/CompanyEmployees.vue"
-import CompanyInvoices from "@/pages/Dashboard/CompanyInvoices.vue"
-import CompanyInvoicePreview from "@/pages/Dashboard/CompanyInvoicePreview.vue"
 // Pages
 import User from "@/pages/Dashboard/Pages/UserProfile.vue";
 import Role from "@/pages/Dashboard/Pages/Role.vue";
@@ -52,13 +35,7 @@ import GoogleMaps from "@/pages/Dashboard/Maps/GoogleMaps.vue";
 import FullScreenMap from "@/pages/Dashboard/Maps/FullScreenMap.vue";
 import VectorMaps from "@/pages/Dashboard/Maps/VectorMaps.vue";
 
-// Calendar
-import Calendar from "@/pages/Dashboard/Calendar.vue";
-// Charts
-import Charts from "@/pages/Dashboard/Charts.vue";
-import Widgets from "@/pages/Dashboard/Widgets.vue";
-
-let componentsMenu = {
+export const componentsMenu = {
   path: "/components",
   component: DashboardLayout,
   redirect: "/components/buttons",
@@ -101,7 +78,8 @@ let componentsMenu = {
     }
   ]
 };
-let formsMenu = {
+
+export const formsMenu = {
   path: "/forms",
   component: DashboardLayout,
   redirect: "/forms/regular",
@@ -130,7 +108,7 @@ let formsMenu = {
   ]
 };
 
-let tablesMenu = {
+export const tablesMenu = {
   path: "/table-list",
   component: DashboardLayout,
   redirect: "/table-list/regular",
@@ -154,7 +132,7 @@ let tablesMenu = {
   ]
 };
 
-let mapsMenu = {
+export const mapsMenu = {
   path: "/maps",
   component: DashboardLayout,
   name: "Maps",
@@ -183,7 +161,7 @@ let mapsMenu = {
   ]
 };
 
-let pagesMenu = {
+export const pagesMenu = {
   path: "/pages",
   component: DashboardLayout,
   name: "Pages",
@@ -210,7 +188,7 @@ let pagesMenu = {
   ]
 };
 
-let authPages = {
+export const authPages = {
   path: "/",
   component: AuthLayout,
   name: "Authentication",
@@ -237,116 +215,3 @@ let authPages = {
     }
   ]
 };
-
-const routes = [
-  {
-    path: "/",
-    redirect: "/reservations",
-    name: "Home"
-  },
-  componentsMenu,
-  formsMenu,
-  tablesMenu,
-  mapsMenu,
-  pagesMenu,
-  authPages,
-  {
-    path: "/company/",
-    component: CompanyDashboardLayout,
-    children:[
-      {
-        path: "reservations",
-        name: "Reservations",
-        components: { default: CompanyReservations }
-      },
-      {
-        path: "createreservation",
-        name: "Create Reservation",
-        components: { default: CompanyCreateReservation }
-      },
-      {
-        path: "addemployee",
-        name: "Add Employee",
-        components: {default: CompanyAddEmployee }
-      },
-      {
-        path: "employees",
-        name: "Employees",
-        components: { default: CompanyEmployees }
-      },
-      {
-        path: "invoices",
-        name: "Invoices",
-        components: { default: CompanyInvoices }
-      },
-      {
-        path: "invoicepreview",
-        name: "Invoice Preview",
-        components: { default: CompanyInvoicePreview }
-      }
-    ]
-  },
-  {
-    path: "/",
-    component: DashboardLayout,
-    children: [
-      {
-        path: "reservations",
-        name: "Reservations",
-        components: { default: Reservations }
-      },
-      {
-        path: "drivers",
-        name: "Drivers",
-        components: {default: Drivers }
-      },
-      {
-        path: "createdriver",
-        name: "Create Driver",
-        components: {default: CreateDriver}
-      },
-      {
-        path: "invoice",
-        name: "Invoice",
-        components: {default: Invoice}
-      },
-      {
-        path: "invoicepreview",
-        name: "Invoice Preview",
-        components: {default: InvoicePreview}
-      },
-      {
-        path: "createinvoice",
-        name: "Create Invoice",
-        components: {default: CreateInvoice}
-      },
-      {
-        path: "reservationdetail",
-        name: "ReservationDetail",
-        components: {default: ReservationDetail}
-      },
-      {
-        path: "main",
-        name: "Dashboard",
-        components: { default: Dashboard }
-      },
-      {
-        path: "calendar",
-        name: "Calendar",
-        components: { default: Calendar }
-      },
-      {
-        path: "charts",
-        name: "Charts",
-        components: { default: Charts }
-      },
-      {
-        path: "widgets",
-        name: "Widgets",
-        components: { default: Widgets }
-      }
-    ]
-  }
-];
-
-export default routes;

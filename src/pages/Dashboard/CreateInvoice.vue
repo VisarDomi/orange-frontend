@@ -595,6 +595,7 @@
 <script>
 import { SlideYDownTransition } from "vue2-transitions";
 export default {
+  name: "CreateInvoice",
   components: {
     SlideYDownTransition
   },

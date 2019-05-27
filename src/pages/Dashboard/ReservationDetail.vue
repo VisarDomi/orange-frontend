@@ -14,6 +14,7 @@
 <script>
 import { EditProfileForm, UserCard } from "@/pages";
 export default {
+  name: "ReservationDetail",
   components: {
     EditProfileForm,
     UserCard

@@ -46,6 +46,7 @@
 import { PricingCard, TestimonialCard } from "@/components";
 
 export default {
+  name: "CompanyEmployees",
   components: {
     PricingCard,
 
