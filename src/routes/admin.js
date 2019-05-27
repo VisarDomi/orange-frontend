@@ -38,7 +38,7 @@ export const admin = {
       path: "createdriver",
       name: "CreateDriver",
       components: { default: CreateDriver },
-      meta: setMeta("CreateDriver")
+      meta: setMeta("Create Driver")
     },
     {
       path: "invoice",
@@ -50,19 +50,19 @@ export const admin = {
       path: "invoicepreview",
       name: "InvoicePreview",
       components: { default: InvoicePreview },
-      meta: setMeta("InvoicePreview")
+      meta: setMeta("Invoice Preview")
     },
     {
       path: "createinvoice",
       name: "CreateInvoice",
       components: { default: CreateInvoice },
-      meta: setMeta("CreateInvoice")
+      meta: setMeta("Create Invoice")
     },
     {
       path: "reservationdetail",
       name: "ReservationDetail",
       components: { default: ReservationDetail },
-      meta: setMeta("ReservationDetail")
+      meta: setMeta("Reservation Detail")
     },
     {
       path: "dashboard",
