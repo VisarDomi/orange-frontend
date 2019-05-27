@@ -5,6 +5,7 @@ import CompanyAddEmployee from "@/pages/Dashboard/CompanyAddEmployee.vue";
 import CompanyEmployees from "@/pages/Dashboard/CompanyEmployees.vue";
 import CompanyInvoices from "@/pages/Dashboard/CompanyInvoices.vue";
 import CompanyInvoicePreview from "@/pages/Dashboard/CompanyInvoicePreview.vue";
+import { setMeta } from './common';
 
 export const company = {
   path: "/company/",
