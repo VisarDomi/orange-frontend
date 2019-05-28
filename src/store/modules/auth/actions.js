@@ -13,7 +13,7 @@ import UserService from "@/common/userstorage.service";
 
 export const actions = {
   async [LOGIN](context, credentials) {
-    console.log("outside post", credentials);
+    console.log("outside post auth credentials", credentials);
     context.commit(START_LOADING);
     await ApiService.login("auth/login", { auth: credentials }).then(res => {
       if (res.status == 200) {

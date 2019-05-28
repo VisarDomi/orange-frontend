@@ -34,7 +34,7 @@
     >
       <component
         :to="link.path"
-        @click.native="linkClick"
+        @click.native="linkClick()"
         :is="elementType(link, false)"
         :class="{ active: link.active }"
         class="nav-link"

@@ -35,7 +35,7 @@
           <p slot="description" class="card-description">
             Make a personal or company limo reservation with Orange.
           </p>
-          <md-button slot="footer" class="md-success md-round"
+          <md-button slot="footer" class="md-success md-round" @click="companyLogin()"
             >Log-in</md-button
           >
         </pricing-card>
@@ -50,7 +50,7 @@
           <p slot="description" class="card-description">
             Access your Orange Limo itineraries and upcoming trips.
           </p>
-          <md-button slot="footer" class="md-success md-round"
+          <md-button slot="footer" class="md-success md-round" @click="employeeLogin()"
             >Log-in</md-button
           >
         </pricing-card>
@@ -60,14 +60,26 @@
 </template>
 <script>
 import { PricingCard } from "@/components";
+import { SET_ROLE } from "@/store/mutations.type";
+
 export default {
+  name: "Role",
   components: {
     PricingCard
-  }, 
+  },
   methods: {
     adminLogin() {
-      this.router.push({ path: 'login' })
-    }
+      this.$router.push({ name: 'Login' })
+      this.$store.commit(SET_ROLE, { role: "admin" })
+    },
+    companyLogin() {
+      this.$router.push({ name: 'Login' })
+      this.$store.commit(SET_ROLE, { role: "company" })
+    },
+    employeeLogin() {
+      this.$router.push({ name: 'Login' })
+      this.$store.commit(SET_ROLE, { role: "employee" })
+    },
   }
 };
 </script>

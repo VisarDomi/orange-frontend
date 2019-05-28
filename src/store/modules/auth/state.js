@@ -4,5 +4,6 @@ export const state = {
   errors: null,
   user: {},
   token: "",
-  isAuthenticated: !!JwtService.getToken()
+  isAuthenticated: !!JwtService.getToken(),
+  role: ""
 };

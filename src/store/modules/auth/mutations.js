@@ -1,6 +1,11 @@
 import JwtService from "@/common/jwt.service";
 import UserService from "@/common/userstorage.service";
-import { SET_AUTH, SET_AUTH_SECOND, PURGE_AUTH } from "../../mutations.type";
+import {
+  SET_AUTH,
+  SET_AUTH_SECOND,
+  PURGE_AUTH,
+  SET_ROLE
+} from "../../mutations.type";
 
 export const mutations = {
   [SET_AUTH_SECOND](state, user) {
@@ -25,5 +30,9 @@ export const mutations = {
     state.isAuthenticated = false;
     UserService.destroyUser();
     state.user = {};
+  },
+  [SET_ROLE](state, param) {
+    console.log("role in muations is:", param.role)
+    state.role = param.role;
   }
 };

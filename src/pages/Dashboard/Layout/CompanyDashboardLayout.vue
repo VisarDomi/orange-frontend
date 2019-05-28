@@ -27,7 +27,7 @@
         >
         </sidebar-item>
         <sidebar-item
-          :link="{ name: 'Logout', icon: 'exit_to_app', path: '/dashboard' }"
+          :link="{ name: 'Logout', icon: 'exit_to_app', path: '/Login' }"
         >
         </sidebar-item>
       </template>
@@ -73,6 +73,7 @@ import ContentFooter from "./ContentFooter.vue";
 import MobileMenu from "./Extra/MobileMenu.vue";
 import UserMenu from "./Extra/CompanyUserMenu.vue";
 import { ZoomCenterTransition } from "vue2-transitions";
+import { LOGOUT } from "@/store/actions.type";
 
 export default {
   components: {
@@ -101,6 +102,11 @@ export default {
       if (this.$sidebar) {
         this.$sidebar.toggleMinimize();
       }
+    },
+    logout() {
+      this.$store.dispatch(LOGOUT).then(() => {
+        this.$router.push({ name: "Login" });
+      });
     }
   },
   mounted() {
