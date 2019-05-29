@@ -1,4 +1,12 @@
 <template>
+<div>
+		<div class="md-layout">
+			<div class="md-layout-item">
+
+				<md-button class="md-success" @click="createReservation()">Create reservation</md-button>
+			</div>
+		</div>
+
   <div class="md-layout">
     <div class="md-layout-item">
       <md-card>
@@ -112,6 +120,7 @@
       </md-card>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -171,6 +180,9 @@ export default {
     };
   },
   methods: {
+    createReservation(){
+      this.$router.push({ name: "CompanyCreateReservation" });
+    },
     customSort(value) {
       return value.sort((a, b) => {
         const sortBy = this.currentSort;

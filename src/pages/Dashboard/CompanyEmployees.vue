@@ -3,7 +3,7 @@
 <div class="md-layout">
     <div class="md-layout-item">
 
-        <md-button class="md-success" @click="addDriver()">Add new employee...</md-button>
+        <md-button class="md-success" @click="addEmployee()">Add new employee...</md-button>
     </div>
 </div>
 
@@ -62,8 +62,8 @@ export default {
     return {};
   },
   methods: {
-      addDriver(){
-          
+      addEmployee(){
+          this.$router.push({ name: "CompanyAddEmployee" });
       },
     onResponsiveInverted() {
       if (window.innerWidth < 768) {

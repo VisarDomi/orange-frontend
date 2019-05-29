@@ -38,9 +38,9 @@
               </slide-y-down-transition>
             </md-field>
           </div>
-          <label class="md-layout-item md-size-20 md-label-on-right">
+          <!-- <label class="md-layout-item md-size-20 md-label-on-right">
             <code>required</code>
-          </label>
+          </label> -->
         </div>
 
         <div class="md-layout">
@@ -51,9 +51,9 @@
               <md-input v-model="placeholder" placeholder="Write the primary address"></md-input>
             </md-field>
           </div>
-          <label class="md-layout-item md-size-20 md-label-on-right">
+          <!-- <label class="md-layout-item md-size-20 md-label-on-right">
             <code>optional</code>
-          </label>
+          </label> -->
         </div>
 
         <div class="md-layout">
@@ -64,9 +64,9 @@
               <md-input v-model="placeholder" placeholder="Write the secondary address"></md-input>
             </md-field>
           </div>
-          <label class="md-layout-item md-size-20 md-label-on-right">
+          <!-- <label class="md-layout-item md-size-20 md-label-on-right">
             <code>optional</code>
-          </label>
+          </label> -->
         </div>
 
         <div class="md-layout">
@@ -93,9 +93,9 @@
               </slide-y-down-transition>
             </md-field>
           </div>
-          <label class="md-layout-item md-size-20 md-label-on-right">
+          <!-- <label class="md-layout-item md-size-20 md-label-on-right">
             <code>required</code>
-          </label>
+          </label> -->
         </div>
 
         <div class="md-layout">
@@ -122,9 +122,9 @@
               </slide-y-down-transition>
             </md-field>
           </div>
-          <label class="md-layout-item md-size-20 md-label-on-right">
+          <!-- <label class="md-layout-item md-size-20 md-label-on-right">
             <code>numeric</code>
-          </label>
+          </label> -->
         </div>
       </md-card-content>
     </md-card>
@@ -167,9 +167,9 @@
               </slide-y-down-transition>
             </md-field>
           </div>
-          <label class="md-layout-item md-size-20 md-label-on-right">
+          <!-- <label class="md-layout-item md-size-20 md-label-on-right">
             <code>required</code>
-          </label>
+          </label> -->
         </div>
 
         <div class="md-layout">
@@ -180,9 +180,9 @@
               <md-input v-model="placeholder" placeholder="Write the primary address"></md-input>
             </md-field>
           </div>
-          <label class="md-layout-item md-size-20 md-label-on-right">
+          <!-- <label class="md-layout-item md-size-20 md-label-on-right">
             <code>optional</code>
-          </label>
+          </label> -->
         </div>
 
         <div class="md-layout">
@@ -193,9 +193,9 @@
               <md-input v-model="placeholder" placeholder="Write the secondary address"></md-input>
             </md-field>
           </div>
-          <label class="md-layout-item md-size-20 md-label-on-right">
+          <!-- <label class="md-layout-item md-size-20 md-label-on-right">
             <code>optional</code>
-          </label>
+          </label> -->
         </div>
 
         <div class="md-layout">
@@ -222,9 +222,9 @@
               </slide-y-down-transition>
             </md-field>
           </div>
-          <label class="md-layout-item md-size-20 md-label-on-right">
+          <!-- <label class="md-layout-item md-size-20 md-label-on-right">
             <code>required</code>
-          </label>
+          </label> -->
         </div>
 
         <div class="md-layout">
@@ -251,9 +251,9 @@
               </slide-y-down-transition>
             </md-field>
           </div>
-          <label class="md-layout-item md-size-20 md-label-on-right">
+          <!-- <label class="md-layout-item md-size-20 md-label-on-right">
             <code>numeric</code>
-          </label>
+          </label> -->
         </div>
       </md-card-content>
     </md-card>
@@ -296,25 +296,25 @@
               </slide-y-down-transition>
             </md-field>
           </div>
-          <label class="md-layout-item md-size-20 md-label-on-right">
+          <!-- <label class="md-layout-item md-size-20 md-label-on-right">
             <code>numeric</code>
-          </label>
+          </label> -->
         </div>
 
         <div class="md-layout">
           <label class="md-layout-item md-size-20 md-form-label">Invoice Date</label>
           <md-datepicker class="md-layout-item" v-model="selectedClose" md-immediately/>
-          <label class="md-layout-item md-size-20 md-label-on-right">
+          <!-- <label class="md-layout-item md-size-20 md-label-on-right">
             <code>required</code>
-          </label>
+          </label> -->
         </div>
 
         <div class="md-layout">
           <label class="md-layout-item md-size-20 md-form-label">Invoice Due</label>
           <md-datepicker class="md-layout-item" v-model="selectedClose" md-immediately/>
-          <label class="md-layout-item md-size-20 md-label-on-right">
+          <!-- <label class="md-layout-item md-size-20 md-label-on-right">
             <code>required</code>
-          </label>
+          </label> -->
         </div>
       </md-card-content>
     </md-card>
@@ -505,9 +505,9 @@
               </slide-y-down-transition>
             </md-field>
           </div>
-          <label class="md-layout-item md-size-20 md-label-on-right">
+          <!-- <label class="md-layout-item md-size-20 md-label-on-right">
             <code>required</code>
-          </label>
+          </label> -->
         </div>
 
         <div class="md-layout">
@@ -518,9 +518,9 @@
               <md-input v-model="placeholder" placeholder="Write the primary address"></md-input>
             </md-field>
           </div>
-          <label class="md-layout-item md-size-20 md-label-on-right">
+          <!-- <label class="md-layout-item md-size-20 md-label-on-right">
             <code>optional</code>
-          </label>
+          </label> -->
         </div>
 
         <div class="md-layout">
@@ -547,9 +547,9 @@
               </slide-y-down-transition>
             </md-field>
           </div>
-          <label class="md-layout-item md-size-20 md-label-on-right">
+          <!-- <label class="md-layout-item md-size-20 md-label-on-right">
             <code>numeric</code>
-          </label>
+          </label> -->
         </div>
       </md-card-content>
     </md-card>

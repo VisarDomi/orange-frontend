@@ -130,7 +130,7 @@ export default {
     setBgImage() {
       let images = {
         Role: "./img/limo.jpg",
-        Login: "./img/login.jpg",
+        Login: "./img/limo.jpg",
         Register: "./img/register.jpg",
         Lock: "./img/lock.jpg"
       };

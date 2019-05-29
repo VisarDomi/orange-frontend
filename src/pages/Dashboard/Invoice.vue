@@ -194,7 +194,7 @@ export default {
       });
 	},
 	createInvoice(){
-
+		this.$router.push({ name: "CreateInvoice" });
 	}
   },
   mounted() {

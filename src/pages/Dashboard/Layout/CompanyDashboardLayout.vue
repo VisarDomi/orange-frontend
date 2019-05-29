@@ -15,19 +15,19 @@
       <mobile-menu></mobile-menu>
       <template slot="links">
         <sidebar-item
-          :link="{ name: 'Reservations', icon: 'event', path: '/reservations' }"
+          :link="{ name: 'Reservations', icon: 'event', path: '/company/reservations' }"
         >
         </sidebar-item>
         <sidebar-item
-          :link="{ name: 'Employees', icon: 'face', path: '/employees' }"
+          :link="{ name: 'Employees', icon: 'face', path: '/company/employees' }"
         >
         </sidebar-item>
         <sidebar-item
-          :link="{ name: 'Invoices', icon: 'credit_card', path: '/invoice' }"
+          :link="{ name: 'Invoices', icon: 'credit_card', path: '/company/invoices' }"
         >
         </sidebar-item>
         <sidebar-item
-          :link="{ name: 'Logout', icon: 'exit_to_app', path: '/Login' }"
+          :link="{ name: 'Logout', icon: 'exit_to_app', path: '/logout' }"
         >
         </sidebar-item>
       </template>
@@ -102,11 +102,6 @@ export default {
       if (this.$sidebar) {
         this.$sidebar.toggleMinimize();
       }
-    },
-    logout() {
-      this.$store.dispatch(LOGOUT).then(() => {
-        this.$router.push({ name: "Login" });
-      });
     }
   },
   mounted() {

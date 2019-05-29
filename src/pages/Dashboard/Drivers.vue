@@ -63,7 +63,7 @@ export default {
   },
   methods: {
       addDriver(){
-          
+          this.$router.push({ name: "CreateDriver" });
       },
     onResponsiveInverted() {
       if (window.innerWidth < 768) {

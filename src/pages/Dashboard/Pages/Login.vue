@@ -1,70 +1,135 @@
 <template>
   <div class="md-layout text-center">
     <div class="md-layout-item md-size-33 md-medium-size-50 md-small-size-70 md-xsmall-size-100">
-      <form @submit.prevent="onSubmit">
-        <login-card header-color="green">
-          <h4 slot="title" class="title">{{setRole()}} Log in</h4>
-          <!-- <md-button
-          slot="buttons"
-          href="#facebook"
-          class="md-just-icon md-simple md-white"
+
+  <form @submit.prevent="onSubmit">
+    <md-card>
+      <md-card-header class="md-card-header-icon md-card-header-green">
+        <div class="card-icon">
+          <md-icon>contacts</md-icon>
+        </div>
+        <h4 class="title">{{setRole()}} log in</h4>
+      </md-card-header>
+
+      <md-card-content>
+        <md-field
+          :class="[
+            { 'md-valid': !errors.has('email') && touched.email },
+            { 'md-error': errors.has('email') }
+          ]"
         >
-          <i class="fab fa-facebook-square"></i>
-        </md-button>
+          <label>Email Adress</label>
+          <md-input
+            v-model="email"
+            data-vv-name="email"
+            type="email"
+            required
+            v-validate="modelValidations.email"
+          >
+          </md-input>
+          <slide-y-down-transition>
+            <md-icon class="error" v-show="errors.has('email')">close</md-icon>
+          </slide-y-down-transition>
+          <slide-y-down-transition>
+            <md-icon
+              class="success"
+              v-show="!errors.has('email') && touched.email"
+              >done</md-icon
+            >
+          </slide-y-down-transition>
+        </md-field>
+        <md-field
+          :class="[
+            { 'md-error': errors.has('password') },
+            { 'md-valid': !errors.has('password') && touched.password }
+          ]"
+        >
+          <label>Password</label>
+          <md-input
+            v-model="password"
+            data-vv-name="password"
+            type="password"
+            required
+            v-validate="modelValidations.password"
+          >
+          </md-input>
+          <slide-y-down-transition>
+            <md-icon class="error" v-show="errors.has('password')"
+              >close</md-icon
+            >
+          </slide-y-down-transition>
+          <slide-y-down-transition>
+            <md-icon
+              class="success"
+              v-show="!errors.has('password') && touched.password"
+              >done</md-icon
+            >
+          </slide-y-down-transition>
+        </md-field>
+      </md-card-content>
+
+          <!-- @click.native.prevent="validate" -->
+      <md-card-actions class="md-alignment-center">
         <md-button
-          slot="buttons"
-          href="#twitter"
-          class="md-just-icon md-simple md-white"
+          native-type="submit"
+          type="submit"
+          
+          class="md-success"
+          >Log in</md-button
         >
-          <i class="fab fa-twitter"></i>
-        </md-button>
-        <md-button
-          slot="buttons"
-          href="#google"
-          class="md-just-icon md-simple md-white"
-        >
-          <i class="fab fa-google-plus-g"></i>
-          </md-button>-->
-          <!-- <p slot="description" class="description">Or Be Classical</p> -->
-          <!-- <md-field class="md-form-group" slot="inputs">
-          <md-icon>face</md-icon>
-          <label>First Name...</label>
-          <md-input v-model="firstname"></md-input>
-          </md-field>-->
-          <md-field class="md-form-group" slot="inputs">
-            <md-icon>username</md-icon>
-            <label>Login...</label>
-            <md-input v-model="login"></md-input>
-          </md-field>
-          <md-field class="md-form-group" slot="inputs">
-            <md-icon>lock_outline</md-icon>
-            <label>Password...</label>
-            <md-input v-model="password"></md-input>
-          </md-field>
-          <md-button slot="footer" class="md-simple md-success md-lg" type="submit">Lets Go</md-button>
-        </login-card>
-      </form>
+      </md-card-actions>
+    </md-card>
+  </form>
+
+
+
+
+
+
+
+
     </div>
   </div>
 </template>
 <script>
-import { LoginCard } from "@/components";
 import { mapGetters } from "vuex";
 import { LOGIN } from "@/store/actions.type";
-
+import { SlideYDownTransition } from "vue2-transitions";
 export default {
   name: "Login",
   components: {
-    LoginCard
+    SlideYDownTransition
   },
   data() {
     return {
-      firstname: null,
-      login: null,
-      password: null
+      email: null,
+      password: null,
+      touched: {
+        email: false,
+        password: false
+      },
+      modelValidations: {
+        email: {
+          required: true,
+          email: true
+        },
+        password: {
+          required: true,
+          min: 5
+        }
+      }
     };
   },
   methods: {
+    validate() {
+      this.$validator.validateAll().then(isValid => {
+        this.$emit("onSubmit", this.registerForm, isValid);
+      });
+
+      this.touched.email = true;
+      this.touched.password = true;
+      
+    },
     setRole() {
       let role = "";
       console.log("getRole is", this.getRole);
@@ -81,37 +146,51 @@ export default {
     },
     onSubmit() {
       let credentials = {
-        username: this.login,
+        username: this.email,
         password: this.password
       };
       console.log("credentials are", credentials);
 
-      this.$store.dispatch(LOGIN, credentials).then(()=>{
-        let user = JSON.parse(localStorage.getItem("user"))
-        console.log("in then of LOGIN: ", user.role)
+      this.$store.dispatch(LOGIN, credentials).then(() => {
+        let user = JSON.parse(localStorage.getItem("user"));
+        console.log("in then of LOGIN: ", user.role);
         // now reroute to the pages depending on the user.role
         if (user.role == "admin") {
-          this.$router.push({name: "Reservations"})
+          this.$router.push({ name: "Reservations" });
         }
         if (user.role == "company") {
-          this.$router.push({name: "CompanyReservations"})
+          this.$router.push({ name: "CompanyReservations" });
         }
         if (user.role == "employee") {
-          this.$router.push({name: "CreateDriver"})
+          this.$router.push({ name: "CreateDriver" });
         }
-      })
+      });
+    }
+  },
+  watch: {
+    email() {
+      this.touched.email = true;
+    },
+    password() {
+      this.touched.password = true;
     }
   },
   computed: {
     ...mapGetters(["getRole"])
   },
   created() {
-    console.log("mounted role is ", this.getRole)
+    console.log("mounted role is ", this.getRole);
     if (this.getRole == "") {
-      this.$router.push({ name: "Role"})
+      this.$router.push({ name: "Role" });
     }
   }
 };
 </script>
 
-<style></style>
+<style scoped>
+
+.md-card-actions.md-alignment-right {
+    justify-content: center;
+}
+
+</style>

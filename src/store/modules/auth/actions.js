@@ -4,7 +4,6 @@ import {
   SET_AUTH,
   SET_AUTH_SECOND,
   PURGE_AUTH,
-  PURGE_APPLICATION,
   START_LOADING,
   STOP_LOADING
 } from "../../mutations.type";
@@ -24,7 +23,6 @@ export const actions = {
   },
   [LOGOUT](context) {
     context.commit(PURGE_AUTH);
-    context.commit(PURGE_APPLICATION);
   },
   async [REGISTER](context, credentials) {
     context.commit(START_LOADING);

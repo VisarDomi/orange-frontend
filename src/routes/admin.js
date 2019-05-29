@@ -9,7 +9,7 @@ import Invoice from "@/pages/Dashboard/Invoice.vue";
 import InvoicePreview from "@/pages/Dashboard/InvoicePreview.vue";
 import ReservationDetail from "@/pages/Dashboard/ReservationDetail.vue";
 import CreateInvoice from "@/pages/Dashboard/CreateInvoice.vue";
-
+import Logout from "@/pages/Dashboard/Pages/Logout.vue";
 // Calendar
 import Calendar from "@/pages/Dashboard/Calendar.vue";
 // Charts
@@ -22,6 +22,11 @@ export const admin = {
   path: "/",
   component: DashboardLayout,
   children: [
+    {
+      path: "logout",
+      name: "Logout",
+      components: {default: Logout}
+    },
     {
       path: "reservations",
       name: "Reservations",
