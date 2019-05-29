@@ -3,7 +3,7 @@ import VueRouter from "vue-router";
 import DashboardPlugin from "./material-dashboard";
 import { CHECK_AUTH } from "./store/actions.type";
 import { ApiService } from "./common/api.service";
-import { yearFormat, hourFormat } from "./common/date.filter";
+import { yearFormat, hourFormat, prettyDate } from "./common/date.filter";
 import ErrorFilter from "./common/error.filter";
 
 // Plugins
@@ -34,6 +34,7 @@ Vue.filter('money', function (value) {
 
 Vue.filter("yearFormat", yearFormat);
 Vue.filter("hourFormat", hourFormat);
+Vue.filter("prettyDate", prettyDate);
 Vue.filter("error", ErrorFilter);
 
 ApiService.init();
