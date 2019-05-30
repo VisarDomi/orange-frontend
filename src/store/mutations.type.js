@@ -10,3 +10,7 @@ export const STOP_LOADING = "stopLoading";
 
 // profile
 export const SET_PROFILE = "setProfile";
+
+//invoice
+
+export const SET_INVOICE = "setInvoice";

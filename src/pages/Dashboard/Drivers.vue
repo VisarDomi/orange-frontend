@@ -11,9 +11,9 @@
 
     <div class="md-layout-item md-large-size-20 md-xlarge-size-25 md-medium-size-33 md-small-size-50 md-xsmall-size-100 auto-mx">
       <md-card>
-        <md-card-media md-medium>
+        <!-- <md-card-media md-medium>
           <img class="img" :src="profileCard">
-        </md-card-media>
+        </md-card-media> -->
 
         <md-card-header>
           <div class="md-title">Andrew Yang</div>
@@ -21,7 +21,7 @@
         </md-card-header>
 
         <md-card-expand>
-          <md-card-actions md-alignment="space-between">
+          <md-card-actions md-alignment="space-between" style="text-align:center;">
             <div>
               <md-button>Details</md-button>
             </div>

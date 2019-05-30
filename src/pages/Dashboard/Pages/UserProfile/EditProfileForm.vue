@@ -117,7 +117,7 @@ export default {
       company: "Pepsi & CO",
       status: "unassigned",
       driver: "unassigned",
-      
+      selectedEmployee: "",
       employees: [
         'Jim Halpert',
         'Dwight Schrute',

@@ -52,112 +52,44 @@ export const ApiService = {
   }
 };
 
-export const ProfileService = {
-  getProfile(userId) {
-    return ApiService.get(`user/${userId}`);
+export const InvoiceService = {
+  getInvoice(invoiceId) {
+    return ApiService.get(`admin/invoice/${invoiceId}`);
   },
-  searchUser(name) {
-    return ApiService.post("user/search", name);
+  postInvoice(reservationId, invoice) {
+    return ApiService.post(`admin/reservation/${reservationId}/invoice`, invoice);
   },
-  putProfile(userId, profile) {
-    return ApiService.put(`user/${userId}`, profile);
+  putInvoice(reservationId, invoiceId, invoice) {
+    return ApiService.put(`admin/reservation/${reservationId}/invoice/${invoiceId}`, invoice);
   },
-  getAllUsers() {
-    return ApiService.get(`user/all`);
+  postInvoiceItem(reservationId, invoiceId, item){
+    return ApiService.post(`admin/reservation/${reservationId}/invoice/${invoiceId}/item`, item)
   }
 };
 
-export const EducationService = {
-  getEducations(userId) {
-    return ApiService.get(`user/${userId}/education/all`);
-  },
-  postEducation(userId, education) {
-    return ApiService.post(`user/${userId}/education`, education);
-  },
-  putEducation(userId, education, educationId) {
-    return ApiService.put(`user/${userId}/education/${educationId}`, education);
-  }
-};
-
-export const ExperienceService = {
-  getExperiences(userId) {
-    return ApiService.get(`user/${userId}/experience/all`);
-  },
-  postExperience(userId, experience) {
-    return ApiService.post(`user/${userId}/experience`, experience);
-  },
-  putExperience(userId, experience, experienceId) {
-    return ApiService.put(
-      `user/${userId}/experience/${experienceId}`,
-      experience
-    );
-  }
-};
-
-export const SkillService = {
-  getSkills(userId) {
-    return ApiService.get(`user/${userId}/skill/all`);
-  },
-  postSkill(userId, skill) {
-    return ApiService.post(`user/${userId}/skill`, skill);
-  },
-  putSkill(userId, skill, skillId) {
-    return ApiService.put(`user/${userId}/skill/${skillId}`, skill);
-  }
-};
-
-export const PaymentService = {
-  getPayments(userId) {
-    return ApiService.get(`user/${userId}/payment/all`);
-  },
-  postPayment(userId, payment) {
-    return ApiService.post(`user/${userId}/payment`, payment);
-  }
-};
-
-export const CommunicationService = {
-  getCommunications() {
-    return ApiService.get(`officialcommunication/all`);
-  },
-  getCommunication(communicationId) {
-    return ApiService.get(`officialcommunication/${communicationId}`);
-  },
-  postComment(communicationId, comment) {
-    return ApiService.post(
-      `officialcommunication/${communicationId}/officialcomment`,
-      comment
-    );
-  },
-  getComments(communicationId) {
-    return ApiService.get(
-      `officialcommunication/${communicationId}/officialcomment/all`
-    );
-  }
-};
-
-export const MediaService = {
-  getPicture(userId) {
-    return ApiService.get(`user/${userId}/media/all`);
-  },
-  getCommunicationMedia(communicationId) {
-    return ApiService.get(`officialcommunication/${communicationId}/media/all`);
-  },
-  postProfileMedia(userId, media) {
-    return ApiService.post(`user/${userId}/media`, media);
-  },
-  postEducationMedia(userId, educationId, media) {
-    return ApiService.post(
-      `user/${userId}/education/${educationId}/media`,
-      media
-    );
-  },
-  postExperienceMedia(userId, experienceId, media) {
-    return ApiService.post(
-      `user/${userId}/experience/${experienceId}/media`,
-      media
-    );
-  },
-  postSkillMedia(userId, skillId, media) {
-    return ApiService.post(`user/${userId}/skill/${skillId}/media`, media);
-  }
-};
+// export const MediaService = {
+//   getPicture(userId) {
+//     return ApiService.get(`user/${userId}/media/all`);
+//   },
+//   getCommunicationMedia(communicationId) {
+//     return ApiService.get(`officialcommunication/${communicationId}/media/all`);
+//   },
+//   postProfileMedia(userId, media) {
+//     return ApiService.post(`user/${userId}/media`, media);
+//   },
+//   postEducationMedia(userId, educationId, media) {
+//     return ApiService.post(
+//       `user/${userId}/education/${educationId}/media`,
+//       media
+//     );
+//   },
+//   postExperienceMedia(userId, experienceId, media) {
+//     return ApiService.post(
+//       `user/${userId}/experience/${experienceId}/media`,
+//       media
+//     );
+//   },
+//   postSkillMedia(userId, skillId, media) {
+//     return ApiService.post(`user/${userId}/skill/${skillId}/media`, media);
+//   }
+// };

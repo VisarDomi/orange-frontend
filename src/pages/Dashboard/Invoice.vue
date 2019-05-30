@@ -1,12 +1,5 @@
 <template>
 	<div>
-
-		<div class="md-layout">
-			<div class="md-layout-item">
-
-				<md-button class="md-success" @click="createInvoice()">Create invoice</md-button>
-			</div>
-		</div>
 		
 		<div class="md-layout">
 			<div class="md-layout-item">
@@ -132,7 +125,6 @@ import { Pagination } from "@/components";
 import users from "./Tables/users";
 import Fuse from "fuse.js";
 import swal from "sweetalert2";
-
 export default {
   name: "Invoice",
   components: {
@@ -192,9 +184,6 @@ export default {
         }
         return b[sortBy].localeCompare(a[sortBy]);
       });
-	},
-	createInvoice(){
-		this.$router.push({ name: "CreateInvoice" });
 	}
   },
   mounted() {
@@ -202,8 +191,12 @@ export default {
     this.fuseSearch = new Fuse(this.tableData, {
       keys: ["name", "email"],
       threshold: 0.3
-    });
-  },
+		});
+
+
+
+	},
+
   watch: {
     /**
      * Searches through the table data by a given query.
@@ -222,6 +215,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
+
 .md-card .md-card-actions{
   border: 0;
   margin-left: 20px;

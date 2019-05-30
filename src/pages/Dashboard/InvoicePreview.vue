@@ -38,38 +38,38 @@
                     <small>From,</small>
                     <br>
                     <br>
-                    <h6>{{from_business_name}}</h6>
+                    <h6>{{invoice.from_business_name}}</h6>
                     <address>
-                      {{from_addressline_1}}
-                      <br>{{from_addressline_2}}
-                      <br>{{from_city}}, {{from_postcode}}
-                      <br>Phone: {{from_phone}}
-                      <br>VAT: U23098430
+                      {{invoice.from_addressline_1}}
+                      <br>{{invoice.from_addressline_2}}
+                      <br>{{invoice.from_city}}, {{invoice.from_postcode}}
+                      <br>Phone: {{invoice.from_phone}}
+                      <br>VAT: {{invoice.from_vat}}
                     </address>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-4">
                     <small>To,</small>
                     <br>
                     <br>
-                    <h6>{{to_client_name}}</h6>
+                    <h6>{{invoice.to_client_name}}</h6>
                     <address>
-                      {{to_addressline_1}}
-                      <br>{{to_addressline_2}}
-                      <br>{{to_city}}, {{to_postcode}}
-                      <br>Phone: {{to_phone}}
-                      <br>VAT: U93847503
+                      {{invoice.to_addressline_1}}
+                      <br>{{invoice.to_addressline_2}}
+                      <br>{{invoice.to_city}}, {{invoice.to_postcode}}
+                      <br>Phone: {{invoice.to_phone}}
+                      <br>VAT: {{invoice.to_vat}}
                     </address>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-4">
                     <div class="invoice-details">
                       <small>
                         Invoice No -
-                        <span class="badge badge-info">#{{invoice_ref}}</span>
+                        <span class="badge badge-info">#{{invoice.ref}}</span>
                       </small>
                       <br>
-                      <small>Sent - {{invoice_date | prettyDate}}</small>
+                      <small>Sent - {{invoice.date | prettyDate}}</small>
                       <br>
-                      <small>Due - {{invoice_due | prettyDate}}</small>
+                      <small>Due - {{invoice.due | prettyDate}}</small>
                       <br>
                     </div>
                   </div>
@@ -83,9 +83,9 @@
                 <div class="row gutters">
                   <div class="col-lg-6 col-md-6 col-sm-6">
                     <p>
-                      <b>Hello, {{to_client_name}}</b>
+                      <b>Hello, {{invoice.to_client_name}}</b>
                     </p>
-                    <p>Thank you for riding with us and for your order.</p>
+                    <p>{{invoice.invoice_notes}}</p>
                     <br>
                   </div>
                   <div class="col-lg-6 col-md-6 col-sm-6"></div>
@@ -102,33 +102,28 @@
                             <th>Items</th>
                             <th>Date</th>
                             <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Discount (%)</th>
+                            <th>Tax (%)</th>
                             <th style="text-align: right;">Sub Total</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
+                          <tr v-for="item in invoice.items" :key='item.id'>
                             <td>
-                              {{items[0].description}}
+                              {{item.description}}
                               <!-- <p class="m-0 text-muted">
                                 <small>Reference site about Lorem Ipsum, giving information on its origins</small>
                               </p> -->
                             </td>
-                            <td>{{invoice_date | prettyDate}}</td>
-                            <td>{{items[0].quantity}}</td>
-                            <td style="text-align: right;">{{items[0].price | money}}</td>
+                            <td>{{item.date | prettyDate}}</td>
+                            <td>{{item.quantity}}</td>
+                            <td>{{item.price}}</td>
+                            <td>{{item.discount}}</td>
+                            <td>{{item.tax}}</td>
+                            <td style="text-align: right;">{{parseFloat(item.total) | money}}</td>
                           </tr>
-                          <tr>
-                            <td>
-                              {{items[1].description}}
-                              <!-- <p class="m-0 text-muted">
-                                <small>Reference site about Lorem Ipsum, giving information on its origins</small>
-                              </p> -->
-                            </td>
-                            <td>{{invoice_due | prettyDate}}</td>
-                            <td>{{items[1].quantity}}</td>
-                            <td style="text-align: right;">{{items[1].price | money}}</td>
 
-                          </tr>
 
                         </tbody>
                       </table>
@@ -156,6 +151,7 @@
                               <p>
                                 Subtotal
                                 <br>Tax
+                                <br>Discount
                                 <br>
                               </p>
                               <h5 class="text-danger">
@@ -164,12 +160,13 @@
                             </td>
                             <td>
                               <p>
-                                $1170.00
-                                <br>$50.00
+                                {{this.invoice_subtotal | money}}
+                                <br>{{this.invoice_tax | money}}
+                                <br>{{this.invoice_discount | money}}
                                 <br>
                               </p>
                               <h5 class="text-danger">
-                                <strong>$1250.00</strong>
+                                <strong>{{this.grand_total | money}}</strong>
                               </h5>
                             </td>
                           </tr>
@@ -204,9 +201,9 @@
                             <td style="text-align: left;">
                               <br>
                               <br>
-                              <p>{{payment_account_name}}</p>
-                              <p>{{payment_account_shortcode}}</p>
-                              <p>{{payment_account_number}}</p>
+                              <p>{{invoice.payment_account_name}}</p>
+                              <p>{{invoice.payment_account_sortcode}}</p>
+                              <p>{{invoice.payment_account_number}}</p>
                             </td>
                           </tr>
                         </tbody>
@@ -235,54 +232,21 @@
 
 <script>
 import * as html2pdf from "html2pdf.js";
-
+import { GET_INVOICE } from "@/store/actions.type";
+import { mapGetters } from "vuex";
 // const moment = require('moment');
 
 export default {
   name: "InvoicePreview",
   data(){
-    return{
-      invoice_id: 1, 
-      from_business_name: "Orange Limo",
-      from_addressline_1: "Viale Druso 299/B",
-      from_addressline_2: "Rr. Limozinave, Pll1/34B",
-      from_city: "Bolzano, BZ", 
-      from_postcode: "39100",
-      from_phone: "+304975034",
-      to_client_name: "Johnnie Walker", 
-      to_addressline_1: "Whiskey Str. 34/A",
-      to_addressline_2: "",
-      to_city: "Winsconsin",
-      to_postcode: "43034",
-      to_phone: "+8593023498",
-      invoice_ref: "3043",
-      invoice_date: "12/31/2012",
-      invoice_due: "11/11/2012",
-      items:[
-        {
-          id: 1, 
-          description: "Limo ride to airport",
-          quantity: 2, 
-          price: 2300.50, 
-          discount: 10,
-          tax: 5,
-          total: 2100
-        },
-        {
-          id: 2, 
-          description: "Redbull on demand",
-          quantity: 23, 
-          price:450.78, 
-          discount: 0,
-          tax: 15,
-          total: 523.40
-        }
-      ],
-      payment_account_name: "Orange Bank",
-      payment_account_shortcode: "WF3043I234",
-      payment_account_number: "2304734953",
-      invoice_notes: "Thank you for your business."
+    return {
+      invoice_subtotal: "",
+      invoice_tax: "",
+      invoice_discount: "",
+      grand_total: ""
+
     }
+
   },
   components: {},
   methods: {
@@ -300,6 +264,44 @@ export default {
         .set(opt)
         .save();
     }
+  },
+  created(){
+    this.$store.dispatch(GET_INVOICE, {invoiceId: this.invoice.id}).then(() => {//Then go to the page
+          console.log("Invoice recieved")
+          this.invoice_subtotal = 0;
+          this.invoice_tax = 0;
+          this.grand_total = 0;
+          this.invoice_discount = 0;
+          for(var item of this.invoice.items){
+
+
+
+            
+            
+            var calculated_item_total = parseFloat(item.quantity) * parseFloat(item.price) //just price of item
+            console.log("price of this item, withou tax and discouont: ", calculated_item_total)
+            this.invoice_discount = this.invoice_discount + (parseFloat(item.discount)/100) * calculated_item_total //the discount for this item added to total discount
+            console.log("Discount so far for all items: ", this.invoice_discount)
+            calculated_item_total = calculated_item_total - (parseFloat(item.discount)/100) * calculated_item_total//minus discount
+            console.log("price of this item removing the discount ", calculated_item_total)
+            var item_tax = (parseFloat(item.tax)/100) * calculated_item_total
+            calculated_item_total = calculated_item_total + item_tax// add tax to price
+            console.log("price of this item with tax added ", calculated_item_total)
+            this.invoice_tax  = this.invoice_tax + item_tax //tax for this item added to total tax
+            console.log("tax so far for all items: ", this.invoice_tax)
+            this.invoice_subtotal = this.invoice_subtotal + calculated_item_total; //this is the total price after discount and tax
+
+            this.grand_total = this.grand_total + this.invoice_tax + this.invoice_subtotal - this.invoice_discount;
+            
+
+
+
+            console.log("items after dispatching get invoice on created:", item)
+          }
+        });
+  },
+  computed: {
+    ...mapGetters(["invoice"])
   }
 };
 </script>
