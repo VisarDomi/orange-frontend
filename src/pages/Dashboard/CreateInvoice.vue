@@ -840,6 +840,13 @@ export default {
       var invoice_tax = 0;
       var invoice_sub_total = 0;
       for(let item of this.invoice_item.rowData){
+
+        let item_price = (parseFloat(item.quantity) * parseFloat(item.price))
+        let item_discount_amount = item_price * (parseFloat(item.discount)/100)
+        invoice_discount += item_discount_amount
+
+        let item_tax_amount = (item_price - item_discount_amount) * (parseFloat(item.tax)/100)
+        invoice_tax += item_tax_amount
         invoice_grand_total += parseFloat(item.total)
       }
       invoice_sub_total = invoice_grand_total - invoice_discount

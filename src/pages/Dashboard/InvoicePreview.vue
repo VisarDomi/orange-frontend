@@ -148,26 +148,28 @@
                         <tbody>
                           <tr>
                             <td>
-                              <p>
-                                Subtotal
-                                <br>Tax
-                                <br>Discount
-                                <br>
-                              </p>
                               <h5 class="text-danger">
                                 <strong>Grand Total</strong>
                               </h5>
-                            </td>
-                            <td>
                               <p>
-                                {{this.invoice_subtotal | money}}
-                                <br>{{this.invoice_tax | money}}
-                                <br>{{this.invoice_discount | money}}
+                                <!-- Subtotal -->
+                                <!-- <br> -->
+                                Discounted
+                                <br>Taxed
                                 <br>
                               </p>
+                            </td>
+                            <td>
                               <h5 class="text-danger">
-                                <strong>{{this.grand_total | money}}</strong>
+                                <strong>{{parseFloat(invoice.grand_total) | money}}</strong>
                               </h5>
+                              <p>
+                                <!-- {{invoice.sub_total | money}} -->
+                                <!-- <br> -->
+                                {{parseFloat(invoice.discount) | money}}
+                                <br>{{parseFloat(invoice.tax) | money}}
+                                <br>
+                              </p>
                             </td>
                           </tr>
                         </tbody>
@@ -266,35 +268,7 @@ export default {
     }
   },
   created(){
-    this.$store.dispatch(GET_INVOICE, {invoiceId: this.invoice.id}).then(() => {//Then calculate 
-          console.log("Invoice recieved")
-          this.invoice_subtotal = 0;
-          this.invoice_tax = 0;
-          this.grand_total = 0;
-          this.invoice_discount = 0;
-          for(var item of this.invoice.items){
-            var calculated_item_total = parseFloat(item.quantity) * parseFloat(item.price) //just price of item
-            console.log("price of this item, withou tax and discouont: ", calculated_item_total)
-
-            this.invoice_discount = this.invoice_discount + (parseFloat(item.discount)/100) * calculated_item_total //the discount for this item added to total discount
-            console.log("Discount so far for all items: ", this.invoice_discount)
-            calculated_item_total = calculated_item_total - (parseFloat(item.discount)/100) * calculated_item_total//minus discount
-            console.log("price of this item removing the discount ", calculated_item_total)
-            var item_tax = (parseFloat(item.tax)/100) * calculated_item_total
-            calculated_item_total = calculated_item_total + item_tax// add tax to price
-            console.log("price of this item with tax added ", calculated_item_total)
-            this.invoice_tax  = this.invoice_tax + item_tax //tax for this item added to total tax
-            console.log("tax so far for all items: ", this.invoice_tax)
-            this.invoice_subtotal = this.invoice_subtotal + calculated_item_total; //this is the total price after discount and tax
-
-            this.grand_total = this.grand_total + this.invoice_tax + this.invoice_subtotal - this.invoice_discount;
-            
-
-
-
-            console.log("items after dispatching get invoice on created:", item)
-          }
-        });
+    this.$store.dispatch(GET_INVOICE, {invoiceId: this.invoice.id});
   },
   computed: {
     ...mapGetters(["invoice"])
