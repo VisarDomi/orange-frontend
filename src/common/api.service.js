@@ -67,6 +67,28 @@ export const InvoiceService = {
   }
 };
 
+export const UserServiceApi = {
+  createUser(user){
+    return ApiService.post('user', user);
+  }
+}
+
+export const EmployeeService = {
+  getInvoice(invoiceId) {
+    return ApiService.get(`admin/invoice/${invoiceId}`);
+  },
+  createEmployee(companyId, employee) {
+    return ApiService.post(`company/1/employee`, employee);
+    //fix here to get the actual company id not the user id or role id 
+  },
+  putInvoice(reservationId, invoiceId, invoice) {
+    return ApiService.put(`admin/reservation/${reservationId}/invoice/${invoiceId}`, invoice);
+  },
+  postInvoiceItem(reservationId, invoiceId, item){
+    return ApiService.post(`admin/reservation/${reservationId}/invoice/${invoiceId}/item`, item)
+  }
+};
+
 // export const MediaService = {
 //   getPicture(userId) {
 //     return ApiService.get(`user/${userId}/media/all`);

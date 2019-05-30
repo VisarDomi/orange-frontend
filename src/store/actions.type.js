@@ -12,3 +12,7 @@ export const FETCH_PROFILE = "fetchProfile";
 export const CREATE_INVOICE = "createInvoice";
 export const UPDATE_INVOICE = "updateInvoice";
 export const GET_INVOICE = "getInvoice";
+
+//employee 
+
+export const CREATE_EMPLOYEE = "createEmployee";

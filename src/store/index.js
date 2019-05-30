@@ -4,6 +4,8 @@ import auth from "./modules/auth";
 import invoice from "./modules/invoice";
 import loading from "./modules/loading";
 import profile from "./modules/profile";
+import employee from "./modules/employee";
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -11,7 +13,8 @@ export default new Vuex.Store({
     auth,
     loading,
     profile,
-    invoice
+    invoice,
+    employee
   },
   strict: process.env.NODE_ENV !== "production"
 });

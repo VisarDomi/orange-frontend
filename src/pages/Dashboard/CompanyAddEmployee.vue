@@ -1,4 +1,5 @@
 <template>
+<form @submit.prevent="onSubmit">
   <div class="md-layout">
     <div class="md-layout-item md-xlarge-size-50 md-large-size-50 md-medium-size-70 md-small-size-100">
       <md-card>
@@ -10,6 +11,25 @@
 
         <md-card-content>
 
+          <div class="md-layout">
+            <label class="md-layout-item md-size-15 md-form-label">Email</label>
+            <div class="md-layout-item">
+              <md-field>
+                <label>Employee email</label>
+                <md-input v-model="email" placeholder="Email"></md-input>
+              </md-field>
+            </div>
+          </div>
+
+          <div class="md-layout">
+            <label class="md-layout-item md-size-15 md-form-label">Password</label>
+            <div class="md-layout-item">
+              <md-field>
+                <label>Employee password</label>
+                <md-input v-model="password" placeholder="Password"></md-input>
+              </md-field>
+            </div>
+          </div>
 
           <div class="md-layout">
             <label class="md-layout-item md-size-15 md-form-label">Name</label>
@@ -36,15 +56,18 @@
           <div class="md-layout" style="margin-top:50px;">
               <div class="md-layout-item mx-auto md-size-30">
 
-                <md-button class="md-success">Add Employee</md-button>
+                <md-button class="md-success" type="submit">Add Employee</md-button>
               </div>
           </div>
         </md-card-content>
       </md-card>
     </div>
   </div>
+  </form>
 </template>
 <script>
+import { CREATE_EMPLOYEE } from "@/store/actions.type";
+
 export default {
   name: "CompanyAddEmployee",
   components: {},
@@ -60,38 +83,25 @@ export default {
   },
   data() {
     return {
-        imageRegular: "",
-      address: null,
-      layout2: null,
-      layout3: null,
-      emailadress: null,
-      emailadress1: null,
-      placeholder: null,
-      name: null,
-      success: null,
-      error: null,
-      password1: null,
-      password2: null,
-      boolean: false,
-      disabled: null,
-      boolean1: false,
-      helper: null,
-      checkbox1: null,
-      checkbox2: null,
-      checkbox3: null,
-      checkbox4: null,
-      checkbox5: null,
-      checkbox6: true,
-      checkbox7: null,
-      checkbox8: true,
-      checkbox9: null,
-      radio: true,
-      radio1: true,
-      radio2: true
+      email: "",
+      password: "",
+      name: "",
+      address: ""
     };
   },
   methods: {
+    onSubmit(){
+      let employee = {
+        email: this.email,
+        password: this.password,
+        name: this.name,
+        address: this.address
+      };
 
+      this.$store.dispatch(CREATE_EMPLOYEE, employee).then(() => {
+          this.$router.push({ name: "CompanyEmployees" });
+      });      
+    },
     onFileChange(e) {
       let files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;
