@@ -753,6 +753,7 @@ export default {
         payment_account_sortcode: "",
         payment_account_number: "",
         invoice_notes: "",
+        discount: "",
         sub_total: "",
         tax: "",
         grand_total: "",
@@ -832,6 +833,23 @@ export default {
       });
     },
     generateInvoice() {
+      //ose ktu, me for loop
+
+      var invoice_grand_total = 0;
+      var invoice_discount = 0;
+      var invoice_tax = 0;
+      var invoice_sub_total = 0;
+      for(let item of this.invoice_item.rowData){
+        invoice_grand_total += parseFloat(item.total)
+      }
+      invoice_sub_total = invoice_grand_total - invoice_discount
+
+      this.completed_invoice.grand_total = invoice_grand_total+""
+      this.completed_invoice.discount = invoice_discount+""
+      this.completed_invoice.tax = invoice_tax+""
+      this.completed_invoice.sub_total = invoice_sub_total+""
+
+      
       this.$store.dispatch(UPDATE_INVOICE, {
         reservationId: this.invoice.reservation_id,
         invoiceId: this.invoice.id,

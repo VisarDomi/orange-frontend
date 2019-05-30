@@ -22,12 +22,12 @@ export const actions = {
         context.commit(SET_INVOICE, data);
         return data;
     });
-    for (var item in items){
-        delete items[item].serial
-        console.log("trying to post item: ", items[item])
-        items[item].name = ""
-        await InvoiceService.postInvoiceItem(reservationId, invoiceId, items[item]).then(({data})=>{
-            console.log("Finished posting item ", items[item])
+    for (var item of items){
+        delete item.serial
+        console.log("trying to post item: ", item)
+        item.name = ""
+        await InvoiceService.postInvoiceItem(reservationId, invoiceId, item).then(({data})=>{
+            console.log("Finished posting item ", item)
         })
     } 
 

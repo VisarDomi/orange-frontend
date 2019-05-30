@@ -266,20 +266,16 @@ export default {
     }
   },
   created(){
-    this.$store.dispatch(GET_INVOICE, {invoiceId: this.invoice.id}).then(() => {//Then go to the page
+    this.$store.dispatch(GET_INVOICE, {invoiceId: this.invoice.id}).then(() => {//Then calculate 
           console.log("Invoice recieved")
           this.invoice_subtotal = 0;
           this.invoice_tax = 0;
           this.grand_total = 0;
           this.invoice_discount = 0;
           for(var item of this.invoice.items){
-
-
-
-            
-            
             var calculated_item_total = parseFloat(item.quantity) * parseFloat(item.price) //just price of item
             console.log("price of this item, withou tax and discouont: ", calculated_item_total)
+
             this.invoice_discount = this.invoice_discount + (parseFloat(item.discount)/100) * calculated_item_total //the discount for this item added to total discount
             console.log("Discount so far for all items: ", this.invoice_discount)
             calculated_item_total = calculated_item_total - (parseFloat(item.discount)/100) * calculated_item_total//minus discount
