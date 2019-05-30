@@ -14,3 +14,7 @@ export const SET_PROFILE = "setProfile";
 //invoice
 
 export const SET_INVOICE = "setInvoice";
+
+//employees 
+
+export const SET_EMPLOYEES = "setEmployees";

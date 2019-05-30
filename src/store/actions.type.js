@@ -16,3 +16,9 @@ export const GET_INVOICE = "getInvoice";
 //employee 
 
 export const CREATE_EMPLOYEE = "createEmployee";
+export const GET_EMPLOYEES = "getEmployees";
+
+
+//reservation
+
+export const CREATE_RESERVATION = "createReservation";

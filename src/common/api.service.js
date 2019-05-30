@@ -74,8 +74,8 @@ export const UserServiceApi = {
 }
 
 export const EmployeeService = {
-  getInvoice(invoiceId) {
-    return ApiService.get(`admin/invoice/${invoiceId}`);
+  getEmployees() {
+    return ApiService.get(`company/1/employee/all`);
   },
   createEmployee(companyId, employee) {
     return ApiService.post(`company/1/employee`, employee);
@@ -88,6 +88,13 @@ export const EmployeeService = {
     return ApiService.post(`admin/reservation/${reservationId}/invoice/${invoiceId}/item`, item)
   }
 };
+
+export const ReservationService = {
+  createReservation(reservation){
+    return ApiService.post(`/company/1/reservation`, reservation)
+    //fix here to get the actual company id not the user id or role id 
+  }
+}
 
 // export const MediaService = {
 //   getPicture(userId) {
