@@ -6,6 +6,7 @@ import User from "@/pages/Dashboard/Pages/UserProfile.vue";
 import Role from "@/pages/Dashboard/Pages/Role.vue";
 import TimeLine from "@/pages/Dashboard/Pages/TimeLinePage.vue";
 import RtlSupport from "@/pages/Dashboard/Pages/RtlSupport.vue";
+import Logout from "@/pages/Dashboard/Pages/Logout.vue";
 import Login from "@/pages/Dashboard/Pages/Login.vue";
 import Register from "@/pages/Dashboard/Pages/Register.vue";
 import Lock from "@/pages/Dashboard/Pages/Lock.vue";
@@ -35,6 +36,8 @@ import GoogleMaps from "@/pages/Dashboard/Maps/GoogleMaps.vue";
 import FullScreenMap from "@/pages/Dashboard/Maps/FullScreenMap.vue";
 import VectorMaps from "@/pages/Dashboard/Maps/VectorMaps.vue";
 
+import { setMeta } from './common';
+
 export const componentsMenu = {
   path: "/components",
   component: DashboardLayout,
@@ -44,37 +47,44 @@ export const componentsMenu = {
     {
       path: "buttons",
       name: "Buttons",
-      components: { default: Buttons }
+      components: { default: Buttons },
+      meta: setMeta("Buttons")
     },
     {
       path: "grid-system",
-      name: "Grid System",
-      components: { default: GridSystem }
+      name: "GridSystem",
+      components: { default: GridSystem },
+      meta: setMeta("Grid System")
     },
     {
       path: "panels",
       name: "Panels",
-      components: { default: Panels }
+      components: { default: Panels },
+      meta: setMeta("Panels")
     },
     {
       path: "sweet-alert",
-      name: "Sweet Alert",
-      components: { default: SweetAlert }
+      name: "SweetAlert",
+      components: { default: SweetAlert },
+      meta: setMeta("Sweet Alert")
     },
     {
       path: "notifications",
       name: "Notifications",
-      components: { default: Notifications }
+      components: { default: Notifications },
+      meta: setMeta("Notifications")
     },
     {
       path: "icons",
       name: "Icons",
-      components: { default: Icons }
+      components: { default: Icons },
+      meta: setMeta("Icons")
     },
     {
       path: "typography",
       name: "Typography",
-      components: { default: Typography }
+      components: { default: Typography },
+      meta: setMeta("Typography")
     }
   ]
 };
@@ -87,23 +97,27 @@ export const formsMenu = {
   children: [
     {
       path: "regular",
-      name: "Regular Forms",
-      components: { default: RegularForms }
+      name: "RegularForms",
+      components: { default: RegularForms },
+      meta: setMeta("Regular Forms")
     },
     {
       path: "extended",
-      name: "Extended Forms",
-      components: { default: ExtendedForms }
+      name: "ExtendedForms",
+      components: { default: ExtendedForms },
+      meta: setMeta("Extended Forms")
     },
     {
       path: "validation",
-      name: "Validation Forms",
-      components: { default: ValidationForms }
+      name: "ValidationForms",
+      components: { default: ValidationForms },
+      meta: setMeta("Validation Forms")
     },
     {
       path: "wizard",
       name: "Wizard",
-      components: { default: Wizard }
+      components: { default: Wizard },
+      meta: setMeta("Wizard")
     }
   ]
 };
@@ -116,18 +130,21 @@ export const tablesMenu = {
   children: [
     {
       path: "regular",
-      name: "Regular Tables",
-      components: { default: RegularTables }
+      name: "RegularTables",
+      components: { default: RegularTables },
+      meta: setMeta("Regular Tables")
     },
     {
       path: "extended",
-      name: "Extended Tables",
-      components: { default: ExtendedTables }
+      name: "ExtendedTables",
+      components: { default: ExtendedTables },
+      meta: setMeta("Extended Tables")
     },
     {
       path: "paginated",
-      name: "Pagianted Tables",
-      components: { default: PaginatedTables }
+      name: "PagiantedTables",
+      components: { default: PaginatedTables },
+      meta: setMeta("Pagianted Tables")
     }
   ]
 };
@@ -140,23 +157,36 @@ export const mapsMenu = {
   children: [
     {
       path: "google",
-      name: "Google Maps",
-      components: { default: GoogleMaps }
+      name: "GoogleMaps",
+      components: { default: GoogleMaps },
+      meta: setMeta("Google Maps")
     },
     {
       path: "full-screen",
-      name: "Full Screen Map",
+      name: "FullScreenMap",
       meta: {
         hideContent: true,
         hideFooter: true,
-        navbarAbsolute: true
+        navbarAbsolute: true,
+        title: `Full Screen Map`,
+        metaTags: [
+          {
+            name: "description",
+            content: `The Full Screen Map page of Orange Limo.`
+          },
+          {
+            property: "og:description",
+            content: `The Full Screen Map page of Orange Limo.`
+          }
+        ]
       },
       components: { default: FullScreenMap }
     },
     {
       path: "vector-map",
-      name: "Vector Map",
-      components: { default: VectorMaps }
+      name: "VectorMap",
+      components: { default: VectorMaps },
+      meta: setMeta("Vector Map")
     }
   ]
 };
@@ -169,13 +199,15 @@ export const pagesMenu = {
   children: [
     {
       path: "user",
-      name: "User Page",
-      components: { default: User }
+      name: "User",
+      components: { default: User },
+      meta: setMeta("User")
     },
     {
       path: "timeline",
-      name: "Timeline Page",
-      components: { default: TimeLine }
+      name: "Timeline",
+      components: { default: TimeLine },
+      meta: setMeta("Timeline")
     },
     {
       path: "rtl",
@@ -189,29 +221,39 @@ export const pagesMenu = {
 };
 
 export const authPages = {
-  path: "/",
+  path: "/auth",
   component: AuthLayout,
   name: "Authentication",
   children: [
     {
+      path: "/logout",
+      name: "Logout",
+      components: {default: Logout},
+      meta: setMeta("Logout")
+    },
+    {
       path: "/login",
       name: "Login",
-      component: Login
+      component: Login,
+      meta: setMeta("Login")
     },
     {
       path: "/register",
       name: "Register",
-      component: Register
+      component: Register,
+      meta: setMeta("Register")
     },
     {
       path: "/role",
       name: "Role",
-      component: Role
+      component: Role,
+      meta: setMeta("Role")
     },
     {
       path: "/lock",
       name: "Lock",
-      component: Lock
+      component: Lock,
+      meta: setMeta("Lock")
     }
   ]
 };

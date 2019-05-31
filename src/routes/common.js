@@ -1,4 +1,4 @@
-export function setMeta(title) {
+export function setMeta(title, auth=false) {
   let meta = {
         title: `${title}`,
         metaTags: [
@@ -12,5 +12,11 @@ export function setMeta(title) {
           }
         ]
       }
+  if (auth) {
+    meta = {
+      ...meta,
+      requiresAuth: true
+    }
+  }
   return meta
 }

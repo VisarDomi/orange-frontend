@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import DashboardPlugin from "./material-dashboard";
 import { CHECK_AUTH } from "./store/actions.type";
 import { ApiService } from "./common/api.service";
+import JwtService from '@/common/jwt.service';
 import { yearFormat, hourFormat, prettyDate } from "./common/date.filter";
 import ErrorFilter from "./common/error.filter";
 
@@ -13,6 +14,7 @@ import Chartist from "chartist";
 // router setup
 import routes from "./routes";
 import store from "./store";
+import './registerServiceWorker'
 
 // plugin setup
 Vue.use(VueRouter);
@@ -41,6 +43,7 @@ ApiService.init();
 
 // configure router
 const router = new VueRouter({
+  mode: "history",
   routes, // short for routes: routes
   linkExactActiveClass: "nav-item active"
 });
@@ -53,11 +56,25 @@ Object.defineProperty(Vue.prototype, "$Chartist", {
 });
 
 // Ensure we checked auth before each page load.
-router.beforeEach(
-  (to, from, next) => {
-    Promise.all([store.dispatch(CHECK_AUTH)]).then(next);
+router.beforeEach((to, from, next) => {
+  console.log("router.beforeEach to: ", to)
+  console.log("router.beforeEach from: ", from)
+  console.log("router.beforeEach next: ", next)
+  ApiService.setHeader();
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (JwtService.getToken() == null) {
+      next({
+        name: "Login",
+        params: { nextUrl: to.fullPath }
+      });
+    } else {
+      next();
+    }
+  } else {
+    next();
   }
-);
+});
+
 // dinamically change title and other metadata
 router.beforeEach((to, from, next) => {
   // This goes through the matched routes from last to first, finding the closest route with a title.
