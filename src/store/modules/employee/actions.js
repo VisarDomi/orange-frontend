@@ -17,7 +17,7 @@ export const actions = {
 
 
     await EmployeeService.createEmployee(
-      UserService.getUser().id,
+      UserService.getUser().role_id,
       { full_name: payload.name, address: payload.address, user_id: user_id }
     ).then(({ data }) => {
       return data;

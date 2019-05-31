@@ -5,6 +5,7 @@ import CompanyAddEmployee from "@/pages/Dashboard/CompanyAddEmployee.vue";
 import CompanyEmployees from "@/pages/Dashboard/CompanyEmployees.vue";
 import CompanyInvoices from "@/pages/Dashboard/CompanyInvoices.vue";
 import CompanyInvoicePreview from "@/pages/Dashboard/CompanyInvoicePreview.vue";
+import CompanyReservationDetail from "@/pages/Dashboard/CompanyReservationDetail.vue";
 import { setMeta } from './common';
 
 export const company = {
@@ -16,6 +17,12 @@ export const company = {
       name: "CompanyReservations",
       components: { default: CompanyReservations },
       meta: setMeta("Company Reservations")
+    },
+    {
+      path: "reservationdetail/:id",
+      name: "CompanyReservationDetail",
+      components: { default: CompanyReservationDetail},
+      meta: setMeta("Reservation Detail")
     },
     {
       path: "createreservation",

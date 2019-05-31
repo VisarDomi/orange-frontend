@@ -6,7 +6,6 @@
 				<md-button class="md-success" @click="createReservation()">Create reservation</md-button>
 			</div>
 		</div>
-
   <div class="md-layout">
     <div class="md-layout-item">
       <md-card>
@@ -23,6 +22,7 @@
             :md-sort-order.sync="currentSortOrder"
             :md-sort-fn="customSort"
             class="paginated-table table-striped table-hover"
+
           >
             <md-table-toolbar>
               <md-field>
@@ -53,34 +53,36 @@
             </md-table-toolbar>
 
             <md-table-row slot="md-table-row" slot-scope="{ item }">
-              <md-table-cell md-label="Name" md-sort-by="name">{{
-                item.name
+              <md-table-cell md-label="Code" md-sort-by="code">{{
+                item.code
               }}</md-table-cell>
-              <md-table-cell md-label="Email" md-sort-by="email">{{
-                item.email
+              <md-table-cell md-label="Date" md-sort-by="date">{{
+                item.date | prettyDate
               }}</md-table-cell>
-              <md-table-cell md-label="Driver">{{ item.age }}</md-table-cell>
-              <md-table-cell md-label="Company">{{ item.email }}</md-table-cell>
-              <!-- <md-table-cell md-label="Actions">
-                <md-button
+              <md-table-cell md-label="Time">{{ item.time }}</md-table-cell>
+              <md-table-cell md-label="Pickup">{{ item.pickup }}</md-table-cell>
+              <md-table-cell md-label="Destination">{{ item.destination }}</md-table-cell>
+              <md-table-cell md-label="Status" style="justify-content:left;">{{ item.status }}</md-table-cell>
+              <md-table-cell md-label="Actions">
+                <!-- <md-button
                   class="md-just-icon md-info md-simple"
                   @click.native="handleLike(item)"
                 >
                   <md-icon>favorite</md-icon>
-                </md-button>
+                </md-button> -->
                 <md-button
                   class="md-just-icon md-warning md-simple"
-                  @click.native="handleEdit(item)"
+                  @click.native="open_reservation(item)"
                 >
                   <md-icon>dvr</md-icon>
                 </md-button>
-                <md-button
+                <!-- <md-button
                   class="md-just-icon md-danger md-simple"
                   @click.native="handleDelete(item)"
                 >
                   <md-icon>close</md-icon>
-                </md-button>
-              </md-table-cell> -->
+                </md-button> -->
+              </md-table-cell>
             </md-table-row>
           </md-table>
           <div class="footer-table md-table">
@@ -128,6 +130,8 @@ import { Pagination } from "@/components";
 import users from "./Tables/users";
 import Fuse from "fuse.js";
 import swal from "sweetalert2";
+import { GET_RESERVATIONS  } from "@/store/actions.type";
+import { mapGetters } from "vuex";
 
 export default {
   name: "CompanyReservations",
@@ -135,11 +139,18 @@ export default {
     Pagination
   },
   computed: {
+    ...mapGetters(["reservations"]),
     /***
      * Returns a page from the searched data or the whole data. Search is performed in the watch section below
      */
     queriedData() {
+
+        console.log("Table data is: ", this.tableData)
       let result = this.tableData;
+        if (result == undefined){
+          console.log("returning nothing")
+          return []
+        }
       if (this.searchedData.length > 0) {
         result = this.searchedData;
       }
@@ -156,9 +167,13 @@ export default {
       return this.pagination.perPage * (this.pagination.currentPage - 1);
     },
     total() {
+      if(this.searchedData == undefined){
+        return 0;
+      } else{
       return this.searchedData.length > 0
         ? this.searchedData.length
         : this.tableData.length;
+        }
     }
   },
   data() {
@@ -174,7 +189,7 @@ export default {
       footerTable: ["Name", "Email", "Driver", "Company"],
       searchQuery: "",
       propsToSearch: ["name", "email", "age"],
-      tableData: users,
+      tableData: [],
       searchedData: [],
       fuseSearch: null
     };
@@ -205,6 +220,14 @@ export default {
         title: `You want to edit ${item.name}`,
         buttonsStyling: false,
         confirmButtonClass: "md-button md-info"
+      });
+    },
+    open_reservation(item) {
+      this.$router.push({
+        name: "CompanyReservationDetail",
+        params: {
+          id: item.id
+        }
       });
     },
     handleDelete(item) {
@@ -238,6 +261,12 @@ export default {
         this.tableData.splice(indexToDelete, 1);
       }
     }
+  },
+  created(){
+    this.$store.dispatch(GET_RESERVATIONS).then(() => {
+      console.log("GET reservations now: ", this.reservations)
+      this.tableData = this.reservations
+    });
   },
   mounted() {
     // Fuse search initialization.

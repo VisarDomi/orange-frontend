@@ -18,3 +18,7 @@ export const SET_INVOICE = "setInvoice";
 //employees 
 
 export const SET_EMPLOYEES = "setEmployees";
+
+//reservation
+
+export const SET_RESERVATIONS = "setReservations";

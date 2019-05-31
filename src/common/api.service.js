@@ -78,7 +78,7 @@ export const EmployeeService = {
     return ApiService.get(`company/1/employee/all`);
   },
   createEmployee(companyId, employee) {
-    return ApiService.post(`company/1/employee`, employee);
+    return ApiService.post(`company/${companyId}/employee`, employee);
     //fix here to get the actual company id not the user id or role id 
   },
   putInvoice(reservationId, invoiceId, invoice) {
@@ -90,9 +90,12 @@ export const EmployeeService = {
 };
 
 export const ReservationService = {
-  createReservation(reservation){
-    return ApiService.post(`/company/1/reservation`, reservation)
+  createReservation(reservation, companyId){
+    return ApiService.post(`/company/${companyId}/reservation`, reservation);
     //fix here to get the actual company id not the user id or role id 
+  },
+  getReservations(companyId){
+    return ApiService.get(`/company/${companyId}/reservation/all`)
   }
 }
 
