@@ -1,15 +1,9 @@
 import DashboardLayout from "@/pages/Dashboard/Layout/DashboardLayout.vue";
-import AuthLayout from "@/pages/Dashboard/Pages/AuthLayout.vue";
 
 // Pages
 import User from "@/pages/Dashboard/Pages/UserProfile.vue";
-import Role from "@/pages/Dashboard/Pages/Role.vue";
 import TimeLine from "@/pages/Dashboard/Pages/TimeLinePage.vue";
 import RtlSupport from "@/pages/Dashboard/Pages/RtlSupport.vue";
-import Logout from "@/pages/Dashboard/Pages/Logout.vue";
-import Login from "@/pages/Dashboard/Pages/Login.vue";
-import Register from "@/pages/Dashboard/Pages/Register.vue";
-import Lock from "@/pages/Dashboard/Pages/Lock.vue";
 
 // Components pages
 import Buttons from "@/pages/Dashboard/Components/Buttons.vue";
@@ -36,7 +30,36 @@ import GoogleMaps from "@/pages/Dashboard/Maps/GoogleMaps.vue";
 import FullScreenMap from "@/pages/Dashboard/Maps/FullScreenMap.vue";
 import VectorMaps from "@/pages/Dashboard/Maps/VectorMaps.vue";
 
-import { setMeta } from './common';
+import { setMeta } from "./common";
+
+export const pagesMenu = {
+  path: "/pages",
+  component: DashboardLayout,
+  name: "Pages",
+  redirect: "/pages/user",
+  children: [
+    {
+      path: "user",
+      name: "User",
+      components: { default: User },
+      meta: setMeta("User")
+    },
+    {
+      path: "timeline",
+      name: "Timeline",
+      components: { default: TimeLine },
+      meta: setMeta("Timeline")
+    },
+    {
+      path: "rtl",
+      name: "وحة القيادة",
+      meta: {
+        rtlActive: true
+      },
+      components: { default: RtlSupport }
+    }
+  ]
+};
 
 export const componentsMenu = {
   path: "/components",
@@ -187,73 +210,6 @@ export const mapsMenu = {
       name: "VectorMap",
       components: { default: VectorMaps },
       meta: setMeta("Vector Map")
-    }
-  ]
-};
-
-export const pagesMenu = {
-  path: "/pages",
-  component: DashboardLayout,
-  name: "Pages",
-  redirect: "/pages/user",
-  children: [
-    {
-      path: "user",
-      name: "User",
-      components: { default: User },
-      meta: setMeta("User")
-    },
-    {
-      path: "timeline",
-      name: "Timeline",
-      components: { default: TimeLine },
-      meta: setMeta("Timeline")
-    },
-    {
-      path: "rtl",
-      name: "وحة القيادة",
-      meta: {
-        rtlActive: true
-      },
-      components: { default: RtlSupport }
-    }
-  ]
-};
-
-export const authPages = {
-  path: "/auth",
-  component: AuthLayout,
-  name: "Authentication",
-  children: [
-    {
-      path: "/logout",
-      name: "Logout",
-      components: {default: Logout},
-      meta: setMeta("Logout")
-    },
-    {
-      path: "/login",
-      name: "Login",
-      component: Login,
-      meta: setMeta("Login")
-    },
-    {
-      path: "/register",
-      name: "Register",
-      component: Register,
-      meta: setMeta("Register")
-    },
-    {
-      path: "/role",
-      name: "Role",
-      component: Role,
-      meta: setMeta("Role")
-    },
-    {
-      path: "/lock",
-      name: "Lock",
-      component: Lock,
-      meta: setMeta("Lock")
     }
   ]
 };

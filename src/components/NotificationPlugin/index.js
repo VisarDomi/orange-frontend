@@ -27,7 +27,7 @@ const NotificationStore = {
   }
 };
 
-var NotificationsPlugin = {
+let NotificationsPlugin = {
   install(Vue) {
     Vue.mixin({
       data() {

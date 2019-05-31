@@ -122,11 +122,11 @@
 
 <script>
 import { Pagination } from "@/components";
-import users from "./Tables/users";
+import users from "./../../Tables/users";
 import Fuse from "fuse.js";
 import swal from "sweetalert2";
 export default {
-  name: "DriverDetail",
+  name: "Invoices",
   components: {
     Pagination
   },

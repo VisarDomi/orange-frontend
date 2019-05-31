@@ -1,13 +1,16 @@
 import CompanyDashboardLayout from "@/pages/Dashboard/Layout/CompanyDashboardLayout.vue";
-import CompanyCreateReservation from "@/pages/Dashboard/CompanyCreateReservation.vue";
-import CompanyReservations from "@/pages/Dashboard/CompanyReservations.vue";
-import CompanyReservationDetail from "@/pages/Dashboard/CompanyReservationDetail.vue";
-import CompanyCreateEmployee from "@/pages/Dashboard/CompanyCreateEmployee.vue";
-import CompanyEmployees from "@/pages/Dashboard/CompanyEmployees.vue";
-import CompanyEmployeeDetail from "@/pages/Dashboard/CompanyEmployeeDetail.vue";
-import CompanyInvoices from "@/pages/Dashboard/CompanyInvoices.vue";
-import CompanyInvoiceDetail from "@/pages/Dashboard/CompanyInvoiceDetail.vue";
-import CompanyInvoicePreview from "@/pages/Dashboard/CompanyInvoicePreview.vue";
+
+// Company pages
+import CompanyCreateReservation from "@/pages/Dashboard/Pages/Company/CompanyCreateReservation.vue";
+import CompanyReservations from "@/pages/Dashboard/Pages/Company/CompanyReservations.vue";
+import CompanyReservationDetail from "@/pages/Dashboard/Pages/Company/CompanyReservationDetail.vue";
+import CompanyCreateEmployee from "@/pages/Dashboard/Pages/Company/CompanyCreateEmployee.vue";
+import CompanyEmployees from "@/pages/Dashboard/Pages/Company/CompanyEmployees.vue";
+import CompanyEmployeeDetail from "@/pages/Dashboard/Pages/Company/CompanyEmployeeDetail.vue";
+import CompanyInvoices from "@/pages/Dashboard/Pages/Company/CompanyInvoices.vue";
+import CompanyInvoiceDetail from "@/pages/Dashboard/Pages/Company/CompanyInvoiceDetail.vue";
+import CompanyInvoicePreview from "@/pages/Dashboard/Pages/Company/CompanyInvoicePreview.vue";
+
 import { setMeta } from './common';
 
 export const company = {

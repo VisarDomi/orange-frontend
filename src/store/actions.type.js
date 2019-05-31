@@ -22,3 +22,9 @@ export const GET_EMPLOYEE = "getEmployee";
 export const CREATE_RESERVATION = "createReservation";
 export const GET_RESERVATIONS = "getReservations";
 export const GET_RESERVATION = "getReservation";
+
+//driver
+
+export const CREATE_DRIVER = "createDriver";
+export const GET_DRIVERS = "getDrivers";
+export const GET_DRIVER = "getDriver";

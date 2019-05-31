@@ -1,21 +1,20 @@
 import DashboardLayout from "@/pages/Dashboard/Layout/DashboardLayout.vue";
 
-// Dashboard pages
-import Dashboard from "@/pages/Dashboard/Dashboard.vue";
-import Reservations from "@/pages/Dashboard/Reservations.vue";
-import CreateDriver from "@/pages/Dashboard/Pages/CreateDriver.vue";
-import Drivers from "@/pages/Dashboard/Drivers.vue";
-import DriverDetail from "@/pages/Dashboard/DriverDetail.vue";
-import CreateInvoice from "@/pages/Dashboard/CreateInvoice.vue";
-import Invoices from "@/pages/Dashboard/Invoices.vue";
-import InvoiceDetail from "@/pages/Dashboard/InvoiceDetail.vue";
-import InvoicePreview from "@/pages/Dashboard/InvoicePreview.vue";
-import ReservationDetail from "@/pages/Dashboard/ReservationDetail.vue";
-// Calendar
-import Calendar from "@/pages/Dashboard/Calendar.vue";
-// Charts
-import Charts from "@/pages/Dashboard/Charts.vue";
-import Widgets from "@/pages/Dashboard/Widgets.vue";
+// Admin pages
+import Dashboard from "@/pages/Dashboard/Pages/Admin/Dashboard.vue";
+import Reservations from "@/pages/Dashboard/Pages/Admin/Reservations.vue";
+import CreateDriver from "@/pages/Dashboard/Pages/Admin/CreateDriver.vue";
+import Drivers from "@/pages/Dashboard/Pages/Admin/Drivers.vue";
+import DriverDetail from "@/pages/Dashboard/Pages/Admin/DriverDetail.vue";
+import CreateInvoice from "@/pages/Dashboard/Pages/Admin/CreateInvoice.vue";
+import Invoices from "@/pages/Dashboard/Pages/Admin/Invoices.vue";
+import InvoiceDetail from "@/pages/Dashboard/Pages/Admin/InvoiceDetail.vue";
+import InvoicePreview from "@/pages/Dashboard/Pages/Admin/InvoicePreview.vue";
+import ReservationDetail from "@/pages/Dashboard/Pages/Admin/ReservationDetail.vue";
+// Old
+import Calendar from "@/pages/Dashboard/Pages/Admin/Calendar.vue";
+import Charts from "@/pages/Dashboard/Pages/Admin/Charts.vue";
+import Widgets from "@/pages/Dashboard/Pages/Admin/Widgets.vue";
 
 import { setMeta } from "./common";
 

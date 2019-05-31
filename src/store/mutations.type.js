@@ -13,7 +13,7 @@ export const STOP_LOADING = "stopLoading";
 export const SET_INVOICES = "setInvoices";
 export const SET_INVOICE = "setInvoice";
 
-//employees
+//employee
 
 export const SET_EMPLOYEES = "setEmployees";
 export const SET_EMPLOYEE = "setEmployee";
@@ -22,3 +22,8 @@ export const SET_EMPLOYEE = "setEmployee";
 
 export const SET_RESERVATIONS = "setReservations";
 export const SET_RESERVATION = "setReservation";
+
+//driver
+
+export const SET_DRIVERS = "setDrivers";
+export const SET_DRIVER = "setDriver";

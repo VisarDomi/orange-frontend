@@ -1,17 +1,21 @@
 import {
+  pagesMenu,
   componentsMenu,
   formsMenu,
   tablesMenu,
-  mapsMenu,
-  pagesMenu,
-  authPages
+  mapsMenu
 } from "./menus";
 import { admin } from "./admin";
+import { auth } from './auth';
 import { company } from "./company";
 import { setMeta } from './common';
-import NotFound from "@/pages/Dashboard/NotFound";
+import NotFound from "@/pages/Dashboard/Pages/NotFound";
 
 const routes = [
+  pagesMenu,
+  admin,
+  auth,
+  company,
   {
     path: "*",
     name: "NotFound",
@@ -21,11 +25,7 @@ const routes = [
   componentsMenu,
   formsMenu,
   tablesMenu,
-  mapsMenu,
-  pagesMenu,
-  authPages,
-  company,
-  admin
+  mapsMenu
 ];
 
 export default routes;

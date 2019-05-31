@@ -21,16 +21,16 @@ function nth(d) {
 
 export const prettyDate = date => {
   date = new Date(date)
-  var monthNames = [
+  let monthNames = [
     "January", "February", "March",
     "April", "May", "June", "July",
     "August", "September", "October",
     "November", "December"
   ];
 
-  var day = date.getDate();
-  var monthIndex = date.getMonth();
-  var year = date.getFullYear();
+  let day = date.getDate();
+  let monthIndex = date.getMonth();
+  let year = date.getFullYear();
 
   // return day+nth(day) + ' ' + monthNames[monthIndex] + ' ' + year;
   return monthNames[monthIndex]+' '+day+nth(day)+' '+year;

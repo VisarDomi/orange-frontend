@@ -24,7 +24,7 @@ export const actions = {
       user_id: user_id
     };
     let company_id = UserStorageService.getUser().role_id;
-    await EmployeeService.createEmployee(employee, company_id).then(
+    await EmployeeService.createEmployee(company_id, employee).then(
       ({ data }) => {
         return data;
       }

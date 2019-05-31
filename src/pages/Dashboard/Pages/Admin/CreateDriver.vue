@@ -1,77 +1,65 @@
 <template>
-<form @submit.prevent="onSubmit">
-  <div class="md-layout">
-    <div class="md-layout-item md-xlarge-size-50 md-large-size-50 md-medium-size-70 md-small-size-100">
-      <md-card>
-        <md-card-header class="md-card-header-text md-card-header-green">
-          <div class="card-text">
-            <h4 class="title">Add Employee</h4>
-          </div>
-        </md-card-header>
-
-        <md-card-content>
-
-          <div class="md-layout">
-            <label class="md-layout-item md-size-15 md-form-label">Email</label>
-            <div class="md-layout-item">
-              <md-field>
-                <label>Employee email</label>
-                <md-input v-model="email" placeholder="Email"></md-input>
-              </md-field>
+  <form @submit.prevent="onSubmit">
+    <div class="md-layout">
+      <div
+        class="md-layout-item md-xlarge-size-50 md-large-size-50 md-medium-size-70 md-small-size-100"
+      >
+        <md-card>
+          <md-card-header class="md-card-header-text md-card-header-green">
+            <div class="card-text">
+              <h4 class="title">Add Driver</h4>
             </div>
-          </div>
+          </md-card-header>
 
-          <div class="md-layout">
-            <label class="md-layout-item md-size-15 md-form-label">Password</label>
-            <div class="md-layout-item">
-              <md-field>
-                <label>Employee password</label>
-                <md-input v-model="password" placeholder="Password"></md-input>
-              </md-field>
-            </div>
-          </div>
-
-          <div class="md-layout">
-            <label class="md-layout-item md-size-15 md-form-label">Name</label>
-            <div class="md-layout-item">
-              <md-field>
-                <label>Employee name</label>
-                <md-input v-model="name" placeholder="Name and surname"></md-input>
-              </md-field>
-            </div>
-          </div>
-
-        <div class="md-layout">
-            <label class="md-layout-item md-size-15 md-form-label">Address</label>
-            <div class="md-layout-item">
-              <md-field>
-                <label>Employee address</label>
-                <md-input v-model="address" placeholder="Employee home address"></md-input>
-              </md-field>
-            </div>
-          </div>
-
-
-
-          <div class="md-layout" style="margin-top:50px;">
-              <div class="md-layout-item mx-auto md-size-30">
-
-                <md-button class="md-success" type="submit">Add Employee</md-button>
+          <md-card-content>
+            <div class="md-layout">
+              <label class="md-layout-item md-size-15 md-form-label">Email</label>
+              <div class="md-layout-item">
+                <md-field>
+                  <label>Driver email</label>
+                  <md-input v-model="email" placeholder="Email"></md-input>
+                </md-field>
               </div>
-          </div>
-        </md-card-content>
-      </md-card>
+            </div>
+
+            <div class="md-layout">
+              <label class="md-layout-item md-size-15 md-form-label">Password</label>
+              <div class="md-layout-item">
+                <md-field>
+                  <label>Driver password</label>
+                  <md-input v-model="password" placeholder="Password"></md-input>
+                </md-field>
+              </div>
+            </div>
+
+            <div class="md-layout">
+              <label class="md-layout-item md-size-15 md-form-label">Name</label>
+              <div class="md-layout-item">
+                <md-field>
+                  <label>Driver name</label>
+                  <md-input v-model="name" placeholder="Name and surname"></md-input>
+                </md-field>
+              </div>
+            </div>
+
+            <div class="md-layout" style="margin-top:50px;">
+              <div class="md-layout-item mx-auto md-size-30">
+                <md-button class="md-success" type="submit">Add Driver</md-button>
+              </div>
+            </div>
+          </md-card-content>
+        </md-card>
+      </div>
     </div>
-  </div>
   </form>
 </template>
 <script>
-import { CREATE_EMPLOYEE } from "@/store/actions.type";
+import { CREATE_DRIVER } from "@/store/actions.type";
 
 export default {
   name: "CreateDriver",
   components: {},
-    props: {
+  props: {
     regularImg: {
       type: String,
       default: "./img/image_placeholder.jpg"
@@ -85,22 +73,20 @@ export default {
     return {
       email: "",
       password: "",
-      name: "",
-      address: ""
+      name: ""
     };
   },
   methods: {
-    onSubmit(){
-      let employee = {
+    onSubmit() {
+      let driver = {
         email: this.email,
         password: this.password,
-        name: this.name,
-        address: this.address
+        name: this.name
       };
 
-      this.$store.dispatch(CREATE_EMPLOYEE, employee).then(() => {
-          this.$router.push({ name: "CompanyEmployees" });
-      });      
+      this.$store.dispatch(CREATE_DRIVER, driver).then(() => {
+        this.$router.push({ name: "Drivers" });
+      });
     },
     onFileChange(e) {
       let files = e.target.files || e.dataTransfer.files;

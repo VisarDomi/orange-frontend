@@ -12,7 +12,7 @@ export const actions = {
     const { reservation } = payload;
     console.log(payload);
     let companyId = UserStorageService.getUser().role_id;
-    await ReservationService.createReservation(payload, companyId).then(
+    await ReservationService.createReservation(companyId, payload).then(
       ({ data }) => {
         return data;
       }

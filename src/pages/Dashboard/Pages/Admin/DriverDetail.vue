@@ -1,6 +1,5 @@
 <template>
 	<div>
-
 		
 		<div class="md-layout">
 			<div class="md-layout-item">
@@ -48,13 +47,13 @@
 					</md-table-toolbar>
 
 					<md-table-row slot="md-table-row" slot-scope="{ item }">
-					<md-table-cell md-label="Employee name" md-sort-by="name">{{
+					<md-table-cell md-label="Company name" md-sort-by="name">{{
 						item.name
 					}}</md-table-cell>
 					<md-table-cell md-label="Destination" md-sort-by="email">{{
 						item.email
 					}}</md-table-cell>
-					<md-table-cell md-label="Total Price">{{ item.age }}</md-table-cell>
+					<md-table-cell md-label="Total">{{ item.age }}</md-table-cell>
 					<md-table-cell md-label="Status">{{ item.email }}</md-table-cell>
 					<!-- <md-table-cell md-label="Actions">
 						<md-button
@@ -123,12 +122,11 @@
 
 <script>
 import { Pagination } from "@/components";
-import users from "./Tables/users";
+import users from "./../../Tables/users";
 import Fuse from "fuse.js";
 import swal from "sweetalert2";
-
 export default {
-  name: "CompanyInvoices",
+  name: "DriverDetail",
   components: {
     Pagination
   },
@@ -169,7 +167,7 @@ export default {
         perPageOptions: [5, 10, 25, 50],
         total: 0
       },
-      footerTable: ["Employee name", "Destination", "Total price", "Status"],
+      footerTable: ["Company name", "Destination", "Total", "Status"],
       searchQuery: "",
       propsToSearch: ["name", "email", "age"],
       tableData: users,
@@ -186,9 +184,6 @@ export default {
         }
         return b[sortBy].localeCompare(a[sortBy]);
       });
-	},
-	createInvoice(){
-
 	}
   },
   mounted() {
@@ -196,8 +191,12 @@ export default {
     this.fuseSearch = new Fuse(this.tableData, {
       keys: ["name", "email"],
       threshold: 0.3
-    });
-  },
+		});
+
+
+
+	},
+
   watch: {
     /**
      * Searches through the table data by a given query.
@@ -216,6 +215,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
+
 .md-card .md-card-actions{
   border: 0;
   margin-left: 20px;

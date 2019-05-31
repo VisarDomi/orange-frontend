@@ -127,7 +127,7 @@ export const UserService = {
 };
 
 export const EmployeeService = {
-  createEmployee(employee, companyId) {
+  createEmployee(companyId, employee) {
     return ApiService.post(`company/${companyId}/employee`, employee);
   },
   getEmployees(companyId) {
@@ -148,7 +148,7 @@ export const EmployeeService = {
 };
 
 export const ReservationService = {
-  createReservation(reservation, companyId) {
+  createReservation(companyId, reservation) {
     return ApiService.post(`/company/${companyId}/reservation`, reservation);
   },
   getReservations(companyId) {
@@ -167,6 +167,24 @@ export const ReservationService = {
     return ApiService.delete(
       `company/${companyId}/reservation/${reservationId}`
     );
+  }
+};
+
+export const DriverService = {
+  createDriver(driver) {
+    return ApiService.post(`admin/driver`, driver);
+  },
+  getDrivers() {
+    return ApiService.get(`admin/driver/all`);
+  },
+  getDriver(driverId) {
+    return ApiService.get(`admin/driver/${driverId}`);
+  },
+  putDriver(driverId, driver) {
+    return ApiService.put(`admin/driver/${driverId}`, driver);
+  },
+  deleteDriver(driverId) {
+    return ApiService.delete(`admin/driver/${driverId}`);
   }
 };
 

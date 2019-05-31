@@ -171,13 +171,13 @@ export default {
       });
     },
     onFileChange(e) {
-      var files = e.target.files || e.dataTransfer.files;
+      let files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;
       this.createImage(files[0]);
     },
     createImage(file) {
-      var reader = new FileReader();
-      var vm = this;
+      let reader = new FileReader();
+      let vm = this;
 
       reader.onload = e => {
         vm.image = e.target.result;

@@ -317,7 +317,7 @@ export default {
   },
   methods: {
     notifyVue(verticalAlign, horizontalAlign) {
-      var color = Math.floor(Math.random() * 4 + 1);
+      let color = Math.floor(Math.random() * 4 + 1);
       this.$notify({
         message:
           "Welcome to <b>Vue Material Dashboard Pro</b> - a beautiful admin panel for every web developer.",

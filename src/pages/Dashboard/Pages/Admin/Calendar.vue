@@ -28,10 +28,10 @@ import Swal from "sweetalert2";
 import $ from "jquery";
 import "fullcalendar";
 
-var today = new Date();
-var y = today.getFullYear();
-var m = today.getMonth();
-var d = today.getDate();
+let today = new Date();
+let y = today.getFullYear();
+let m = today.getMonth();
+let d = today.getDate();
 export default {
   name: "Calendar",
   data() {
@@ -101,8 +101,8 @@ export default {
   },
   methods: {
     initCalendar($) {
-      var self = this;
-      var $calendar = $("#fullCalendar");
+      let self = this;
+      let $calendar = $("#fullCalendar");
       $calendar.fullCalendar({
         header: {
           left: "title",
@@ -137,8 +137,8 @@ export default {
             cancelButtonClass: "md-button md-danger",
             buttonsStyling: false
           }).then(() => {
-            var eventData;
-            var eventTitle = $("#md-input").val();
+            let eventData;
+            let eventTitle = $("#md-input").val();
             if (eventTitle) {
               eventData = {
                 title: eventTitle,

@@ -26,7 +26,7 @@ Vue.filter('money', function (value) {
   if (typeof value !== "number") {
       return value;
   }
-  var formatter = new Intl.NumberFormat('en-US', {
+  let formatter = new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'EUR',
       minimumFractionDigits: 0

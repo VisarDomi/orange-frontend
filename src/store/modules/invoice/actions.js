@@ -47,13 +47,14 @@ export const actions = {
         return data;
       }
     );
-    for (var item of items) {
+    for (let item of items) {
       delete item.serial;
       console.log("trying to post item: ", item);
       item.name = "";
       await ItemService.postItem(reservationId, invoiceId, item).then(
         ({ data }) => {
           console.log("Finished posting item ", item);
+          console.log("Returning data ", data);
         }
       );
     }
