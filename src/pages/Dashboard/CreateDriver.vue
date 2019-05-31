@@ -69,7 +69,7 @@
 import { CREATE_EMPLOYEE } from "@/store/actions.type";
 
 export default {
-  name: "CompanyAddEmployee",
+  name: "CreateDriver",
   components: {},
     props: {
     regularImg: {

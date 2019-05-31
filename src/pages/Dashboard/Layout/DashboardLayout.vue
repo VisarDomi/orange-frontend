@@ -23,7 +23,7 @@
         >
         </sidebar-item>
         <sidebar-item
-          :link="{ name: 'Invoices', icon: 'credit_card', path: '/invoice' }"
+          :link="{ name: 'Invoices', icon: 'credit_card', path: '/invoices' }"
         >
         </sidebar-item>
         <sidebar-item @click="console.log('hello')"

@@ -86,14 +86,14 @@ export default {
           title: "Click for Creative Tim",
           start: new Date(y, m, 21),
           end: new Date(y, m, 22),
-          url: "http://www.creative-tim.com/",
+          url: "http://orange-frontend.ml/",
           className: "event-orange"
         },
         {
           title: "Click for Google",
           start: new Date(y, m, 21),
           end: new Date(y, m, 22),
-          url: "http://www.creative-tim.com/",
+          url: "http://orange-frontend.ml/",
           className: "event-orange"
         }
       ]

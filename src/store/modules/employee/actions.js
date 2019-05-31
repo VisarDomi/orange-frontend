@@ -1,4 +1,8 @@
-import { CREATE_EMPLOYEE, GET_EMPLOYEES } from "../../actions.type";
+import {
+  CREATE_EMPLOYEE,
+  GET_EMPLOYEES,
+  GET_EMPLOYEE
+} from "../../actions.type";
 import { SET_EMPLOYEES } from "../../mutations.type";
 import { EmployeeService, UserServiceApi } from "@/common/api.service";
 import UserService from "@/common/userstorage.service";
@@ -18,15 +22,29 @@ export const actions = {
       full_name: payload.name,
       address: payload.address,
       user_id: user_id
-    }
-    let company_id = UserService.getUser().role_id
-    await EmployeeService.createEmployee(employee, company_id).then(({ data }) => {
-      return data;
-    });
+    };
+    let company_id = UserService.getUser().role_id;
+    await EmployeeService.createEmployee(employee, company_id).then(
+      ({ data }) => {
+        return data;
+      }
+    );
   },
 
   async [GET_EMPLOYEES](context, payload) {
-    await EmployeeService.getEmployees(UserService.getUser().role_id).then(
+    let company_id = UserService.getUser().role_id;
+    await EmployeeService.getEmployees(company_id).then(
+      ({ data }) => {
+        console.log("setting employee state to ", data);
+        context.commit(SET_EMPLOYEES, data);
+      }
+    );
+  },
+
+  async [GET_EMPLOYEE](context, payload) {
+    const { employee_id } = payload
+    let company_id = UserService.getUser().role_id;
+    await EmployeeService.getEmployee(company_id, employee_id).then(
       ({ data }) => {
         console.log("setting employee state to ", data);
         context.commit(SET_EMPLOYEES, data);

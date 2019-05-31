@@ -126,7 +126,7 @@ import users from "./Tables/users";
 import Fuse from "fuse.js";
 import swal from "sweetalert2";
 export default {
-  name: "Invoice",
+  name: "DriverDetail",
   components: {
     Pagination
   },

@@ -6,10 +6,10 @@
           <li>
             <router-link
               v-if="$route.meta.rtlActive"
-              :to="{ path: 'https://www.creative-tim.com' }"
+              :to="{ path: 'https://orange-frontend.ml' }"
               >منزل</router-link
             >
-            <a v-else href="https://www.creative-tim.com">Creative Tim</a>
+            <a v-else href="https://orange-frontend.ml">Creative Tim</a>
           </li>
           <li>
             <a v-if="$route.meta.rtlActive" href="http://blog.creative-tim.com">
@@ -30,11 +30,11 @@
           <li>
             <a
               v-if="$route.meta.rtlActive"
-              href="https://www.creative-tim.com/license"
+              href="https://orange-frontend.ml/license"
             >
               بلوق
             </a>
-            <a v-else href="https://www.creative-tim.com/license">
+            <a v-else href="https://orange-frontend.ml/license">
               Licenses
             </a>
           </li>

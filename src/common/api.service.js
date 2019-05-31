@@ -53,14 +53,17 @@ export const ApiService = {
 };
 
 export const InvoiceService = {
-  getInvoice(invoiceId) {
-    return ApiService.get(`admin/invoice/${invoiceId}`);
-  },
   postInvoice(reservationId, invoice) {
     return ApiService.post(
       `admin/reservation/${reservationId}/invoice`,
       invoice
     );
+  },
+  getInvoices() {
+    return ApiService.get(`admin/invoice/all`);
+  },
+  getInvoice(invoiceId) {
+    return ApiService.get(`admin/invoice/${invoiceId}`);
   },
   putInvoice(reservationId, invoiceId, invoice) {
     return ApiService.put(
@@ -68,10 +71,39 @@ export const InvoiceService = {
       invoice
     );
   },
-  postInvoiceItem(reservationId, invoiceId, item) {
+  deleteInvoice(reservationId, invoiceId) {
+    return ApiService.delete(
+      `admin/reservation/${reservationId}/invoice/${invoiceId}`
+    );
+  }
+};
+
+export const ItemService = {
+  postItem(reservationId, invoiceId, item) {
     return ApiService.post(
       `admin/reservation/${reservationId}/invoice/${invoiceId}/item`,
       item
+    );
+  },
+  getItems(reservationId, invoiceId) {
+    return ApiService.get(
+      `admin/reservation/${reservationId}/invoice/${invoiceId}/item/all`
+    );
+  },
+  getItem(reservationId, invoiceId, itemId) {
+    return ApiService.get(
+      `admin/reservation/${reservationId}/invoice/${invoiceId}/item/${itemId}`
+    );
+  },
+  putItem(reservationId, invoiceId, itemId, item) {
+    return ApiService.put(
+      `admin/reservation/${reservationId}/invoice/${invoiceId}/item/${itemId}`,
+      item
+    );
+  },
+  deleteItem(reservationId, invoiceId, itemId) {
+    return ApiService.delete(
+      `admin/reservation/${reservationId}/invoice/${invoiceId}/item/${itemId}`
     );
   }
 };
@@ -79,41 +111,62 @@ export const InvoiceService = {
 export const UserServiceApi = {
   createUser(user) {
     return ApiService.post("user", user);
+  },
+  getUsers() {
+    return ApiService.get(`user/all`);
+  },
+  getUser(userId) {
+    return ApiService.get(`user/${userId}`);
+  },
+  putUser(userId, user) {
+    return ApiService.put(`user/${userId}`, user);
+  },
+  deleteUser(userId) {
+    return ApiService.delete(`user/${userId}`);
   }
 };
 
 export const EmployeeService = {
+  createEmployee(employee, companyId) {
+    return ApiService.post(`company/${companyId}/employee`, employee);
+  },
   getEmployees(companyId) {
     return ApiService.get(`company/${companyId}/employee/all`);
   },
-  createEmployee(employee, companyId) {
-    return ApiService.post(`company/${companyId}/employee`, employee);
-    //fix here to get the actual company id not the user id or role id
+  getEmployee(companyId, employeeId) {
+    return ApiService.get(`company/${companyId}/employee/${employeeId}`);
   },
-  putInvoice(reservationId, invoiceId, invoice) {
+  putEmployee(companyId, employeeId, employee) {
     return ApiService.put(
-      `admin/reservation/${reservationId}/invoice/${invoiceId}`,
-      invoice
+      `company/${companyId}/employee/${employeeId}`,
+      employee
     );
   },
-  postInvoiceItem(reservationId, invoiceId, item) {
-    return ApiService.post(
-      `admin/reservation/${reservationId}/invoice/${invoiceId}/item`,
-      item
-    );
+  deleteEmployee(companyId, employeeId) {
+    return ApiService.delete(`company/${companyId}/employee/${employeeId}`);
   }
 };
 
 export const ReservationService = {
   createReservation(reservation, companyId) {
     return ApiService.post(`/company/${companyId}/reservation`, reservation);
-    //fix here to get the actual company id not the user id or role id
   },
   getReservations(companyId) {
     return ApiService.get(`/company/${companyId}/reservation/all`);
   },
   getReservation(companyId, reservationId) {
     return ApiService.get(`/company/${companyId}/reservation/${reservationId}`);
+  },
+  putReservation(companyId, reservationId, reservation) {
+    return ApiService.put(
+      `company/${companyId}/reservation/${reservationId}`,
+      reservation
+    );
+  },
+  deleteReservation(companyId, reservationId) {
+    return ApiService.delete(
+      `company/${companyId}/reservation/${reservationId}`
+    );
   }
 };
 

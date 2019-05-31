@@ -3,12 +3,14 @@ import DashboardLayout from "@/pages/Dashboard/Layout/DashboardLayout.vue";
 // Dashboard pages
 import Dashboard from "@/pages/Dashboard/Dashboard.vue";
 import Reservations from "@/pages/Dashboard/Reservations.vue";
-import Drivers from "@/pages/Dashboard/Drivers.vue";
 import CreateDriver from "@/pages/Dashboard/Pages/CreateDriver.vue";
-import Invoice from "@/pages/Dashboard/Invoice.vue";
+import Drivers from "@/pages/Dashboard/Drivers.vue";
+import DriverDetail from "@/pages/Dashboard/DriverDetail.vue";
+import CreateInvoice from "@/pages/Dashboard/CreateInvoice.vue";
+import Invoices from "@/pages/Dashboard/Invoices.vue";
+import InvoiceDetail from "@/pages/Dashboard/InvoiceDetail.vue";
 import InvoicePreview from "@/pages/Dashboard/InvoicePreview.vue";
 import ReservationDetail from "@/pages/Dashboard/ReservationDetail.vue";
-import CreateInvoice from "@/pages/Dashboard/CreateInvoice.vue";
 // Calendar
 import Calendar from "@/pages/Dashboard/Calendar.vue";
 // Charts
@@ -30,10 +32,10 @@ export const admin = {
       meta: setMeta("Reservations")
     },
     {
-      path: "/drivers",
-      name: "Drivers",
-      components: { default: Drivers },
-      meta: setMeta("Drivers")
+      path: "/reservationdetail-:id",
+      name: "ReservationDetail",
+      components: { default: ReservationDetail },
+      meta: setMeta("Reservation Detail")
     },
     {
       path: "/createdriver",
@@ -42,16 +44,16 @@ export const admin = {
       meta: setMeta("Create Driver")
     },
     {
-      path: "/invoice",
-      name: "Invoice",
-      components: { default: Invoice },
-      meta: setMeta("Invoice")
+      path: "/drivers",
+      name: "Drivers",
+      components: { default: Drivers },
+      meta: setMeta("Drivers")
     },
     {
-      path: "/invoicepreview",
-      name: "InvoicePreview",
-      components: { default: InvoicePreview },
-      meta: setMeta("Invoice Preview")
+      path: "/driverdetail-:id",
+      name: "DriverDetail",
+      components: { default: DriverDetail },
+      meta: setMeta("Driver Detail")
     },
     {
       path: "/createinvoice",
@@ -60,10 +62,22 @@ export const admin = {
       meta: setMeta("Create Invoice")
     },
     {
-      path: "/reservationdetail",
-      name: "ReservationDetail",
-      components: { default: ReservationDetail },
-      meta: setMeta("Reservation Detail")
+      path: "/invoices",
+      name: "Invoices",
+      components: { default: Invoices },
+      meta: setMeta("Invoices")
+    },
+    {
+      path: "/invoicesdetail:-id",
+      name: "InvoiceDetail",
+      components: { default: InvoiceDetail },
+      meta: setMeta("Invoice Detail")
+    },
+    {
+      path: "/invoicepreview",
+      name: "InvoicePreview",
+      components: { default: InvoicePreview },
+      meta: setMeta("Invoice Preview")
     },
     {
       path: "/dashboard",

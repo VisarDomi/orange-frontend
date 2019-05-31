@@ -62,7 +62,7 @@ export default {
   },
   methods: {
     addEmployee() {
-      this.$router.push({ name: "CompanyAddEmployee" });
+      this.$router.push({ name: "CompanyCreateEmployee" });
     },
     onResponsiveInverted() {
       if (window.innerWidth < 768) {

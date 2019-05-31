@@ -15,15 +15,15 @@
       <mobile-menu></mobile-menu>
       <template slot="links">
         <sidebar-item
-          :link="{ name: 'Reservations', icon: 'event', path: '/company/reservations' }"
+          :link="{ name: 'Reservations', icon: 'event', path: '/company-reservations' }"
         >
         </sidebar-item>
         <sidebar-item
-          :link="{ name: 'Employees', icon: 'face', path: '/company/employees' }"
+          :link="{ name: 'Employees', icon: 'face', path: '/company-employees' }"
         >
         </sidebar-item>
         <sidebar-item
-          :link="{ name: 'Invoices', icon: 'credit_card', path: '/company/invoices' }"
+          :link="{ name: 'Invoices', icon: 'credit_card', path: '/company-invoices' }"
         >
         </sidebar-item>
         <sidebar-item

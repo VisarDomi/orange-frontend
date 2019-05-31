@@ -8,7 +8,7 @@
   >
     <div class="logo">
       <a
-        href="https://www.creative-tim.com"
+        href="https://orange-frontend.ml"
         class="simple-text logo-mini"
         target="_blank"
       >
@@ -17,7 +17,7 @@
         </div>
       </a>
       <a
-        href="https://www.creative-tim.com"
+        href="https://orange-frontend.ml"
         class="simple-text logo-normal"
         target="_blank"
       >
