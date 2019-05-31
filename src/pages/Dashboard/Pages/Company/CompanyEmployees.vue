@@ -41,7 +41,7 @@
 
 <script>
 import { PricingCard, TestimonialCard } from "@/components";
-import { GET_EMPLOYEES } from "@/store/actions.type";
+import { GET_EMPLOYEES, GET_EMPLOYEE } from "@/store/actions.type";
 
 import { mapGetters } from "vuex";
 export default {
@@ -66,6 +66,7 @@ export default {
     },
     open_employee(employee) {
       console.log("open_employee")
+      this.$store.dispatch(GET_EMPLOYEE, { employeeId: employee.id });
       this.$router.push({
         name: "CompanyEmployeeDetail",
         params: {

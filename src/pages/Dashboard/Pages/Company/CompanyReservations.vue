@@ -120,7 +120,7 @@ import { Pagination } from "@/components";
 import users from "./../../Tables/users";
 import Fuse from "fuse.js";
 import swal from "sweetalert2";
-import { GET_RESERVATIONS } from "@/store/actions.type";
+import { GET_RESERVATIONS, GET_RESERVATION } from "@/store/actions.type";
 import { mapGetters } from "vuex";
 
 export default {
@@ -212,6 +212,11 @@ export default {
       });
     },
     open_reservation(item) {
+      this.$store
+        .dispatch(GET_RESERVATION, { reservationId: item.id })
+        .then(() => {
+          console.log("after dispatch reservation");
+        });
       this.$router.push({
         name: "CompanyReservationDetail",
         params: {

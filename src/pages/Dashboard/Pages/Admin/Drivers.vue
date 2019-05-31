@@ -41,7 +41,7 @@
 
 <script>
 import { PricingCard, TestimonialCard } from "@/components";
-import { GET_DRIVERS } from "@/store/actions.type";
+import { GET_DRIVERS, GET_DRIVER } from "@/store/actions.type";
 
 import { mapGetters } from "vuex";
 export default {
@@ -65,7 +65,7 @@ export default {
       this.$router.push({ name: "CreateDriver" });
     },
     open_driver(driver) {
-      console.log("open_driver")
+      this.$store.dispatch(GET_DRIVER, { driverId: driver.id });
       this.$router.push({
         name: "DriverDetail",
         params: {
