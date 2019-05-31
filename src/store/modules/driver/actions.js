@@ -38,8 +38,8 @@ export const actions = {
   },
 
   async [GET_DRIVER](context, payload) {
-    const { driver_id } = payload;
-    await DriverService.getDriver(driver_id).then(
+    const { driverId } = payload;
+    await DriverService.getDriver(driverId).then(
       ({ data }) => {
         console.log("setting driver state to ", data);
         context.commit(SET_DRIVER, data);

@@ -4,8 +4,8 @@ import {
   GET_RESERVATION
 } from "../../actions.type";
 import { SET_RESERVATIONS, SET_RESERVATION } from "../../mutations.type";
-import { ReservationService } from "@/common/api.service";
-import UserStorageService from "@/common/userstorage.service";
+import { ReservationService } from "./node_modules/@/common/api.service";
+import UserStorageService from "./node_modules/@/common/userstorage.service";
 
 export const actions = {
   async [CREATE_RESERVATION](context, payload) {
@@ -18,7 +18,6 @@ export const actions = {
       }
     );
   },
-
   async [GET_RESERVATIONS](context) {
     const companyId = UserStorageService.getUser().role_id;
     await ReservationService.getReservations(companyId).then(({ data }) => {
@@ -27,7 +26,6 @@ export const actions = {
       return data;
     });
   },
-
   async [GET_RESERVATION](context, payload) {
     const companyId = UserStorageService.getUser().role_id;
     const { reservationId } = payload;

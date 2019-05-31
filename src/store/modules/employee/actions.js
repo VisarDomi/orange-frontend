@@ -40,9 +40,9 @@ export const actions = {
   },
 
   async [GET_EMPLOYEE](context, payload) {
-    const { employee_id } = payload;
+    const { employeeId } = payload;
     let company_id = UserStorageService.getUser().role_id;
-    await EmployeeService.getEmployee(company_id, employee_id).then(
+    await EmployeeService.getEmployee(company_id, employeeId).then(
       ({ data }) => {
         console.log("setting employee state to ", data);
         context.commit(SET_EMPLOYEE, data);

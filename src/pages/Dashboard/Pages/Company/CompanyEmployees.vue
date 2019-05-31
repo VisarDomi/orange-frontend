@@ -25,7 +25,7 @@
           <md-card-expand>
             <md-card-actions md-alignment="space-between">
               <div>
-                <md-button>Details</md-button>
+                <md-button @click.native="open_employee(employee)">Details</md-button>
               </div>
             </md-card-actions>
 
@@ -64,6 +64,16 @@ export default {
     addEmployee() {
       this.$router.push({ name: "CompanyCreateEmployee" });
     },
+    open_employee(employee) {
+      console.log("open_employee")
+      this.$router.push({
+        name: "CompanyEmployeeDetail",
+        params: {
+          id: employee.id
+        }
+      });
+    },
+
     onResponsiveInverted() {
       if (window.innerWidth < 768) {
         this.responsive = true;

@@ -147,15 +147,16 @@ export const EmployeeService = {
   }
 };
 
+// reservation company
 export const ReservationService = {
   createReservation(companyId, reservation) {
-    return ApiService.post(`/company/${companyId}/reservation`, reservation);
+    return ApiService.post(`company/${companyId}/reservation`, reservation);
   },
   getReservations(companyId) {
-    return ApiService.get(`/company/${companyId}/reservation/all`);
+    return ApiService.get(`company/${companyId}/reservation/all`);
   },
   getReservation(companyId, reservationId) {
-    return ApiService.get(`/company/${companyId}/reservation/${reservationId}`);
+    return ApiService.get(`company/${companyId}/reservation/${reservationId}`);
   },
   putReservation(companyId, reservationId, reservation) {
     return ApiService.put(
@@ -167,6 +168,19 @@ export const ReservationService = {
     return ApiService.delete(
       `company/${companyId}/reservation/${reservationId}`
     );
+  }
+};
+
+// reservation admin
+export const AdminReservationService = {
+  getReservations() {
+    return ApiService.get(`admin/reservation/all`);
+  },
+  getReservation(reservationId) {
+    return ApiService.get(`admin/reservation/${reservationId}`);
+  },
+  putReservation(reservationId, reservation) {
+    return ApiService.put(`admin/reservation/${reservationId}`, reservation);
   }
 };
 

@@ -25,7 +25,7 @@
           <md-card-expand>
             <md-card-actions md-alignment="space-between">
               <div>
-                <md-button>Details</md-button>
+                <md-button @click.native="open_driver(driver)">Details</md-button>
               </div>
             </md-card-actions>
 
@@ -64,6 +64,15 @@ export default {
     addDriver() {
       this.$router.push({ name: "CreateDriver" });
     },
+    open_driver(driver) {
+      console.log("open_driver")
+      this.$router.push({
+        name: "DriverDetail",
+        params: {
+          id: driver.id
+        }
+      });
+    },
     onResponsiveInverted() {
       if (window.innerWidth < 768) {
         this.responsive = true;
@@ -73,7 +82,7 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch(GET_DRIVERS)
+    this.$store.dispatch(GET_DRIVERS);
     this.onResponsiveInverted();
     window.addEventListener("resize", this.onResponsiveInverted);
   },

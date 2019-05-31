@@ -8,22 +8,22 @@ export const SET_ROLE = "setRole";
 export const START_LOADING = "startLoading";
 export const STOP_LOADING = "stopLoading";
 
-//invoice
-
+// invoice
 export const SET_INVOICES = "setInvoices";
 export const SET_INVOICE = "setInvoice";
 
-//employee
-
+// employee
 export const SET_EMPLOYEES = "setEmployees";
 export const SET_EMPLOYEE = "setEmployee";
 
-//reservation
-
+// reservation company
 export const SET_RESERVATIONS = "setReservations";
 export const SET_RESERVATION = "setReservation";
 
-//driver
+// reservation admin
+export const SET_ADMIN_RESERVATIONS = "setAdminReservations";
+export const SET_ADMIN_RESERVATION = "setAdminReservation";
 
+// driver
 export const SET_DRIVERS = "setDrivers";
 export const SET_DRIVER = "setDriver";
