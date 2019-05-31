@@ -14,7 +14,7 @@ import NotFound from "@/pages/Dashboard/NotFound";
 const routes = [
   {
     path: "*",
-    name: "Not Found",
+    name: "NotFound",
     component: NotFound,
     meta: setMeta("Not Found")
   },
