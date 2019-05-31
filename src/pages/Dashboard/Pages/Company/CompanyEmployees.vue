@@ -8,7 +8,7 @@
 
     <div class="md-layout">
       <div
-        v-for="employee in employees"
+        v-for="employee in this.employees"
         :key="employee.id"
         class="md-layout-item md-large-size-20 md-xlarge-size-20 md-medium-size-33 md-small-size-50 md-xsmall-size-100 auto-mx"
       >
@@ -73,6 +73,7 @@ export default {
     }
   },
   mounted() {
+    this.$store.dispatch(GET_EMPLOYEES)
     this.onResponsiveInverted();
     window.addEventListener("resize", this.onResponsiveInverted);
   },
