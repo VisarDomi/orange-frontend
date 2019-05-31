@@ -14,12 +14,13 @@ export const actions = {
       user_id = data.id + "";
       return data;
     });
-
-    await EmployeeService.createEmployee(UserService.getUser().role_id, {
+    let employee = {
       full_name: payload.name,
       address: payload.address,
       user_id: user_id
-    }).then(({ data }) => {
+    }
+    let company_id = UserService.getUser().role_id
+    await EmployeeService.createEmployee(employee, company_id).then(({ data }) => {
       return data;
     });
   },

@@ -57,46 +57,65 @@ export const InvoiceService = {
     return ApiService.get(`admin/invoice/${invoiceId}`);
   },
   postInvoice(reservationId, invoice) {
-    return ApiService.post(`admin/reservation/${reservationId}/invoice`, invoice);
+    return ApiService.post(
+      `admin/reservation/${reservationId}/invoice`,
+      invoice
+    );
   },
   putInvoice(reservationId, invoiceId, invoice) {
-    return ApiService.put(`admin/reservation/${reservationId}/invoice/${invoiceId}`, invoice);
+    return ApiService.put(
+      `admin/reservation/${reservationId}/invoice/${invoiceId}`,
+      invoice
+    );
   },
-  postInvoiceItem(reservationId, invoiceId, item){
-    return ApiService.post(`admin/reservation/${reservationId}/invoice/${invoiceId}/item`, item)
+  postInvoiceItem(reservationId, invoiceId, item) {
+    return ApiService.post(
+      `admin/reservation/${reservationId}/invoice/${invoiceId}/item`,
+      item
+    );
   }
 };
 
 export const UserServiceApi = {
-  createUser(user){
-    return ApiService.post('user', user);
+  createUser(user) {
+    return ApiService.post("user", user);
   }
-}
+};
 
 export const EmployeeService = {
   getEmployees(companyId) {
     return ApiService.get(`company/${companyId}/employee/all`);
   },
-  createEmployee(companyId, employee) {
+  createEmployee(employee, companyId) {
     return ApiService.post(`company/${companyId}/employee`, employee);
-    //fix here to get the actual company id not the user id or role id 
+    //fix here to get the actual company id not the user id or role id
   },
   putInvoice(reservationId, invoiceId, invoice) {
-    return ApiService.put(`admin/reservation/${reservationId}/invoice/${invoiceId}`, invoice);
+    return ApiService.put(
+      `admin/reservation/${reservationId}/invoice/${invoiceId}`,
+      invoice
+    );
   },
-  postInvoiceItem(reservationId, invoiceId, item){
-    return ApiService.post(`admin/reservation/${reservationId}/invoice/${invoiceId}/item`, item)
+  postInvoiceItem(reservationId, invoiceId, item) {
+    return ApiService.post(
+      `admin/reservation/${reservationId}/invoice/${invoiceId}/item`,
+      item
+    );
   }
 };
 
 export const ReservationService = {
-  getReservations(companyId) {
-    return ApiService.get(`company/${companyId}/reservation/all`);
+  createReservation(reservation, companyId) {
+    return ApiService.post(`/company/${companyId}/reservation`, reservation);
+    //fix here to get the actual company id not the user id or role id
   },
-  createReservation(companyId, reservation){
-    return ApiService.post(`/company/${companyId}/reservation`, reservation)
+  getReservations(companyId) {
+    return ApiService.get(`/company/${companyId}/reservation/all`);
+  },
+  getReservation(companyId, reservationId) {
+    return ApiService.get(`/company/${companyId}/reservation/${reservationId}`);
   }
-}
+};
 
 // export const MediaService = {
 //   getPicture(userId) {

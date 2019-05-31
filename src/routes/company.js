@@ -19,9 +19,9 @@ export const company = {
       meta: setMeta("Company Reservations")
     },
     {
-      path: "/company/reservationdetail",
+      path: "/company/reservationdetail/:id",
       name: "CompanyReservationDetail",
-      components: { default: CompanyReservationDetail },
+      components: { default: CompanyReservationDetail},
       meta: setMeta("Company Reservation Detail")
     },
     {
