@@ -9,7 +9,6 @@ import Invoice from "@/pages/Dashboard/Invoice.vue";
 import InvoicePreview from "@/pages/Dashboard/InvoicePreview.vue";
 import ReservationDetail from "@/pages/Dashboard/ReservationDetail.vue";
 import CreateInvoice from "@/pages/Dashboard/CreateInvoice.vue";
-import Logout from "@/pages/Dashboard/Pages/Logout.vue";
 // Calendar
 import Calendar from "@/pages/Dashboard/Calendar.vue";
 // Charts
@@ -19,79 +18,77 @@ import Widgets from "@/pages/Dashboard/Widgets.vue";
 import { setMeta } from "./common";
 
 export const admin = {
-  path: "/",
+  path: "",
+  name: "Home",
+  redirect: "/dashboard",
   component: DashboardLayout,
   children: [
     {
-      path: "logout",
-      name: "Logout",
-      components: {default: Logout}
-    },
-    {
-      path: "reservations",
+      path: "/reservations",
       name: "Reservations",
       components: { default: Reservations },
       meta: setMeta("Reservations")
     },
     {
-      path: "drivers",
+      path: "/drivers",
       name: "Drivers",
       components: { default: Drivers },
       meta: setMeta("Drivers")
     },
     {
-      path: "createdriver",
+      path: "/createdriver",
       name: "CreateDriver",
       components: { default: CreateDriver },
       meta: setMeta("Create Driver")
     },
     {
-      path: "invoice",
+      path: "/invoice",
       name: "Invoice",
       components: { default: Invoice },
       meta: setMeta("Invoice")
     },
     {
-      path: "invoicepreview",
+      path: "/invoicepreview",
       name: "InvoicePreview",
       components: { default: InvoicePreview },
       meta: setMeta("Invoice Preview")
     },
     {
-      path: "createinvoice",
+      path: "/createinvoice",
       name: "CreateInvoice",
       components: { default: CreateInvoice },
       meta: setMeta("Create Invoice")
     },
     {
-      path: "reservationdetail",
+      path: "/reservationdetail",
       name: "ReservationDetail",
       components: { default: ReservationDetail },
       meta: setMeta("Reservation Detail")
     },
     {
-      path: "dashboard",
+      path: "/dashboard",
       name: "Dashboard",
       components: { default: Dashboard },
       meta: setMeta("Dashboard")
     },
     {
-      path: "calendar",
+      path: "/calendar",
       name: "Calendar",
       components: { default: Calendar },
       meta: setMeta("Calendar")
     },
     {
-      path: "charts",
+      path: "/charts",
       name: "Charts",
       components: { default: Charts },
       meta: setMeta("Charts")
     },
     {
-      path: "widgets",
+      path: "/widgets",
       name: "Widgets",
       components: { default: Widgets },
       meta: setMeta("Widgets")
     }
-  ]
+  ],
+  meta: setMeta("Home", true)
 };

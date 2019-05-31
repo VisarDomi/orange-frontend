@@ -8,41 +8,41 @@ import CompanyInvoicePreview from "@/pages/Dashboard/CompanyInvoicePreview.vue";
 import { setMeta } from './common';
 
 export const company = {
-  path: "/company/",
+  path: "/company",
   component: CompanyDashboardLayout,
   children: [
     {
-      path: "reservations",
+      path: "/reservations",
       name: "CompanyReservations",
       components: { default: CompanyReservations },
       meta: setMeta("Company Reservations")
     },
     {
-      path: "createreservation",
+      path: "/createreservation",
       name: "CompanyCreateReservation",
       components: { default: CompanyCreateReservation },
       meta: setMeta("Company Create Reservation")
     },
     {
-      path: "addemployee",
+      path: "/addemployee",
       name: "CompanyAddEmployee",
       components: { default: CompanyAddEmployee },
       meta: setMeta("Company Add Employee")
     },
     {
-      path: "employees",
+      path: "/employees",
       name: "CompanyEmployees",
       components: { default: CompanyEmployees },
       meta: setMeta("Company Employees")
     },
     {
-      path: "invoices",
+      path: "/invoices",
       name: "CompanyInvoices",
       components: { default: CompanyInvoices },
       meta: setMeta("Company Invoices")
     },
     {
-      path: "invoicepreview",
+      path: "/invoicepreview",
       name: "CompanyInvoicePreview",
       components: { default: CompanyInvoicePreview },
       meta: setMeta("Company Invoice Preview")

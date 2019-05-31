@@ -8,12 +8,15 @@ import {
 } from "./menus";
 import { admin } from "./admin";
 import { company } from "./company";
+import { setMeta } from './common';
+import NotFound from "@/pages/Dashboard/NotFound";
 
 const routes = [
   {
-    path: "/",
-    redirect: "/reservations",
-    name: "Home"
+    path: "*",
+    name: "Not Found",
+    component: NotFound,
+    meta: setMeta("Not Found")
   },
   componentsMenu,
   formsMenu,
