@@ -23,3 +23,4 @@ export const GET_EMPLOYEES = "getEmployees";
 
 export const CREATE_RESERVATION = "createReservation";
 export const GET_RESERVATIONS = "getReservations";
+export const GET_RESERVATION = "getReservation";

@@ -96,6 +96,9 @@ export const ReservationService = {
   },
   getReservations(companyId){
     return ApiService.get(`/company/${companyId}/reservation/all`)
+  },
+  getReservation(companyId, reservationId){
+    return ApiService.get(`/company/${companyId}/reservation/${reservationId}`)
   }
 }
 

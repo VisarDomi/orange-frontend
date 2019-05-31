@@ -22,3 +22,4 @@ export const SET_EMPLOYEES = "setEmployees";
 //reservation
 
 export const SET_RESERVATIONS = "setReservations";
+export const SET_RESERVATION = "setReservation";
