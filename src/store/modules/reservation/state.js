@@ -1,5 +1,4 @@
 export const state = {
-    reservations: [],
-    reservation: {}
-  };
-  
+  reservations: [],
+  reservation: {}
+};

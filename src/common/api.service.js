@@ -108,7 +108,7 @@ export const ItemService = {
   }
 };
 
-export const UserServiceApi = {
+export const UserService = {
   createUser(user) {
     return ApiService.post("user", user);
   },

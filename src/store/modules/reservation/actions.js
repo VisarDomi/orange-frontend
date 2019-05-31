@@ -5,13 +5,13 @@ import {
 } from "../../actions.type";
 import { SET_RESERVATIONS, SET_RESERVATION } from "../../mutations.type";
 import { ReservationService } from "@/common/api.service";
-import UserService from "@/common/userstorage.service";
+import UserStorageService from "@/common/userstorage.service";
 
 export const actions = {
   async [CREATE_RESERVATION](context, payload) {
     const { reservation } = payload;
     console.log(payload);
-    let companyId = UserService.getUser().role_id;
+    let companyId = UserStorageService.getUser().role_id;
     await ReservationService.createReservation(payload, companyId).then(
       ({ data }) => {
         return data;
@@ -19,7 +19,7 @@ export const actions = {
     );
   },
   async [GET_RESERVATIONS](context) {
-    const companyId = UserService.getUser().role_id;
+    const companyId = UserStorageService.getUser().role_id;
     await ReservationService.getReservations(companyId).then(({ data }) => {
       context.commit(SET_RESERVATIONS, data);
       console.log("setting reservations", data);
@@ -27,7 +27,7 @@ export const actions = {
     });
   },
   async [GET_RESERVATION](context, payload) {
-    const companyId = UserService.getUser().role_id;
+    const companyId = UserStorageService.getUser().role_id;
     const { reservationId } = payload;
     await ReservationService.getReservation(companyId, reservationId).then(
       ({ data }) => {

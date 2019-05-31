@@ -3,15 +3,15 @@ import {
   GET_EMPLOYEES,
   GET_EMPLOYEE
 } from "../../actions.type";
-import { SET_EMPLOYEES } from "../../mutations.type";
-import { EmployeeService, UserServiceApi } from "@/common/api.service";
-import UserService from "@/common/userstorage.service";
+import { SET_EMPLOYEES, SET_EMPLOYEE } from "../../mutations.type";
+import { EmployeeService, UserService } from "@/common/api.service";
+import UserStorageService from "@/common/userstorage.service";
 
 export const actions = {
   async [CREATE_EMPLOYEE](context, payload) {
     let user_id = "";
     console.log(payload.email);
-    await UserServiceApi.createUser({
+    await UserService.createUser({
       email: payload.email,
       password: payload.password
     }).then(({ data }) => {
@@ -23,7 +23,7 @@ export const actions = {
       address: payload.address,
       user_id: user_id
     };
-    let company_id = UserService.getUser().role_id;
+    let company_id = UserStorageService.getUser().role_id;
     await EmployeeService.createEmployee(employee, company_id).then(
       ({ data }) => {
         return data;
@@ -32,22 +32,20 @@ export const actions = {
   },
 
   async [GET_EMPLOYEES](context, payload) {
-    let company_id = UserService.getUser().role_id;
-    await EmployeeService.getEmployees(company_id).then(
-      ({ data }) => {
-        console.log("setting employee state to ", data);
-        context.commit(SET_EMPLOYEES, data);
-      }
-    );
+    let company_id = UserStorageService.getUser().role_id;
+    await EmployeeService.getEmployees(company_id).then(({ data }) => {
+      console.log("setting employee state to ", data);
+      context.commit(SET_EMPLOYEES, data);
+    });
   },
 
   async [GET_EMPLOYEE](context, payload) {
-    const { employee_id } = payload
-    let company_id = UserService.getUser().role_id;
+    const { employee_id } = payload;
+    let company_id = UserStorageService.getUser().role_id;
     await EmployeeService.getEmployee(company_id, employee_id).then(
       ({ data }) => {
         console.log("setting employee state to ", data);
-        context.commit(SET_EMPLOYEES, data);
+        context.commit(SET_EMPLOYEE, data);
       }
     );
   }

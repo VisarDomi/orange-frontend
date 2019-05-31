@@ -1,4 +1,4 @@
 export const state = {
-    employees: []
-  };
-  
+  employees: [],
+  employee: {}
+};

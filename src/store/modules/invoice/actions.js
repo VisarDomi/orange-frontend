@@ -1,10 +1,11 @@
 import { InvoiceService, ItemService } from "@/common/api.service";
 import {
   CREATE_INVOICE,
-  UPDATE_INVOICE,
-  GET_INVOICE
+  GET_INVOICE,
+  GET_INVOICES,
+  UPDATE_INVOICE
 } from "../../actions.type";
-import { SET_INVOICE } from "../../mutations.type";
+import { SET_INVOICES, SET_INVOICE } from "../../mutations.type";
 
 export const actions = {
   async [CREATE_INVOICE](context, payload) {
@@ -17,6 +18,24 @@ export const actions = {
       }
     );
   },
+
+  async [GET_INVOICES](context, payload) {
+    await InvoiceService.getInvoices().then(({ data }) => {
+      console.log("Setting invoice data...");
+      context.commit(SET_INVOICES, data);
+      return data;
+    });
+  },
+
+  async [GET_INVOICE](context, payload) {
+    const { invoiceId } = payload;
+    await InvoiceService.getInvoice(invoiceId).then(({ data }) => {
+      console.log("Setting invoice data...");
+      context.commit(SET_INVOICE, data);
+      return data;
+    });
+  },
+
   async [UPDATE_INVOICE](context, payload) {
     const { reservationId, invoiceId, invoice, items } = payload;
     delete invoice.id;
@@ -38,13 +57,5 @@ export const actions = {
         }
       );
     }
-  },
-  async [GET_INVOICE](context, payload) {
-    const { invoiceId } = payload;
-    await InvoiceService.getInvoice(invoiceId).then(({ data }) => {
-      console.log("Setting invoice data...");
-      context.commit(SET_INVOICE, data);
-      return data;
-    });
   }
 };

@@ -10,6 +10,7 @@ export const STOP_LOADING = "stopLoading";
 
 //invoice
 
+export const SET_INVOICES = "setInvoices";
 export const SET_INVOICE = "setInvoice";
 
 //employees

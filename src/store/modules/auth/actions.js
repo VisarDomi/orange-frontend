@@ -8,7 +8,7 @@ import {
   STOP_LOADING
 } from "../../mutations.type";
 import JwtService from "@/common/jwt.service";
-import UserService from "@/common/userstorage.service";
+import UserStorageService from "@/common/userstorage.service";
 
 export const actions = {
   async [LOGIN](context, credentials) {
@@ -36,7 +36,7 @@ export const actions = {
   [CHECK_AUTH](context) {
     if (JwtService.getToken()) {
       ApiService.setHeader();
-      context.commit(SET_AUTH_SECOND, UserService.getUser());
+      context.commit(SET_AUTH_SECOND, UserStorageService.getUser());
     } else {
       context.commit(PURGE_AUTH);
     }
