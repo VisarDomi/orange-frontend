@@ -1,5 +1,6 @@
 import CompanyDashboardLayout from "@/pages/Dashboard/Layout/CompanyDashboardLayout.vue";
 import CompanyReservations from "@/pages/Dashboard/CompanyReservations.vue";
+import CompanyReservationDetail from "@/pages/Dashboard/CompanyReservationDetail.vue";
 import CompanyCreateReservation from "@/pages/Dashboard/CompanyCreateReservation.vue";
 import CompanyAddEmployee from "@/pages/Dashboard/CompanyAddEmployee.vue";
 import CompanyEmployees from "@/pages/Dashboard/CompanyEmployees.vue";
@@ -16,6 +17,12 @@ export const company = {
       name: "CompanyReservations",
       components: { default: CompanyReservations },
       meta: setMeta("Company Reservations")
+    },
+    {
+      path: "/company/reservationdetail",
+      name: "CompanyReservationDetail",
+      components: { default: CompanyReservationDetail },
+      meta: setMeta("Company Reservation Detail")
     },
     {
       path: "/company/createreservation",

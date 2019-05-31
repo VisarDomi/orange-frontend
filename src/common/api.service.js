@@ -90,6 +90,9 @@ export const EmployeeService = {
 };
 
 export const ReservationService = {
+  getReservations(companyId) {
+    return ApiService.get(`company/${companyId}/reservation/all`);
+  },
   createReservation(companyId, reservation){
     return ApiService.post(`/company/${companyId}/reservation`, reservation)
   }

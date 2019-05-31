@@ -12,6 +12,10 @@ export const STOP_LOADING = "stopLoading";
 
 export const SET_INVOICE = "setInvoice";
 
-//employees 
+//employees
 
 export const SET_EMPLOYEES = "setEmployees";
+
+//reservation
+
+export const SET_RESERVATIONS = "setReservations";

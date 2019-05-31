@@ -1,18 +1,25 @@
-import { CREATE_RESERVATION } from "../../actions.type";
+import { CREATE_RESERVATION, GET_RESERVATIONS } from "../../actions.type";
+import { SET_RESERVATIONS } from "../../mutations.type";
 import { ReservationService } from "@/common/api.service";
 import UserService from "@/common/userstorage.service";
-
 
 export const actions = {
   async [CREATE_RESERVATION](context, payload) {
     const { reservation } = payload;
-    console.log(payload)
-    await ReservationService.createReservation(
-      UserService.getUser().role_id,
-      payload).then(
+    console.log(payload);
+    let companyId = UserService.getUser().role_id;
+    await ReservationService.createReservation(companyId, payload).then(
       ({ data }) => {
         return data;
       }
     );
+  },
+  async [GET_RESERVATIONS](context) {
+    const companyId = UserService.getUser().role_id;
+    await ReservationService.getReservations(companyId).then(({ data }) => {
+      context.commit(SET_RESERVATIONS, data);
+      console.log("setting reservations", data);
+      return data;
+    });
   }
 };
