@@ -13,6 +13,7 @@ import Chartist from "chartist";
 // router setup
 import routes from "./routes";
 import store from "./store";
+import './registerServiceWorker'
 
 // plugin setup
 Vue.use(VueRouter);

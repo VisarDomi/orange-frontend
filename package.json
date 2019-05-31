@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --open",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build && cp netlify.toml dist/netlify.toml",
     "lint": "vue-cli-service lint",
     "dev": "npm run serve",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm run dev"
@@ -39,6 +39,7 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "3.4.0",
     "@vue/cli-plugin-eslint": "3.4.0",
+    "@vue/cli-plugin-pwa": "^3.8.0",
     "@vue/cli-service": "3.4.0",
     "@vue/eslint-config-prettier": "4.0.1",
     "eslint-plugin-vue": "5.1.0",
