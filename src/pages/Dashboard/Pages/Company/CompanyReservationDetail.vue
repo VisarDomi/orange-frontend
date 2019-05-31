@@ -76,7 +76,6 @@ export default {
   },
   methods: {},
   mounted() {
-    // this.$store.dispatch(ADMIN_GET_RESERVATION) //get reservation with store then store it in variable, then get it with mapGetters and plug it into POST invoice
   },
   created() {
     this.$store.dispatch(GET_RESERVATION, {
@@ -86,7 +85,6 @@ export default {
   computed: {
     ...mapGetters(["reservation"])
   }
-  //need map getter reservationId
 };
 </script>
 <style lang="scss">

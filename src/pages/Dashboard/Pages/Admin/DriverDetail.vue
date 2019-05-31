@@ -57,7 +57,6 @@ export default {
   },
   methods: {},
   mounted() {
-    // this.$store.dispatch(ADMIN_GET_DRIVER) //get driver with store then store it in variable, then get it with mapGetters and plug it into POST invoice
   },
   created() {
     this.$store.dispatch(GET_DRIVER, {
@@ -67,7 +66,6 @@ export default {
   computed: {
     ...mapGetters(["driver"])
   }
-  //need map getter driverId
 };
 </script>
 <style lang="scss">

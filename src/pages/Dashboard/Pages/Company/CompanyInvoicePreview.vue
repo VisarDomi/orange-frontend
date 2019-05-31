@@ -213,10 +213,4 @@ export default {
 </style>
 
 <style scoped src="@/assets/css/invoice.css">
-  
 </style>
-
-
-
-// WEBPACK FOOTER //
-// src/components/Invoice.vue

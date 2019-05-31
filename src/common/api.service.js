@@ -52,6 +52,7 @@ export const ApiService = {
   }
 };
 
+// invoice admin
 export const InvoiceService = {
   postInvoice(reservationId, invoice) {
     return ApiService.post(
@@ -75,6 +76,16 @@ export const InvoiceService = {
     return ApiService.delete(
       `admin/reservation/${reservationId}/invoice/${invoiceId}`
     );
+  }
+};
+
+// invoice company
+export const CompanyInvoiceService = {
+  getInvoices(companyId) {
+    return ApiService.get(`company/${companyId}/invoice/all`);
+  },
+  getInvoice(companyId, invoiceId) {
+    return ApiService.get(`company/${companyId}/invoice/${invoiceId}`);
   }
 };
 

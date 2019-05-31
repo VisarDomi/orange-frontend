@@ -23,8 +23,8 @@ export const actions = {
   },
 
   async [GET_ADMIN_RESERVATION](context, payload) {
-    const companyId = UserStorageService.getUser().role_id;
     const { reservationId } = payload;
+    const companyId = UserStorageService.getUser().role_id;
     await AdminReservationService.getReservation(companyId, reservationId).then(
       ({ data }) => {
         context.commit(SET_ADMIN_RESERVATION, data);
@@ -37,14 +37,15 @@ export const actions = {
   async [UPDATE_ADMIN_RESERVATION](context, payload) {
     const { reservationId, driverId } = payload;
     let reservation = {
-      "driver_id": driverId+""
-    }
-    await AdminReservationService.putReservation(reservationId, reservation).then(
-      ({ data }) => {
-        console.log("Setting invoice data...");
-        context.commit(SET_ADMIN_RESERVATION, data);
-        return data;
-      }
-    );
+      driver_id: driverId + ""
+    };
+    await AdminReservationService.putReservation(
+      reservationId,
+      reservation
+    ).then(({ data }) => {
+      console.log("Setting invoice data...");
+      context.commit(SET_ADMIN_RESERVATION, data);
+      return data;
+    });
   }
 };

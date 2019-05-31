@@ -4,11 +4,15 @@ export const LOGOUT = "logout";
 export const REGISTER = "register";
 export const CHECK_AUTH = "checkAuth";
 
-// invoice
+// invoice admin
 export const CREATE_INVOICE = "createInvoice";
 export const GET_INVOICES = "getInvoices";
 export const GET_INVOICE = "getInvoice";
 export const UPDATE_INVOICE = "updateInvoice";
+
+// invoice company
+export const GET_COMPANY_INVOICES = "getCompanyInvoices";
+export const GET_COMPANY_INVOICE = "getCompanyInvoice";
 
 // employee
 export const CREATE_EMPLOYEE = "createEmployee";

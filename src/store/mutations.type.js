@@ -8,9 +8,13 @@ export const SET_ROLE = "setRole";
 export const START_LOADING = "startLoading";
 export const STOP_LOADING = "stopLoading";
 
-// invoice
+// invoice admin
 export const SET_INVOICES = "setInvoices";
 export const SET_INVOICE = "setInvoice";
+
+// invoice company
+export const SET_COMPANY_INVOICES = "setCompanyInvoices";
+export const SET_COMPANY_INVOICE = "setCompanyInvoice";
 
 // employee
 export const SET_EMPLOYEES = "setEmployees";

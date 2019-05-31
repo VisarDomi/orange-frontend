@@ -23,8 +23,8 @@ export const actions = {
       address: payload.address,
       user_id: user_id
     };
-    let company_id = UserStorageService.getUser().role_id;
-    await EmployeeService.createEmployee(company_id, employee).then(
+    let companyId = UserStorageService.getUser().role_id;
+    await EmployeeService.createEmployee(companyId, employee).then(
       ({ data }) => {
         return data;
       }
@@ -32,8 +32,8 @@ export const actions = {
   },
 
   async [GET_EMPLOYEES](context, payload) {
-    let company_id = UserStorageService.getUser().role_id;
-    await EmployeeService.getEmployees(company_id).then(({ data }) => {
+    let companyId = UserStorageService.getUser().role_id;
+    await EmployeeService.getEmployees(companyId).then(({ data }) => {
       console.log("setting employee state to ", data);
       context.commit(SET_EMPLOYEES, data);
     });
@@ -41,8 +41,8 @@ export const actions = {
 
   async [GET_EMPLOYEE](context, payload) {
     const { employeeId } = payload;
-    let company_id = UserStorageService.getUser().role_id;
-    await EmployeeService.getEmployee(company_id, employeeId).then(
+    let companyId = UserStorageService.getUser().role_id;
+    await EmployeeService.getEmployee(companyId, employeeId).then(
       ({ data }) => {
         console.log("setting employee state to ", data);
         context.commit(SET_EMPLOYEE, data);

@@ -30,7 +30,6 @@ export const actions = {
   },
 
   async [GET_DRIVERS](context, payload) {
-    let admin_id = UserStorageService.getUser().role_id;
     await DriverService.getDrivers().then(({ data }) => {
       console.log("setting driver state to ", data);
       context.commit(SET_DRIVERS, data);

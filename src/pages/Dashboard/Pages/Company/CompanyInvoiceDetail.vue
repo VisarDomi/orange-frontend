@@ -9,7 +9,7 @@
                 <md-icon>card_travel</md-icon>
               </div>
               <h4 class="title">
-                Reservation -
+                Invoice -
                 <small>Details</small>
               </h4>
             </md-card-header>
@@ -19,38 +19,38 @@
                 <div class="md-layout md-layout-item md-small-size-100 md-size-100">
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
-                      <label>Pickup</label>
-                      <md-input v-model="pickup" disabled></md-input>
-                    </md-field>
-                  </div>
-                  <div class="md-layout-item md-small-size-100 md-size-100">
-                    <md-field>
-                      <label>Destination</label>
-                      <md-input v-model="destination" disabled></md-input>
-                    </md-field>
-                  </div>
-                  <div class="md-layout-item md-small-size-100 md-size-100">
-                    <md-field>
                       <label>Date</label>
-                      <md-input v-model="date" disabled></md-input>
+                      <md-input v-model="this.invoice.date" disabled></md-input>
                     </md-field>
                   </div>
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
-                      <label>Time</label>
-                      <md-input v-model="time" disabled></md-input>
+                      <label>Due</label>
+                      <md-input v-model="this.invoice.due" disabled></md-input>
+                    </md-field>
+                  </div>
+                  <div class="md-layout-item md-small-size-100 md-size-100">
+                    <md-field>
+                      <label>From Business Name</label>
+                      <md-input v-model="this.invoice.from_business_name" disabled></md-input>
+                    </md-field>
+                  </div>
+                  <div class="md-layout-item md-small-size-100 md-size-100">
+                    <md-field>
+                      <label>To Client Name</label>
+                      <md-input v-model="this.invoice.to_client_name" disabled></md-input>
                     </md-field>
                   </div>
 
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
-                      <label>Status</label>
-                      <md-input v-model="status" disabled></md-input>
+                      <label>Grand Total</label>
+                      <md-input v-model="this.invoice.grand_total" disabled></md-input>
                     </md-field>
                   </div>
 
                   <!-- <div class="md-layout-item md-size-100 text-right">
-            
+
                   </div>-->
                 </div>
               </div>
@@ -64,7 +64,7 @@
 
 <script>
 import { UserCard } from "@/pages";
-import { GET_RESERVATION } from "@/store/actions.type";
+import { GET_COMPANY_INVOICE } from "@/store/actions.type";
 import { mapGetters } from "vuex";
 export default {
   name: "CompanyInvoiceDetail",
@@ -72,35 +72,19 @@ export default {
     UserCard
   },
   data() {
-    return {
-      pickup: "",
-      destination: "",
-      date: "",
-      code: "",
-      time: "",
-      status: ""
-    };
+    return {};
   },
   methods: {},
   mounted() {
-    // this.$store.dispatch(ADMIN_GET_RESERVATION) //get reservation with store then store it in variable, then get it with mapGetters and plug it into POST invoice
   },
   created() {
-    this.$store
-      .dispatch(GET_RESERVATION, { reservationId: this.$route.params.id })
-      .then(() => {
-        this.pickup = this.reservation.pickup;
-        this.destination = this.reservation.destination;
-        this.date = this.reservation.date;
-        this.code = this.reservation.code;
-        this.time = this.reservation.time;
-        this.status = this.reservation.status;
-      });
+    this.$store.dispatch(GET_COMPANY_INVOICE, {
+      invoiceId: this.$route.params.id
+    });
   },
   computed: {
-    ...mapGetters(["reservation"])
+    ...mapGetters(["invoice"])
   }
-  //need map getter reservationId
 };
 </script>
 <style lang="scss">
