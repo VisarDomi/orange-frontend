@@ -8,9 +8,6 @@ export const SET_ROLE = "setRole";
 export const START_LOADING = "startLoading";
 export const STOP_LOADING = "stopLoading";
 
-// profile
-export const SET_PROFILE = "setProfile";
-
 //invoice
 
 export const SET_INVOICE = "setInvoice";

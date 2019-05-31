@@ -7,8 +7,9 @@ export const actions = {
   async [CREATE_RESERVATION](context, payload) {
     const { reservation } = payload;
     console.log(payload)
-    // companyId = UserService.getUser().company_id  --> this is needed for full functionality, plug in method below as first argument
-    await ReservationService.createReservation(payload).then(
+    await ReservationService.createReservation(
+      UserService.getUser().role_id,
+      payload).then(
       ({ data }) => {
         return data;
       }

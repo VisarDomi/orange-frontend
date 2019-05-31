@@ -12,37 +12,37 @@ export const company = {
   component: CompanyDashboardLayout,
   children: [
     {
-      path: "/reservations",
+      path: "/company/reservations",
       name: "CompanyReservations",
       components: { default: CompanyReservations },
       meta: setMeta("Company Reservations")
     },
     {
-      path: "/createreservation",
+      path: "/company/createreservation",
       name: "CompanyCreateReservation",
       components: { default: CompanyCreateReservation },
       meta: setMeta("Company Create Reservation")
     },
     {
-      path: "/addemployee",
+      path: "/company/addemployee",
       name: "CompanyAddEmployee",
       components: { default: CompanyAddEmployee },
       meta: setMeta("Company Add Employee")
     },
     {
-      path: "/employees",
+      path: "/company/employees",
       name: "CompanyEmployees",
       components: { default: CompanyEmployees },
       meta: setMeta("Company Employees")
     },
     {
-      path: "/invoices",
+      path: "/company/invoices",
       name: "CompanyInvoices",
       components: { default: CompanyInvoices },
       meta: setMeta("Company Invoices")
     },
     {
-      path: "/invoicepreview",
+      path: "/company/invoicepreview",
       name: "CompanyInvoicePreview",
       components: { default: CompanyInvoicePreview },
       meta: setMeta("Company Invoice Preview")
