@@ -4,7 +4,8 @@ import {
   SET_AUTH,
   SET_AUTH_SECOND,
   PURGE_AUTH,
-  SET_ROLE
+  SET_ROLE,
+  SET_GO_BACK
 } from "../../mutations.type";
 
 export const mutations = {
