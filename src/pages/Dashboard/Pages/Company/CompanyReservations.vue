@@ -47,7 +47,7 @@
                 </md-field>
               </md-table-toolbar>
 
-              <md-table-row slot="md-table-row" slot-scope="{ item }">
+              <md-table-row slot="md-table-row" slot-scope="{ item }" @click.native="open_reservation(item)">
                 <md-table-cell md-label="Code" md-sort-by="code">
                   {{
                   item.code
@@ -62,26 +62,6 @@
                 <md-table-cell md-label="Pickup">{{ item.pickup }}</md-table-cell>
                 <md-table-cell md-label="Destination">{{ item.destination }}</md-table-cell>
                 <md-table-cell md-label="Status" style="justify-content:left;">{{ item.status }}</md-table-cell>
-                <md-table-cell md-label="Actions">
-                  <!-- <md-button
-                  class="md-just-icon md-info md-simple"
-                  @click.native="handleLike(item)"
-                >
-                  <md-icon>favorite</md-icon>
-                  </md-button>-->
-                  <md-button
-                    class="md-just-icon md-warning md-simple"
-                    @click.native="open_reservation(item)"
-                  >
-                    <md-icon>dvr</md-icon>
-                  </md-button>
-                  <!-- <md-button
-                  class="md-just-icon md-danger md-simple"
-                  @click.native="handleDelete(item)"
-                >
-                  <md-icon>close</md-icon>
-                  </md-button>-->
-                </md-table-cell>
               </md-table-row>
             </md-table>
             <div class="footer-table md-table">
