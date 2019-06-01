@@ -1,5 +1,5 @@
 export const state = {
     adminInvoices: [],
-    adminInvoice: {}
+    adminInvoice: null
   };
   

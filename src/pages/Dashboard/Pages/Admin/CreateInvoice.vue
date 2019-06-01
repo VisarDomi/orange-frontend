@@ -1,5 +1,5 @@
 <template>
-  <form class="md-layout">
+  <form class="md-layout" @submit.prevent="generateInvoice()">
     <!-- ------------ -->
     <!-- From  -->
     <!-- ------------- -->
@@ -17,10 +17,7 @@
           <label class="md-layout-item md-size-20 md-form-label">Company name</label>
           <div class="md-layout-item">
             <md-field
-              :class="[
-                { 'md-error': errors.has('required') },
-                { 'md-valid': !errors.has('required') && touched.required }
-              ]"
+
             >
               <md-input
                 v-model="completed_invoice.from_business_name"
@@ -30,12 +27,7 @@
                 required
                 placeholder="Orange Limo"
               ></md-input>
-              <slide-y-down-transition>
-                <md-icon class="error" v-show="errors.has('required')">close</md-icon>
-              </slide-y-down-transition>
-              <slide-y-down-transition>
-                <md-icon class="success" v-show="!errors.has('required') && touched.required">done</md-icon>
-              </slide-y-down-transition>
+
             </md-field>
           </div>
           <!-- <label class="md-layout-item md-size-20 md-label-on-right">
@@ -49,9 +41,13 @@
             <md-field>
               <label>Address</label>
               <md-input
+              data-vv-name="required"
+                type="text"
+                required
                 v-model="completed_invoice.from_addressline_1"
                 placeholder="Write the primary address"
               ></md-input>
+
             </md-field>
           </div>
           <!-- <label class="md-layout-item md-size-20 md-label-on-right">
@@ -79,10 +75,7 @@
           <label class="md-layout-item md-size-20 md-form-label">City</label>
           <div class="md-layout-item">
             <md-field
-              :class="[
-                { 'md-error': errors.has('required') },
-                { 'md-valid': !errors.has('required') && touched.required }
-              ]"
+
             >
               <md-input
                 v-model="completed_invoice.from_city"
@@ -91,12 +84,7 @@
                 v-validate="modelValidations.required"
                 required
               ></md-input>
-              <slide-y-down-transition>
-                <md-icon class="error" v-show="errors.has('required')">close</md-icon>
-              </slide-y-down-transition>
-              <slide-y-down-transition>
-                <md-icon class="warning" v-show="!errors.has('required') && touched.required">done</md-icon>
-              </slide-y-down-transition>
+
             </md-field>
           </div>
           <!-- <label class="md-layout-item md-size-20 md-label-on-right">
@@ -108,10 +96,7 @@
           <label class="md-layout-item md-size-20 md-form-label">Zip code</label>
           <div class="md-layout-item">
             <md-field
-              :class="[
-                { 'md-error': errors.has('number') },
-                { 'md-valid': !errors.has('number') && touched.number }
-              ]"
+
             >
               <md-input
                 v-model="completed_invoice.from_postcode"
@@ -120,12 +105,7 @@
                 v-validate="modelValidations.number"
                 required
               ></md-input>
-              <slide-y-down-transition>
-                <md-icon class="error" v-show="errors.has('number')">close</md-icon>
-              </slide-y-down-transition>
-              <slide-y-down-transition>
-                <md-icon class="success" v-show="!errors.has('number') && touched.number">done</md-icon>
-              </slide-y-down-transition>
+
             </md-field>
           </div>
           <!-- <label class="md-layout-item md-size-20 md-label-on-right">
@@ -137,10 +117,7 @@
           <label class="md-layout-item md-size-20 md-form-label">Phone</label>
           <div class="md-layout-item">
             <md-field
-              :class="[
-                { 'md-error': errors.has('required') },
-                { 'md-valid': !errors.has('required') && touched.required }
-              ]"
+
             >
               <md-input
                 v-model="completed_invoice.from_phone"
@@ -149,12 +126,7 @@
                 v-validate="modelValidations.required"
                 required
               ></md-input>
-              <slide-y-down-transition>
-                <md-icon class="error" v-show="errors.has('required')">close</md-icon>
-              </slide-y-down-transition>
-              <slide-y-down-transition>
-                <md-icon class="success" v-show="!errors.has('required') && touched.required">done</md-icon>
-              </slide-y-down-transition>
+
             </md-field>
           </div>
           <!-- <label class="md-layout-item md-size-20 md-label-on-right">
@@ -166,10 +138,7 @@
           <label class="md-layout-item md-size-20 md-form-label">VAT</label>
           <div class="md-layout-item">
             <md-field
-              :class="[
-                { 'md-error': errors.has('required') },
-                { 'md-valid': !errors.has('required') && touched.required }
-              ]"
+
             >
               <md-input
                 v-model="completed_invoice.from_vat"
@@ -178,12 +147,7 @@
                 v-validate="modelValidations.required"
                 required
               ></md-input>
-              <slide-y-down-transition>
-                <md-icon class="error" v-show="errors.has('required')">close</md-icon>
-              </slide-y-down-transition>
-              <slide-y-down-transition>
-                <md-icon class="success" v-show="!errors.has('required') && touched.required">done</md-icon>
-              </slide-y-down-transition>
+
             </md-field>
           </div>
           <!-- <label class="md-layout-item md-size-20 md-label-on-right">
@@ -211,10 +175,7 @@
           <label class="md-layout-item md-size-20 md-form-label">Company name</label>
           <div class="md-layout-item">
             <md-field
-              :class="[
-                  { 'md-error': errors.has('required') },
-                  { 'md-valid': !errors.has('required') && touched.required }
-                ]"
+
             >
               <md-input
                 v-model="completed_invoice.to_client_name"
@@ -223,12 +184,7 @@
                 v-validate="modelValidations.required"
                 required
               ></md-input>
-              <slide-y-down-transition>
-                <md-icon class="error" v-show="errors.has('required')">close</md-icon>
-              </slide-y-down-transition>
-              <slide-y-down-transition>
-                <md-icon class="success" v-show="!errors.has('required') && touched.required">done</md-icon>
-              </slide-y-down-transition>
+
             </md-field>
           </div>
           <!-- <label class="md-layout-item md-size-20 md-label-on-right">
@@ -242,9 +198,13 @@
             <md-field>
               <label>Address</label>
               <md-input
+                data-vv-name="required"
+                type="text"
+                required
                 v-model="completed_invoice.to_addressline_1"
                 placeholder="Write the primary address"
               ></md-input>
+         
             </md-field>
           </div>
           <!-- <label class="md-layout-item md-size-20 md-label-on-right">
@@ -272,10 +232,7 @@
           <label class="md-layout-item md-size-20 md-form-label">City</label>
           <div class="md-layout-item">
             <md-field
-              :class="[
-                  { 'md-error': errors.has('required') },
-                  { 'md-valid': !errors.has('required') && touched.required }
-                ]"
+
             >
               <md-input
                 v-model="completed_invoice.to_city"
@@ -284,12 +241,7 @@
                 v-validate="modelValidations.required"
                 required
               ></md-input>
-              <slide-y-down-transition>
-                <md-icon class="error" v-show="errors.has('required')">close</md-icon>
-              </slide-y-down-transition>
-              <slide-y-down-transition>
-                <md-icon class="success" v-show="!errors.has('required') && touched.required">done</md-icon>
-              </slide-y-down-transition>
+
             </md-field>
           </div>
           <!-- <label class="md-layout-item md-size-20 md-label-on-right">
@@ -301,10 +253,7 @@
           <label class="md-layout-item md-size-20 md-form-label">Zip code</label>
           <div class="md-layout-item">
             <md-field
-              :class="[
-                  { 'md-error': errors.has('number') },
-                  { 'md-valid': !errors.has('number') && touched.number }
-                ]"
+
             >
               <md-input
                 v-model="completed_invoice.to_postcode"
@@ -313,12 +262,7 @@
                 v-validate="modelValidations.number"
                 required
               ></md-input>
-              <slide-y-down-transition>
-                <md-icon class="error" v-show="errors.has('number')">close</md-icon>
-              </slide-y-down-transition>
-              <slide-y-down-transition>
-                <md-icon class="success" v-show="!errors.has('number') && touched.number">done</md-icon>
-              </slide-y-down-transition>
+
             </md-field>
           </div>
           <!-- <label class="md-layout-item md-size-20 md-label-on-right">
@@ -330,10 +274,7 @@
           <label class="md-layout-item md-size-20 md-form-label">Phone</label>
           <div class="md-layout-item">
             <md-field
-              :class="[
-                  { 'md-error': errors.has('required') },
-                  { 'md-valid': !errors.has('required') && touched.required }
-                ]"
+
             >
               <md-input
                 v-model="completed_invoice.to_phone"
@@ -342,12 +283,7 @@
                 v-validate="modelValidations.required"
                 required
               ></md-input>
-              <slide-y-down-transition>
-                <md-icon class="error" v-show="errors.has('required')">close</md-icon>
-              </slide-y-down-transition>
-              <slide-y-down-transition>
-                <md-icon class="success" v-show="!errors.has('required') && touched.required">done</md-icon>
-              </slide-y-down-transition>
+
             </md-field>
           </div>
           <!-- <label class="md-layout-item md-size-20 md-label-on-right">
@@ -359,10 +295,7 @@
           <label class="md-layout-item md-size-20 md-form-label">VAT</label>
           <div class="md-layout-item">
             <md-field
-              :class="[
-                  { 'md-error': errors.has('required') },
-                  { 'md-valid': !errors.has('required') && touched.required }
-                ]"
+
             >
               <md-input
                 v-model="completed_invoice.to_vat"
@@ -371,12 +304,7 @@
                 v-validate="modelValidations.required"
                 required
               ></md-input>
-              <slide-y-down-transition>
-                <md-icon class="error" v-show="errors.has('required')">close</md-icon>
-              </slide-y-down-transition>
-              <slide-y-down-transition>
-                <md-icon class="success" v-show="!errors.has('required') && touched.required">done</md-icon>
-              </slide-y-down-transition>
+
             </md-field>
           </div>
           <!-- <label class="md-layout-item md-size-20 md-label-on-right">
@@ -404,10 +332,7 @@
           <label class="md-layout-item md-size-20 md-form-label">Invoice #</label>
           <div class="md-layout-item">
             <md-field
-              :class="[
-                { 'md-error': errors.has('number') },
-                { 'md-valid': !errors.has('number') && touched.number }
-              ]"
+
             >
               <md-input
                 v-model="completed_invoice.ref"
@@ -416,12 +341,7 @@
                 v-validate="modelValidations.number"
                 required
               ></md-input>
-              <slide-y-down-transition>
-                <md-icon class="error" v-show="errors.has('number')">close</md-icon>
-              </slide-y-down-transition>
-              <slide-y-down-transition>
-                <md-icon class="success" v-show="!errors.has('number') && touched.number">done</md-icon>
-              </slide-y-down-transition>
+
             </md-field>
           </div>
           <!-- <label class="md-layout-item md-size-20 md-label-on-right">
@@ -431,7 +351,8 @@
 
         <div class="md-layout">
           <label class="md-layout-item md-size-20 md-form-label">Invoice Date</label>
-          <md-datepicker class="md-layout-item" v-model="completed_invoice.date" md-immediately/>
+          <md-datepicker class="md-layout-item" v-model="completed_invoice.date" md-immediately required 
+                        data-vv-name="required" v-validate="modelValidations.required"/>
           <!-- <label class="md-layout-item md-size-20 md-label-on-right">
             <code>required</code>
           </label>-->
@@ -490,24 +411,13 @@
         <md-table-cell md-numeric>{{this.rowCounter+1}}</md-table-cell>
         <md-table-cell>
           <md-field
-            :class="[
-                { 'md-error': errors.has('required') },
-                { 'md-valid': !errors.has('required') && touched.required }
-              ]"
+
           >
             <md-input
               v-model="invoice_item.description"
-              data-vv-name="required"
               type="text"
-              v-validate="modelValidations.required"
-              required
             ></md-input>
-            <slide-y-down-transition>
-              <md-icon class="error" v-show="errors.has('required')">close</md-icon>
-            </slide-y-down-transition>
-            <slide-y-down-transition>
-              <md-icon class="success" v-show="!errors.has('required') && touched.required">done</md-icon>
-            </slide-y-down-transition>
+
           </md-field>
         </md-table-cell>
 
@@ -517,90 +427,58 @@
 
         <md-table-cell>
           <md-field
-            :class="[
-                { 'md-error': errors.has('number') },
-                { 'md-valid': !errors.has('number') && touched.number }
-              ]"
+
           >
             <md-input
               v-model="invoice_item.quantity"
               data-vv-name="number"
               type="number"
               v-validate="modelValidations.number"
-              required
+
             ></md-input>
-            <slide-y-down-transition>
-              <md-icon class="error" v-show="errors.has('number')">close</md-icon>
-            </slide-y-down-transition>
-            <slide-y-down-transition>
-              <md-icon class="success" v-show="!errors.has('number') && touched.number">done</md-icon>
-            </slide-y-down-transition>
+
           </md-field>
         </md-table-cell>
         <md-table-cell>
           <md-field
-            :class="[
-                { 'md-error': errors.has('number') },
-                { 'md-valid': !errors.has('number') && touched.number }
-              ]"
+
           >
             <md-input
               v-model="invoice_item.price"
               data-vv-name="number"
               type="number"
               v-validate="modelValidations.number"
-              required
+
             ></md-input>
-            <slide-y-down-transition>
-              <md-icon class="error" v-show="errors.has('number')">close</md-icon>
-            </slide-y-down-transition>
-            <slide-y-down-transition>
-              <md-icon class="success" v-show="!errors.has('number') && touched.number">done</md-icon>
-            </slide-y-down-transition>
+
           </md-field>
         </md-table-cell>
         <md-table-cell>
           <md-field
-            :class="[
-                { 'md-valid': !errors.has('range') && touched.range },
-                { 'md-error': errors.has('range') }
-              ]"
+
           >
             <md-input
               v-model="invoice_item.discount"
               data-vv-name="range"
               type="text"
-              required
+
               v-validate="modelValidations.range"
             ></md-input>
-            <slide-y-down-transition>
-              <md-icon class="error" v-show="errors.has('range')">close</md-icon>
-            </slide-y-down-transition>
-            <slide-y-down-transition>
-              <md-icon class="success" v-show="!errors.has('range') && touched.range">done</md-icon>
-            </slide-y-down-transition>
+
           </md-field>
         </md-table-cell>
         <md-table-cell>
           <md-field
-            :class="[
-                { 'md-valid': !errors.has('range') && touched.range },
-                { 'md-error': errors.has('range') }
-              ]"
+
           >
             <md-input
               v-model="invoice_item.tax"
               data-vv-name="range"
               type="text"
-              required
+
               v-validate="modelValidations.range"
             ></md-input>
-            <slide-y-down-transition>
-              <md-icon class="error" v-show="errors.has('range')">close</md-icon>
-            </slide-y-down-transition>
-            <slide-y-down-transition>
-              <md-icon class="warning" v-show="!errors.has('range') && touched.range">done</md-icon>
-            </slide-y-down-transition>
+
           </md-field>
         </md-table-cell>
         <md-table-cell>{{invoice_item.total | money}}</md-table-cell>
@@ -631,10 +509,7 @@
           <label class="md-layout-item md-size-20 md-form-label">Account name</label>
           <div class="md-layout-item">
             <md-field
-              :class="[
-                { 'md-error': errors.has('required') },
-                { 'md-valid': !errors.has('required') && touched.required }
-              ]"
+
             >
               <md-input
                 v-model="completed_invoice.payment_account_name"
@@ -643,12 +518,7 @@
                 v-validate="modelValidations.required"
                 required
               ></md-input>
-              <slide-y-down-transition>
-                <md-icon class="error" v-show="errors.has('required')">close</md-icon>
-              </slide-y-down-transition>
-              <slide-y-down-transition>
-                <md-icon class="success" v-show="!errors.has('required') && touched.required">done</md-icon>
-              </slide-y-down-transition>
+
             </md-field>
           </div>
           <!-- <label class="md-layout-item md-size-20 md-label-on-right">
@@ -672,10 +542,7 @@
           <label class="md-layout-item md-size-20 md-form-label">Account number</label>
           <div class="md-layout-item">
             <md-field
-              :class="[
-                { 'md-error': errors.has('number') },
-                { 'md-valid': !errors.has('number') && touched.number }
-              ]"
+
             >
               <md-input
                 v-model="completed_invoice.payment_account_number"
@@ -684,12 +551,7 @@
                 v-validate="modelValidations.number"
                 required
               ></md-input>
-              <slide-y-down-transition>
-                <md-icon class="error" v-show="errors.has('number')">close</md-icon>
-              </slide-y-down-transition>
-              <slide-y-down-transition>
-                <md-icon class="success" v-show="!errors.has('number') && touched.number">done</md-icon>
-              </slide-y-down-transition>
+
             </md-field>
           </div>
           <!-- <label class="md-layout-item md-size-20 md-label-on-right">
@@ -734,7 +596,7 @@
 </template>
 <script>
 import { SlideYDownTransition } from "vue2-transitions";
-import { UPDATE_INVOICE } from "@/store/actions.type";
+import { UPDATE_ADMIN_INVOICE } from "@/store/actions.type";
 import { mapGetters } from "vuex";
 export default {
   name: "CreateInvoice",
@@ -847,17 +709,19 @@ export default {
     },
     validate() {
       this.$validator.validateAll().then(isValid => {
-        this.$emit("on-submit", this.registerForm, isValid);
+        console.log("is valid on validate() function")
+        // this.$emit("on-submit", this.registerForm, isValid);
       });
     },
     generateInvoice() {
       console.log("generating invoice")
       //ose ktu, me for loop
-      this.$validator.validate().then(valid => {
-        if (!valid) {
+      // this.$validator.validate().then(valid => {
+        // if (!valid) {
           // make notification appear here
-          console.log("not valid")
-        }else{
+          // console.log("not valid")
+        // }else{
+          // console.log("valid form trying to go to the rest of the code")
           let invoice_grand_total = 0;
           let invoice_discount = 0;
           let invoice_tax = 0;
@@ -879,9 +743,13 @@ export default {
           this.completed_invoice.discount = invoice_discount + "";
           this.completed_invoice.tax = invoice_tax + "";
           this.completed_invoice.sub_total = invoice_sub_total + "";
-
+          console.log(this.invoice_item.rowData)
+          console.log(this.adminInvoice.id)
+          console.log(UPDATE_ADMIN_INVOICE)
+          console.log(this.adminInvoice.reservation_id)
+          console.log(this.completed_invoice)
           this.$store
-            .dispatch(UPDATE_INVOICE, {
+            .dispatch(UPDATE_ADMIN_INVOICE, {
               reservationId: this.adminInvoice.reservation_id,
               invoiceId: this.adminInvoice.id,
               invoice: this.completed_invoice,
@@ -892,13 +760,15 @@ export default {
               console.log("Updated invoice.");
               this.$router.push({ name: "InvoiceDetail" });
             });          
-        }
-      });
+        // }
+      // });
 
     }
   },
   computed: {
-    ...mapGetters(["adminInvoice"])
+    ...mapGetters({
+      adminInvoice: 'adminInvoice'
+    })
   },
   watch: {
     range() {
