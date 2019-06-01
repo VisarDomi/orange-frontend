@@ -38,46 +38,46 @@
                     <small>From,</small>
                     <br>
                     <br>
-                    <h6>{{adminInvoice.from_business_name}}</h6>
+                    <h6>{{companyInvoice.from_business_name}}</h6>
                     <address>
-                      {{adminInvoice.from_addressline_1}}
+                      {{companyInvoice.from_addressline_1}}
                       <br>
-                      {{adminInvoice.from_addressline_2}}
+                      {{companyInvoice.from_addressline_2}}
                       <br>
-                      {{adminInvoice.from_city}}, {{adminInvoice.from_postcode}}
+                      {{companyInvoice.from_city}}, {{companyInvoice.from_postcode}}
                       <br>
-                      Phone: {{adminInvoice.from_phone}}
+                      Phone: {{companyInvoice.from_phone}}
                       <br>
-                      VAT: {{adminInvoice.from_vat}}
+                      VAT: {{companyInvoice.from_vat}}
                     </address>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-4">
                     <small>To,</small>
                     <br>
                     <br>
-                    <h6>{{adminInvoice.to_client_name}}</h6>
+                    <h6>{{companyInvoice.to_client_name}}</h6>
                     <address>
-                      {{adminInvoice.to_addressline_1}}
+                      {{companyInvoice.to_addressline_1}}
                       <br>
-                      {{adminInvoice.to_addressline_2}}
+                      {{companyInvoice.to_addressline_2}}
                       <br>
-                      {{adminInvoice.to_city}}, {{adminInvoice.to_postcode}}
+                      {{companyInvoice.to_city}}, {{companyInvoice.to_postcode}}
                       <br>
-                      Phone: {{adminInvoice.to_phone}}
+                      Phone: {{companyInvoice.to_phone}}
                       <br>
-                      VAT: {{adminInvoice.to_vat}}
+                      VAT: {{companyInvoice.to_vat}}
                     </address>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-4">
                     <div class="invoice-details">
                       <small>
                         Invoice No -
-                        <span class="badge badge-info">#{{adminInvoice.ref}}</span>
+                        <span class="badge badge-info">#{{companyInvoice.ref}}</span>
                       </small>
                       <br>
-                      <small>Sent - {{adminInvoice.date | prettyDate}}</small>
+                      <small>Sent - {{companyInvoice.date | prettyDate}}</small>
                       <br>
-                      <small>Due - {{adminInvoice.due | prettyDate}}</small>
+                      <small>Due - {{companyInvoice.due | prettyDate}}</small>
                       <br>
                     </div>
                   </div>
@@ -91,9 +91,9 @@
                 <div class="row gutters">
                   <div class="col-lg-6 col-md-6 col-sm-6">
                     <p>
-                      <b>Hello, {{adminInvoice.to_client_name}}</b>
+                      <b>Hello, {{companyInvoice.to_client_name}}</b>
                     </p>
-                    <p>{{adminInvoice.invoice_notes}}</p>
+                    <p>{{companyInvoice.invoice_notes}}</p>
                     <br>
                   </div>
                   <div class="col-lg-6 col-md-6 col-sm-6"></div>
@@ -117,7 +117,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr v-for="item in adminInvoice.items" :key="item.id">
+                          <tr v-for="item in companyInvoice.items" :key="item.id">
                             <td>
                               {{item.description}}
                               <!-- <p class="m-0 text-muted">
@@ -165,14 +165,14 @@
                             </td>
                             <td>
                               <h5 class="text-danger">
-                                <strong>{{parseFloat(adminInvoice.grand_total) | money}}</strong>
+                                <strong>{{parseFloat(companyInvoice.grand_total) | money}}</strong>
                               </h5>
                               <p>
-                                <!-- {{adminInvoice.sub_total | money}} -->
+                                <!-- {{companyInvoice.sub_total | money}} -->
                                 <!-- <br> -->
-                                {{parseFloat(adminInvoice.discount) | money}}
+                                {{parseFloat(companyInvoice.discount) | money}}
                                 <br>
-                                {{parseFloat(adminInvoice.tax) | money}}
+                                {{parseFloat(companyInvoice.tax) | money}}
                                 <br>
                               </p>
                             </td>
@@ -208,9 +208,9 @@
                           <td style="text-align: left;">
                             <br>
                             <br>
-                            <p>{{adminInvoice.payment_account_name}}</p>
-                            <p>{{adminInvoice.payment_account_sortcode}}</p>
-                            <p>{{adminInvoice.payment_account_number}}</p>
+                            <p>{{companyInvoice.payment_account_name}}</p>
+                            <p>{{companyInvoice.payment_account_sortcode}}</p>
+                            <p>{{companyInvoice.payment_account_number}}</p>
                           </td>
                         </tr>
                       </tbody>
@@ -269,7 +269,7 @@ export default {
     this.$store.dispatch(GET_COMPANY_INVOICE, { invoiceId: this.$route.params.id });
   },
   computed: {
-    ...mapGetters(["adminInvoice"])
+    ...mapGetters(["companyInvoice"])
   }
 };
 </script>
