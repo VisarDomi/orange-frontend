@@ -728,7 +728,7 @@
     </md-card>
 
     <div class="md-layout-item md-size-100 mx-auto" style="text-align:center;">
-      <md-button class="md-warning md-lg" @click="generateInvoice()">Generate Invoice</md-button>
+      <md-button class="md-warning md-lg" type="submit">Generate Invoice</md-button>
     </div>
   </form>
 </template>
@@ -851,42 +851,50 @@ export default {
       });
     },
     generateInvoice() {
+      console.log("generating invoice")
       //ose ktu, me for loop
-      this.validate()
-      let invoice_grand_total = 0;
-      let invoice_discount = 0;
-      let invoice_tax = 0;
-      let invoice_sub_total = 0;
-      for (let item of this.invoice_item.rowData) {
-        let item_price = parseFloat(item.quantity) * parseFloat(item.price);
-        let item_discount_amount =
-          item_price * (parseFloat(item.discount) / 100);
-        invoice_discount += item_discount_amount;
+      this.$validator.validate().then(valid => {
+        if (!valid) {
+          // make notification appear here
+          console.log("not valid")
+        }else{
+          let invoice_grand_total = 0;
+          let invoice_discount = 0;
+          let invoice_tax = 0;
+          let invoice_sub_total = 0;
+          for (let item of this.invoice_item.rowData) {
+            let item_price = parseFloat(item.quantity) * parseFloat(item.price);
+            let item_discount_amount =
+              item_price * (parseFloat(item.discount) / 100);
+            invoice_discount += item_discount_amount;
 
-        let item_tax_amount =
-          (item_price - item_discount_amount) * (parseFloat(item.tax) / 100);
-        invoice_tax += item_tax_amount;
-        invoice_grand_total += parseFloat(item.total);
-      }
-      invoice_sub_total = invoice_grand_total - invoice_discount;
+            let item_tax_amount =
+              (item_price - item_discount_amount) * (parseFloat(item.tax) / 100);
+            invoice_tax += item_tax_amount;
+            invoice_grand_total += parseFloat(item.total);
+          }
+          invoice_sub_total = invoice_grand_total - invoice_discount;
 
-      this.completed_invoice.grand_total = invoice_grand_total + "";
-      this.completed_invoice.discount = invoice_discount + "";
-      this.completed_invoice.tax = invoice_tax + "";
-      this.completed_invoice.sub_total = invoice_sub_total + "";
+          this.completed_invoice.grand_total = invoice_grand_total + "";
+          this.completed_invoice.discount = invoice_discount + "";
+          this.completed_invoice.tax = invoice_tax + "";
+          this.completed_invoice.sub_total = invoice_sub_total + "";
 
-      this.$store
-        .dispatch(UPDATE_INVOICE, {
-          reservationId: this.adminInvoice.reservation_id,
-          invoiceId: this.adminInvoice.id,
-          invoice: this.completed_invoice,
-          items: this.invoice_item.rowData
-        })
-        .then(() => {
-          //Then go to the page
-          console.log("Updated invoice.");
-          this.$router.push({ name: "InvoiceDetail" });
-        });
+          this.$store
+            .dispatch(UPDATE_INVOICE, {
+              reservationId: this.adminInvoice.reservation_id,
+              invoiceId: this.adminInvoice.id,
+              invoice: this.completed_invoice,
+              items: this.invoice_item.rowData
+            })
+            .then(() => {
+              //Then go to the page
+              console.log("Updated invoice.");
+              this.$router.push({ name: "InvoiceDetail" });
+            });          
+        }
+      });
+
     }
   },
   computed: {
