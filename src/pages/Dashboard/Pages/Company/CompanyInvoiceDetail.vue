@@ -72,7 +72,7 @@
                     <div class="invoice-details">
                       <small>
                         Invoice No -
-                        <span class="badge badge-warning">#{{adminInvoice.ref}}</span>
+                        <span class="badge badge-warning">#{{companyInvoice.ref}}</span>
                       </small>
                       <br>
                       <small>Sent - {{companyInvoice.date | prettyDate}}</small>
@@ -165,7 +165,7 @@
                             </td>
                             <td>
                               <h5 class="text-warning">
-                                <strong>{{parseFloat(adminInvoice.grand_total) | money}}</strong>
+                                <strong>{{parseFloat(companyInvoice.grand_total) | money}}</strong>
                               </h5>
                               <p>
                                 <!-- {{companyInvoice.sub_total | money}} -->
