@@ -1,9 +1,9 @@
-import JwtService from "./../../services/jwt.service";
+import { getToken } from "../../services/jwt";
 
 export const state = {
   errors: null,
   user: {},
   token: "",
-  isAuthenticated: !!JwtService.getToken(),
+  isAuthenticated: !!getToken(),
   role: ""
 };

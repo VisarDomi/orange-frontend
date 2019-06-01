@@ -1,4 +1,4 @@
-import { SET_COMPANY_INVOICE, SET_COMPANY_INVOICES } from "./../../mutations.type";
+import { SET_COMPANY_INVOICE, SET_COMPANY_INVOICES } from "../../mutations.type";
 
 export const mutations = {
   [SET_COMPANY_INVOICES](state, invoices) {

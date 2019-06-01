@@ -1,8 +1,9 @@
 import Vue from "vue";
 import axios from "axios";
 import VueAxios from "vue-axios";
-import JwtService from "./jwt.service";
-import { API_URL } from "./config";
+import { getToken } from "./jwt";
+
+const API_URL = "https://orange-backend.ml/api";
 
 export const ApiService = {
   init() {
@@ -14,7 +15,7 @@ export const ApiService = {
     Vue.axios.defaults.baseURL = API_URL;
   },
   setHeader() {
-    let token = JwtService.getToken();
+    let token = getToken();
     Vue.axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   },
   setHeaderMultipart() {

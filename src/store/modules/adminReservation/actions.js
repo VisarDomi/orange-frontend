@@ -2,12 +2,12 @@ import {
   GET_ADMIN_RESERVATIONS,
   GET_ADMIN_RESERVATION,
   UPDATE_ADMIN_RESERVATION
-} from "./../../actions.type";
+} from "../../actions.type";
 import {
   SET_ADMIN_RESERVATIONS,
   SET_ADMIN_RESERVATION
-} from "./../../mutations.type";
-import { AdminReservationService } from "./../../services/api.service";
+} from "../../mutations.type";
+import { AdminReservationService } from "../../services/api";
 
 export const actions = {
   async [GET_ADMIN_RESERVATIONS](context) {

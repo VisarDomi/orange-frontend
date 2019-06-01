@@ -1,8 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import DashboardPlugin from "./material-dashboard";
-import { ApiService } from "./store/services/api.service";
-import JwtService from './store/services/jwt.service';
+import { ApiService } from "./store/services/api";
+import { getToken } from './store/services/jwt';
 import { yearFormat, hourFormat, prettyDate } from "./common/date.filter";
 import ErrorFilter from "./common/error.filter";
 
@@ -14,7 +14,8 @@ import Chartist from "chartist";
 import routes from "./routes";
 import store from "./store";
 import './registerServiceWorker'
-
+console.log("first")
+console.log("getToken()", getToken())
 // plugin setup
 Vue.use(VueRouter);
 Vue.use(DashboardPlugin);
@@ -61,7 +62,7 @@ router.beforeEach((to, from, next) => {
   console.log("router.beforeEach next: ", next)
   ApiService.setHeader();
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (JwtService.getToken() == null) {
+    if (getToken() == null) {
       next({
         name: "Login",
         params: { nextUrl: to.fullPath }

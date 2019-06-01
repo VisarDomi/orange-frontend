@@ -1,4 +1,4 @@
-import { SET_DRIVERS, SET_DRIVER } from "./../../mutations.type";
+import { SET_DRIVERS, SET_DRIVER } from "../../mutations.type";
 
 export const mutations = {
   [SET_DRIVERS](state, drivers) {
