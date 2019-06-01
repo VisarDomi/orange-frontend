@@ -919,12 +919,12 @@ export default {
   margin-left: 1%;
 }
 
- .md-card .md-card-header-green .card-text  {
-    background: orange;
-}
 </style>
 
 <style>
+   .md-card .md-card-header-green .card-text  {
+      background: orange;
+  }
 .md-datepicker-dialog .md-datepicker-header {
     background: orange !important;
 }
