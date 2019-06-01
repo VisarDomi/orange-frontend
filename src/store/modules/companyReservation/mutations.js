@@ -1,4 +1,4 @@
-import { SET_COMPANY_RESERVATIONS, SET_COMPANY_RESERVATION } from "./../../mutations.type";
+import { SET_COMPANY_RESERVATIONS, SET_COMPANY_RESERVATION } from "../../mutations.type";
 
 export const mutations = {
   [SET_COMPANY_RESERVATIONS](state, reservations) {

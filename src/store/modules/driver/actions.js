@@ -2,9 +2,9 @@ import {
   CREATE_DRIVER,
   GET_DRIVERS,
   GET_DRIVER
-} from "./../../actions.type";
-import { SET_DRIVERS, SET_DRIVER } from "./../../mutations.type";
-import { DriverService, UserService } from "./../../services/api.service";
+} from "../../actions.type";
+import { SET_DRIVERS, SET_DRIVER } from "../../mutations.type";
+import { DriverService, UserService } from "../../services/api";
 
 export const actions = {
   async [CREATE_DRIVER](context, payload) {

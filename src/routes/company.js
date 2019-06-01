@@ -9,7 +9,6 @@ import CompanyEmployees from "@/pages/Dashboard/Pages/Company/CompanyEmployees.v
 import CompanyEmployeeDetail from "@/pages/Dashboard/Pages/Company/CompanyEmployeeDetail.vue";
 import CompanyInvoices from "@/pages/Dashboard/Pages/Company/CompanyInvoices.vue";
 import CompanyInvoiceDetail from "@/pages/Dashboard/Pages/Company/CompanyInvoiceDetail.vue";
-import CompanyInvoicePreview from "@/pages/Dashboard/Pages/Company/CompanyInvoicePreview.vue";
 
 import { setMeta } from './common';
 
@@ -64,12 +63,6 @@ export const company = {
       name: "CompanyInvoiceDetail",
       components: { default: CompanyInvoiceDetail },
       meta: setMeta("Company Invoice Detail")
-    },
-    {
-      path: "/company-invoicepreview-:id",
-      name: "CompanyInvoicePreview",
-      components: { default: CompanyInvoicePreview },
-      meta: setMeta("Company Invoice Preview")
     }
   ]
 };

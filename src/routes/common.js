@@ -1,4 +1,4 @@
-export function setMeta(title, auth=false) {
+export function setMeta(title, no_auth=false) {
   let meta = {
         title: `${title}`,
         metaTags: [
@@ -10,13 +10,11 @@ export function setMeta(title, auth=false) {
             property: "og:description",
             content: `The ${title} page of Orange Limo.`
           }
-        ]
+        ],
+        requiresAuth: true
       }
-  if (auth) {
-    meta = {
-      ...meta,
-      requiresAuth: true
-    }
+  if (no_auth) {
+    meta.requiresAuth = false
   }
   return meta
 }

@@ -1,4 +1,4 @@
-import { SET_ADMIN_RESERVATIONS, SET_ADMIN_RESERVATION } from "./../../mutations.type";
+import { SET_ADMIN_RESERVATIONS, SET_ADMIN_RESERVATION } from "../../mutations.type";
 
 export const mutations = {
   [SET_ADMIN_RESERVATIONS](state, reservations) {

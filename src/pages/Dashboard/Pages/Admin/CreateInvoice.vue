@@ -885,7 +885,7 @@ export default {
         .then(() => {
           //Then go to the page
           console.log("Updated invoice.");
-          this.$router.push({ name: "InvoicePreview" });
+          this.$router.push({ name: "InvoiceDetail" });
         });
     }
   },

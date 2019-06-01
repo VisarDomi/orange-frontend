@@ -10,7 +10,6 @@ import DriverDetail from "@/pages/Dashboard/Pages/Admin/DriverDetail.vue";
 import CreateInvoice from "@/pages/Dashboard/Pages/Admin/CreateInvoice.vue";
 import Invoices from "@/pages/Dashboard/Pages/Admin/Invoices.vue";
 import InvoiceDetail from "@/pages/Dashboard/Pages/Admin/InvoiceDetail.vue";
-import InvoicePreview from "@/pages/Dashboard/Pages/Admin/InvoicePreview.vue";
 // Old
 import Calendar from "@/pages/Dashboard/Pages/Admin/Calendar.vue";
 import Charts from "@/pages/Dashboard/Pages/Admin/Charts.vue";
@@ -73,12 +72,6 @@ export const admin = {
       meta: setMeta("Invoice Detail")
     },
     {
-      path: "/invoicepreview-:id",
-      name: "InvoicePreview",
-      components: { default: InvoicePreview },
-      meta: setMeta("Invoice Preview")
-    },
-    {
       path: "/dashboard",
       name: "Dashboard",
       components: { default: Dashboard },
@@ -103,5 +96,4 @@ export const admin = {
       meta: setMeta("Widgets")
     }
   ],
-  meta: setMeta("Home", true)
 };

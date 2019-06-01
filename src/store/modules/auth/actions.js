@@ -1,14 +1,14 @@
-import { ApiService } from "./../../services/api.service";
-import { LOGIN, LOGOUT, REGISTER, CHECK_AUTH } from "./../../actions.type";
+import { ApiService } from "../../services/api";
+import { LOGIN, LOGOUT, REGISTER, CHECK_AUTH } from "../../actions.type";
 import {
   SET_AUTH,
   SET_AUTH_SECOND,
   PURGE_AUTH,
   START_LOADING,
   STOP_LOADING
-} from "./../../mutations.type";
-import JwtService from "./../../services/jwt.service";
-import UserStorageService from "./../../services/userstorage.service";
+} from "../../mutations.type";
+import { getToken } from "../../services/jwt";
+import { getUser } from "../../services/userstorage";
 
 export const actions = {
   async [LOGIN](context, credentials) {
@@ -34,9 +34,9 @@ export const actions = {
     context.commit(STOP_LOADING);
   },
   [CHECK_AUTH](context) {
-    if (JwtService.getToken()) {
+    if (getToken()) {
       ApiService.setHeader();
-      context.commit(SET_AUTH_SECOND, UserStorageService.getUser());
+      context.commit(SET_AUTH_SECOND, getUser());
     } else {
       context.commit(PURGE_AUTH);
     }

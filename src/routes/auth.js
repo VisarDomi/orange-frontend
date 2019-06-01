@@ -18,31 +18,31 @@ export const auth = {
       path: "/logout",
       name: "Logout",
       components: {default: Logout},
-      meta: setMeta("Logout")
+      meta: setMeta("Logout", true)
     },
     {
       path: "/login",
       name: "Login",
       component: Login,
-      meta: setMeta("Login")
+      meta: setMeta("Login", true)
     },
     {
       path: "/register",
       name: "Register",
       component: Register,
-      meta: setMeta("Register")
+      meta: setMeta("Register", true)
     },
     {
       path: "/role",
       name: "Role",
       component: Role,
-      meta: setMeta("Role")
+      meta: setMeta("Role", true)
     },
     {
       path: "/lock",
       name: "Lock",
       component: Lock,
-      meta: setMeta("Lock")
+      meta: setMeta("Lock", true)
     }
   ]
 };

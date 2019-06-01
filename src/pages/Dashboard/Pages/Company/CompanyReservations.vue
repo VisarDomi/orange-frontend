@@ -117,7 +117,7 @@
 
 <script>
 import { Pagination } from "@/components";
-import users from "./../../Tables/users";
+import users from "../../Tables/users";
 import Fuse from "fuse.js";
 import swal from "sweetalert2";
 import { GET_COMPANY_RESERVATIONS, GET_COMPANY_RESERVATION } from "@/store/actions.type";
