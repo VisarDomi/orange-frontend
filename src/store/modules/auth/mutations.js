@@ -32,11 +32,11 @@ export const mutations = {
     destroyUser();
     state.user = {};
   },
-  [SET_ROLE](state, param) {
-    console.log("role in muations is:", param.role)
-    state.role = param.role;
+  [SET_ROLE](state, payload) {
+    console.log("role in muations is:", payload.role)
+    state.role = payload.role;
   },
-  [SET_GO_BACK](state, param) {
-    state.goBack = param.goBack
+  [SET_GO_BACK](state, payload) {
+    state.goBack = payload.goBack
   }
 };

@@ -28,11 +28,17 @@ export const actions = {
       })
       .catch(error => {
         console.log("error", Object.assign({}, error));
-        console.log("error.request.status", Object.assign({}, error).request.status);
-        let status = Object.assign({}, error).request.status
+        console.log(
+          "error.request.status",
+          Object.assign({}, error).request.status
+        );
+        let status = Object.assign({}, error).request.status;
         if (status == 401) {
+          console.log("status is: ", status);
           // push to login again?, no put a new element where you click it to go back to /role
-          context.commit(SET_GO_BACK);
+          payload = { goBack: true };
+          console.log("payload.goBack", payload.goBack)
+          context.commit(SET_GO_BACK, payload);
         }
       });
     context.commit(STOP_LOADING);

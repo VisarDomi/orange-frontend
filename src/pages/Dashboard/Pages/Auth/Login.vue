@@ -59,17 +59,20 @@
           <md-card-actions class="md-alignment-center">
             <md-button native-type="submit" type="submit" class="md-warning">Log in</md-button>
           </md-card-actions>
-          <!-- <md-card-actions class="md-alignment-center">
-            <md-button native-type="submit" type="submit" class="md-warning">Go Back</md-button>
-          </md-card-actions> -->
         </md-card>
       </form>
+      <md-card>
+        <md-card-actions class="md-alignment-center" v-if="goBack">
+          <md-button class="md-warning" @click="goBackToRole()">Go Back</md-button>
+        </md-card-actions>
+      </md-card>
     </div>
   </div>
 </template>
 <script>
 import { mapGetters } from "vuex";
 import { LOGIN } from "@/store/actions.type";
+import { SET_GO_BACK } from "@/store/mutations.type";
 import { SlideYDownTransition } from "vue2-transitions";
 export default {
   name: "Login",
@@ -119,6 +122,11 @@ export default {
       }
       return role;
     },
+    goBackToRole() {
+      let payload = { goBack: false };
+      this.$store.commit(SET_GO_BACK, payload);
+      this.$router.push({ name: "Role" });
+    },
     async onSubmit() {
       let payload = {
         username: this.email,
@@ -139,7 +147,9 @@ export default {
       }
       if (this.user.role == "employee") {
         // this.$router.push({ name: "EmployeeReservationDetail" });
-        console.log(`you should now be routed to: this.$router.push({ name: "EmployeeReservationDetail" })`)
+        console.log(
+          `you should now be routed to: this.$router.push({ name: "EmployeeReservationDetail" })`
+        );
       }
     }
   },
@@ -152,7 +162,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["role", "user"])
+    ...mapGetters(["role", "user", "goBack"])
   },
   created() {
     console.log("mounted role is ", this.role);
@@ -171,14 +181,14 @@ export default {
 
 <style>
 .md-field.md-valid label {
-    color: #f0ad4e !important;
+  color: #f0ad4e !important;
 }
 
 .md-field.md-valid .md-icon {
-    color: #f0ad4e !important;
+  color: #f0ad4e !important;
 }
 
 .md-field.md-valid:before {
-    background-color: orange !important;
+  background-color: orange !important;
 }
 </style>
