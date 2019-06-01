@@ -877,8 +877,8 @@ export default {
 
       this.$store
         .dispatch(UPDATE_INVOICE, {
-          reservationId: this.invoice.reservation_id,
-          invoiceId: this.invoice.id,
+          reservationId: this.adminInvoice.reservation_id,
+          invoiceId: this.adminInvoice.id,
           invoice: this.completed_invoice,
           items: this.invoice_item.rowData
         })
@@ -890,7 +890,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["invoice"])
+    ...mapGetters(["adminInvoice"])
   },
   watch: {
     range() {

@@ -1,4 +1,4 @@
-import { SET_EMPLOYEES, SET_EMPLOYEE } from "../../mutations.type";
+import { SET_EMPLOYEES, SET_EMPLOYEE } from "./../../mutations.type";
 
 export const mutations = {
   [SET_EMPLOYEES](state, employees) {

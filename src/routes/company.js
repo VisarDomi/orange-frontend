@@ -66,7 +66,7 @@ export const company = {
       meta: setMeta("Company Invoice Detail")
     },
     {
-      path: "/company-invoicepreview",
+      path: "/company-invoicepreview-:id",
       name: "CompanyInvoicePreview",
       components: { default: CompanyInvoicePreview },
       meta: setMeta("Company Invoice Preview")

@@ -1,14 +1,14 @@
-import { ApiService } from "@/common/api.service";
-import { LOGIN, LOGOUT, REGISTER, CHECK_AUTH } from "../../actions.type";
+import { ApiService } from "./../../services/api.service";
+import { LOGIN, LOGOUT, REGISTER, CHECK_AUTH } from "./../../actions.type";
 import {
   SET_AUTH,
   SET_AUTH_SECOND,
   PURGE_AUTH,
   START_LOADING,
   STOP_LOADING
-} from "../../mutations.type";
-import JwtService from "@/common/jwt.service";
-import UserStorageService from "@/common/userstorage.service";
+} from "./../../mutations.type";
+import JwtService from "./../../services/jwt.service";
+import UserStorageService from "./../../services/userstorage.service";
 
 export const actions = {
   async [LOGIN](context, credentials) {

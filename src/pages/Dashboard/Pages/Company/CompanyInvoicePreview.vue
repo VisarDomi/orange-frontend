@@ -196,9 +196,11 @@ export default {
   methods: {
     exportPDF() {
       const element = document.querySelector('.generate');
+      let invoiceId = this.$route.params.id
+      let companyId = "unknown" // substitute properly
       const opt = {
         margin: 8,
-        filename: 'invoice.pdf',
+        filename: `invoice-${invoiceId}-company-${companyId}.pdf`,
         image: { type: 'jpeg', quality: 1 },
         html2canvas: { scale: 2 },
       };

@@ -3,6 +3,7 @@ import DashboardLayout from "@/pages/Dashboard/Layout/DashboardLayout.vue";
 // Admin pages
 import Dashboard from "@/pages/Dashboard/Pages/Admin/Dashboard.vue";
 import Reservations from "@/pages/Dashboard/Pages/Admin/Reservations.vue";
+import ReservationDetail from "@/pages/Dashboard/Pages/Admin/ReservationDetail.vue";
 import CreateDriver from "@/pages/Dashboard/Pages/Admin/CreateDriver.vue";
 import Drivers from "@/pages/Dashboard/Pages/Admin/Drivers.vue";
 import DriverDetail from "@/pages/Dashboard/Pages/Admin/DriverDetail.vue";
@@ -10,7 +11,6 @@ import CreateInvoice from "@/pages/Dashboard/Pages/Admin/CreateInvoice.vue";
 import Invoices from "@/pages/Dashboard/Pages/Admin/Invoices.vue";
 import InvoiceDetail from "@/pages/Dashboard/Pages/Admin/InvoiceDetail.vue";
 import InvoicePreview from "@/pages/Dashboard/Pages/Admin/InvoicePreview.vue";
-import ReservationDetail from "@/pages/Dashboard/Pages/Admin/ReservationDetail.vue";
 // Old
 import Calendar from "@/pages/Dashboard/Pages/Admin/Calendar.vue";
 import Charts from "@/pages/Dashboard/Pages/Admin/Charts.vue";
@@ -67,13 +67,13 @@ export const admin = {
       meta: setMeta("Invoices")
     },
     {
-      path: "/invoicesdetail:-id",
+      path: "/invoicesdetail-:id",
       name: "InvoiceDetail",
       components: { default: InvoiceDetail },
       meta: setMeta("Invoice Detail")
     },
     {
-      path: "/invoicepreview",
+      path: "/invoicepreview-:id",
       name: "InvoicePreview",
       components: { default: InvoicePreview },
       meta: setMeta("Invoice Preview")

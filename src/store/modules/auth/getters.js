@@ -1,6 +1,6 @@
 export const getters = {
-  getCurrentUser: state => state.user,
-  getCurrentToken: state => state.token,
+  user: state => state.user,
+  token: state => state.token,
   isAuthenticated: state => state.isAuthenticated,
-  getRole: state => state.role
+  role: state => state.role
 };

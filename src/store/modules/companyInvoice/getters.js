@@ -1,4 +1,4 @@
 export const getters = {
-  invoices: state => state.invoices,
-  invoice: state => state.invoice
+  companyInvoices: state => state.companyInvoices,
+  companyInvoice: state => state.companyInvoice
 };

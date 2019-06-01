@@ -120,7 +120,7 @@ import { Pagination } from "@/components";
 import users from "./../../Tables/users";
 import Fuse from "fuse.js";
 import swal from "sweetalert2";
-import { GET_RESERVATIONS, GET_RESERVATION } from "@/store/actions.type";
+import { GET_COMPANY_RESERVATIONS, GET_COMPANY_RESERVATION } from "@/store/actions.type";
 import { mapGetters } from "vuex";
 
 export default {
@@ -129,7 +129,7 @@ export default {
     Pagination
   },
   computed: {
-    ...mapGetters(["reservations"]),
+    ...mapGetters(["companyReservations"]),
     /***
      * Returns a page from the searched data or the whole data. Search is performed in the watch section below
      */
@@ -213,7 +213,7 @@ export default {
     },
     open_reservation(item) {
       this.$store
-        .dispatch(GET_RESERVATION, { reservationId: item.id })
+        .dispatch(GET_COMPANY_RESERVATION, { reservationId: item.id })
         .then(() => {
           console.log("after dispatch reservation");
         });
@@ -257,9 +257,9 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch(GET_RESERVATIONS).then(() => {
-      console.log("GET reservations now: ", this.reservations);
-      this.tableData = this.reservations;
+    this.$store.dispatch(GET_COMPANY_RESERVATIONS).then(() => {
+      console.log("GET companyReservations now: ", this.companyReservations);
+      this.tableData = this.companyReservations;
     });
   },
   mounted() {

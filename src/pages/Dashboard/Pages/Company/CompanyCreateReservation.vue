@@ -1,132 +1,134 @@
 <template>
-<form @submit.prevent="onSubmit">
-  <div class="md-layout">
-    <div class="md-layout-item md-xlarge-size-50 md-large-size-50 md-medium-size-70 md-small-size-100">
-      <md-card>
-        <md-card-header class="md-card-header-text md-card-header-green">
-          <div class="card-text">
-            <h4 class="title">Create Reservation</h4>
-          </div>
-        </md-card-header>
+  <form @submit.prevent="onSubmit">
+    <div class="md-layout">
+      <div
+        class="md-layout-item md-xlarge-size-50 md-large-size-50 md-medium-size-70 md-small-size-100"
+      >
+        <md-card>
+          <md-card-header class="md-card-header-text md-card-header-green">
+            <div class="card-text">
+              <h4 class="title">Create Reservation</h4>
+            </div>
+          </md-card-header>
 
-        <md-card-content>
-
-<div class="md-layout">
-                <label class="md-layout-item md-size-15 md-form-label">Employees</label>
-        <div class="md-layout-item">
+          <md-card-content>
+            <div class="md-layout">
+              <label class="md-layout-item md-size-15 md-form-label">Employees</label>
+              <div class="md-layout-item">
                 <md-field>
-                <md-select v-model="selectedEmployees"  name="employees" id="employees" md-dense multiple>
-                    <md-option v-for="employee in this.employees" :value="employee.full_name" :key="employee.id">{{employee.full_name}}</md-option>
-                </md-select>
+                  <md-select
+                    v-model="selectedEmployees"
+                    name="employees"
+                    id="employees"
+                    md-dense
+                    multiple
+                  >
+                    <md-option
+                      v-for="employee in this.employees"
+                      :value="employee.full_name"
+                      :key="employee.id"
+                    >{{employee.full_name}}</md-option>
+                  </md-select>
                 </md-field>
+              </div>
             </div>
-</div>
 
-          <div class="md-layout">
-            <label class="md-layout-item md-size-15 md-form-label">Pickup</label>
-            <div class="md-layout-item">
-              <md-field>
-                <label>Pickup Address</label>
-                <md-input v-model="pickup" placeholder="placeholder"></md-input>
-              </md-field>
+            <div class="md-layout">
+              <label class="md-layout-item md-size-15 md-form-label">Pickup</label>
+              <div class="md-layout-item">
+                <md-field>
+                  <label>Pickup Address</label>
+                  <md-input v-model="pickup" placeholder="placeholder"></md-input>
+                </md-field>
+              </div>
             </div>
-          </div>
 
-          <div class="md-layout">
-            <label class="md-layout-item md-size-15 md-form-label">Destination</label>
-            <div class="md-layout-item">
-              <md-field>
-                <label>Destination Address</label>
-                <md-input v-model="destination" placeholder="placeholder"></md-input>
-              </md-field>
+            <div class="md-layout">
+              <label class="md-layout-item md-size-15 md-form-label">Destination</label>
+              <div class="md-layout-item">
+                <md-field>
+                  <label>Destination Address</label>
+                  <md-input v-model="destination" placeholder="placeholder"></md-input>
+                </md-field>
+              </div>
             </div>
-          </div>
 
-        <div class="md-layout">
-          <label class="md-layout-item md-size-15 md-form-label">Reservation Date</label>
-          <md-datepicker class="md-layout-item" v-model="date" md-immediately/>
-        </div>
-
-        <div class="md-layout">
-                <label class="md-layout-item md-size-15 md-form-label">Reservation Time</label>
-                <div class="md-layout-item">
-                    <md-field>
-                    <label for="hour">Hour</label>
-                    <md-select v-model="hours" name="hour" id="hour" md-dense>
-                        <md-option value="1">1</md-option>
-                        <md-option value="2">2</md-option>
-                        <md-option value="3">3</md-option>
-                        <md-option value="4">4</md-option>
-                        <md-option value="5">5</md-option>
-                        <md-option value="6">6</md-option>
-                        <md-option value="7">7</md-option>
-                        <md-option value="8">8</md-option>
-                        <md-option value="9">9</md-option>
-                        <md-option value="10">10</md-option>
-                        <md-option value="1">11</md-option>
-                        <md-option value="12">12</md-option>
-                        <md-option value="13">13</md-option>
-                        <md-option value="14">14</md-option>
-                        <md-option value="15">15</md-option>
-                        <md-option value="16">16</md-option>
-                        <md-option value="17">17</md-option>
-                        <md-option value="18">18</md-option>
-                        <md-option value="19">19</md-option>
-                        <md-option value="20">20</md-option>
-                        <md-option value="21">21</md-option>
-                        <md-option value="22">22</md-option>
-                        <md-option value="23">23</md-option>
-                        <md-option value="00">00</md-option>
-                    </md-select>
-                    </md-field>
-                </div>
-
-
-                <div class="md-layout-item">
-                    <md-field>
-                    <label for="font">Minutes</label>
-                    <md-select v-model="minutes" name="minutes" id="minutes" md-dense>
-                        <md-option value="15">15</md-option>
-                        <md-option value="30">30</md-option>
-                        <md-option value="45">45</md-option>
-                        <md-option value="00">00</md-option>
-                    </md-select>
-                    </md-field>
-                </div>
-        </div>
-
-
-        <div class="md-layout">
-            <label class="md-layout-item md-size-15 md-form-label">Reservation code</label>
-            <div class="md-layout-item">
-              <md-field>
-                <label>Reservation code</label>
-                <md-input v-model="code" placeholder="placeholder"></md-input>
-              </md-field>
+            <div class="md-layout">
+              <label class="md-layout-item md-size-15 md-form-label">Reservation Date</label>
+              <md-datepicker class="md-layout-item" v-model="date" md-immediately/>
             </div>
-          </div>
 
-          <div class="md-layout" style="margin-top:50px;">
+            <div class="md-layout">
+              <label class="md-layout-item md-size-15 md-form-label">Reservation Time</label>
+              <div class="md-layout-item">
+                <md-field>
+                  <label for="hour">Hour</label>
+                  <md-select v-model="hours" name="hour" id="hour" md-dense>
+                    <md-option value="1">1</md-option>
+                    <md-option value="2">2</md-option>
+                    <md-option value="3">3</md-option>
+                    <md-option value="4">4</md-option>
+                    <md-option value="5">5</md-option>
+                    <md-option value="6">6</md-option>
+                    <md-option value="7">7</md-option>
+                    <md-option value="8">8</md-option>
+                    <md-option value="9">9</md-option>
+                    <md-option value="10">10</md-option>
+                    <md-option value="1">11</md-option>
+                    <md-option value="12">12</md-option>
+                    <md-option value="13">13</md-option>
+                    <md-option value="14">14</md-option>
+                    <md-option value="15">15</md-option>
+                    <md-option value="16">16</md-option>
+                    <md-option value="17">17</md-option>
+                    <md-option value="18">18</md-option>
+                    <md-option value="19">19</md-option>
+                    <md-option value="20">20</md-option>
+                    <md-option value="21">21</md-option>
+                    <md-option value="22">22</md-option>
+                    <md-option value="23">23</md-option>
+                    <md-option value="00">00</md-option>
+                  </md-select>
+                </md-field>
+              </div>
+
+              <div class="md-layout-item">
+                <md-field>
+                  <label for="font">Minutes</label>
+                  <md-select v-model="minutes" name="minutes" id="minutes" md-dense>
+                    <md-option value="15">15</md-option>
+                    <md-option value="30">30</md-option>
+                    <md-option value="45">45</md-option>
+                    <md-option value="00">00</md-option>
+                  </md-select>
+                </md-field>
+              </div>
+            </div>
+
+            <div class="md-layout">
+              <label class="md-layout-item md-size-15 md-form-label">Reservation code</label>
+              <div class="md-layout-item">
+                <md-field>
+                  <label>Reservation code</label>
+                  <md-input v-model="code" placeholder="placeholder"></md-input>
+                </md-field>
+              </div>
+            </div>
+
+            <div class="md-layout" style="margin-top:50px;">
               <div class="md-layout-item mx-auto md-size-30">
-
                 <md-button class="md-success" type="submit">Create reservation</md-button>
               </div>
-          </div>
-
-
-
-
-
-        </md-card-content>
-      </md-card>
+            </div>
+          </md-card-content>
+        </md-card>
+      </div>
     </div>
-  </div>
   </form>
 </template>
 
 <script>
-
-import { GET_EMPLOYEES,CREATE_RESERVATION } from "@/store/actions.type";
+import { GET_EMPLOYEES, CREATE_COMPANY_RESERVATION } from "@/store/actions.type";
 
 import { mapGetters } from "vuex";
 
@@ -135,32 +137,30 @@ export default {
   components: {},
   data() {
     return {
-        selectedEmployees: [],
-        pickup: "",
-        destination: "",
-        status: "",
-        hours: "",
-        minutes: "",
-        date: "",
-        code: ""
+      selectedEmployees: [],
+      pickup: "",
+      destination: "",
+      status: "",
+      hours: "",
+      minutes: "",
+      date: "",
+      code: ""
     };
   },
   methods: {
-    onSubmit(){
-      let fixed_time = this.hours+":"+this.minutes+":00"
+    onSubmit() {
+      let fixed_time = this.hours + ":" + this.minutes + ":00";
       let form = {
         code: this.code,
         date: this.date,
         time: fixed_time,
-        destination: this.destination, 
+        destination: this.destination,
         pickup: this.pickup
       };
       console.log("credentials are", form);
 
-      this.$store.dispatch(CREATE_RESERVATION, form).then(() => {
-
-          this.$router.push({ name: "CompanyReservations" });
-
+      this.$store.dispatch(CREATE_COMPANY_RESERVATION, form).then(() => {
+        this.$router.push({ name: "CompanyReservations" });
       });
     },
     onFileChange(e) {
@@ -200,7 +200,7 @@ export default {
       }
     }
   },
-  created(){
+  created() {
     this.$store.dispatch(GET_EMPLOYEES);
   },
   mounted() {

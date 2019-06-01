@@ -1,11 +1,11 @@
-import JwtService from "@/common/jwt.service";
-import UserStorageService from "@/common/userstorage.service";
+import JwtService from "./../../services/jwt.service";
+import UserStorageService from "./../../services/userstorage.service";
 import {
   SET_AUTH,
   SET_AUTH_SECOND,
   PURGE_AUTH,
   SET_ROLE
-} from "../../mutations.type";
+} from "./../../mutations.type";
 
 export const mutations = {
   [SET_AUTH_SECOND](state, user) {

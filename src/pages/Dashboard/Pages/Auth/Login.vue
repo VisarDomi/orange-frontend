@@ -1,93 +1,66 @@
 <template>
   <div class="md-layout text-center">
     <div class="md-layout-item md-size-33 md-medium-size-50 md-small-size-70 md-xsmall-size-100">
+      <form @submit.prevent="onSubmit">
+        <md-card>
+          <md-card-header class="md-card-header-icon md-card-header-green">
+            <div class="card-icon">
+              <md-icon>contacts</md-icon>
+            </div>
+            <h4 class="title">{{setRole()}} log in</h4>
+          </md-card-header>
 
-  <form @submit.prevent="onSubmit">
-    <md-card>
-      <md-card-header class="md-card-header-icon md-card-header-green">
-        <div class="card-icon">
-          <md-icon>contacts</md-icon>
-        </div>
-        <h4 class="title">{{setRole()}} log in</h4>
-      </md-card-header>
-
-      <md-card-content>
-        <md-field
-          :class="[
+          <md-card-content>
+            <md-field
+              :class="[
             { 'md-valid': !errors.has('email') && touched.email },
             { 'md-error': errors.has('email') }
           ]"
-        >
-          <label>Email Adress</label>
-          <md-input
-            v-model="email"
-            data-vv-name="email"
-            type="email"
-            required
-            v-validate="modelValidations.email"
-          >
-          </md-input>
-          <slide-y-down-transition>
-            <md-icon class="error" v-show="errors.has('email')">close</md-icon>
-          </slide-y-down-transition>
-          <slide-y-down-transition>
-            <md-icon
-              class="success"
-              v-show="!errors.has('email') && touched.email"
-              >done</md-icon
             >
-          </slide-y-down-transition>
-        </md-field>
-        <md-field
-          :class="[
+              <label>Email Adress</label>
+              <md-input
+                v-model="email"
+                data-vv-name="email"
+                type="email"
+                required
+                v-validate="modelValidations.email"
+              ></md-input>
+              <slide-y-down-transition>
+                <md-icon class="error" v-show="errors.has('email')">close</md-icon>
+              </slide-y-down-transition>
+              <slide-y-down-transition>
+                <md-icon class="success" v-show="!errors.has('email') && touched.email">done</md-icon>
+              </slide-y-down-transition>
+            </md-field>
+            <md-field
+              :class="[
             { 'md-error': errors.has('password') },
             { 'md-valid': !errors.has('password') && touched.password }
           ]"
-        >
-          <label>Password</label>
-          <md-input
-            v-model="password"
-            data-vv-name="password"
-            type="password"
-            required
-            v-validate="modelValidations.password"
-          >
-          </md-input>
-          <slide-y-down-transition>
-            <md-icon class="error" v-show="errors.has('password')"
-              >close</md-icon
             >
-          </slide-y-down-transition>
-          <slide-y-down-transition>
-            <md-icon
-              class="success"
-              v-show="!errors.has('password') && touched.password"
-              >done</md-icon
-            >
-          </slide-y-down-transition>
-        </md-field>
-      </md-card-content>
+              <label>Password</label>
+              <md-input
+                v-model="password"
+                data-vv-name="password"
+                type="password"
+                required
+                v-validate="modelValidations.password"
+              ></md-input>
+              <slide-y-down-transition>
+                <md-icon class="error" v-show="errors.has('password')">close</md-icon>
+              </slide-y-down-transition>
+              <slide-y-down-transition>
+                <md-icon class="success" v-show="!errors.has('password') && touched.password">done</md-icon>
+              </slide-y-down-transition>
+            </md-field>
+          </md-card-content>
 
           <!-- @click.native.prevent="validate" -->
-      <md-card-actions class="md-alignment-center">
-        <md-button
-          native-type="submit"
-          type="submit"
-          
-          class="md-success"
-          >Log in</md-button
-        >
-      </md-card-actions>
-    </md-card>
-  </form>
-
-
-
-
-
-
-
-
+          <md-card-actions class="md-alignment-center">
+            <md-button native-type="submit" type="submit" class="md-success">Log in</md-button>
+          </md-card-actions>
+        </md-card>
+      </form>
     </div>
   </div>
 </template>
@@ -128,18 +101,17 @@ export default {
 
       this.touched.email = true;
       this.touched.password = true;
-      
     },
     setRole() {
       let role = "";
-      console.log("getRole is", this.getRole);
-      if (this.getRole == "admin") {
+      console.log("role is", this.role);
+      if (this.role == "admin") {
         role = "Administrator";
       }
-      if (this.getRole == "company") {
+      if (this.role == "company") {
         role = "Company";
       }
-      if (this.getRole == "employee") {
+      if (this.role == "employee") {
         role = "Employee";
       }
       return role;
@@ -176,11 +148,11 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["getRole"])
+    ...mapGetters(["role"])
   },
   created() {
-    console.log("mounted role is ", this.getRole);
-    if (this.getRole == "") {
+    console.log("mounted role is ", this.role);
+    if (this.role == "") {
       this.$router.push({ name: "Role" });
     }
   }
@@ -188,9 +160,7 @@ export default {
 </script>
 
 <style scoped>
-
 .md-card-actions.md-alignment-right {
-    justify-content: center;
+  justify-content: center;
 }
-
 </style>

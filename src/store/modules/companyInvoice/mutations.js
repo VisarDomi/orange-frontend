@@ -1,14 +1,14 @@
-import { SET_INVOICE, SET_INVOICES } from "../../mutations.type";
+import { SET_COMPANY_INVOICE, SET_COMPANY_INVOICES } from "./../../mutations.type";
 
 export const mutations = {
-  [SET_INVOICES](state, invoices) {
+  [SET_COMPANY_INVOICES](state, invoices) {
     console.log("setting state...");
-    state.invoices = invoices;
-    console.log("state.invoices is now: ", state.invoices);
+    state.companyInvoices = invoices;
+    console.log("state.invoices is now: ", state.companyInvoices);
   },
-  [SET_INVOICE](state, invoice) {
+  [SET_COMPANY_INVOICE](state, invoice) {
     console.log("setting state...");
-    state.invoice = invoice;
-    console.log("state.invoice is now: ", state.invoice);
+    state.companyInvoice = invoice;
+    console.log("state.invoice is now: ", state.companyInvoice);
   }
 };

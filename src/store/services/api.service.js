@@ -1,8 +1,8 @@
 import Vue from "vue";
 import axios from "axios";
 import VueAxios from "vue-axios";
-import JwtService from "@/common/jwt.service";
-import { API_URL } from "@/common/config";
+import JwtService from "./jwt.service";
+import { API_URL } from "./config";
 
 export const ApiService = {
   init() {
@@ -53,7 +53,7 @@ export const ApiService = {
 };
 
 // invoice admin
-export const InvoiceService = {
+export const AdminInvoiceService = {
   postInvoice(reservationId, invoice) {
     return ApiService.post(
       `admin/reservation/${reservationId}/invoice`,
@@ -159,7 +159,7 @@ export const EmployeeService = {
 };
 
 // reservation company
-export const ReservationService = {
+export const CompanyReservationService = {
   createReservation(companyId, reservation) {
     return ApiService.post(`company/${companyId}/reservation`, reservation);
   },

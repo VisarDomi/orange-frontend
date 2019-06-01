@@ -1,14 +1,13 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import DashboardPlugin from "./material-dashboard";
-import { CHECK_AUTH } from "./store/actions.type";
-import { ApiService } from "./common/api.service";
-import JwtService from '@/common/jwt.service';
+import { ApiService } from "./store/services/api.service";
+import JwtService from './store/services/jwt.service';
 import { yearFormat, hourFormat, prettyDate } from "./common/date.filter";
 import ErrorFilter from "./common/error.filter";
 
 // Plugins
-import App from "./App.vue";
+import App from "./App";
 import Chartist from "chartist";
 
 // router setup

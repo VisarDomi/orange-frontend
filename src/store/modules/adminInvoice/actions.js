@@ -1,49 +1,49 @@
-import { InvoiceService, ItemService } from "@/common/api.service";
+import { AdminInvoiceService, ItemService } from "./../../services/api.service";
 import {
-  CREATE_INVOICE,
-  GET_INVOICE,
-  GET_INVOICES,
-  UPDATE_INVOICE
-} from "../../actions.type";
-import { SET_INVOICES, SET_INVOICE } from "../../mutations.type";
+  CREATE_ADMIN_INVOICE,
+  GET_ADMIN_INVOICE,
+  GET_ADMIN_INVOICES,
+  UPDATE_ADMIN_INVOICE
+} from "./../../actions.type";
+import { SET_ADMIN_INVOICES, SET_ADMIN_INVOICE } from './../../mutations.type';
 
 export const actions = {
-  async [CREATE_INVOICE](context, payload) {
+  async [CREATE_ADMIN_INVOICE](context, payload) {
     const { reservationId, invoice } = payload;
-    await InvoiceService.postInvoice(reservationId, invoice).then(
+    await AdminInvoiceService.postInvoice(reservationId, invoice).then(
       ({ data }) => {
         console.log("Setting invoice data...");
-        context.commit(SET_INVOICE, data);
+        context.commit(SET_ADMIN_INVOICE, data);
         return data;
       }
     );
   },
 
-  async [GET_INVOICES](context, payload) {
-    await InvoiceService.getInvoices().then(({ data }) => {
+  async [GET_ADMIN_INVOICES](context, payload) {
+    await AdminInvoiceService.getInvoices().then(({ data }) => {
       console.log("Setting invoice data...");
-      context.commit(SET_INVOICES, data);
+      context.commit(SET_ADMIN_INVOICES, data);
       return data;
     });
   },
 
-  async [GET_INVOICE](context, payload) {
+  async [GET_ADMIN_INVOICE](context, payload) {
     const { invoiceId } = payload;
-    await InvoiceService.getInvoice(invoiceId).then(({ data }) => {
+    await AdminInvoiceService.getInvoice(invoiceId).then(({ data }) => {
       console.log("Setting invoice data...");
-      context.commit(SET_INVOICE, data);
+      context.commit(SET_ADMIN_INVOICE, data);
       return data;
     });
   },
 
-  async [UPDATE_INVOICE](context, payload) {
+  async [UPDATE_ADMIN_INVOICE](context, payload) {
     const { reservationId, invoiceId, invoice, items } = payload;
     delete invoice.id;
     delete invoice.reservation_id;
-    await InvoiceService.putInvoice(reservationId, invoiceId, invoice).then(
+    await AdminInvoiceService.putInvoice(reservationId, invoiceId, invoice).then(
       ({ data }) => {
         console.log("Setting invoice data...");
-        context.commit(SET_INVOICE, data);
+        context.commit(SET_ADMIN_INVOICE, data);
         return data;
       }
     );

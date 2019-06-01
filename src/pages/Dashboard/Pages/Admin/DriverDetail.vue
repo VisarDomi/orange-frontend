@@ -20,13 +20,13 @@
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
                       <label>Name</label>
-                      <md-input v-model="this.driver.full_name" disabled></md-input>
+                      <md-input v-model="full_name" disabled></md-input>
                     </md-field>
                   </div>
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
                       <label>Status</label>
-                      <md-input v-model="this.driver.status" disabled></md-input>
+                      <md-input v-model="status" disabled></md-input>
                     </md-field>
                   </div>
 
@@ -53,15 +53,22 @@ export default {
     UserCard
   },
   data() {
-    return {};
+    return {
+      full_name: "",
+      status: ""
+    };
   },
   methods: {},
-  mounted() {
-  },
+  mounted() {},
   created() {
-    this.$store.dispatch(GET_DRIVER, {
-      driverId: this.$route.params.id
-    });
+    this.$store
+      .dispatch(GET_DRIVER, {
+        driverId: this.$route.params.id
+      })
+      .then(() => {
+        this.full_name = this.driver.full_name;
+        this.status = this.driver.status;
+      });
   },
   computed: {
     ...mapGetters(["driver"])

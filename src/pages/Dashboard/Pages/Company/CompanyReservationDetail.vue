@@ -64,7 +64,7 @@
 
 <script>
 import { UserCard } from "@/pages";
-import { GET_RESERVATION } from "@/store/actions.type";
+import { GET_COMPANY_RESERVATION } from "@/store/actions.type";
 import { mapGetters } from "vuex";
 export default {
   name: "CompanyReservationDetail",
@@ -77,29 +77,30 @@ export default {
       date: "",
       destination: "",
       employees: "",
-      pickup : "",
+      pickup: "",
       status: "",
       time: ""
     };
   },
   methods: {},
-  mounted() {
-  },
+  mounted() {},
   created() {
-    this.$store.dispatch(GET_RESERVATION, {
-      reservationId: this.$route.params.id
-    }).then(()=>{
-      this.code = this.reservation.code 
-      this.date = this.reservation.date 
-      this.destination = this.reservation.destination 
-      this.employees = this.reservation.employees 
-      this.pickup = this.reservation.pickup 
-      this.status = this.reservation.status 
-      this.time = this.reservation.time 
-    });
+    this.$store
+      .dispatch(GET_COMPANY_RESERVATION, {
+        reservationId: this.$route.params.id
+      })
+      .then(() => {
+        this.code = this.companyReservation.code;
+        this.date = this.companyReservation.date;
+        this.destination = this.companyReservation.destination;
+        this.employees = this.companyReservation.employees;
+        this.pickup = this.companyReservation.pickup;
+        this.status = this.companyReservation.status;
+        this.time = this.companyReservation.time;
+      });
   },
   computed: {
-    ...mapGetters(["reservation"])
+    ...mapGetters(["companyReservation"])
   }
 };
 </script>

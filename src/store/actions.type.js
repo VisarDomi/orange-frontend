@@ -5,10 +5,10 @@ export const REGISTER = "register";
 export const CHECK_AUTH = "checkAuth";
 
 // invoice admin
-export const CREATE_INVOICE = "createInvoice";
-export const GET_INVOICES = "getInvoices";
-export const GET_INVOICE = "getInvoice";
-export const UPDATE_INVOICE = "updateInvoice";
+export const CREATE_ADMIN_INVOICE = "createAdminInvoice";
+export const GET_ADMIN_INVOICES = "getAdminInvoices";
+export const GET_ADMIN_INVOICE = "getAdminInvoice";
+export const UPDATE_ADMIN_INVOICE = "updateAdminInvoice";
 
 // invoice company
 export const GET_COMPANY_INVOICES = "getCompanyInvoices";
@@ -19,16 +19,15 @@ export const CREATE_EMPLOYEE = "createEmployee";
 export const GET_EMPLOYEES = "getEmployees";
 export const GET_EMPLOYEE = "getEmployee";
 
-// reservation company
-export const CREATE_RESERVATION = "createReservation";
-export const GET_RESERVATIONS = "getReservations";
-export const GET_RESERVATION = "getReservation";
-
 // reservation admin
 export const GET_ADMIN_RESERVATIONS = "getAdminReservations";
 export const GET_ADMIN_RESERVATION = "getAdminReservation";
 export const UPDATE_ADMIN_RESERVATION = "updateAdminReservation";
 
+// reservation company
+export const CREATE_COMPANY_RESERVATION = "createCompanyReservation";
+export const GET_COMPANY_RESERVATIONS = "getCompanyReservations";
+export const GET_COMPANY_RESERVATION = "getCompanyReservation";
 // driver
 export const CREATE_DRIVER = "createDriver";
 export const GET_DRIVERS = "getDrivers";

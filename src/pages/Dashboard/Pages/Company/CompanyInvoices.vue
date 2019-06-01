@@ -124,7 +124,7 @@ export default {
     Pagination
   },
   computed: {
-    ...mapGetters(["invoices"]),
+    ...mapGetters(["companyInvoices"]),
     /***
      * Returns a page from the searched data or the whole data. Search is performed in the watch section below
      */
@@ -250,8 +250,8 @@ export default {
   },
   created() {
     this.$store.dispatch(GET_COMPANY_INVOICES).then(() => {
-      console.log("GET invoices now: ", this.invoices);
-      this.tableData = this.invoices;
+      console.log("GET invoices now: ", this.companyInvoices);
+      this.tableData = this.companyInvoices;
     });
   },
   mounted() {

@@ -20,13 +20,13 @@
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
                       <label>Name</label>
-                      <md-input v-model="this.employee.full_name" disabled></md-input>
+                      <md-input v-model="full_name" disabled></md-input>
                     </md-field>
                   </div>
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
                       <label>Address</label>
-                      <md-input v-model="this.employee.address" disabled></md-input>
+                      <md-input v-model="address" disabled></md-input>
                     </md-field>
                   </div>
 
@@ -53,16 +53,24 @@ export default {
     UserCard
   },
   data() {
-    return {};
+    return {
+      full_name: "",
+      address: ""
+    };
   },
   methods: {},
   mounted() {
     // this.$store.dispatch(ADMIN_GET_EMPLOYEE) //get employee with store then store it in variable, then get it with mapGetters and plug it into POST invoice
   },
   created() {
-    this.$store.dispatch(GET_EMPLOYEE, {
-      employeeId: this.$route.params.id
-    });
+    this.$store
+      .dispatch(GET_EMPLOYEE, {
+        employeeId: this.$route.params.id
+      })
+      .then(() => {
+        this.full_name = this.employee.full_name;
+        this.address = this.employee.address;
+      });
   },
   computed: {
     ...mapGetters(["employee"])

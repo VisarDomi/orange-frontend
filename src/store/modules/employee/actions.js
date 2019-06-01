@@ -2,10 +2,10 @@ import {
   CREATE_EMPLOYEE,
   GET_EMPLOYEES,
   GET_EMPLOYEE
-} from "../../actions.type";
-import { SET_EMPLOYEES, SET_EMPLOYEE } from "../../mutations.type";
-import { EmployeeService, UserService } from "@/common/api.service";
-import UserStorageService from "@/common/userstorage.service";
+} from "./../../actions.type";
+import { SET_EMPLOYEES, SET_EMPLOYEE } from "./../../mutations.type";
+import { EmployeeService, UserService } from "./../../services/api.service";
+import UserStorageService from "./../../services/userstorage.service";
 
 export const actions = {
   async [CREATE_EMPLOYEE](context, payload) {

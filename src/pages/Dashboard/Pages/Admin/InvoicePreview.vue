@@ -41,10 +41,14 @@
                     <h6>{{invoice.from_business_name}}</h6>
                     <address>
                       {{invoice.from_addressline_1}}
-                      <br>{{invoice.from_addressline_2}}
-                      <br>{{invoice.from_city}}, {{invoice.from_postcode}}
-                      <br>Phone: {{invoice.from_phone}}
-                      <br>VAT: {{invoice.from_vat}}
+                      <br>
+                      {{invoice.from_addressline_2}}
+                      <br>
+                      {{invoice.from_city}}, {{invoice.from_postcode}}
+                      <br>
+                      Phone: {{invoice.from_phone}}
+                      <br>
+                      VAT: {{invoice.from_vat}}
                     </address>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-4">
@@ -54,10 +58,14 @@
                     <h6>{{invoice.to_client_name}}</h6>
                     <address>
                       {{invoice.to_addressline_1}}
-                      <br>{{invoice.to_addressline_2}}
-                      <br>{{invoice.to_city}}, {{invoice.to_postcode}}
-                      <br>Phone: {{invoice.to_phone}}
-                      <br>VAT: {{invoice.to_vat}}
+                      <br>
+                      {{invoice.to_addressline_2}}
+                      <br>
+                      {{invoice.to_city}}, {{invoice.to_postcode}}
+                      <br>
+                      Phone: {{invoice.to_phone}}
+                      <br>
+                      VAT: {{invoice.to_vat}}
                     </address>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-4">
@@ -109,12 +117,12 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr v-for="item in invoice.items" :key='item.id'>
+                          <tr v-for="item in invoice.items" :key="item.id">
                             <td>
                               {{item.description}}
                               <!-- <p class="m-0 text-muted">
                                 <small>Reference site about Lorem Ipsum, giving information on its origins</small>
-                              </p> -->
+                              </p>-->
                             </td>
                             <td>{{item.date | prettyDate}}</td>
                             <td>{{item.quantity}}</td>
@@ -123,8 +131,6 @@
                             <td>{{item.tax}}</td>
                             <td style="text-align: right;">{{parseFloat(item.total) | money}}</td>
                           </tr>
-
-
                         </tbody>
                       </table>
                     </div>
@@ -134,15 +140,13 @@
 
                 <!-- Row start -->
 
-
                 <div class="invoice-payment" style="padding: 0 0 0 1.5rem;">
                   <div class="row gutters">
-                    <div class="col-lg-6 col-md-6 col-sm-12">
-
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-sm-12" style="    background-color: #E9EFF5 !important;">
-
-                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12"></div>
+                    <div
+                      class="col-lg-2 col-md-6 col-sm-12"
+                      style="    background-color: #E9EFF5 !important;"
+                    ></div>
                     <div class="col-lg-4 col-md-6 col-sm-12 order-last" style="padding-left: 0;">
                       <table class="table no-border m-0" style="height: 100%;">
                         <tbody>
@@ -167,7 +171,8 @@
                                 <!-- {{invoice.sub_total | money}} -->
                                 <!-- <br> -->
                                 {{parseFloat(invoice.discount) | money}}
-                                <br>{{parseFloat(invoice.tax) | money}}
+                                <br>
+                                {{parseFloat(invoice.tax) | money}}
                                 <br>
                               </p>
                             </td>
@@ -180,49 +185,42 @@
                 <!-- Row end -->
               </div>
 
-              
-                <div class="invoice-body" style="padding: 3rem 1.5rem 0rem;">
-
-                
+              <div class="invoice-body" style="padding: 3rem 1.5rem 0rem;">
                 <div class="row" style="     padding-bottom: 1rem;">
-                  <div class="col-lg-6 col-md-6 col-sm-12" style="    margin-left: 15px;
+                  <div
+                    class="col-lg-6 col-md-6 col-sm-12"
+                    style="    margin-left: 15px;
     padding-right: 0px;
-    padding-left: 0px;">
-                      <table class="table no-border m-0">
-                        <tbody>
-                          <tr>
-                            <td style="text-align: left;">
-                              <h5 class="text-danger">
-                                <strong>Payment details</strong>
-                                <p>&nbsp;</p>
-                                <p>Account Name: </p>
-                                <p>Sort Code: </p>
-                                <p>Account Number: </p>
-                              </h5>
-                            </td>
-                            <td style="text-align: left;">
-                              <br>
-                              <br>
-                              <p>{{invoice.payment_account_name}}</p>
-                              <p>{{invoice.payment_account_sortcode}}</p>
-                              <p>{{invoice.payment_account_number}}</p>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
+    padding-left: 0px;"
+                  >
+                    <table class="table no-border m-0">
+                      <tbody>
+                        <tr>
+                          <td style="text-align: left;">
+                            <h5 class="text-danger">
+                              <strong>Payment details</strong>
+                              <p>&nbsp;</p>
+                              <p>Account Name:</p>
+                              <p>Sort Code:</p>
+                              <p>Account Number:</p>
+                            </h5>
+                          </td>
+                          <td style="text-align: left;">
+                            <br>
+                            <br>
+                            <p>{{invoice.payment_account_name}}</p>
+                            <p>{{invoice.payment_account_sortcode}}</p>
+                            <p>{{invoice.payment_account_number}}</p>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
-                  <div class="col-lg-6 col-md-6 col-sm-12" >
-
-                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12"></div>
                 </div>
-</div>
-                
+              </div>
 
-
-
-                <div class="invoice-footer">
-											Thank you for your Business.
-                </div>
+              <div class="invoice-footer">Thank you for your Business.</div>
             </div>
           </div>
         </div>
@@ -240,23 +238,23 @@ import { mapGetters } from "vuex";
 
 export default {
   name: "InvoicePreview",
-  data(){
+  data() {
     return {
       invoice_subtotal: "",
       invoice_tax: "",
       invoice_discount: "",
       grand_total: ""
-
-    }
-
+    };
   },
   components: {},
   methods: {
     exportPDF() {
       const element = document.querySelector(".generate");
+      let invoiceId = this.$route.params.id
+      let companyId = "unknown" // substitute properly
       const opt = {
         margin: 8,
-        filename: "invoice.pdf",
+        filename: `invoice-${invoiceId}-company-${companyId}.pdf`,
         image: { type: "jpeg", quality: 1 },
         html2canvas: { scale: 2 }
       };
@@ -267,8 +265,8 @@ export default {
         .save();
     }
   },
-  created(){
-    this.$store.dispatch(GET_INVOICE, {invoiceId: this.invoice.id});
+  created() {
+    this.$store.dispatch(GET_INVOICE, { invoiceId: this.invoice.id });
   },
   computed: {
     ...mapGetters(["invoice"])

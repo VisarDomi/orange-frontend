@@ -17,41 +17,28 @@
             <md-card-content>
               <div class="md-layout md-gutter md-size-100">
                 <div class="md-layout md-layout-item md-small-size-100 md-size-100">
-                  <div class="md-layout-item md-small-size-100 md-size-100">
-                    <md-field>
-                      <label>Pickup</label>
-                      <md-input v-model="pickup" disabled></md-input>
-                    </md-field>
-                  </div>
-                  <div class="md-layout-item md-small-size-100 md-size-100">
-                    <md-field>
-                      <label>Destination</label>
-                      <md-input v-model="destination" disabled></md-input>
-                    </md-field>
-                  </div>
+
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
                       <label>Date</label>
                       <md-input v-model="date" disabled></md-input>
                     </md-field>
                   </div>
+
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
-                      <label>Time</label>
-                      <md-input v-model="time" disabled></md-input>
+                      <label>From business name</label>
+                      <md-input v-model="from_business_name" disabled></md-input>
                     </md-field>
                   </div>
 
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
-                      <label>Status</label>
-                      <md-input v-model="status" disabled></md-input>
+                      <label>To business name</label>
+                      <md-input v-model="to_business_name" disabled></md-input>
                     </md-field>
                   </div>
 
-                  <!-- <div class="md-layout-item md-size-100 text-right">
-            
-                  </div>-->
                 </div>
               </div>
             </md-card-content>
@@ -64,7 +51,7 @@
 
 <script>
 import { UserCard } from "@/pages";
-import { GET_RESERVATION } from "@/store/actions.type";
+import { GET_ADMIN_INVOICE } from "@/store/actions.type";
 import { mapGetters } from "vuex";
 export default {
   name: "InvoiceDetail",
@@ -73,34 +60,28 @@ export default {
   },
   data() {
     return {
-      pickup: "",
-      destination: "",
       date: "",
-      code: "",
-      time: "",
-      status: ""
+      from_business_name: "",
+      to_business_name: ""
     };
   },
   methods: {},
   mounted() {
-    // this.$store.dispatch(ADMIN_GET_RESERVATION) //get reservation with store then store it in variable, then get it with mapGetters and plug it into POST invoice
+    // this.$store.dispatch(ADMIN_GET_ADMIN_INVOICE) //get invoice with store then store it in variable, then get it with mapGetters and plug it into POST invoice
   },
   created() {
     this.$store
-      .dispatch(GET_RESERVATION, { reservationId: this.$route.params.id })
+      .dispatch(GET_ADMIN_INVOICE, { invoiceId: this.$route.params.id })
       .then(() => {
-        this.pickup = this.reservation.pickup;
-        this.destination = this.reservation.destination;
-        this.date = this.reservation.date;
-        this.code = this.reservation.code;
-        this.time = this.reservation.time;
-        this.status = this.reservation.status;
+        this.date = this.adminInvoice.date;
+        this.from_business_name = this.adminInvoice.from_business_name;
+        this.to_business_name = this.adminInvoice.to_business_name;
       });
   },
   computed: {
-    ...mapGetters(["reservation"])
+    ...mapGetters(["adminInvoice"])
   }
-  //need map getter reservationId
+  //need map getter invoiceId
 };
 </script>
 <style lang="scss">
