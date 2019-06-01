@@ -61,10 +61,18 @@
           </md-card-actions>
         </md-card>
       </form>
-      <md-card>
-        <md-card-actions class="md-alignment-center" v-if="goBack">
-          <md-button class="md-warning" @click="goBackToRole()">Go Back</md-button>
-        </md-card-actions>
+      <md-card v-if="goBack">
+          <md-card-header class="md-card-header-icon md-card-header-warning">
+            <div class="card-icon">
+              <md-icon>announcement</md-icon>
+            </div>
+            <h4 class="title">It seems this account is not associated with this role.</h4>
+          </md-card-header>
+        <md-card-content>
+          <md-card-actions class="md-alignment-center">
+            <md-button class="md-warning" @click="goBackToRole()">Go Back</md-button>
+          </md-card-actions>
+        </md-card-content>
       </md-card>
     </div>
   </div>
