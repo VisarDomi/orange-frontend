@@ -75,7 +75,7 @@
         a:hover,
         a:focus,
         a:active {
-            background-color: $brand-primary !important;
+            background-color: orange !important;
             color: #FFFFFF !important;
         }
     }
@@ -90,7 +90,7 @@
       @include drop-down-button-color($brand-warning);
     }
     .md-primary + & li {
-      @include drop-down-button-color($brand-primary);
+      @include drop-down-button-color(orange);
     }
     .md-rose + & li {
       @include drop-down-button-color($brand-rose);
@@ -109,9 +109,9 @@
             a:hover,
             a:focus,
             a:active {
-                background-color: $brand-primary;
+                background-color: orange;
                 color: #FFFFFF;
-                @include shadow-big-color($brand-primary);
+                @include shadow-big-color(orange);
             }
         }
     }

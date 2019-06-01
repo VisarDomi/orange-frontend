@@ -280,4 +280,14 @@ export default {
     border-color: orange;
 
 }
+
+.md-select-menu .md-list-item.md-selected .md-list-item-button {
+    background-color: orange;
+
+}
+
+
+.md-select-menu .md-list-item .md-list-item-button:hover {
+    background-color: orange !important;
+}
 </style>
