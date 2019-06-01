@@ -20,32 +20,32 @@
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
                       <label>Pickup</label>
-                      <md-input v-model="this.reservation.pickup" disabled></md-input>
+                      <md-input v-model="pickup" disabled></md-input>
                     </md-field>
                   </div>
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
                       <label>Destination</label>
-                      <md-input v-model="this.reservation.destination" disabled></md-input>
+                      <md-input v-model="destination" disabled></md-input>
                     </md-field>
                   </div>
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
                       <label>Date</label>
-                      <md-input v-model="this.reservation.date" disabled></md-input>
+                      <md-input v-model="date" disabled></md-input>
                     </md-field>
                   </div>
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
                       <label>Time</label>
-                      <md-input v-model="this.reservation.time" disabled></md-input>
+                      <md-input v-model="time" disabled></md-input>
                     </md-field>
                   </div>
 
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
                       <label>Status</label>
-                      <md-input v-model="this.reservation.status" disabled></md-input>
+                      <md-input v-model="status" disabled></md-input>
                     </md-field>
                   </div>
 
@@ -72,7 +72,15 @@ export default {
     UserCard
   },
   data() {
-    return {};
+    return {
+      code: "",
+      date: "",
+      destination: "",
+      employees: "",
+      pickup : "",
+      status: "",
+      time: ""
+    };
   },
   methods: {},
   mounted() {
@@ -80,6 +88,14 @@ export default {
   created() {
     this.$store.dispatch(GET_RESERVATION, {
       reservationId: this.$route.params.id
+    }).then(()=>{
+      this.code = this.reservation.code 
+      this.date = this.reservation.date 
+      this.destination = this.reservation.destination 
+      this.employees = this.reservation.employees 
+      this.pickup = this.reservation.pickup 
+      this.status = this.reservation.status 
+      this.time = this.reservation.time 
     });
   },
   computed: {

@@ -12,8 +12,7 @@ import UserStorageService from "@/common/userstorage.service";
 
 export const actions = {
   async [GET_ADMIN_RESERVATIONS](context) {
-    const companyId = UserStorageService.getUser().role_id;
-    await AdminReservationService.getReservations(companyId).then(
+    await AdminReservationService.getReservations().then(
       ({ data }) => {
         context.commit(SET_ADMIN_RESERVATIONS, data);
         console.log("setting reservations", data);
@@ -24,8 +23,7 @@ export const actions = {
 
   async [GET_ADMIN_RESERVATION](context, payload) {
     const { reservationId } = payload;
-    const companyId = UserStorageService.getUser().role_id;
-    await AdminReservationService.getReservation(companyId, reservationId).then(
+    await AdminReservationService.getReservation(reservationId).then(
       ({ data }) => {
         context.commit(SET_ADMIN_RESERVATION, data);
         console.log("setting reservation", data);

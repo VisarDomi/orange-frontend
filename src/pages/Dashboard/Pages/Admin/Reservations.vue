@@ -124,7 +124,7 @@ export default {
     Pagination
   },
   computed: {
-    ...mapGetters(["reservations"]),
+    ...mapGetters(["adminReservations"]),
     /***
      * Returns a page from the searched data or the whole data. Search is performed in the watch section below
      */
@@ -210,7 +210,7 @@ export default {
           console.log("after dispatch reservation");
         });
       this.$router.push({
-        name: "CompanyReservationDetail",
+        name: "ReservationDetail",
         params: {
           id: item.id
         }
@@ -250,8 +250,8 @@ export default {
   },
   created() {
     this.$store.dispatch(GET_ADMIN_RESERVATIONS).then(() => {
-      console.log("GET reservations now: ", this.reservations);
-      this.tableData = this.reservations;
+      console.log("GET reservations now: ", this.adminReservations);
+      this.tableData = this.adminReservations;
     });
   },
   mounted() {

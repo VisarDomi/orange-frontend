@@ -1,4 +1,4 @@
 export const getters = {
-  reservations: state => state.reservations,
-  reservation: state => state.reservation
+  adminReservations: state => state.adminReservations,
+  adminReservation: state => state.adminReservation
 };
