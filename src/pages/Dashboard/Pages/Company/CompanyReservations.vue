@@ -2,7 +2,7 @@
   <div>
     <div class="md-layout">
       <div class="md-layout-item">
-        <md-button class="md-success" @click="createReservation()">Create reservation</md-button>
+        <md-button class="md-warning" @click="createReservation()">Create reservation</md-button>
       </div>
     </div>
     <div class="md-layout">
@@ -291,5 +291,13 @@ export default {
   border: 0;
   margin-left: 20px;
   margin-right: 20px;
+}
+</style>
+
+<style>
+.pagination.pagination-success > .page-item.active > a{
+   background-color: orange;
+    border-color: orange;
+
 }
 </style>

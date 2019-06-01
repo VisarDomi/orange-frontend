@@ -2,7 +2,7 @@
   <div>
     <div class="md-layout">
       <div class="md-layout-item">
-        <md-button class="md-success" @click="addEmployee()">Add new employee...</md-button>
+        <md-button class="md-warning" @click="addEmployee()">Add new employee...</md-button>
       </div>
     </div>
 
@@ -25,7 +25,7 @@
           <md-card-expand>
             <md-card-actions md-alignment="space-between">
               <div>
-                <md-button @click.native="open_employee(employee)">Details</md-button>
+                <md-button class="md-warning" @click.native="open_employee(employee)">Details</md-button>
               </div>
             </md-card-actions>
 

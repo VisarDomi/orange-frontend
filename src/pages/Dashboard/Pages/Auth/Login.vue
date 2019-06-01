@@ -173,4 +173,8 @@ export default {
 .md-field.md-valid .md-icon {
     color: #f0ad4e !important;
 }
+
+.md-field.md-valid:before {
+    background-color: orange !important;
+}
 </style>

@@ -86,7 +86,7 @@ export default {
   data() {
     return {
       sidebarBackgroundColor: "black",
-      sidebarBackground: "green",
+      sidebarBackground: "orange",
       sidebarBackgroundImage: "./img/sidebar-2.jpg",
       sidebarMini: false,
       sidebarImg: true

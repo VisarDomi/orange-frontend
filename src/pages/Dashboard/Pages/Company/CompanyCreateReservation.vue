@@ -117,7 +117,7 @@
 
             <div class="md-layout" style="margin-top:50px;">
               <div class="md-layout-item mx-auto md-size-30">
-                <md-button class="md-success" type="submit">Create reservation</md-button>
+                <md-button class="md-warning" type="submit">Create reservation</md-button>
               </div>
             </div>
           </md-card-content>

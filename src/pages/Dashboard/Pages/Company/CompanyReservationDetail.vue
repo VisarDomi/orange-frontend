@@ -4,7 +4,7 @@
       <div class="md-layout-item md-medium-size-100 md-size-40 mx-auto">
         <form>
           <md-card>
-            <md-card-header class="md-card-header-icon">
+            <md-card-header class="md-card-header-icon md-card-header-green">
               <div class="card-icon">
                 <md-icon>card_travel</md-icon>
               </div>

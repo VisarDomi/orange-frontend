@@ -2,7 +2,7 @@
   <div class="content-wrapper">
     <div class="md-layout" style="margin-bottom:50px;">
       <div class="md-layout-item">
-        <md-button class="md-success" @click="exportPDF()">Generate PDF</md-button>
+        <md-button class="md-warning" @click="exportPDF()">Generate PDF</md-button>
       </div>
     </div>
 
@@ -72,7 +72,7 @@
                     <div class="invoice-details">
                       <small>
                         Invoice No -
-                        <span class="badge badge-info">#{{adminInvoice.ref}}</span>
+                        <span class="badge badge-warning">#{{adminInvoice.ref}}</span>
                       </small>
                       <br>
                       <small>Sent - {{adminInvoice.date | prettyDate}}</small>
@@ -152,7 +152,7 @@
                         <tbody>
                           <tr>
                             <td>
-                              <h5 class="text-danger">
+                              <h5 class="text-warning">
                                 <strong>Grand Total</strong>
                               </h5>
                               <p>
@@ -164,7 +164,7 @@
                               </p>
                             </td>
                             <td>
-                              <h5 class="text-danger">
+                              <h5 class="text-warning">
                                 <strong>{{parseFloat(adminInvoice.grand_total) | money}}</strong>
                               </h5>
                               <p>
@@ -197,7 +197,7 @@
                       <tbody>
                         <tr>
                           <td style="text-align: left;">
-                            <h5 class="text-danger">
+                            <h5 class="text-warning">
                               <strong>Payment details</strong>
                               <p>&nbsp;</p>
                               <p>Account Name:</p>
