@@ -44,5 +44,6 @@ export const auth = {
       component: Lock,
       meta: setMeta("Lock", true)
     }
-  ]
+  ],
+  meta: setMeta("Authentication", true)
 };

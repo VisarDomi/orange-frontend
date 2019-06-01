@@ -3,6 +3,7 @@ export const SET_AUTH_SECOND = "setUserButNoToken";
 export const SET_AUTH = "setUserAndToken";
 export const PURGE_AUTH = "purgeAuth";
 export const SET_ROLE = "setRole";
+export const SET_GO_BACK = "setGoBack";
 
 // loading
 export const START_LOADING = "startLoading";

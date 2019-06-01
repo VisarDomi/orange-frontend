@@ -7,6 +7,7 @@ import companyInvoice from "./modules/companyInvoice";
 import companyReservation from "./modules/companyReservation";
 import driver from "./modules/driver";
 import employee from "./modules/employee";
+import employeeReservation from "./modules/employeeReservation";
 import loading from "./modules/loading";
 
 Vue.use(Vuex);
@@ -20,6 +21,7 @@ export default new Vuex.Store({
     companyReservation,
     driver,
     employee,
+    employeeReservation,
     loading,
   },
   strict: process.env.NODE_ENV !== "production"

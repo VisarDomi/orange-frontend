@@ -59,6 +59,9 @@
           <md-card-actions class="md-alignment-center">
             <md-button native-type="submit" type="submit" class="md-warning">Log in</md-button>
           </md-card-actions>
+          <!-- <md-card-actions class="md-alignment-center">
+            <md-button native-type="submit" type="submit" class="md-warning">Go Back</md-button>
+          </md-card-actions> -->
         </md-card>
       </form>
     </div>
@@ -116,27 +119,28 @@ export default {
       }
       return role;
     },
-    onSubmit() {
-      let credentials = {
+    async onSubmit() {
+      let payload = {
         username: this.email,
-        password: this.password
+        password: this.password,
+        role: this.role
       };
-      console.log("credentials are", credentials);
+      console.log("payload are", payload);
 
-      this.$store.dispatch(LOGIN, credentials).then(() => {
-        let user = JSON.parse(localStorage.getItem("user"));
-        console.log("in then of LOGIN: ", user.role);
-        // now reroute to the pages depending on the user.role
-        if (user.role == "admin") {
-          this.$router.push({ name: "Reservations" });
-        }
-        if (user.role == "company") {
-          this.$router.push({ name: "CompanyReservations" });
-        }
-        if (user.role == "employee") {
-          this.$router.push({ name: "CreateDriver" });
-        }
+      await this.$store.dispatch(LOGIN, payload).then(() => {
+        console.log("in then of LOGIN: this.user.role", this.user.role);
+        // now reroute to the pages depending on the this.user.role
       });
+      if (this.user.role == "admin") {
+        this.$router.push({ name: "Reservations" });
+      }
+      if (this.user.role == "company") {
+        this.$router.push({ name: "CompanyReservations" });
+      }
+      if (this.user.role == "employee") {
+        // this.$router.push({ name: "EmployeeReservationDetail" });
+        console.log(`you should now be routed to: this.$router.push({ name: "EmployeeReservationDetail" })`)
+      }
     }
   },
   watch: {
@@ -148,7 +152,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["role"])
+    ...mapGetters(["role", "user"])
   },
   created() {
     console.log("mounted role is ", this.role);

@@ -34,5 +34,8 @@ export const mutations = {
   [SET_ROLE](state, param) {
     console.log("role in muations is:", param.role)
     state.role = param.role;
+  },
+  [SET_GO_BACK](state, param) {
+    state.goBack = param.goBack
   }
 };

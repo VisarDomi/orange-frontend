@@ -5,5 +5,6 @@ export const state = {
   user: {},
   token: "",
   isAuthenticated: !!getToken(),
-  role: ""
+  role: "",
+  goBack: false
 };

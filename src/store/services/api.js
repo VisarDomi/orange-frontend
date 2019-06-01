@@ -36,9 +36,9 @@ export const ApiService = {
     console.log(`post resource and params are:`, resource, params);
     return Vue.axios.post(`${resource}`, params);
   },
-  login(resource, params) {
-    console.log(`login resource and params are:`, resource, params);
-    return Vue.axios.post(`${resource}`, {}, params);
+  login(resource, body, params) {
+    console.log(`login(resource, body, params) are:`, resource, body, params);
+    return Vue.axios.post(`${resource}`, body, params);
   },
   put(resource, params) {
     console.log(`put params are:`, params);
