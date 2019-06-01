@@ -17,30 +17,35 @@
             <md-card-content>
               <div class="md-layout md-gutter">
                 <div class="md-layout md-layout-item md-small-size-100">
+
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
                       <label>Pickup Address</label>
                       <md-input v-model="pickup" disabled></md-input>
                     </md-field>
                   </div>
+
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
                       <label>Destination</label>
                       <md-input v-model="destination" disabled></md-input>
                     </md-field>
                   </div>
+
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
                       <label>Date of pickup</label>
                       <md-input v-model="date" disabled></md-input>
                     </md-field>
                   </div>
+
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
                       <label>Time of pickup</label>
                       <md-input v-model="time" disabled></md-input>
                     </md-field>
                   </div>
+
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
                       <label>Company</label>
@@ -50,10 +55,18 @@
                 </div>
 
                 <div class="md-layout md-layout-item md-small-size-100">
+
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
                       <label>Status</label>
                       <md-input v-model="status" disabled></md-input>
+                    </md-field>
+                  </div>
+
+                  <div class="md-layout-item md-small-size-100 md-size-100">
+                    <md-field>
+                      <label>Code</label>
+                      <md-input v-model="code" disabled></md-input>
                     </md-field>
                   </div>
 
