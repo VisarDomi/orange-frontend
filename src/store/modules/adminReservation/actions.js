@@ -1,7 +1,8 @@
 import {
   GET_ADMIN_RESERVATIONS,
   GET_ADMIN_RESERVATION,
-  UPDATE_ADMIN_RESERVATION
+  UPDATE_ADMIN_RESERVATION,
+  GET_DRIVER
 } from "../../actions.type";
 import {
   SET_ADMIN_RESERVATIONS,
@@ -11,13 +12,11 @@ import { AdminReservationService } from "../../services/api";
 
 export const actions = {
   async [GET_ADMIN_RESERVATIONS](context) {
-    await AdminReservationService.getReservations().then(
-      ({ data }) => {
-        context.commit(SET_ADMIN_RESERVATIONS, data);
-        console.log("setting reservations", data);
-        return data;
-      }
-    );
+    await AdminReservationService.getReservations().then(({ data }) => {
+      context.commit(SET_ADMIN_RESERVATIONS, data);
+      console.log("setting reservations", data);
+      return data;
+    });
   },
 
   async [GET_ADMIN_RESERVATION](context, payload) {
@@ -42,6 +41,7 @@ export const actions = {
     ).then(({ data }) => {
       console.log("Setting invoice data...");
       context.commit(SET_ADMIN_RESERVATION, data);
+      context.dispatch(GET_DRIVER, { driverId });
       return data;
     });
   }

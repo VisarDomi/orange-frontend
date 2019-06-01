@@ -2,6 +2,9 @@
   <div class="content">
     <div class="md-layout">
       <div class="md-layout-item md-medium-size-100 md-size-66 mx-auto">
+        <md-button class="md-warning" @click="createInvoice()">Create invoice for this reservation</md-button>
+      </div>
+      <div class="md-layout-item md-medium-size-100 md-size-66 mx-auto">
         <form>
           <md-card>
             <md-card-header class="md-card-header-icon md-card-header-green">
@@ -17,7 +20,6 @@
             <md-card-content>
               <div class="md-layout md-gutter">
                 <div class="md-layout md-layout-item md-small-size-100">
-
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
                       <label>Pickup Address</label>
@@ -54,15 +56,6 @@
                   </div>
                 </div>
 
-                <div class="md-layout md-layout-item md-small-size-100">
-
-                  <div class="md-layout-item md-small-size-100 md-size-100">
-                    <md-field>
-                      <label>Status</label>
-                      <md-input v-model="status" disabled></md-input>
-                    </md-field>
-                  </div>
-
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
                       <label>Code</label>
@@ -77,18 +70,27 @@
                     </md-field>
                   </div>
 
-                  <div class="md-layout-item md-size-100" style="text-align:center;">
+                <div class="md-layout md-layout-item md-small-size-100">
+                  <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
-                      <md-autocomplete
-                        v-model="selectedDriver"
-                        :md-options="this.drivers"
-                        :md-open-on-focus="false"
-                        class="nounderline"
-                      >
-                        <label>Drivers</label>
-                      </md-autocomplete>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      <md-button class="md-raised md-warning mt-4">Assign Driver</md-button>
+                      <label>Status</label>
+                      <md-input v-model="status" disabled></md-input>
                     </md-field>
+                  </div>
+
+                  <div class="md-layout">
+                    <label class="md-layout-item md-size-15 md-form-label">Drivers</label>
+                    <div class="md-layout-item">
+                      <md-field>
+                        <md-select v-model="selectedDriver" name="driver" id="driver" md-dense>
+                          <md-option
+                            v-for="driver in this.drivers"
+                            :value="driver.id"
+                            :key="driver.id"
+                          >{{driver.full_name}}</md-option>
+                        </md-select>
+                      </md-field>
+                    </div>
                   </div>
 
                   <!-- <div class="md-layout-item md-size-100 text-right">
@@ -99,12 +101,12 @@
           </md-card>
         </form>
       </div>
+      <div class="md-layout-item md-medium-size-100 md-size-66 mx-auto">
+        <md-button class="md-warning" @click="assignDrivers()">Assign drivers to this reservation</md-button>
+      </div>
       <!-- <div class="md-layout-item md-medium-size-100 md-size-33">
         <user-card button-color="success"> </user-card>
       </div>-->
-      <div class="md-layout-item md-medium-size-100 md-size-66 mx-auto">
-        <md-button class="md-warning" @click="createInvoice()">Create invoice for this reservation</md-button>
-      </div>
     </div>
   </div>
 </template>
@@ -114,7 +116,10 @@ import { mapGetters } from "vuex";
 import {
   CREATE_ADMIN_INVOICE,
   GET_ADMIN_RESERVATION,
-  GET_DRIVERS
+  UPDATE_ADMIN_RESERVATION,
+  GET_DRIVERS,
+  GET_DRIVER,
+  GET_COMPANY
 } from "@/store/actions.type";
 
 export default {
@@ -175,38 +180,65 @@ export default {
           console.log("Creating a new blank invoice...");
           this.$router.push({ name: "CreateInvoice" });
         });
+    },
+    assignDrivers() {
+      console.log("selectedDriver", this.selectedDriver);
+      let payload = {
+        reservationId: this.$route.params.id,
+        driverId: this.selectedDriver
+      };
+      this.$store.dispatch(UPDATE_ADMIN_RESERVATION, payload).then(() => {
+        // changeDriverName
+        this.changeDriverName();
+      });
+    },
+    changeDriverName() {
+      this.driverName = this.driver.full_name;
+      this.status = this.adminReservation.status;
+    },
+    async updateData() {
+      await this.$store
+        .dispatch(GET_ADMIN_RESERVATION, {
+          reservationId: this.$route.params.id
+        })
+        .then(() => {
+          this.code = this.adminReservation.code;
+          this.date = this.adminReservation.date;
+          this.destination = this.adminReservation.destination;
+          this.employees = this.adminReservation.employees;
+          this.pickup = this.adminReservation.pickup;
+          this.time = this.adminReservation.time;
+        });
+      await this.$store.dispatch(GET_DRIVERS).then(() => {
+        console.log(this.drivers);
+      });
+    },
+    async updateDriver() {
+      await this.updateData().then(() => {
+        let driverId = this.adminReservation.driver_id;
+        let companyId = this.adminReservation.company_id;
+        console.log("driverId is", driverId);
+        if (driverId) {
+          this.$store.dispatch(GET_DRIVER, { driverId }).then(() => {
+            this.changeDriverName();
+          });
+        }
+        if (companyId) {
+          this.$store.dispatch(GET_COMPANY, { companyId }).then(() => {
+            this.companyName = this.company.full_name;
+          });
+        }
+      });
     }
   },
   mounted() {
     // this.$store.dispatch(ADMIN_GET_RESERVATION) //get reservation with store then store it in variable, then get it with mapGetters and plug it into POST invoice
     console.log("this.adminReservation.code", this.adminReservation);
+    this.updateDriver();
   },
-  created() {
-    this.$store
-      .dispatch(GET_ADMIN_RESERVATION, {
-        reservationId: this.$route.params.id
-      })
-      .then(() => {
-        this.code = this.adminReservation.code;
-        this.date = this.adminReservation.date;
-        this.destination = this.adminReservation.destination;
-        this.employees = this.adminReservation.employees;
-        this.pickup = this.adminReservation.pickup;
-        this.status = this.adminReservation.status;
-        this.time = this.adminReservation.time;
-      });
-
-    this.$store
-      .dispatch(GET_DRIVERS, {
-        reservationId: this.$route.params.id
-      })
-      .then(() => {
-        this.driverss = this.drivers;
-        console.log(this.driverss);
-      });
-  },
+  created() {},
   computed: {
-    ...mapGetters(["adminReservation", "drivers"])
+    ...mapGetters(["adminReservation", "drivers", "driver", "company"])
   }
 
   //need map getter reservationId
@@ -217,21 +249,19 @@ export default {
   display: flex;
 }
 
-
 .md-field:before {
-    background-color: orange !important;
+  background-color: orange !important;
 }
 
 // .md-theme-default.md-menu-content.md-menu-content-bottom-start.md-menu-content-small {
 //   color: orange !important;
 //   background-color: orange !important;
 // }
-.md-list-item-content.md-ripple:hover{
+.md-list-item-content.md-ripple:hover {
   background-color: orange !important;
 }
 </style>
 
 <style scoped>
-
 </style>
 

@@ -28,7 +28,13 @@ export const UPDATE_ADMIN_RESERVATION = "updateAdminReservation";
 export const CREATE_COMPANY_RESERVATION = "createCompanyReservation";
 export const GET_COMPANY_RESERVATIONS = "getCompanyReservations";
 export const GET_COMPANY_RESERVATION = "getCompanyReservation";
+
 // driver
 export const CREATE_DRIVER = "createDriver";
 export const GET_DRIVERS = "getDrivers";
 export const GET_DRIVER = "getDriver";
+
+// company
+export const CREATE_COMPANY = "createCompany";
+export const GET_COMPANYS = "getCompanys";
+export const GET_COMPANY = "getCompany";
