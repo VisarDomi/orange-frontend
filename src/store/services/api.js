@@ -214,6 +214,24 @@ export const DriverService = {
   }
 };
 
+export const CompanyService = {
+  createCompany(company) {
+    return ApiService.post(`company`, company);
+  },
+  getCompanys() {
+    return ApiService.get(`company/all`);
+  },
+  getCompany(companyId) {
+    return ApiService.get(`company/${companyId}`);
+  },
+  putCompany(companyId, company) {
+    return ApiService.put(`company/${companyId}`, company);
+  },
+  deleteCompany(companyId) {
+    return ApiService.delete(`company/${companyId}`);
+  }
+};
+
 // export const MediaService = {
 //   getPicture(userId) {
 //     return ApiService.get(`user/${userId}/media/all`);

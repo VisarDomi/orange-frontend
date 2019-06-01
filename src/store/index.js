@@ -3,6 +3,7 @@ import Vuex from "vuex";
 import adminInvoice from "./modules/adminInvoice";
 import adminReservation from "./modules/adminReservation";
 import auth from "./modules/auth";
+import company from "./modules/company";
 import companyInvoice from "./modules/companyInvoice";
 import companyReservation from "./modules/companyReservation";
 import driver from "./modules/driver";
@@ -17,6 +18,7 @@ export default new Vuex.Store({
     adminInvoice,
     adminReservation,
     auth,
+    company,
     companyInvoice,
     companyReservation,
     driver,

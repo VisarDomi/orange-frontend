@@ -30,7 +30,7 @@ export const actions = {
 
   async [GET_DRIVERS](context, payload) {
     await DriverService.getDrivers().then(({ data }) => {
-      console.log("setting driver state to ", data);
+      console.log("setting drivers state to ", data);
       context.commit(SET_DRIVERS, data);
     });
   },

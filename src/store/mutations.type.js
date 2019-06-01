@@ -32,3 +32,7 @@ export const SET_COMPANY_RESERVATION = "setCompanyReservation";
 // driver
 export const SET_DRIVERS = "setDrivers";
 export const SET_DRIVER = "setDriver";
+
+// company
+export const SET_COMPANYS = "setCompanys";
+export const SET_COMPANY = "setCompany";
