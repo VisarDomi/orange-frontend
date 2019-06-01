@@ -131,8 +131,34 @@ export default {
       driverName: "",
       companyName: "",
       employeeNames: "",
-      selectedDriver: ""
+      selectedDriver: "",
 
+      invoice: {
+        "ref": "ref2",
+        "date": "2018-12-31",
+        "due": "2019-12-31",
+        "from_business_name": "adsf",
+        "from_addressline_1": "adsfasd",
+        "from_addressline_2": "wer",
+        "from_city": "werf",
+        "from_postcode": "sdf",
+        "from_vat": "sdsf",
+        "from_phone": "sdqwf",
+        "to_client_name": "sdaflk",
+        "to_addressline_1": "werjo",
+        "to_addressline_2": "wer",
+        "to_city": "werg",
+        "to_postcode": "edfg",
+        "to_vat": "sdwef",
+        "to_phone": "sdrf",
+        "payment_account_name": "weroui",
+        "payment_account_sortcode": "weroi",
+        "payment_account_number": "235890",
+        "invoice_notes": "aerguiopd",
+        "sub_total": "213",
+        "tax": "123",
+      "grand_total": "569"
+           }
     }
   },
   methods: {
