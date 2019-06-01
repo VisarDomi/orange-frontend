@@ -2,7 +2,7 @@
   <div>
     <div class="md-layout">
       <div class="md-layout-item">
-        <md-button class="md-success" @click="addDriver()">Add new driver...</md-button>
+        <md-button class="md-warning" @click="addDriver()">Add new driver...</md-button>
       </div>
     </div>
 
@@ -25,7 +25,7 @@
           <md-card-expand>
             <md-card-actions md-alignment="space-between">
               <div>
-                <md-button @click.native="open_driver(driver)">Details</md-button>
+                <md-button class="md-warning" @click.native="open_driver(driver)">Details</md-button>
               </div>
             </md-card-actions>
 

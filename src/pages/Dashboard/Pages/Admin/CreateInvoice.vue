@@ -95,7 +95,7 @@
                 <md-icon class="error" v-show="errors.has('required')">close</md-icon>
               </slide-y-down-transition>
               <slide-y-down-transition>
-                <md-icon class="success" v-show="!errors.has('required') && touched.required">done</md-icon>
+                <md-icon class="warning" v-show="!errors.has('required') && touched.required">done</md-icon>
               </slide-y-down-transition>
             </md-field>
           </div>
@@ -599,13 +599,13 @@
               <md-icon class="error" v-show="errors.has('range')">close</md-icon>
             </slide-y-down-transition>
             <slide-y-down-transition>
-              <md-icon class="success" v-show="!errors.has('range') && touched.range">done</md-icon>
+              <md-icon class="warning" v-show="!errors.has('range') && touched.range">done</md-icon>
             </slide-y-down-transition>
           </md-field>
         </md-table-cell>
         <md-table-cell>{{invoice_item.total | money}}</md-table-cell>
         <md-table-cell>
-          <md-button class="md-just-icon md-round md-success" @click="addItem()">
+          <md-button class="md-just-icon md-round md-warning" @click="addItem()">
             <md-icon>add</md-icon>
           </md-button>
 &nbsp;
@@ -852,7 +852,7 @@ export default {
     },
     generateInvoice() {
       //ose ktu, me for loop
-
+      this.validate()
       let invoice_grand_total = 0;
       let invoice_discount = 0;
       let invoice_tax = 0;
@@ -917,5 +917,27 @@ export default {
 .md-card {
   margin-right: 1%;
   margin-left: 1%;
+}
+
+ .md-card .md-card-header-green .card-text  {
+    background: orange;
+}
+</style>
+
+<style>
+.md-datepicker-dialog .md-datepicker-header {
+    background: orange !important;
+}
+.md-datepicker-today, .md-datepicker-today:hover, .md-datepicker-today:focus, .md-datepicker-selected, .md-datepicker-selected:hover, .md-datepicker-selected:focus {
+    background-color: orange!important;
+    color: #FFFFFF !important;
+}
+
+.md-button.md-primary{
+  background-color: orange !important;
+}
+
+.md-button.md-primary:hover{
+  background-color: orange !important;
 }
 </style>

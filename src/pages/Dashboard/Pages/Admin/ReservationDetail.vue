@@ -4,7 +4,7 @@
       <div class="md-layout-item md-medium-size-100 md-size-66 mx-auto">
         <form>
           <md-card>
-            <md-card-header class="md-card-header-icon">
+            <md-card-header class="md-card-header-icon md-card-header-green">
               <div class="card-icon">
                 <md-icon>card_travel</md-icon>
               </div>
@@ -74,7 +74,7 @@
                       >
                         <label>Drivers</label>
                       </md-autocomplete>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      <md-button class="md-raised md-success mt-4">Assign Driver</md-button>
+                      <md-button class="md-raised md-warning mt-4">Assign Driver</md-button>
                     </md-field>
                   </div>
 
@@ -90,7 +90,7 @@
         <user-card button-color="success"> </user-card>
       </div>-->
       <div class="md-layout-item md-medium-size-100 md-size-66 mx-auto">
-        <md-button class="md-success" @click="createInvoice()">Create invoice for this reservation</md-button>
+        <md-button class="md-warning" @click="createInvoice()">Create invoice for this reservation</md-button>
       </div>
     </div>
   </div>
@@ -203,4 +203,22 @@ export default {
 .text-right {
   display: flex;
 }
+
+
+.md-field:before {
+    background-color: orange !important;
+}
+
+// .md-theme-default.md-menu-content.md-menu-content-bottom-start.md-menu-content-small {
+//   color: orange !important;
+//   background-color: orange !important;
+// }
+.md-list-item-content.md-ripple:hover{
+  background-color: orange !important;
+}
 </style>
+
+<style scoped>
+
+</style>
+

@@ -98,7 +98,7 @@
               <p class="card-category">Showing {{ from + 1 }} to {{ to }} of {{ total }} entries</p>
             </div>
             <pagination
-              class="pagination-no-border pagination-success"
+              class="pagination-no-border pagination-warning"
               v-model="pagination.currentPage"
               :per-page="pagination.perPage"
               :total="total"

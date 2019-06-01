@@ -98,7 +98,7 @@
               <p class="card-category">Showing {{ from + 1 }} to {{ to }} of {{ total }} entries</p>
             </div>
             <pagination
-              class="pagination-no-border pagination-success"
+              class="pagination-no-border pagination-warning"
               v-model="pagination.currentPage"
               :per-page="pagination.perPage"
               :total="total"
@@ -283,5 +283,13 @@ export default {
   border: 0;
   margin-left: 20px;
   margin-right: 20px;
+}
+</style>
+
+
+<style>
+
+.md-card .md-card-header-green .card-icon {
+    background: orange;
 }
 </style>

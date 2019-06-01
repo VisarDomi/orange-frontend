@@ -3,7 +3,7 @@
     <div class="md-layout-item md-size-33 md-medium-size-50 md-small-size-70 md-xsmall-size-100">
       <form @submit.prevent="onSubmit">
         <md-card>
-          <md-card-header class="md-card-header-icon md-card-header-green">
+          <md-card-header class="md-card-header-icon md-card-header-warning">
             <div class="card-icon">
               <md-icon>contacts</md-icon>
             </div>
@@ -29,7 +29,7 @@
                 <md-icon class="error" v-show="errors.has('email')">close</md-icon>
               </slide-y-down-transition>
               <slide-y-down-transition>
-                <md-icon class="success" v-show="!errors.has('email') && touched.email">done</md-icon>
+                <md-icon class="warning" v-show="!errors.has('email') && touched.email">done</md-icon>
               </slide-y-down-transition>
             </md-field>
             <md-field
@@ -50,14 +50,14 @@
                 <md-icon class="error" v-show="errors.has('password')">close</md-icon>
               </slide-y-down-transition>
               <slide-y-down-transition>
-                <md-icon class="success" v-show="!errors.has('password') && touched.password">done</md-icon>
+                <md-icon class="warning" v-show="!errors.has('password') && touched.password">done</md-icon>
               </slide-y-down-transition>
             </md-field>
           </md-card-content>
 
           <!-- @click.native.prevent="validate" -->
           <md-card-actions class="md-alignment-center">
-            <md-button native-type="submit" type="submit" class="md-success">Log in</md-button>
+            <md-button native-type="submit" type="submit" class="md-warning">Log in</md-button>
           </md-card-actions>
         </md-card>
       </form>
@@ -162,5 +162,15 @@ export default {
 <style scoped>
 .md-card-actions.md-alignment-right {
   justify-content: center;
+}
+</style>
+
+<style>
+.md-field.md-valid label {
+    color: #f0ad4e !important;
+}
+
+.md-field.md-valid .md-icon {
+    color: #f0ad4e !important;
 }
 </style>
