@@ -159,6 +159,9 @@ export default {
           `you should now be routed to: this.$router.push({ name: "EmployeeReservationDetail" })`
         );
       }
+      if (this.user.role == "driver"){
+        this.$router.push({ name: "DriverIncomingReservations"})
+      }
     }
   },
   watch: {

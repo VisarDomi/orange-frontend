@@ -211,6 +211,9 @@ export const DriverService = {
   },
   deleteDriver(driverId) {
     return ApiService.delete(`admin/driver/${driverId}`);
+  },
+  getIncomingReservations(driverId){
+    return ApiService.get(`driver/${driverId}/reservation/all`)
   }
 };
 

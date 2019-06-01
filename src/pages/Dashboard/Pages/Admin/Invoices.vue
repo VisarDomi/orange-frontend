@@ -43,20 +43,21 @@
               </md-table-toolbar>
 
               <md-table-row slot="md-table-row" slot-scope="{ item }" @click.native="open_invoice(item)">
-                <md-table-cell md-label="Code" md-sort-by="code">
+                
+                <md-table-cell md-label="Company" md-sort-by="company_id">
                   {{
-                  item.code
+                  item.to_client_name
                   }}
                 </md-table-cell>
-                <md-table-cell md-label="Date" md-sort-by="date">
+                <md-table-cell md-label="Amount" md-sort-by="grand_total">
                   {{
-                  item.date | prettyDate
+                  item.grand_total | money
                   }}
                 </md-table-cell>
-                <md-table-cell md-label="Time">{{ item.time }}</md-table-cell>
-                <md-table-cell md-label="Pickup">{{ item.pickup }}</md-table-cell>
-                <md-table-cell md-label="Destination">{{ item.destination }}</md-table-cell>
-                <md-table-cell md-label="Status" style="justify-content:left;">{{ item.status }}</md-table-cell>
+                <md-table-cell md-label="Date sent">{{ item.date | prettyDate }}</md-table-cell>
+                <md-table-cell md-label="Date due">{{ item.due | prettyDate }}</md-table-cell>
+                <md-table-cell md-label="Destination">Figure out how to get destination</md-table-cell>
+                <!-- <md-table-cell md-label="Status" style="justify-content:left;">{{ item.status }}</md-table-cell> -->
               </md-table-row>
             </md-table>
             <div class="footer-table md-table">
@@ -150,7 +151,7 @@ export default {
         perPageOptions: [5, 10, 25, 50],
         total: 0
       },
-      footerTable: ["Name", "Email", "Driver", "Company"],
+      footerTable: ["Company", "Amount", "Date sent", "Date due", "Destination" ],
       searchQuery: "",
       propsToSearch: ["name", "email", "age"],
       tableData: [],

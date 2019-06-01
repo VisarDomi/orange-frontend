@@ -1,7 +1,7 @@
 <template>
   <div class="content">
     <div class="md-layout">
-      <div class="md-layout-item md-medium-size-100 md-size-66 mx-auto">
+      <div class="md-layout-item md-medium-size-100 md-size-66 mx-auto" style="margin-bottom: 50px;">
         <md-button class="md-warning" @click="createInvoice()">Create invoice for this reservation</md-button>
       </div>
       <div class="md-layout-item md-medium-size-100 md-size-66 mx-auto">
@@ -54,7 +54,7 @@
                       <md-input v-model="companyName" disabled></md-input>
                     </md-field>
                   </div>
-                </div>
+                
 
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
@@ -70,7 +70,6 @@
                     </md-field>
                   </div>
 
-                <div class="md-layout md-layout-item md-small-size-100">
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
                       <label>Status</label>
@@ -78,32 +77,53 @@
                     </md-field>
                   </div>
 
-                  <div class="md-layout">
-                    <label class="md-layout-item md-size-15 md-form-label">Drivers</label>
-                    <div class="md-layout-item">
-                      <md-field>
-                        <md-select v-model="selectedDriver" name="driver" id="driver" md-dense>
-                          <md-option
-                            v-for="driver in this.drivers"
-                            :value="driver.id"
-                            :key="driver.id"
-                          >{{driver.full_name}}</md-option>
-                        </md-select>
-                      </md-field>
-                    </div>
                   </div>
+
+                  
+                    <div class="md-layout-item md-small-size-100 md-size-100">
+                      <div class="md-layout">
+
+                  <div class="md-layout-item md-medium-size-50 md-size-40 mx-auto">
+                        <md-field>
+                      <label class="">Driver</label>
+                          <md-select v-model="selectedDriver" name="driver" id="driver" md-dense>
+                            <md-option
+                              v-for="driver in this.drivers"
+                              :value="driver.id"
+                              :key="driver.id"
+                            >{{driver.full_name}}</md-option>
+                          </md-select>
+                        </md-field>
+                  </div>
+                      <div class="md-layout-item md-medium-size-50 md-size-40 mx-auto">
+                      <md-button class="md-warning" @click="assignDrivers()">Assign driver to this reservation</md-button>
+                    </div>
+
+
+
+                      </div>
+                    </div>
+
+
+
+                  
+
+                    
+                    
+                  
+
+
 
                   <!-- <div class="md-layout-item md-size-100 text-right">
                   </div>-->
-                </div>
+                <!-- <div class="md-layout md-layout-item md-small-size-100">
+                </div> -->
               </div>
             </md-card-content>
           </md-card>
         </form>
       </div>
-      <div class="md-layout-item md-medium-size-100 md-size-66 mx-auto">
-        <md-button class="md-warning" @click="assignDrivers()">Assign drivers to this reservation</md-button>
-      </div>
+
       <!-- <div class="md-layout-item md-medium-size-100 md-size-33">
         <user-card button-color="success"> </user-card>
       </div>-->

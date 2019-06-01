@@ -48,20 +48,21 @@
               </md-table-toolbar>
 
               <md-table-row slot="md-table-row" slot-scope="{ item }" @click.native="open_reservation(item)">
-                <md-table-cell md-label="Code" md-sort-by="code">
+                <!-- ["Employee", "Date", "Destination", "Code"] -->
+                <md-table-cell md-label="Employee" md-sort-by="code">
                   {{
-                  item.code
+                  item.employees
                   }}
                 </md-table-cell>
                 <md-table-cell md-label="Date" md-sort-by="date">
                   {{
                   item.date | prettyDate
-                  }}
+                  }} {{item.time}}
                 </md-table-cell>
-                <md-table-cell md-label="Time">{{ item.time }}</md-table-cell>
-                <md-table-cell md-label="Pickup">{{ item.pickup }}</md-table-cell>
                 <md-table-cell md-label="Destination">{{ item.destination }}</md-table-cell>
-                <md-table-cell md-label="Status" style="justify-content:left;">{{ item.status }}</md-table-cell>
+                <md-table-cell md-label="Code">{{ item.code }}</md-table-cell>
+                <!-- <md-table-cell md-label="Destination">{{ item.destination }}</md-table-cell>
+                <md-table-cell md-label="Status" style="justify-content:left;">{{ item.status }}</md-table-cell> -->
               </md-table-row>
             </md-table>
             <div class="footer-table md-table">
@@ -155,7 +156,7 @@ export default {
         perPageOptions: [5, 10, 25, 50],
         total: 0
       },
-      footerTable: ["Name", "Email", "Driver", "Company"],
+      footerTable: ["Employee", "Date", "Destination", "Code"],
       searchQuery: "",
       propsToSearch: ["name", "email", "age"],
       tableData: [],

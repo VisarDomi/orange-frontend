@@ -1,10 +1,12 @@
 import {
   CREATE_DRIVER,
   GET_DRIVERS,
-  GET_DRIVER
+  GET_DRIVER,
+  GET_INCOMING_RESERVATIONS
 } from "../../actions.type";
-import { SET_DRIVERS, SET_DRIVER } from "../../mutations.type";
+import { SET_DRIVERS, SET_DRIVER, SET_INCOMING_RESERVATIONS } from "../../mutations.type";
 import { DriverService, UserService } from "../../services/api";
+import { getUser } from "../../services/userstorage";
 
 export const actions = {
   async [CREATE_DRIVER](context, payload) {
@@ -32,6 +34,14 @@ export const actions = {
     await DriverService.getDrivers().then(({ data }) => {
       console.log("setting drivers state to ", data);
       context.commit(SET_DRIVERS, data);
+    });
+  },
+
+  async [GET_INCOMING_RESERVATIONS](context){
+    console.log("Getting incoming reservations")
+    await DriverService.getIncomingReservations(getUser().role_id).then(({data})=>{
+      console.log("setting incoming reservations")
+      context.commit(SET_INCOMING_RESERVATIONS, data)
     });
   },
 

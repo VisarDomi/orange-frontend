@@ -18,6 +18,8 @@ export const GET_COMPANY_INVOICE = "getCompanyInvoice";
 export const CREATE_EMPLOYEE = "createEmployee";
 export const GET_EMPLOYEES = "getEmployees";
 export const GET_EMPLOYEE = "getEmployee";
+export const GET_EMPLOYEE_RESERVATION = "getEmployeeReservation";
+export const GET_EMPLOYEE_RESERVATIONS = "getEmployeeReservations";
 
 // reservation admin
 export const GET_ADMIN_RESERVATIONS = "getAdminReservations";
@@ -33,6 +35,7 @@ export const GET_COMPANY_RESERVATION = "getCompanyReservation";
 export const CREATE_DRIVER = "createDriver";
 export const GET_DRIVERS = "getDrivers";
 export const GET_DRIVER = "getDriver";
+export const GET_INCOMING_RESERVATIONS = "getIncomingReservations";
 
 // company
 export const CREATE_COMPANY = "createCompany";

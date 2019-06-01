@@ -21,6 +21,9 @@ export const SET_COMPANY_INVOICE = "setCompanyInvoice";
 export const SET_EMPLOYEES = "setEmployees";
 export const SET_EMPLOYEE = "setEmployee";
 
+export const SET_EMPLOYEE_RESERVATIONS = "setEmployeeReservations";
+export const SET_EMPLOYEE_RESERVATION = "setEmployeeReservation";
+
 // reservation admin
 export const SET_ADMIN_RESERVATIONS = "setAdminReservations";
 export const SET_ADMIN_RESERVATION = "setAdminReservation";
@@ -32,6 +35,7 @@ export const SET_COMPANY_RESERVATION = "setCompanyReservation";
 // driver
 export const SET_DRIVERS = "setDrivers";
 export const SET_DRIVER = "setDriver";
+export const SET_INCOMING_RESERVATIONS = "setIncomingReservations";
 
 // company
 export const SET_COMPANYS = "setCompanys";

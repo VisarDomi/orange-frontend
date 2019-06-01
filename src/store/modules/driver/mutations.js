@@ -1,4 +1,4 @@
-import { SET_DRIVERS, SET_DRIVER } from "../../mutations.type";
+import { SET_DRIVERS, SET_DRIVER, SET_INCOMING_RESERVATIONS } from "../../mutations.type";
 
 export const mutations = {
   [SET_DRIVERS](state, drivers) {
@@ -6,5 +6,10 @@ export const mutations = {
   },
   [SET_DRIVER](state, driver) {
     state.driver = driver;
-  }
+  },
+  [SET_INCOMING_RESERVATIONS](state, data) {
+
+    state.incomingReservations = data;
+    console.log("state.incomingReservations ", state.incomingReservations)
+  },
 };

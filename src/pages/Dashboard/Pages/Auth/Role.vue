@@ -43,6 +43,18 @@
           <md-button slot="footer" class="md-warning md-round" @click="employeeLogin()">Log-in</md-button>
         </pricing-card>
       </div>
+      <div class="md-layout-item md-medium-size-33 md-small-size-50 md-xsmall-size-100">
+        <pricing-card icon-color="icon-warning">
+          <h6 slot="category" class="category">Driver</h6>
+          <md-icon slot="icon">supervised_user_circle</md-icon>
+          <h3 slot="title" class="title">Driver</h3>
+          <p
+            slot="description"
+            class="card-description"
+          >Access your Orange Limo itineraries and upcoming trips.</p>
+          <md-button slot="footer" class="md-warning md-round" @click="driverLogin()">Log-in</md-button>
+        </pricing-card>
+      </div>
     </div>
   </div>
 </template>
@@ -74,6 +86,10 @@ export default {
     employeeLogin() {
       this.$router.push({ name: "Login" });
       this.$store.commit(SET_ROLE, { role: "employee" });
+    },
+    driverLogin(){
+      this.$router.push({name: "Login"});
+      this.$store.commit(SET_ROLE, { role: "driver"});
     }
   }
 };

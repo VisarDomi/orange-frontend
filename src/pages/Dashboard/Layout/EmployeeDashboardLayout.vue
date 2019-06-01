@@ -15,17 +15,10 @@
       <mobile-menu></mobile-menu>
       <template slot="links">
         <sidebar-item
-          :link="{ name: 'Reservations', icon: 'event', path: '/company-reservations' }"
+          :link="{ name: 'Your reservations', icon: 'event', path: '/employee-reservations' }"
         >
         </sidebar-item>
-        <sidebar-item
-          :link="{ name: 'Employees', icon: 'face', path: '/company-employees' }"
-        >
-        </sidebar-item>
-        <sidebar-item
-          :link="{ name: 'Invoices', icon: 'credit_card', path: '/company-invoices' }"
-        >
-        </sidebar-item>
+
         <sidebar-item
           :link="{ name: 'Logout', icon: 'exit_to_app', path: '/logout' }"
         >

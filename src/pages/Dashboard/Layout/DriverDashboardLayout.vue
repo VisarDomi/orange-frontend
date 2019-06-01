@@ -12,21 +12,19 @@
       :data-background-color="sidebarBackgroundColor"
     >
       <user-menu></user-menu>
-      <!-- <mobile-menu></mobile-menu> -->
+      <mobile-menu></mobile-menu>
       <template slot="links">
         <sidebar-item
-          :link="{ name: 'Reservations', icon: 'event', path: '/reservations' }"
+          :link="{ name: 'Accepted reservations', icon: 'event', path: '/driver-accepted-reservations' }"
         >
         </sidebar-item>
+
         <sidebar-item
-          :link="{ name: 'Drivers', icon: 'face', path: '/drivers' }"
+          :link="{ name: 'Incoming reservations', icon: 'event', path: '/driver-incoming-reservations' }"
         >
         </sidebar-item>
+
         <sidebar-item
-          :link="{ name: 'Invoices', icon: 'credit_card', path: '/invoices' }"
-        >
-        </sidebar-item>
-        <sidebar-item @click="console.log('hello')"
           :link="{ name: 'Logout', icon: 'exit_to_app', path: '/logout' }"
         >
         </sidebar-item>
@@ -71,8 +69,9 @@ function initScrollbar(className) {
 import TopNavbar from "./TopNavbar.vue";
 import ContentFooter from "./ContentFooter.vue";
 import MobileMenu from "./Extra/MobileMenu.vue";
-import UserMenu from "./Extra/UserMenu.vue";
+import UserMenu from "./Extra/CompanyUserMenu.vue";
 import { ZoomCenterTransition } from "vue2-transitions";
+import { LOGOUT } from "@/store/actions.type";
 
 export default {
   components: {

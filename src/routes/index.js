@@ -9,6 +9,7 @@ import { admin } from "./admin";
 import { auth } from './auth';
 import { company } from "./company";
 import { employee } from "./employee";
+import { driver } from "./driver";
 import { setMeta } from './common';
 import NotFound from "@/pages/Dashboard/Pages/NotFound";
 
@@ -18,6 +19,7 @@ const routes = [
   auth,
   company,
   employee,
+  driver,
   {
     path: "*",
     name: "NotFound",
