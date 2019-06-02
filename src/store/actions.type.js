@@ -36,6 +36,8 @@ export const CREATE_DRIVER = "createDriver";
 export const GET_DRIVERS = "getDrivers";
 export const GET_DRIVER = "getDriver";
 export const GET_INCOMING_RESERVATIONS = "getIncomingReservations";
+export const GET_RESERVATION_DETAILS = "getReservationDetails";
+export const UPDATE_DRIVER_RESERVATION = "updateDriverReservation";
 
 // company
 export const CREATE_COMPANY = "createCompany";

@@ -26,7 +26,7 @@
                   >
                     <md-option
                       v-for="employee in this.employees"
-                      :value="employee.full_name"
+                      :value="employee.id"
                       :key="employee.id"
                     >{{employee.full_name}}</md-option>
                   </md-select>
@@ -151,12 +151,14 @@ export default {
   methods: {
     onSubmit() {
       let fixed_time = this.hours + ":" + this.minutes + ":00";
+      console.log("selected employees ", this.selectedEmployees)
       let form = {
         code: this.code,
         date: this.date,
         time: fixed_time,
         destination: this.destination,
-        pickup: this.pickup
+        pickup: this.pickup,
+        employee_ids: this.selectedEmployees
       };
       console.log("credentials are", form);
 

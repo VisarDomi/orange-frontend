@@ -2,9 +2,11 @@ import {
   CREATE_DRIVER,
   GET_DRIVERS,
   GET_DRIVER,
-  GET_INCOMING_RESERVATIONS
+  GET_INCOMING_RESERVATIONS,
+  GET_RESERVATION_DETAILS,
+  UPDATE_DRIVER_RESERVATION
 } from "../../actions.type";
-import { SET_DRIVERS, SET_DRIVER, SET_INCOMING_RESERVATIONS } from "../../mutations.type";
+import { SET_DRIVERS, SET_DRIVER, SET_INCOMING_RESERVATIONS, SET_RESERVATION_DETAILS } from "../../mutations.type";
 import { DriverService, UserService } from "../../services/api";
 import { getUser } from "../../services/userstorage";
 
@@ -30,12 +32,29 @@ export const actions = {
     );
   },
 
+  async [GET_RESERVATION_DETAILS](context, payload) {
+    const { reservationId } = payload;
+    await DriverService.getReservationDetails(  getUser().role_id,   reservationId  ).then(({ data }) => {
+      console.log("setting reservation detail driver state to ", data);
+      context.commit(SET_RESERVATION_DETAILS, data);
+    });
+  },
+
+  async [ UPDATE_DRIVER_RESERVATION ](context, payload){
+    const { reservationId, reservationStatus } = payload
+    await DriverService.putReservationStatus(  getUser().role_id, reservationId, reservationStatus).then(({ data }) => {
+      console.log("setting reservation detail driver state to ", data);
+      context.commit(SET_RESERVATION_DETAILS, data);
+    });
+  },
+
   async [GET_DRIVERS](context, payload) {
     await DriverService.getDrivers().then(({ data }) => {
       console.log("setting drivers state to ", data);
       context.commit(SET_DRIVERS, data);
     });
   },
+
 
   async [GET_INCOMING_RESERVATIONS](context){
     console.log("Getting incoming reservations")

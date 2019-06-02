@@ -4,11 +4,12 @@
 
     <div class="md-layout">
       <div
-        v-for="reservation in this.incomingReservationsData"
+        v-for="reservation in this.incomingReservationsData" 
         :key="reservation.id"
+        v-if="reservation.status=='waiting'"
         class="md-layout-item md-large-size-20 md-xlarge-size-20 md-medium-size-33 md-small-size-50 md-xsmall-size-100 auto-mx"
       >
-        <md-card>
+        <md-card v-if="reservation.status=='waiting'" >
           <!-- <md-card-media md-medium>
           <img class="img" :src="profileCard">
           </md-card-media>-->
@@ -63,7 +64,7 @@ export default {
       console.log("open reservation")
       
       this.$router.push({
-        name: "DriverReservationDetails",
+        name: "DriverReservationDetail",
         params: {
           id: reservation.id
         }

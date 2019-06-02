@@ -37,7 +37,7 @@
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
                       <label>Date of pickup</label>
-                      <md-input v-model="date" disabled></md-input>
+                      <md-input :value="this.date | prettyDate" disabled></md-input>
                     </md-field>
                   </div>
 

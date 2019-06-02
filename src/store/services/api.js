@@ -214,6 +214,15 @@ export const DriverService = {
   },
   getIncomingReservations(driverId){
     return ApiService.get(`driver/${driverId}/reservation/all`)
+  },
+  getReservationDetails(driverId, reservationId){
+    return ApiService.get(`driver/${driverId}/reservation/${reservationId}`)
+  },
+  putReservationStatus(driverId, reservationId, incomingStatus){
+    console.log("sending ", {status: incomingStatus})
+
+      return ApiService.put(`driver/${driverId}/reservation/${reservationId}`, {status: incomingStatus})
+
   }
 };
 
