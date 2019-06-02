@@ -129,7 +129,7 @@ export default {
         });
       },
       rejectReservation(){
-        this.$store.dispatch(UPDATE_DRIVER_RESERVATION, {reservationId: this.$route.params.id, reservationStatus: "waiting"})
+        this.$store.dispatch(UPDATE_DRIVER_RESERVATION, {reservationId: this.$route.params.id, reservationStatus: "rejected"})
         this.$router.push({
           name: "DriverAcceptedReservations"
         });

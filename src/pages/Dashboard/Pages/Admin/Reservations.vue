@@ -15,7 +15,7 @@
               :md-sort.sync="currentSort"
               :md-sort-order.sync="currentSortOrder"
               :md-sort-fn="customSort"
-              class="paginated-table table-striped table-hover"
+              class="paginated-table  table-hover"
             >
               <md-table-toolbar>
                 <md-field>
@@ -42,11 +42,19 @@
                 </md-field>
               </md-table-toolbar>
 
-              <md-table-row slot="md-table-row" slot-scope="{ item }" @click.native="open_reservation(item)">
+              <md-table-row slot="md-table-row" slot-scope="{ item }" @click.native="open_reservation(item)" 
+                :class="{
+                'table-success': item.status == 'accepted',
+                'table-warning' : item.status =='waiting',
+                'table-danger' : item.status =='rejected'
+                }"
+          
+          >
                 <md-table-cell md-label="Company" md-sort-by="company_id">
                   {{
                   item.company_id
                   }}
+
                 </md-table-cell>
                 <md-table-cell md-label="Driver" md-sort-by="driver_id">
                   {{
@@ -95,7 +103,7 @@ import { Pagination } from "@/components";
 import users from "../../Tables/users";
 import Fuse from "fuse.js";
 import swal from "sweetalert2";
-import { GET_ADMIN_RESERVATIONS, GET_ADMIN_RESERVATION } from "@/store/actions.type";
+import { GET_ADMIN_RESERVATIONS, GET_ADMIN_RESERVATION, GET_COMPANY } from "@/store/actions.type";
 import { mapGetters } from "vuex";
 
 export default {
@@ -104,7 +112,7 @@ export default {
     Pagination
   },
   computed: {
-    ...mapGetters(["adminReservations"]),
+    ...mapGetters(["adminReservations", "company"]),
     /***
      * Returns a page from the searched data or the whole data. Search is performed in the watch section below
      */
@@ -232,12 +240,14 @@ export default {
     this.$store.dispatch(GET_ADMIN_RESERVATIONS).then(() => {
       console.log("GET reservations now: ", this.adminReservations);
       this.tableData = this.adminReservations;
+      
     });
+
   },
   mounted() {
     // Fuse search initialization.
     this.fuseSearch = new Fuse(this.tableData, {
-      keys: ["name", "email"],
+      keys: ["code"],
       threshold: 0.3
     });
   },
@@ -271,5 +281,9 @@ export default {
 
 .md-card .md-card-header-green .card-icon {
     background: orange;
+}
+
+.table-info{
+
 }
 </style>

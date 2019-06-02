@@ -211,6 +211,7 @@ export default {
         // changeDriverName
         this.changeDriverName();
       });
+      this.$router.push({ name: "Reservations" });
     },
     changeDriverName() {
       this.driverName = this.driver.full_name;
@@ -248,6 +249,7 @@ export default {
             this.companyName = this.company.full_name;
           });
         }
+        
       });
     }
   },
