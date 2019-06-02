@@ -60,7 +60,6 @@
 </template>
 <script>
 import { CollapseTransition } from "vue2-transitions";
-
 export default {
   components: {
     CollapseTransition

@@ -32,7 +32,7 @@
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
                       <label>Date</label>
-                      <md-input v-model="date" disabled></md-input>
+                      <md-input :value="date |prettyDate" disabled></md-input>
                     </md-field>
                   </div>
                   <div class="md-layout-item md-small-size-100 md-size-100">

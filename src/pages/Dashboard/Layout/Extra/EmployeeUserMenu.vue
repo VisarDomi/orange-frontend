@@ -68,7 +68,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: "CompanyX"
+      default: "Employee X"
     },
     rtlTitle: {
       type: String,
