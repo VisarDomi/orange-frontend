@@ -758,7 +758,10 @@ export default {
             .then(() => {
               //Then go to the page
               console.log("Updated invoice.");
-              this.$router.push({ name: "InvoiceDetail" });
+              this.$router.push({ name: "InvoiceDetail"        
+              ,params: {
+          id: this.adminInvoice.id
+        } });
             });          
         // }
       // });

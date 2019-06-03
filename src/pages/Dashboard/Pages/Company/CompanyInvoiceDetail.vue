@@ -267,6 +267,7 @@ export default {
   created() {
     console.log("this.$route.params.id", this.$route.params.id)
     this.$store.dispatch(GET_COMPANY_INVOICE, { invoiceId: this.$route.params.id });
+    console.log("this company.invoice.items ", this.companyInvoice.items)
   },
   computed: {
     ...mapGetters(["companyInvoice"])
