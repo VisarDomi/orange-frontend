@@ -15,6 +15,7 @@
               :md-sort.sync="currentSort"
               :md-sort-order.sync="currentSortOrder"
               :md-sort-fn="customSort"
+              @md-selected="onSelect"
               class="paginated-table  table-hover"
             >
               <md-table-toolbar>
@@ -42,7 +43,10 @@
                 </md-field>
               </md-table-toolbar>
 
-              <md-table-row slot="md-table-row" slot-scope="{ item }" @click.native="open_reservation(item)" 
+              <md-table-row 
+                slot="md-table-row" slot-scope="{ item }" 
+                @click.native="open_reservation(item)" 
+                md-selectable="multiple" md-auto-select
                 :class="{
                 'table-success': item.status == 'accepted',
                 'table-warning' : item.status =='waiting',
@@ -67,6 +71,8 @@
                 <md-table-cell md-label="Code" style="justify-content:left;">{{ item.code }}</md-table-cell>
               </md-table-row>
             </md-table>
+            <p>Selected: </p>
+            {{selected}}
             <div class="footer-table md-table">
               <table>
                 <tfoot>
@@ -151,6 +157,7 @@ export default {
   data() {
     return {
       currentSort: "name",
+      selected: [],
       currentSortOrder: "asc",
       pagination: {
         perPage: 10,
@@ -158,7 +165,7 @@ export default {
         perPageOptions: [5, 10, 25, 50],
         total: 0
       },
-      footerTable: ["Company", "Driver", "Status", "Destination", "Date", "Code"],
+      footerTable: ["Company", "Driver", "Status", "Destination", "Date", "Drivers", "Code"],
       searchQuery: "",
       propsToSearch: ["name", "email", "age"],
       tableData: [],
@@ -167,6 +174,9 @@ export default {
     };
   },
   methods: {
+    onSelect(items) {
+      this.selected = items;
+    },
     customSort(value) {
       return value.sort((a, b) => {
         const sortBy = this.currentSort;
