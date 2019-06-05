@@ -16,7 +16,7 @@
             slot="description"
             class="card-description"
           >Access your dashboard here and manage your orders.</p>
-          <md-button slot="footer" class="md-warning md-round" @click="adminLogin()">Log-in</md-button>
+          <md-button slot="footer" class="md-warning md-round" @click="login('admin')">Log-in</md-button>
         </pricing-card>
       </div>
       <div class="md-layout-item md-medium-size-33 md-small-size-50 md-xsmall-size-100">
@@ -28,7 +28,7 @@
             slot="description"
             class="card-description"
           >Make a personal or company limo reservation with Orange.</p>
-          <md-button slot="footer" class="md-warning md-round" @click="companyLogin()">Log-in</md-button>
+          <md-button slot="footer" class="md-warning md-round" @click="login('company')">Log-in</md-button>
         </pricing-card>
       </div>
       <div class="md-layout-item md-medium-size-33 md-small-size-50 md-xsmall-size-100">
@@ -40,7 +40,7 @@
             slot="description"
             class="card-description"
           >Access your Orange Limo itineraries and upcoming trips.</p>
-          <md-button slot="footer" class="md-warning md-round" @click="employeeLogin()">Log-in</md-button>
+          <md-button slot="footer" class="md-warning md-round" @click="login('employee')">Log-in</md-button>
         </pricing-card>
       </div>
       <div class="md-layout-item md-medium-size-33 md-small-size-50 md-xsmall-size-100">
@@ -52,7 +52,7 @@
             slot="description"
             class="card-description"
           >Access your Orange Limo itineraries and upcoming trips.</p>
-          <md-button slot="footer" class="md-warning md-round" @click="driverLogin()">Log-in</md-button>
+          <md-button slot="footer" class="md-warning md-round" @click="login('driver')">Log-in</md-button>
         </pricing-card>
       </div>
     </div>
@@ -75,22 +75,26 @@ export default {
     ...mapGetters(["role"])
   },
   methods: {
-    adminLogin() {
+    login(role) {
+      this.getLocation()
       this.$router.push({ name: "Login" });
-      this.$store.commit(SET_ROLE, { role: "admin" });
+      this.$store.commit(SET_ROLE, { role: `${role}` });
     },
-    companyLogin() {
-      this.$router.push({ name: "Login" });
-      this.$store.commit(SET_ROLE, { role: "company" });
+    getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(this.showPosition);
+      } else {
+        console.log("Geo Location not supported by browser");
+      }
     },
-    employeeLogin() {
-      this.$router.push({ name: "Login" });
-      this.$store.commit(SET_ROLE, { role: "employee" });
-    },
-    driverLogin(){
-      this.$router.push({name: "Login"});
-      this.$store.commit(SET_ROLE, { role: "driver"});
+    showPosition(position) {
+      let location = {
+        longitude: position.coords.longitude,
+        latitude: position.coords.latitude
+      };
+      console.log(location);
     }
+
   }
 };
 </script>
