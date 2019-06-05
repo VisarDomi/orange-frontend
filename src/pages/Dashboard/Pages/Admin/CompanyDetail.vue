@@ -1,6 +1,7 @@
 <template>
   <div class="content">
     <div class="md-layout">
+      <!-- company details -->
       <div class="md-layout-item md-medium-size-100 md-size-40 mx-auto">
         <form>
           <md-card>
@@ -203,18 +204,146 @@
           </md-card-actions>
         </md-card>
       </div>
+
     </div>
+
+
+<!-- here starts the company employees -->
+    <div class="md-layout ">
+
+      <div class="md-layout-item md-size-40 ">
+        <md-button class="md-warning mx-auto" @click="addEmployee()">Add new employee</md-button>
+        <!-- employee creation form -->
+
+  <form @submit.prevent="onSubmit" v-if="!formCollapsed">
+    <div class="md-layout">
+      <div
+        class="md-layout-item md-xlarge-size-100 md-large-size-100 md-medium-size-70 md-small-size-100"
+      >
+        <md-card>
+          <md-card-header class="md-card-header-text md-card-header-green">
+            <div class="card-text">
+              <h4 class="title">Add Employee</h4>
+            </div>
+          </md-card-header>
+
+          <md-card-content>
+            <div class="md-layout">
+              <label class="md-layout-item md-size-15 md-form-label">Email</label>
+              <div class="md-layout-item">
+                <md-field>
+                  <label>Employee email</label>
+                  <md-input v-model="email" placeholder="Email"></md-input>
+                </md-field>
+              </div>
+            </div>
+
+            <div class="md-layout">
+              <label class="md-layout-item md-size-15 md-form-label">Password</label>
+              <div class="md-layout-item">
+                <md-field>
+                  <label>Employee password</label>
+                  <md-input v-model="password" placeholder="Password"></md-input>
+                </md-field>
+              </div>
+            </div>
+
+            <div class="md-layout">
+              <label class="md-layout-item md-size-15 md-form-label">Name</label>
+              <div class="md-layout-item">
+                <md-field>
+                  <label>Employee name</label>
+                  <md-input v-model="name" placeholder="Name and surname"></md-input>
+                </md-field>
+              </div>
+            </div>
+
+            <div class="md-layout">
+              <label class="md-layout-item md-size-15 md-form-label">Address</label>
+              <div class="md-layout-item">
+                <md-field>
+                  <label>Employee address</label>
+                  <md-input v-model="address" placeholder="Employee home address"></md-input>
+                </md-field>
+              </div>
+            </div>
+
+            <div class="md-layout" style="margin-top:50px;">
+              <div class="md-layout-item mx-auto md-size-30">
+                <md-button class="md-warning" type="submit">Add Employee</md-button>
+              </div>
+            </div>
+          </md-card-content>
+        </md-card>
+      </div>
+    </div>
+  </form>
+
+
+
+
+
+
+      </div>
+    
+
+    <div class="md-layout md-size-60">
+      <div
+        v-for="employee in this.employees"
+        :key="employee.id"
+        class="md-layout-item md-large-size-20 md-xlarge-size-20 md-medium-size-33 md-small-size-50 md-xsmall-size-100 auto-mx"
+      >
+        <md-card>
+          <!-- <md-card-media md-medium>
+          <img class="img" :src="profileCard">
+          </md-card-media>-->
+
+          <md-card-header>
+            <div class="md-title">{{employee.full_name}}</div>
+            <div class="md-subhead">Employee</div>
+          </md-card-header>
+
+          <md-card-expand>
+            <md-card-actions md-alignment="space-between">
+              <div>
+                <md-button class="md-warning" @click.native="open_employee(employee)">Details</md-button>
+              </div>
+            </md-card-actions>
+
+            <md-card-expand-content>
+              <md-card-content>Member of company since 2007.</md-card-content>
+            </md-card-expand-content>
+          </md-card-expand>
+        </md-card>
+      </div>
+    </div>
+
+    </div>
+
+
+
+
   </div>
 </template>
 
 <script>
-
+//for employee creation
+import { CREATE_EMPLOYEE } from "@/store/actions.type";
+// for employees part
+import { PricingCard, TestimonialCard } from "@/components";
+import { GET_EMPLOYEES, GET_EMPLOYEE } from "@/store/actions.type";
+//-----------------------
+// for table part
 import { Pagination } from "@/components";
+import { GET_ADMIN_INVOICES, GET_ADMIN_INVOICE } from "@/store/actions.type"; //to be changed with itinerary store actions
+import Fuse from "fuse.js";
+//--------------------------
+
+// for company details
 import { UserCard } from "@/pages";
 import { GET_COMPANY } from "@/store/actions.type";
-import { GET_ADMIN_INVOICES, GET_ADMIN_INVOICE } from "@/store/actions.type"; //to be changed with itinerary store actions
 import { mapGetters } from "vuex";
-import Fuse from "fuse.js";
+// --------------------
 export default {
   name: "CompanyDetail",
   components: {
@@ -223,6 +352,13 @@ export default {
   },
   data() {
     return {
+      //start create employee
+            email: "",
+      password: "",
+      name: "",
+      address: "",
+      formCollapsed: true,
+      //--end create employee
       full_name: "",
       payment_frequency: "",
       //so far for the details of company, below, the table needed variables
@@ -243,6 +379,36 @@ export default {
     };
   },
   methods: {
+    //create employee methods------------
+    onSubmit() {
+      let employee = {
+        email: this.email,
+        password: this.password,
+        name: this.name,
+        address: this.address
+      };
+
+      this.$store.dispatch(CREATE_EMPLOYEE, employee).then(() => {
+        this.$store.dispatch(GET_EMPLOYEES);
+        this.formCollapsed = true;
+      });
+    },
+    //end create employee methods ------
+    //company employee methods ---------------------
+        addEmployee() {
+      this.formCollapsed = false;
+    },
+    open_employee(employee) {
+      console.log("open_employee")
+      this.$store.dispatch(GET_EMPLOYEE, { employeeId: employee.id });
+      this.$router.push({
+        name: "CompanyEmployeeDetail",
+        params: {
+          id: employee.id
+        }
+      });
+    },
+    //end company employees methods --------------------
     //this function we may need in future but probably okay if deleted on refactor
     customSort(value) {
       return value.sort((a, b) => {
@@ -291,6 +457,7 @@ export default {
     },
   },
   mounted() {
+    this.$store.dispatch(GET_EMPLOYEES)
         // Fuse search initialization.
         //doesnt work now but need to make functional
     this.fuseSearch = new Fuse(this.tableData, {
@@ -324,7 +491,7 @@ export default {
       });
   },
   computed: {
-    ...mapGetters(["company", "adminInvoices"]), //to be changed from adminInvoices to companyItineraries
+    ...mapGetters(["company", "adminInvoices", "employees"]), //to be changed from adminInvoices to companyItineraries
      /***
      * Returns a page from the searched data or the whole data. Search is performed in the watch section below
      */
