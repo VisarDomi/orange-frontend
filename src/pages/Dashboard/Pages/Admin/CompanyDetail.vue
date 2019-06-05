@@ -390,6 +390,10 @@ export default {
 
       this.$store.dispatch(CREATE_EMPLOYEE, employee).then(() => {
         this.$store.dispatch(GET_EMPLOYEES);
+        this.email="";
+        this.password="";
+        this.name="";
+        this.address="";
         this.formCollapsed = true;
       });
     },
