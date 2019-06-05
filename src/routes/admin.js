@@ -11,6 +11,9 @@ import CreateInvoice from "@/pages/Dashboard/Pages/Admin/CreateInvoice.vue";
 import Invoices from "@/pages/Dashboard/Pages/Admin/Invoices.vue";
 import InvoiceDetail from "@/pages/Dashboard/Pages/Admin/InvoiceDetail.vue";
 import Itineraries from "@/pages/Dashboard/Pages/Admin/Itineraries.vue";
+import Companies from "@/pages/Dashboard/Pages/Admin/Companies.vue";
+import CompanyDetail from "@/pages/Dashboard/Pages/Admin/CompanyDetail.vue";
+import CreateCompany from "@/pages/Dashboard/Pages/Admin/CreateCompany.vue";
 // Old
 import Calendar from "@/pages/Dashboard/Pages/Admin/Calendar.vue";
 import Charts from "@/pages/Dashboard/Pages/Admin/Charts.vue";
@@ -24,6 +27,24 @@ export const admin = {
   redirect: "/dashboard",
   component: DashboardLayout,
   children: [
+    {
+      path: "/createcompany",
+      name: "CreateCompany",
+      components: { default: CreateCompany },
+      meta: setMeta("Create Company")
+    },
+    {
+      path: "/companies",
+      name: "Companies",
+      components: {default : Companies },
+      meta: setMeta("Companies")
+    },
+    {
+      path: "/companydetail-:id",
+      name: "CompanyDetail",
+      components: { default: CompanyDetail },
+      meta: setMeta("Company Detail")
+    },
     {
       path: "/itineraries",
       name: "Itineraries",

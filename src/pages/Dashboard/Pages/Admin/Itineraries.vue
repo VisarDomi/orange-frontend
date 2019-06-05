@@ -287,8 +287,6 @@ export default {
                 // this.tableData[item].editable = bool;
                 let changed = this.tableData[item]
                  this.tableData.splice( item, 1, changed); // at index position 1, remove 0 elements, then add "baz" to that position
-                
-                
                 console.log("updated item: ", this.tableData[item].editable)
             }
         }
