@@ -26,6 +26,10 @@
           :link="{ name: 'Invoices', icon: 'credit_card', path: '/invoices' }"
         >
         </sidebar-item>
+        <sidebar-item
+          :link="{ name: 'Itineraries', icon: 'commute', path: '/itineraries' }"
+        >
+        </sidebar-item>
         <sidebar-item @click="console.log('hello')"
           :link="{ name: 'Logout', icon: 'exit_to_app', path: '/logout' }"
         >

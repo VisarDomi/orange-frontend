@@ -10,6 +10,7 @@ import DriverDetail from "@/pages/Dashboard/Pages/Admin/DriverDetail.vue";
 import CreateInvoice from "@/pages/Dashboard/Pages/Admin/CreateInvoice.vue";
 import Invoices from "@/pages/Dashboard/Pages/Admin/Invoices.vue";
 import InvoiceDetail from "@/pages/Dashboard/Pages/Admin/InvoiceDetail.vue";
+import Itineraries from "@/pages/Dashboard/Pages/Admin/Itineraries.vue";
 // Old
 import Calendar from "@/pages/Dashboard/Pages/Admin/Calendar.vue";
 import Charts from "@/pages/Dashboard/Pages/Admin/Charts.vue";
@@ -23,6 +24,12 @@ export const admin = {
   redirect: "/dashboard",
   component: DashboardLayout,
   children: [
+    {
+      path: "/itineraries",
+      name: "Itineraries",
+      components: {default: Itineraries},
+      meta: setMeta("Itineraries")
+    },
     {
       path: "/reservations",
       name: "Reservations",

@@ -52,13 +52,13 @@
           >
                 <md-table-cell md-label="Company" md-sort-by="company_id">
                   {{
-                  item.company_id
+                  item.company.full_name
                   }}
 
                 </md-table-cell>
                 <md-table-cell md-label="Driver" md-sort-by="driver_id">
                   {{
-                  item.driver_id
+                  item.driver.full_name
                   }}
                 </md-table-cell>
                 <md-table-cell md-label="Status" md-sort-by="status">{{ item.status }}</md-table-cell>
