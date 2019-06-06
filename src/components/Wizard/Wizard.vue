@@ -74,11 +74,11 @@
               <md-button
                 v-if="activeTabIndex < tabCount - 1"
                 @click.native="nextTab"
-                class="btn-next md-success"
+                class="btn-next md-warning"
               >
                 {{ nextButtonText }}
               </md-button>
-              <md-button v-else class="md-success" @click.native="nextTab">{{
+              <md-button v-else class="md-warning" @click.native="nextTab">{{
                 finishButtonText
               }}</md-button>
             </div>

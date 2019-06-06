@@ -97,7 +97,8 @@
                 <md-field>
                   <label for="font">Minutes</label>
                   <md-select v-model="minutes" name="minutes" id="minutes" md-dense>
-                    <md-option value="5">5</md-option>
+                    <md-option value="00">00</md-option>
+                    <md-option value="05">05</md-option>
                     <md-option value="10">10</md-option>
                     <md-option value="15">15</md-option>
                     <md-option value="20">20</md-option>
@@ -107,7 +108,7 @@
                     <md-option value="40">40</md-option>
                     <md-option value="45">45</md-option>
                     <md-option value="50">50</md-option>
-                    <md-option value="50">55</md-option>
+                    <md-option value="55">55</md-option>
                   </md-select>
                 </md-field>
               </div>

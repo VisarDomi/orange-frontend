@@ -803,6 +803,13 @@ export default {
 </style>
 
 <style>
+
+.md-card-wizard[data-color="green"] .moving-tab {
+    background-color: orange;
+
+}
+
+
    .md-card .md-card-header-green .card-text  {
       background: orange;
   }

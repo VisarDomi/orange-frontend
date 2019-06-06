@@ -5,6 +5,14 @@ import { ApiService } from "./store/services/api";
 import { getToken } from './store/services/jwt';
 import { yearFormat, hourFormat, prettyDate } from "./common/date.filter";
 import ErrorFilter from "./common/error.filter";
+import * as VueGoogleMaps from 'vue2-google-maps'
+
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: 'AIzaSyBzlLYISGjL_ovJwAehh6ydhB56fCCpPQw',
+    libraries: 'places'
+  },
+});
 
 // Plugins
 import App from "./App";

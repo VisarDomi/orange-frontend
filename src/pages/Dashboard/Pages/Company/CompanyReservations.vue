@@ -167,7 +167,7 @@ export default {
   },
   methods: {
     createReservation() {
-      this.$router.push({ name: "CompanyCreateReservation" });
+      this.$router.push({ name: "CompanyWizard" });
     },
     customSort(value) {
       return value.sort((a, b) => {

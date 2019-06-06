@@ -52,6 +52,19 @@
               </div>
             </div>
 
+            <div class="md-layout">
+              <label class="md-layout-item md-size-15 md-form-label">
+                AutoComplete
+              </label>
+              <div class="md-layout-item">
+                <gmap-autocomplete
+                  placeholder="This is a placeholder text"
+                  @place_changed="setPlace">
+                </gmap-autocomplete>
+                <button @click="usePlace">Add</button>
+              </div>
+            </div>
+
             <div class="md-layout" style="margin-top:50px;">
               <div class="md-layout-item mx-auto md-size-30">
                 <md-button class="md-warning" type="submit">Add Employee</md-button>
@@ -84,10 +97,34 @@ export default {
       email: "",
       password: "",
       name: "",
-      address: ""
+      address: "",
+
+
+      markers: [],
+      place: null,
     };
   },
   methods: {
+
+
+    setDescription(description) {
+        this.description = description;
+      },
+      setPlace(place) {
+        this.place = place
+      },
+      usePlace(place) {
+        if (this.place) {
+          this.markers.push({
+            position: {
+              lat: this.place.geometry.location.lat(),
+              lng: this.place.geometry.location.lng(),
+            }
+          })
+          this.place = null;
+        }
+      },
+
     onSubmit() {
       let employee = {
         email: this.email,

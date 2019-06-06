@@ -17,8 +17,9 @@
               :md-sort-fn="customSort"
               @md-selected="onSelect"
               class="paginated-table  table-hover"
+
             >
-              <md-table-toolbar>
+              <md-table-toolbar >
                 <md-field>
                   <label for="pages">Per page</label>
                   <md-select v-model="pagination.perPage" name="pages">
@@ -42,6 +43,24 @@
                   ></md-input>
                 </md-field>
               </md-table-toolbar>
+
+
+
+              <md-table-toolbar slot="md-table-alternate-header" slot-scope="{ count }" >
+                <div class="md-toolbar-section-start">{{ getAlternateLabel(count) }}</div>
+
+                <div class="md-toolbar-section-end">
+                  <md-button class="md-button md-warning">Create Invoice
+                    <md-icon>credit_card</md-icon>
+                  </md-button>
+
+                  <md-button class="md-button md-danger">
+                    <md-icon>delete</md-icon>
+                  </md-button>
+
+                </div>
+              </md-table-toolbar>
+        
 
               <md-table-row 
                 slot="md-table-row" slot-scope="{ item }" 
@@ -174,6 +193,15 @@ export default {
     };
   },
   methods: {
+      getAlternateLabel (count) {
+        let plural = ''
+
+        if (count > 1) {
+          plural = 's'
+        }
+
+        return `${count} reservation${plural} selected`
+      },
     onSelect(items) {
       this.selected = items;
     },
@@ -284,16 +312,103 @@ export default {
   margin-left: 20px;
   margin-right: 20px;
 }
+
+.md-table.md-theme-default .md-table-alternate-header .md-table-toolbar {
+    color: rgba(0, 0, 0, 0.87);
+    color: var(--md-theme-default-text-primary-on-background, rgba(0, 0, 0, 0.87));
+    background-color: rgba(255, 82, 82, 0.2);
+    background-color: var(--md-theme-default-accent-on-, rgba(255, 82, 82, 0.2));
+}
+
+.md-table-alternate-header{
+  padding-left: 30px;
+  padding-right: 30px;
+}
 </style>
 
 
 <style>
 
+
+.md-card .md-card-actions {
+  border: 0;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.md-table.md-theme-default .md-table-alternate-header .md-table-toolbar {
+    color: rgba(0, 0, 0, 0.87);
+    color: var(--md-theme-default-text-primary-on-background, rgba(0, 0, 0, 0.87));
+    background-color: rgba(255, 82, 82, 0.2);
+    background-color: var(--md-theme-default-accent-on-, rgba(255, 82, 82, 0.2));
+}
+
+.md-table-alternate-header{
+  padding-left: 20px;
+  margin-top: 13px;
+  padding-right: 20px;
+}
+
+
+
+
+
+
 .md-card .md-card-header-green .card-icon {
     background: orange;
 }
 
-.table-info{
-
+.md-toolbar-section-end .md-button{
+    margin-bottom: 5px;
+    margin-right: 5px;
 }
+
+.md-toolbar .md-button:first-child {
+    margin-left: 0;
+    margin-bottom: 5px;
+    margin-right: 5px;
+}
+
+.md-toolbar-section-end, .md-toolbar-section-start {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    margin-left: 5px;
+}
+
+tr > .md-ripple{
+  display:none;
+}
+
+
+.md-table-alternate-header .md-transparent{
+      background-color: #eee !important;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.md-table-cell-selection .md-table-cell-container{
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    overflow: visible;
+    margin-left: 5px;
+}
+
+ .md-table-cell-selection .md-table-head-label {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    overflow: visible;
+    margin-left: 5px;
+}
+
+
+
+/* .md-toolbar.md-transparent.md-theme-default {
+    background-color: lightblue !important;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+} */
 </style>
