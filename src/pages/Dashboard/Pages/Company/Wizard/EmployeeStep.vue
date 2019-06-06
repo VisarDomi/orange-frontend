@@ -284,7 +284,8 @@
 <script>
 import {
   GET_EMPLOYEES,
-  CREATE_COMPANY_RESERVATION
+  CREATE_COMPANY_RESERVATION,
+  SET_EMPLOYEE_STEP
 } from "@/store/actions.type";
 import { mapGetters } from "vuex";
 import { SlideYDownTransition } from "vue2-transitions";
@@ -371,7 +372,23 @@ export default {
     validate() {
       return this.$validator.validateAll().then(res => {
         this.$emit("on-validated", res);
-        return res;
+        console.log("res of validate is: ", res)
+        if(res == true){
+          let data = {
+            destination: this.destination,
+            employeeIds: this.selectedEmployees,
+            stops: this.stops.rowData,
+            date: this.date, 
+            hour: this.hour, 
+            minutes: this.minutes,
+            smallLuggage: this.smallLuggage, 
+            bigLuggage: this.bigLuggage
+          }
+
+          this.$store.dispatch(SET_EMPLOYEE_STEP, data);
+          return res;
+        }
+        return true;//for development speed
       });
     }
   },
@@ -379,6 +396,8 @@ export default {
     smallLuggage(){
       this.touched.smallLuggage = true;
     },
+
+
     bigLuggage(){
       this.touched.bigLuggage = true;
     },

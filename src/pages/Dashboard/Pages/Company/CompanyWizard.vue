@@ -42,6 +42,7 @@ import VehicleStep from "./Wizard/VehicleStep.vue";
 import PaymentStep from "./Wizard/PaymentStep.vue";
 import swal from "sweetalert2";
 import { SimpleWizard, WizardTab } from "@/components";
+import { mapGetters } from "vuex";
 
 export default {
   data() {
@@ -61,7 +62,10 @@ export default {
       return this.$refs[ref].validate();
     },
     onStepValidated(validated, model) {
+      
       this.wizardModel = { ...this.wizardModel, ...model };
+
+      
     },
     wizardComplete() {
       swal({

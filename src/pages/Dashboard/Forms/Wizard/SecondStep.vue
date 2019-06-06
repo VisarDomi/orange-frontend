@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h5 class="info-text">What are you doing? (checkboxes)</h5>
+    <h5 class="info-text">Based on your luggage amount and size, you can select: </h5>
     <div class="md-layout">
       <div class="md-layout-item">
         <div class="md-layout">

@@ -1,13 +1,22 @@
 import {
   CREATE_COMPANY_RESERVATION,
   GET_COMPANY_RESERVATIONS,
-  GET_COMPANY_RESERVATION
+  GET_COMPANY_RESERVATION,
+  SET_EMPLOYEE_STEP
 } from "../../actions.type";
-import { SET_COMPANY_RESERVATIONS, SET_COMPANY_RESERVATION } from "../../mutations.type";
+import { SET_COMPANY_RESERVATIONS, SET_COMPANY_RESERVATION, SET_EMPLOYEE_STEP_MUTATION } from "../../mutations.type";
 import { CompanyReservationService } from "../../services/api";
 import { getUser } from "../../services/userstorage";
 
 export const actions = {
+
+  async [SET_EMPLOYEE_STEP](context, payload){
+    console.log("action pyalod is: ", payload)
+    context.commit(SET_EMPLOYEE_STEP_MUTATION, payload);
+  },
+
+
+
   async [CREATE_COMPANY_RESERVATION](context, payload) {
     const { reservation } = payload;
     console.log(payload);

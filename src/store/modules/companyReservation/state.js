@@ -1,4 +1,14 @@
 export const state = {
   companyReservations: [],
-  companyReservation: {}
+  companyReservation: {
+    destination: "",
+    date: "",
+    time: "",
+    bigLuggage: "",
+    smallLuggage: "",
+    paymentMethod: "",
+    code: "",
+    stops: [],
+    employeeIds: []
+  }
 };
