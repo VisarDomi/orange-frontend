@@ -411,4 +411,8 @@ tr > .md-ripple{
     -webkit-box-shadow: none;
     box-shadow: none;
 } */
+
+.md-table-cell-selection .md-table-head-container{
+  justify-content:left;
+}
 </style>

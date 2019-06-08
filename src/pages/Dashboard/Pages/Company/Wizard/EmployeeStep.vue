@@ -78,6 +78,38 @@
           <label>Pickup address for {{stop.employeeName}}</label>
           <md-input v-model="stops.rowData[index].address" type="text" required></md-input>
         </md-field>
+
+
+
+        <md-field
+          :class="[
+            { 'md-valid': !errors.has('code') && touched.code },
+            { 'md-form-group': true },
+            { 'md-error': errors.has('code') }
+          ]"
+        >
+          <md-icon>business</md-icon>
+          <label>What is your company KST?</label>
+          <md-input
+            v-model="code"
+            data-vv-name="code"
+            type="text"
+            name="code"
+            required
+            v-validate="modelValidations.code"
+          ></md-input>
+          <slide-y-down-transition>
+            <md-icon class="error" v-show="errors.has('code')">close</md-icon>
+          </slide-y-down-transition>
+          <slide-y-down-transition>
+            <md-icon
+              class="success"
+              v-show="!errors.has('code') && touched.code"
+            >done</md-icon>
+          </slide-y-down-transition>
+        </md-field>
+
+
       </div>
 
       <div class="md-layout-item md-size-60 mx-auto md-small-size-100">
@@ -308,16 +340,20 @@ export default {
       minutes: "",
       smallLuggage: "",
       bigLuggage: "",
-
+      code: "",
       single: null,
       touched: {
         passangerCount: false,
         selectedEmployees: false,
         date: false,
         hour: false,
-        minutes: false
+        minutes: false,
+        code: false
       },
       modelValidations: {
+        code:{
+          required: true
+        },
         smallLuggage: {
           required: true
         },
@@ -396,7 +432,9 @@ export default {
     smallLuggage(){
       this.touched.smallLuggage = true;
     },
-
+    code(){
+      this.touched.code = true;
+    },
 
     bigLuggage(){
       this.touched.bigLuggage = true;
