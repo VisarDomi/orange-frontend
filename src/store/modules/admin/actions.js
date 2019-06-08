@@ -47,6 +47,7 @@ export const actions = {
   async [UPDATE_ADMIN_INVOICE](context, payload) {
     const { reservationId, invoiceId, invoice, items } = payload;
     delete invoice.id;
+    delete invoice.ref;
     delete invoice.reservation_id;
     await AdminService.putInvoice(reservationId, invoiceId, invoice).then(
       ({ data }) => {

@@ -339,7 +339,7 @@
                 data-vv-name="number"
                 type="number"
                 v-validate="modelValidations.number"
-                required
+                disabled
               ></md-input>
 
             </md-field>
