@@ -64,6 +64,9 @@ export const AdminInvoiceService = {
   getInvoices() {
     return ApiService.get(`admin/invoice/all`);
   },
+  getReservationInvoices(reservationId) {
+    return ApiService.get(`admin/reservation/${reservationId}/invoice/all`);
+  },
   getInvoice(invoiceId) {
     return ApiService.get(`admin/invoice/${invoiceId}`);
   },
@@ -198,19 +201,19 @@ export const AdminReservationService = {
 
 export const DriverService = {
   createDriver(driver) {
-    return ApiService.post(`admin/driver`, driver);
+    return ApiService.post(`driver`, driver);
   },
   getDrivers() {
-    return ApiService.get(`admin/driver/all`);
+    return ApiService.get(`driver/all`);
   },
   getDriver(driverId) {
-    return ApiService.get(`admin/driver/${driverId}`);
+    return ApiService.get(`driver/${driverId}`);
   },
   putDriver(driverId, driver) {
-    return ApiService.put(`admin/driver/${driverId}`, driver);
+    return ApiService.put(`driver/${driverId}`, driver);
   },
   deleteDriver(driverId) {
-    return ApiService.delete(`admin/driver/${driverId}`);
+    return ApiService.delete(`driver/${driverId}`);
   },
   getIncomingReservations(driverId){
     return ApiService.get(`driver/${driverId}/reservation/all`)
@@ -218,11 +221,8 @@ export const DriverService = {
   getReservationDetails(driverId, reservationId){
     return ApiService.get(`driver/${driverId}/reservation/${reservationId}`)
   },
-  putReservationStatus(driverId, reservationId, incomingStatus){
-    console.log("sending ", {status: incomingStatus})
-
-      return ApiService.put(`driver/${driverId}/reservation/${reservationId}`, {status: incomingStatus})
-
+  putReservationStatus(driverId, reservationId, reservation){
+    return ApiService.put(`driver/${driverId}/reservation/${reservationId}`, reservation)
   }
 };
 
@@ -243,6 +243,63 @@ export const CompanyService = {
     return ApiService.delete(`company/${companyId}`);
   }
 };
+
+export const StopService = {
+  createStop(stop) {
+    return ApiService.post(`stop`, stop);
+  },
+  getStops() {
+    return ApiService.get(`stop/all`);
+  },
+  getStop(stopId) {
+    return ApiService.get(`stop/${stopId}`);
+  },
+  putStop(stopId, stop) {
+    return ApiService.put(`stop/${stopId}`, stop);
+  },
+  deleteStop(stopId) {
+    return ApiService.delete(`stop/${stopId}`);
+  }
+};
+
+export const ItineraryMasterService = {
+  createItineraryMaster(itineraryMaster) {
+    return ApiService.post(`itinerary_master`, itineraryMaster);
+  },
+  getItineraryMasters() {
+    return ApiService.get(`itinerary_master/all`);
+  },
+  getItineraryMaster(itineraryMasterId) {
+    return ApiService.get(`itinerary_master/${itineraryMasterId}`);
+  },
+  putItineraryMaster(itineraryMasterId, itineraryMaster) {
+    return ApiService.put(`itinerary_master/${itineraryMasterId}`, itineraryMaster);
+  },
+  deleteItineraryMaster(itineraryMasterId) {
+    return ApiService.delete(`itinerary_master/${itineraryMasterId}`);
+  }
+};
+
+export const ItineraryService = {
+  createItinerary(companyId, itinerary) {
+    return ApiService.post(`company/${companyId}/itinerary`, itinerary);
+  },
+  getItinerarys(companyId, ) {
+    return ApiService.get(`company/${companyId}/itinerary/all`);
+  },
+  getItinerary(companyId, itineraryId) {
+    return ApiService.get(`company/${companyId}/itinerary/${itineraryId}`);
+  },
+  putItinerary(companyId, itineraryId, itinerary) {
+    return ApiService.put(`company/${companyId}/itinerary/${itineraryId}`, itinerary);
+  },
+  deleteItinerary(companyId, itineraryId) {
+    return ApiService.delete(`company/${companyId}/itinerary/${itineraryId}`);
+  }
+};
+
+
+
 
 // export const MediaService = {
 //   getPicture(userId) {
