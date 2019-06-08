@@ -142,7 +142,7 @@ export default {
       })
       .then(reservation => {
         console.log("getting back from dispatch: ", reservation);
-        console.log("getting back from getter", this.reservationDetail);
+        console.log("getting back from getter", this.driverReservation);
         this.code = this.driverReservation.code;
         this.date = this.driverReservation.date;
         this.destination = this.driverReservation.destination;

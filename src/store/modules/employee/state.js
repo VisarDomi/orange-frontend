@@ -1,4 +1,6 @@
 export const state = {
   employees: [],
-  employee: {}
+  employee: {},
+  employeeReservation: {},
+  employeeReservations: []
 };

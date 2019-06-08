@@ -16,7 +16,7 @@ export const employee = {
       meta: setMeta("Your itinerary details")
     },
     {
-      path: "/reservations",
+      path: "/employee-reservations",
       name: "EmployeeReservations",
       components: {default : EmployeeReservations},
       meta: setMeta("Your reservations")

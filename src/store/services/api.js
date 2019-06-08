@@ -229,7 +229,13 @@ export const EmployeeService = {
   },
   deleteEmployee(companyId, employeeId) {
     return ApiService.delete(`company/${companyId}/employee/${employeeId}`);
-  }
+  },
+  getReservations(companyId, employeeId) {
+    return ApiService.get(`company/${companyId}/employee/${employeeId}/reservation/all`);
+  },
+  getReservation(companyId, employeeId, reservationId) {
+    return ApiService.get(`company/${companyId}/employee/${employeeId}/reservation/${reservationId}`);
+  },
 };
 
 export const ItemService = {
