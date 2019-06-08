@@ -317,7 +317,7 @@
 import {
   GET_EMPLOYEES,
   CREATE_COMPANY_RESERVATION,
-  SET_EMPLOYEE_STEP
+  UPDATE_EMPLOYEE_STEP
 } from "@/store/actions.type";
 import { mapGetters } from "vuex";
 import { SlideYDownTransition } from "vue2-transitions";
@@ -331,8 +331,10 @@ export default {
       selectedEmployees: [],
       stops: {
         employeeId: "",
-        employeeName: "",
+        date: "",
+        time: "",
         address: "",
+
         rowData: []
       },
       date: "",
@@ -391,9 +393,10 @@ export default {
         for (let selected of this.selectedEmployees) {
           if (employee.id == selected) {
             employeeStops.push({
-              employeeId: employee.id,
-              employeeName: employee.full_name,
-              address: employee.address
+              employee_id: employee.id,
+              date: "1999-12-31",
+              pickup: employee.address,
+              time: "2:00:00"
             });
           }
         }
@@ -410,21 +413,26 @@ export default {
         this.$emit("on-validated", res);
         console.log("res of validate is: ", res)
         if(res == true){
+
+
+
+
           let data = {
+            code: this.code,
             destination: this.destination,
             employeeIds: this.selectedEmployees,
             stops: this.stops.rowData,
             date: this.date, 
-            hour: this.hour, 
-            minutes: this.minutes,
-            smallLuggage: this.smallLuggage, 
-            bigLuggage: this.bigLuggage
+            time: this.hour + ":" + this.minutes + ":00", 
+            small_luggage: this.smallLuggage, 
+            biguggage: this.bigLuggage
           }
 
-          this.$store.dispatch(SET_EMPLOYEE_STEP, data);
+          this.$store.dispatch(UPDATE_EMPLOYEE_STEP, data);
           return res;
         }
-        return true;//for development speed
+        // return true;//for development speed
+        return res;
       });
     }
   },
@@ -438,6 +446,7 @@ export default {
 
     bigLuggage(){
       this.touched.bigLuggage = true;
+      
     },
     hour() {
       this.touched.hour = true;

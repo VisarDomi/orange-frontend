@@ -769,9 +769,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({
-      adminInvoice: 'adminInvoice'
-    })
+    ...mapGetters(['adminInvoice'])
   },
   watch: {
     range() {

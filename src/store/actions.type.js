@@ -43,4 +43,6 @@ export const UPDATE_DRIVER_RESERVATION = "updateDriverReservation";
 export const CREATE_COMPANY = "createCompany";
 export const GET_COMPANYS = "getCompanys";
 export const GET_COMPANY = "getCompany";
-export const SET_EMPLOYEE_STEP = "setEmployeeStep";
+export const UPDATE_EMPLOYEE_STEP = "updateEmployeeStep";
+export const UPDATE_VEHICLE_STEP = "updateVehicleStep";
+export const UPDATE_PAYMENT_STEP = "updatePaymentStep";

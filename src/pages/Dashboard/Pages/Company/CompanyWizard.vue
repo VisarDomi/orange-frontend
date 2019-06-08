@@ -43,6 +43,9 @@ import PaymentStep from "./Wizard/PaymentStep.vue";
 import swal from "sweetalert2";
 import { SimpleWizard, WizardTab } from "@/components";
 import { mapGetters } from "vuex";
+import {
+  CREATE_COMPANY_RESERVATION
+} from "@/store/actions.type";
 
 export default {
   data() {
@@ -57,6 +60,9 @@ export default {
     SimpleWizard,
     WizardTab
   },
+  computed: {
+    ...mapGetters(['companyReservation'])
+  },
   methods: {
     validateStep(ref) {
       return this.$refs[ref].validate();
@@ -64,17 +70,21 @@ export default {
     onStepValidated(validated, model) {
       
       this.wizardModel = { ...this.wizardModel, ...model };
-
       
     },
     wizardComplete() {
-      swal({
-        title: "Good job!",
-        text: "You clicked the finish button!",
-        type: "success",
-        confirmButtonClass: "md-button md-warning",
-        buttonsStyling: false
-      });
+      console.log("COMPLETED");
+      let payload = this.companyReservation
+      this.$store.dispatch(CREATE_COMPANY_RESERVATION, payload)
+      
+      this.$router.push({ name: "CompanyReservations"});
+      // swal({
+      //   title: "Good job!",
+      //   text: "You clicked the finish button!",
+      //   type: "success",
+      //   confirmButtonClass: "md-button md-warning",
+      //   buttonsStyling: false
+      // });
     }
   }
 };

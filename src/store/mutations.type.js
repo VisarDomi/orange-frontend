@@ -41,4 +41,6 @@ export const SET_RESERVATION_DETAILS = "setReservationDetails";
 // company
 export const SET_COMPANYS = "setCompanys";
 export const SET_COMPANY = "setCompany";
-export const SET_EMPLOYEE_STEP_MUTATION = "setEmployeeStepMutation";
+export const SET_EMPLOYEE_STEP = "setEmployeeStep";
+export const SET_VEHICLE_STEP = "setVehicleStep";
+export const SET_PAYMENT_STEP = "setPaymentStep";

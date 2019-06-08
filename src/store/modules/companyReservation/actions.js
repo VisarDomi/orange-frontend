@@ -2,24 +2,41 @@ import {
   CREATE_COMPANY_RESERVATION,
   GET_COMPANY_RESERVATIONS,
   GET_COMPANY_RESERVATION,
-  SET_EMPLOYEE_STEP
+  UPDATE_EMPLOYEE_STEP,
+  UPDATE_VEHICLE_STEP,
+  UPDATE_PAYMENT_STEP
 } from "../../actions.type";
-import { SET_COMPANY_RESERVATIONS, SET_COMPANY_RESERVATION, SET_EMPLOYEE_STEP_MUTATION } from "../../mutations.type";
+import { 
+  SET_COMPANY_RESERVATIONS, 
+  SET_COMPANY_RESERVATION, 
+  SET_EMPLOYEE_STEP, 
+  SET_PAYMENT_STEP, 
+  SET_VEHICLE_STEP 
+} from "../../mutations.type";
+
 import { CompanyReservationService } from "../../services/api";
 import { getUser } from "../../services/userstorage";
 
 export const actions = {
 
-  async [SET_EMPLOYEE_STEP](context, payload){
-    console.log("action pyalod is: ", payload)
-    context.commit(SET_EMPLOYEE_STEP_MUTATION, payload);
+  async [UPDATE_EMPLOYEE_STEP](context, payload){
+    console.log("action employees pyalod is: ", payload)
+    context.commit(SET_EMPLOYEE_STEP, payload);
   },
 
+  async [UPDATE_VEHICLE_STEP](context, payload){
+    console.log("action vehicle payload is: ", payload)
+    context.commit(SET_VEHICLE_STEP, payload);
+  },
 
+  async [UPDATE_PAYMENT_STEP](context, payload){
+    console.log("action payment payload is: ", payload)
+    context.commit(SET_PAYMENT_STEP, payload);
+  },
 
   async [CREATE_COMPANY_RESERVATION](context, payload) {
-    const { reservation } = payload;
-    console.log(payload);
+    // const { reservation } = payload; //not needed, left for artifact reasons
+    console.log("paylaod in action of create reservaton: ", payload);
     let companyId = getUser().role_id;
     await CompanyReservationService.createReservation(companyId, payload).then(
       ({ data }) => {

@@ -80,9 +80,7 @@
 //     window.addEventListener("resize", this.onResponsiveInverted);
 //   },
 //   computed: {
-//     ...mapGetters({
-//         employeeReservations: 'employeeReservations'
-//     })
+//     ...mapGetters(['employeeReservations'])
 //   },
 //   beforeDestroy() {
 //     window.removeEventListener("resize", this.onResponsiveInverted);
