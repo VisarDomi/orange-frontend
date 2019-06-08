@@ -42,7 +42,8 @@ export const actions = {
 
   async [ UPDATE_DRIVER_RESERVATION ](context, payload){
     const { reservationId, reservationStatus } = payload
-    await DriverService.putReservationStatus(  getUser().role_id, reservationId, reservationStatus).then(({ data }) => {
+    let reservation = {reservationStatus}
+    await DriverService.putReservationStatus(  getUser().role_id, reservationId, reservation).then(({ data }) => {
       console.log("setting reservation detail driver state to ", data);
       context.commit(SET_RESERVATION_DETAILS, data);
     });
