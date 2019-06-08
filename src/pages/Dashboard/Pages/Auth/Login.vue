@@ -128,6 +128,9 @@ export default {
       if (this.role == "employee") {
         role = "Employee";
       }
+      if (this.role == "driver") {
+        role = "Driver";
+      }
       return role;
     },
     goBackToRole() {
@@ -154,10 +157,7 @@ export default {
         this.$router.push({ name: "CompanyReservations" });
       }
       if (this.user.role == "employee") {
-        // this.$router.push({ name: "EmployeeReservationDetail" });
-        console.log(
-          `you should now be routed to: this.$router.push({ name: "EmployeeReservationDetail" })`
-        );
+        this.$router.push({ name: "EmployeeReservationDetail" });
       }
       if (this.user.role == "driver"){
         this.$router.push({ name: "DriverIncomingReservations"})

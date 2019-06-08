@@ -4,11 +4,11 @@
 
     <div class="md-layout">
       <div
-        v-for="reservation in this.incomingReservationsData" 
+        v-for="reservation in this.incomingReservationsData"
         :key="reservation.id"
         class="md-layout-item md-large-size-20 md-xlarge-size-20 md-medium-size-33 md-small-size-50 md-xsmall-size-100 auto-mx"
       >
-        <md-card v-if="reservation.status=='accepted'" >
+        <md-card v-if="reservation.status=='accepted'">
           <!-- <md-card-media md-medium>
           <img class="img" :src="profileCard">
           </md-card-media>-->
@@ -37,7 +37,7 @@
 
 <script>
 import { PricingCard, TestimonialCard } from "@/components";
-import { GET_INCOMING_RESERVATIONS } from "@/store/actions.type";
+import { GET_DRIVER_RESERVATIONS } from "@/store/actions.type";
 
 import { mapGetters } from "vuex";
 export default {
@@ -55,13 +55,13 @@ export default {
   },
   data() {
     return {
-        incomingReservationsData: []
+      incomingReservationsData: []
     };
   },
   methods: {
     open_reservation(reservation) {
-      console.log("open reservation")
-      
+      console.log("open reservation");
+
       this.$router.push({
         name: "DriverReservationDetail",
         params: {
@@ -82,15 +82,14 @@ export default {
     this.onResponsiveInverted();
     window.addEventListener("resize", this.onResponsiveInverted);
   },
-  created(){
-    this.$store.dispatch(GET_INCOMING_RESERVATIONS).then(()=>{
-        console.log("incomingReservaitons ", this.incomingReservations)
-        this.incomingReservationsData = this.incomingReservations 
+  created() {
+    this.$store.dispatch(GET_DRIVER_RESERVATIONS).then(() => {
+      console.log("incomingReservaitons ", this.driverReservations);
+      this.incomingReservationsData = this.driverReservations;
     });
-
   },
   computed: {
-    ...mapGetters(['incomingReservations'])
+    ...mapGetters(["driverReservations"])
   },
   beforeDestroy() {
     window.removeEventListener("resize", this.onResponsiveInverted);

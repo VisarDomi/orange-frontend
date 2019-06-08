@@ -21,7 +21,7 @@ export const actions = {
   },
   async [GET_EMPLOYEE_RESERVATIONS](context) {
     const employeeId = getUser().role_id;
-    await EmployeeReservationService.getReservation(employeeId).then(
+    await EmployeeReservationService.getReservations(employeeId).then(
       ({ data }) => {
         context.commit(SET_EMPLOYEE_RESERVATIONS, data);
         console.log("setting reservations", data);

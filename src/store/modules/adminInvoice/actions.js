@@ -1,4 +1,4 @@
-import { AdminInvoiceService, ItemService } from "../../services/api";
+import { AdminService, ItemService } from "../../services/api";
 import {
   CREATE_ADMIN_INVOICE,
   GET_ADMIN_INVOICE,
@@ -10,7 +10,7 @@ import { SET_ADMIN_INVOICES, SET_ADMIN_INVOICE } from '../../mutations.type';
 export const actions = {
   async [CREATE_ADMIN_INVOICE](context, payload) {
     const { reservationId, invoice } = payload;
-    await AdminInvoiceService.postInvoice(reservationId, invoice).then(
+    await AdminService.postInvoice(reservationId, invoice).then(
       ({ data }) => {
         console.log("Setting admin invoice data...");
         context.commit(SET_ADMIN_INVOICE, data);
@@ -20,7 +20,7 @@ export const actions = {
   },
 
   async [GET_ADMIN_INVOICES](context, payload) {
-    await AdminInvoiceService.getInvoices().then(({ data }) => {
+    await AdminService.getInvoices().then(({ data }) => {
       console.log("Setting admin invoice data...");
       context.commit(SET_ADMIN_INVOICES, data);
       return data;
@@ -29,7 +29,7 @@ export const actions = {
 
   async [GET_ADMIN_INVOICE](context, payload) {
     const { invoiceId } = payload;
-    await AdminInvoiceService.getInvoice(invoiceId).then(({ data }) => {
+    await AdminService.getInvoice(invoiceId).then(({ data }) => {
       console.log("Setting admin invoice data...");
       context.commit(SET_ADMIN_INVOICE, data);
       return data;
@@ -40,7 +40,7 @@ export const actions = {
     const { reservationId, invoiceId, invoice, items } = payload;
     delete invoice.id;
     delete invoice.reservation_id;
-    await AdminInvoiceService.putInvoice(reservationId, invoiceId, invoice).then(
+    await AdminService.putInvoice(reservationId, invoiceId, invoice).then(
       ({ data }) => {
         console.log("Setting admin invoice data...");
         context.commit(SET_ADMIN_INVOICE, data);

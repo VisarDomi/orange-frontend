@@ -35,14 +35,11 @@ export const GET_COMPANY_RESERVATION = "getCompanyReservation";
 export const CREATE_DRIVER = "createDriver";
 export const GET_DRIVERS = "getDrivers";
 export const GET_DRIVER = "getDriver";
-export const GET_INCOMING_RESERVATIONS = "getIncomingReservations";
-export const GET_RESERVATION_DETAILS = "getReservationDetails";
+export const GET_DRIVER_RESERVATIONS = "getDriverReservations";
+export const GET_DRIVER_RESERVATION = "getDriverReservation";
 export const UPDATE_DRIVER_RESERVATION = "updateDriverReservation";
 
 // company
 export const CREATE_COMPANY = "createCompany";
 export const GET_COMPANYS = "getCompanys";
 export const GET_COMPANY = "getCompany";
-export const UPDATE_EMPLOYEE_STEP = "updateEmployeeStep";
-export const UPDATE_VEHICLE_STEP = "updateVehicleStep";
-export const UPDATE_PAYMENT_STEP = "updatePaymentStep";

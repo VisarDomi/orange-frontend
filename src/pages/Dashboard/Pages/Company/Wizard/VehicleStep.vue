@@ -1,47 +1,22 @@
 <template>
   <div>
-    <h5 class="info-text">Based on your luggage amount and size you can select: </h5>
+    <h5 class="info-text">Based on your luggage amount and size you can select:</h5>
     <div class="md-layout">
       <div class="md-layout-item">
         <div class="md-layout" v-if="allChoices">
-
           <div class="md-layout-item md-size-25 md-small-size-100" @click="economyLimoSelected()">
-
-            <icon-checkbox
-              v-model="model.economyLimo"
-              icon="fas fa-car"
-              title="Economy"
-            >
-            </icon-checkbox>
+            <icon-checkbox v-model="model.economyLimo" icon="fas fa-car" title="Economy"></icon-checkbox>
           </div>
           <div class="md-layout-item md-size-25 md-small-size-100" @click="economyBusSelected()">
-            <icon-checkbox
-              v-model="model.economyBus"
-              icon="fas fa-bus"
-              title="Economy"
-            >
-            </icon-checkbox>
+            <icon-checkbox v-model="model.economyBus" icon="fas fa-bus" title="Economy"></icon-checkbox>
           </div>
           <div class="md-layout-item md-size-25 md-small-size-100" @click="businessLimoSelected()">
-            <icon-checkbox
-              v-model="model.businessLimo"
-              icon="fas fa-car"
-              title="Business"
-            >
-            </icon-checkbox>
+            <icon-checkbox v-model="model.businessLimo" icon="fas fa-car" title="Business"></icon-checkbox>
           </div>
           <div class="md-layout-item md-size-25 md-small-size-100" @click="businessBusSelected()">
-            <icon-checkbox
-              v-model="model.businessBus"
-              icon="fas fa-bus"
-              title="Business"
-            >
-            </icon-checkbox>
-
-
-          </div>          
+            <icon-checkbox v-model="model.businessBus" icon="fas fa-bus" title="Business"></icon-checkbox>
+          </div>
         </div>
-
       </div>
     </div>
   </div>
@@ -49,9 +24,7 @@
 <script>
 import { IconCheckbox } from "@/components";
 import { mapGetters } from "vuex";
-import {
-  UPDATE_VEHICLE_STEP
-} from "@/store/actions.type";
+import { SET_VEHICLE_STEP } from "@/store/mutations.type";
 export default {
   components: {
     IconCheckbox
@@ -75,22 +48,20 @@ export default {
         console.log(res);
         this.$emit("on-validated", true, this.model);
         // return Promise.resolve(true);
-        let vehicleType = ''
+        let vehicleType = "";
 
-        if(this.model.economyLimo){
-          vehicleType = 'economy limo';
-        }else if(this.model.businessLimo){
-          vehicleType = 'business limo';
-        }else if(this.model.economyBus){
-          vehicleType = 'economy buss';
-        }else if(this.model.businessBus){
-          vehicleType = 'business buss';
+        if (this.model.economyLimo) {
+          vehicleType = "economy limo";
+        } else if (this.model.businessLimo) {
+          vehicleType = "business limo";
+        } else if (this.model.economyBus) {
+          vehicleType = "economy buss";
+        } else if (this.model.businessBus) {
+          vehicleType = "business buss";
         }
-        let data = {
-          vehicle_type : vehicleType
-        }
+        let data = { vehicleType };
 
-        this.$store.dispatch(UPDATE_VEHICLE_STEP, data);
+        this.$store.commit(SET_VEHICLE_STEP, data);
         return true;
       });
     },
@@ -121,14 +92,14 @@ export default {
       this.model.economyBus = false;
       this.model.businessBus = true;
       this.model.businessLimo = false;
-    },
+    }
   }
 };
 </script>
 <style scoped>
-
-.md-card-wizard[data-color="green"] .choice:hover .icon, .md-card-wizard[data-color="green"] .choice.active .icon {
-    border-color: orange;
-    color: orange;
+.md-card-wizard[data-color="green"] .choice:hover .icon,
+.md-card-wizard[data-color="green"] .choice.active .icon {
+  border-color: orange;
+  color: orange;
 }
 </style>

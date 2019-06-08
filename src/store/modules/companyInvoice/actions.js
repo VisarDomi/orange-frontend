@@ -1,4 +1,4 @@
-import { CompanyInvoiceService } from "../../services/api";
+import { CompanyService } from "../../services/api";
 import { GET_COMPANY_INVOICES, GET_COMPANY_INVOICE } from "../../actions.type";
 import {
   SET_COMPANY_INVOICES,
@@ -12,7 +12,7 @@ export const actions = {
     console.log(" getUser().role_id",  getUser().role_id)
     let companyId = getUser().role_id;
     console.log("companyID is: ", companyId)
-    await CompanyInvoiceService.getInvoices(companyId).then(({ data }) => {
+    await CompanyService.getInvoices(companyId).then(({ data }) => {
       console.log("Setting companyInvoice data...");
       context.commit(SET_COMPANY_INVOICES, data);
       return data;
@@ -22,7 +22,7 @@ export const actions = {
   async [GET_COMPANY_INVOICE](context, payload) {
     const { invoiceId } = payload;
     let companyId = getUser().role_id;
-    await CompanyInvoiceService.getInvoice(companyId, invoiceId).then(
+    await CompanyService.getInvoice(companyId, invoiceId).then(
       ({ data }) => {
         console.log("Setting companyInvoice data...");
         context.commit(SET_COMPANY_INVOICE, data);

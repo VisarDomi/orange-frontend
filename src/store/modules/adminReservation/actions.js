@@ -8,11 +8,11 @@ import {
   SET_ADMIN_RESERVATIONS,
   SET_ADMIN_RESERVATION
 } from "../../mutations.type";
-import { AdminReservationService } from "../../services/api";
+import { AdminService } from "../../services/api";
 
 export const actions = {
   async [GET_ADMIN_RESERVATIONS](context) {
-    await AdminReservationService.getReservations().then(({ data }) => {
+    await AdminService.getReservations().then(({ data }) => {
       context.commit(SET_ADMIN_RESERVATIONS, data);
       console.log("setting reservations", data);
       return data;
@@ -21,7 +21,7 @@ export const actions = {
 
   async [GET_ADMIN_RESERVATION](context, payload) {
     const { reservationId } = payload;
-    await AdminReservationService.getReservation(reservationId).then(
+    await AdminService.getReservation(reservationId).then(
       ({ data }) => {
         context.commit(SET_ADMIN_RESERVATION, data);
         console.log("setting reservation", data);
@@ -35,7 +35,7 @@ export const actions = {
     let reservation = {
       driver_id: driverId + ""
     };
-    await AdminReservationService.putReservation(
+    await AdminService.putReservation(
       reservationId,
       reservation
     ).then(({ data }) => {

@@ -1,32 +1,17 @@
 <template>
   <div>
-    <h5 class="info-text">What is your desired payment method? </h5>
+    <h5 class="info-text">What is your desired payment method?</h5>
     <div class="md-layout">
       <div class="md-layout-item">
         <div class="md-layout">
           <div class="md-layout-item md-size-33 md-small-size-100" @click="CreditCardSelected()">
-            <icon-checkbox
-              v-model="model.creditCard"
-              icon="fas fa-credit-card"
-              title="Credit Card"
-            >
-            </icon-checkbox>
+            <icon-checkbox v-model="model.creditCard" icon="fas fa-credit-card" title="Credit Card"></icon-checkbox>
           </div>
           <div class="md-layout-item md-size-33 md-small-size-100" @click="CashSelected()">
-            <icon-checkbox
-              v-model="model.cash"
-              icon="fas fa-money-bill-alt"
-              title="Cash"
-            >
-            </icon-checkbox>
+            <icon-checkbox v-model="model.cash" icon="fas fa-money-bill-alt" title="Cash"></icon-checkbox>
           </div>
           <div class="md-layout-item md-size-33 md-small-size-100" @click="InvoiceSelected()">
-            <icon-checkbox
-              v-model="model.invoice"
-              icon="fas fa-file-alt"
-              title="Invoice"
-            >
-            </icon-checkbox>
+            <icon-checkbox v-model="model.invoice" icon="fas fa-file-alt" title="Invoice"></icon-checkbox>
           </div>
         </div>
       </div>
@@ -35,9 +20,7 @@
 </template>
 <script>
 import { IconCheckbox } from "@/components";
-import {
-  UPDATE_PAYMENT_STEP
-} from "@/store/actions.type";
+import { SET_PAYMENT_STEP } from "@/store/mutations.type";
 export default {
   components: {
     IconCheckbox
@@ -57,24 +40,21 @@ export default {
         console.log(res);
         this.$emit("on-validated", true, this.model);
         // return Promise.resolve(true);
-        let paymentType = ''
+        let paymentMethod = "";
 
-        if(this.model.creditCard){
-          paymentType = 'credit card';
-        }else if(this.model.cash){
-          paymentType = 'cash';
-        }else if(this.model.invoice){
-          paymentType = 'invoice';
+        if (this.model.creditCard) {
+          paymentMethod = "credit card";
+        } else if (this.model.cash) {
+          paymentMethod = "cash";
+        } else if (this.model.invoice) {
+          paymentMethod = "invoice";
         }
 
-        let data = {
-          payment_type : paymentType
-        }
+        let data = { paymentMethod };
 
-        this.$store.dispatch(UPDATE_PAYMENT_STEP, data);
+        this.$store.commit(SET_PAYMENT_STEP, data);
         return true;
       });
-
     },
     CreditCardSelected() {
       this.model.creditCard = true;
@@ -90,7 +70,7 @@ export default {
       this.model.creditCard = false;
       this.model.cash = false;
       this.model.invoice = true;
-    },
+    }
   }
 };
 </script>
