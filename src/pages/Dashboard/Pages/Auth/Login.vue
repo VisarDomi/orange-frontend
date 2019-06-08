@@ -157,7 +157,7 @@ export default {
         this.$router.push({ name: "CompanyReservations" });
       }
       if (this.user.role == "employee") {
-        this.$router.push({ name: "EmployeeReservationDetail" });
+        this.$router.push({ name: "EmployeeReservations" });
       }
       if (this.user.role == "driver"){
         this.$router.push({ name: "DriverIncomingReservations"})

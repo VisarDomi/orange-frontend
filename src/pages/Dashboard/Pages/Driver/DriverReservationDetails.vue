@@ -96,7 +96,7 @@ import {
 } from "@/store/actions.type";
 
 export default {
-  name: "ReservationDetail",
+  name: "DriverReservationDetail",
   components: {},
   data() {
     return {

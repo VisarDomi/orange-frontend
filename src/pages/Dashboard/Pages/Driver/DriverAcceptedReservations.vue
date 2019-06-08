@@ -41,7 +41,7 @@ import { GET_DRIVER_RESERVATIONS } from "@/store/actions.type";
 
 import { mapGetters } from "vuex";
 export default {
-  name: "DriverIncomingReservations",
+  name: "DriverAcceptedReservations",
   components: {
     PricingCard,
 

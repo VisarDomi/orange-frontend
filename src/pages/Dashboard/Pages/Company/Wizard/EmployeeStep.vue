@@ -413,9 +413,8 @@ export default {
           if (employee.id == selected) {
             employeeStops.push({
               employee_id: employee.id,
-              date: "1999-12-31",
               pickup: employee.address,
-              time: "2:00:00"
+              time: "14:00:00"
             });
           }
         }
