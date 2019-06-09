@@ -55,13 +55,13 @@ export default {
         let vehicleType = "";
 
         if (this.model.economyLimo) {
-          vehicleType = "economy limo";
+          vehicleType = "Economy Limo";
         } else if (this.model.businessLimo) {
-          vehicleType = "business limo";
+          vehicleType = "Business Limo";
         } else if (this.model.economyBus) {
-          vehicleType = "economy buss";
+          vehicleType = "Economy Bus";
         } else if (this.model.businessBus) {
-          vehicleType = "business buss";
+          vehicleType = "Business Bus";
         }
         let data = { vehicleType };
 

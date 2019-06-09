@@ -1,10 +1,65 @@
 <template>
   <div class="content">
     <div class="md-layout">
-      <div class="md-layout-item md-medium-size-100 md-size-66 mx-auto" style="margin-bottom: 50px;">
+      <div class="md-layout-item md-medium-size-100 md-size-100 mx-auto" style="margin-bottom: 50px;">
         <md-button class="md-warning" @click="createInvoice()">Create invoice for this reservation</md-button>
       </div>
-      <div class="md-layout-item md-medium-size-100 md-size-66 mx-auto">
+
+
+      <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-40">
+        <h3>Reservation stops</h3>
+        <div class="md-card md-card-timeline md-theme-default md-card-plain">
+          <ul class="timeline timeline-simple">
+            <li class="timeline-inverted" v-for="stop of adminReservation.stops" >
+              <div class="timeline-badge warning">
+                <i class="md-icon md-icon-font md-theme-default">person</i>
+              </div>
+              <div class="timeline-panel">
+                <div class="timeline-heading">
+                  <span class="badge badge-warning">{{stop.employee_full_name}}</span>
+                </div>
+                <div class="timeline-body">
+                  <p>
+                    {{stop.pickup}}
+                  </p>
+                </div>
+                <h6>
+                  <h6>
+                    <i class="ti-time"></i>
+                    {{stop.time}}
+                  </h6>
+                </h6>
+              </div>
+            </li>
+
+            <li class="timeline-inverted"  >
+              <div class="timeline-badge danger">
+                <i class="md-icon md-icon-font md-theme-default">directions</i>
+              </div>
+              <div class="timeline-panel">
+                <div class="timeline-heading">
+                  <span class="badge badge-danger">{{adminReservation.destination}}</span>
+                </div>
+                <div class="timeline-body">
+                  <p>
+                  </p>
+                </div>
+                <h6>
+                  <h6>
+                    <i class="ti-time"></i>
+                  </h6>
+                </h6>
+              </div>
+            </li>
+
+
+          </ul>
+        </div>
+      </div>
+
+
+      <div class="md-layout-item md-medium-size-100 md-size-50 mx-auto">
+        <h3>Reservation details</h3><br>
         <form>
           <md-card>
             <md-card-header class="md-card-header-icon md-card-header-green">
@@ -20,12 +75,7 @@
             <md-card-content>
               <div class="md-layout md-gutter">
                 <div class="md-layout md-layout-item md-small-size-100">
-                  <div class="md-layout-item md-small-size-100 md-size-100">
-                    <md-field>
-                      <label>Pickup Address</label>
-                      <md-input v-model="pickup" disabled></md-input>
-                    </md-field>
-                  </div>
+
 
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
@@ -37,7 +87,7 @@
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
                       <label>Date of pickup</label>
-                      <md-input :value="this.date | prettyDate" disabled></md-input>
+                      <md-input :value="this.date " disabled></md-input>
                     </md-field>
                   </div>
 
@@ -54,11 +104,23 @@
                       <md-input v-model="companyName" disabled></md-input>
                     </md-field>
                   </div>
-                
 
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
-                      <label>Code</label>
+                      <label>Payment Method</label>
+                      <md-input v-model="adminReservation.payment_method" disabled></md-input>
+                    </md-field>
+                  </div>
+
+                  <div class="md-layout-item md-small-size-100 md-size-100">
+                    <md-field>
+                      <label>Vehicle Type</label>
+                      <md-input v-model="adminReservation.vehicle_type" disabled></md-input>
+                    </md-field>
+                  </div>
+                  <div class="md-layout-item md-small-size-100 md-size-100">
+                    <md-field>
+                      <label>KSt</label>
                       <md-input v-model="code" disabled></md-input>
                     </md-field>
                   </div>

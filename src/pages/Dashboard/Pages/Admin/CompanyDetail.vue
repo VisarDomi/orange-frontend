@@ -210,7 +210,7 @@
 
 <!-- here starts the company employees -->
     <div class="md-layout ">
-
+      
       <div class="md-layout-item md-size-40 ">
         <md-button class="md-warning mx-auto" @click="addEmployee()">Add new employee</md-button>
         <!-- employee creation form -->
@@ -288,6 +288,7 @@
     
 
     <div class="md-layout md-size-60">
+      
       <div
         v-for="employee in this.employees"
         :key="employee.id"
@@ -331,7 +332,7 @@
 import { CREATE_EMPLOYEE } from "@/store/actions.type";
 // for employees part
 import { PricingCard, TestimonialCard } from "@/components";
-import { GET_EMPLOYEES, GET_EMPLOYEE } from "@/store/actions.type";
+import { GET_EMPLOYEES_BY_ID, GET_EMPLOYEE } from "@/store/actions.type";
 //-----------------------
 // for table part
 import { Pagination } from "@/components";
@@ -461,7 +462,7 @@ export default {
     },
   },
   mounted() {
-    this.$store.dispatch(GET_EMPLOYEES)
+    this.$store.dispatch(GET_EMPLOYEES_BY_ID, {companyId: this.company.id})
         // Fuse search initialization.
         //doesnt work now but need to make functional
     this.fuseSearch = new Fuse(this.tableData, {

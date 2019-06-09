@@ -3,6 +3,7 @@ import {
   GET_EMPLOYEES,
   GET_EMPLOYEE,
   GET_EMPLOYEE_RESERVATION,
+  GET_EMPLOYEES_BY_ID,
   GET_EMPLOYEE_RESERVATIONS
 } from "../../actions.type";
 import {
@@ -39,6 +40,16 @@ export const actions = {
         return data;
       }
     );
+  },
+
+
+
+  async [GET_EMPLOYEES_BY_ID](context, payload) {
+    const {companyId} = payload;
+    await EmployeeService.getEmployees(companyId).then(({ data }) => {
+      console.log("setting employee state to ", data);
+      context.commit(SET_EMPLOYEES, data);
+    });
   },
 
   async [GET_EMPLOYEES](context, payload) {

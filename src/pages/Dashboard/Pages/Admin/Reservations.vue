@@ -86,8 +86,8 @@
                 </md-table-cell>
                 <md-table-cell md-label="Status" md-sort-by="status">{{ item.status }}</md-table-cell>
                 <md-table-cell md-label="Destination">{{ item.destination }}</md-table-cell>
-                <md-table-cell md-label="Date" md-sort-by="date">{{ item.date |prettyDate}} {{ item.time }}</md-table-cell>
-                <md-table-cell md-label="Code" style="justify-content:left;">{{ item.code }}</md-table-cell>
+                <md-table-cell md-label="Date" md-sort-by="date">{{ item.date }} / {{ item.time }}</md-table-cell>
+                <md-table-cell md-label="KSt" style="justify-content:left;">{{ item.code }}</md-table-cell>
               </md-table-row>
             </md-table>
             <p>Selected: </p>
@@ -184,7 +184,7 @@ export default {
         perPageOptions: [5, 10, 25, 50],
         total: 0
       },
-      footerTable: ["Company", "Driver", "Status", "Destination", "Date", "Drivers", "Code"],
+      footerTable: ["Company", "Driver", "Status", "Destination", "Date", "Drivers", "KSt"],
       searchQuery: "",
       propsToSearch: ["name", "email", "age"],
       tableData: [],

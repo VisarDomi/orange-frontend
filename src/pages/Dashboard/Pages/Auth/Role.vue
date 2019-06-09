@@ -1,13 +1,13 @@
 <template>
-  <div>
+  <div class="">
     <div class="md-layout">
-      <div class="md-layout-item md-size-50 mx-auto text-center">
+      <div class="md-layout-item md-size-80 mx-auto text-center">
         <h2 class="title">Select your role</h2>
         <h5 class="description">Chose your login below.</h5>
       </div>
     </div>
     <div class="md-layout">
-      <div class="md-layout-item md-medium-size-33 md-small-size-50 md-xsmall-size-100">
+      <div class="md-layout-item md-medium-size-100 md-small-size-010 md-xsmall-size-100">
         <pricing-card icon-color="icon-warning">
           <h6 slot="category" class="category">Administrator</h6>
           <md-icon slot="icon">home</md-icon>
@@ -19,7 +19,7 @@
           <md-button slot="footer" class="md-warning md-round" @click="login('admin')">Log-in</md-button>
         </pricing-card>
       </div>
-      <div class="md-layout-item md-medium-size-33 md-small-size-50 md-xsmall-size-100">
+      <div class="md-layout-item md-medium-size-100 md-small-size-100 md-xsmall-size-100">
         <pricing-card icon-color="icon-warning">
           <h6 slot="category" class="category">Manager</h6>
           <md-icon slot="icon">work</md-icon>
@@ -31,7 +31,7 @@
           <md-button slot="footer" class="md-warning md-round" @click="login('company')">Log-in</md-button>
         </pricing-card>
       </div>
-      <div class="md-layout-item md-medium-size-33 md-small-size-50 md-xsmall-size-100">
+      <!-- <div class="md-layout-item md-medium-size-33 md-small-size-50 md-xsmall-size-100">
         <pricing-card icon-color="icon-warning">
           <h6 slot="category" class="category">Employee</h6>
           <md-icon slot="icon">supervised_user_circle</md-icon>
@@ -54,7 +54,7 @@
           >Access your Orange Limo itineraries and upcoming trips.</p>
           <md-button slot="footer" class="md-warning md-round" @click="login('driver')">Log-in</md-button>
         </pricing-card>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
