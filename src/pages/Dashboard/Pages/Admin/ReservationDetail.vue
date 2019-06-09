@@ -12,7 +12,7 @@
                 <md-icon>card_travel</md-icon>
               </div>
               <h4 class="title">
-                Itinerary -
+                Reservation -
                 <small>Details</small>
               </h4>
             </md-card-header>
