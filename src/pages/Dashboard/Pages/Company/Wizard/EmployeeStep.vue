@@ -424,8 +424,8 @@ export default {
             stops: this.stops.rowData,
             date: this.date, 
             time: this.hour + ":" + this.minutes + ":00", 
-            small_luggage: this.smallLuggage, 
-            biguggage: this.bigLuggage
+            smallLuggage: this.smallLuggage, 
+            bigLuggage: this.bigLuggage
           }
 
           this.$store.dispatch(UPDATE_EMPLOYEE_STEP, data);
