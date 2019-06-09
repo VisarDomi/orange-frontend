@@ -6,16 +6,16 @@
       <div class="md-layout-item">
         <div class="md-layout" v-if="allChoices">
           <div class="md-layout-item md-size-25 md-small-size-100" @click="economyLimoSelected()">
-            <icon-checkbox v-model="model.economyLimo" icon="fas fa-car" title="Economy"></icon-checkbox>
+            <icon-checkbox v-model="model.economyLimo" icon="fas fa-car" title="Economy Limo"></icon-checkbox>
           </div>
           <div class="md-layout-item md-size-25 md-small-size-100" @click="economyBusSelected()">
-            <icon-checkbox v-model="model.economyBus" icon="fas fa-bus" title="Economy"></icon-checkbox>
+            <icon-checkbox v-model="model.economyBus" icon="fas fa-bus" title="Economy Bus"></icon-checkbox>
           </div>
           <div class="md-layout-item md-size-25 md-small-size-100" @click="businessLimoSelected()">
-            <icon-checkbox v-model="model.businessLimo" icon="fas fa-car" title="Business"></icon-checkbox>
+            <icon-checkbox v-model="model.businessLimo" icon="fas fa-car" title="Business Limo"></icon-checkbox>
           </div>
           <div class="md-layout-item md-size-25 md-small-size-100" @click="businessBusSelected()">
-            <icon-checkbox v-model="model.businessBus" icon="fas fa-bus" title="Business"></icon-checkbox>
+            <icon-checkbox v-model="model.businessBus" icon="fas fa-bus" title="Business Bus"></icon-checkbox>
           </div>
         </div>
       </div>

@@ -50,18 +50,18 @@
               <md-table-row slot="md-table-row" slot-scope="{ item }" @click.native="open_reservation(item)">
                 <!-- ["Employee", "Date", "Destination", "Code"] -->
                 <md-table-cell md-label="Employee" md-sort-by="code">
-                  <span v-for="employee in item.employees" :key="employee.id">
+                  <span v-for="stop in item.stops" :key="stop.id">
                   {{
-                  employee.full_name
+                  stop.employee_full_name
                   }},</span>
                 </md-table-cell>
                 <md-table-cell md-label="Date" md-sort-by="date">
                   {{
-                  item.date | prettyDate
-                  }} {{item.time}}
+                  item.date 
+                  }} 
                 </md-table-cell>
                 <md-table-cell md-label="Destination">{{ item.destination }}</md-table-cell>
-                <md-table-cell md-label="Code">{{ item.code }}</md-table-cell>
+                <md-table-cell md-label="KSt">{{ item.code }}</md-table-cell>
                 <!-- <md-table-cell md-label="Destination">{{ item.destination }}</md-table-cell>
                 <md-table-cell md-label="Status" style="justify-content:left;">{{ item.status }}</md-table-cell> -->
               </md-table-row>
@@ -157,7 +157,7 @@ export default {
         perPageOptions: [5, 10, 25, 50],
         total: 0
       },
-      footerTable: ["Employee", "Date", "Destination", "Code"],
+      footerTable: ["Employee", "Date", "Destination", "KSt"],
       searchQuery: "",
       propsToSearch: ["name", "email", "age"],
       tableData: [],

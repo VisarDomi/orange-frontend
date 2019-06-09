@@ -1,7 +1,60 @@
 <template>
   <div class="content">
     <div class="md-layout">
+      <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50">
+        <h3>Reservation stops</h3>
+        <div class="md-card md-card-timeline md-theme-default md-card-plain">
+          <ul class="timeline timeline-simple">
+            <li class="timeline-inverted" v-for="stop of companyReservation.stops" >
+              <div class="timeline-badge warning">
+                <i class="md-icon md-icon-font md-theme-default">person</i>
+              </div>
+              <div class="timeline-panel">
+                <div class="timeline-heading">
+                  <span class="badge badge-warning">{{stop.employee_full_name}}</span>
+                </div>
+                <div class="timeline-body">
+                  <p>
+                    {{stop.pickup}}
+                  </p>
+                </div>
+                <h6>
+                  <h6>
+                    <i class="ti-time"></i>
+                    {{stop.time}}
+                  </h6>
+                </h6>
+              </div>
+            </li>
+
+            <li class="timeline-inverted"  >
+              <div class="timeline-badge danger">
+                <i class="md-icon md-icon-font md-theme-default">directions</i>
+              </div>
+              <div class="timeline-panel">
+                <div class="timeline-heading">
+                  <span class="badge badge-danger">{{companyReservation.destination}}</span>
+                </div>
+                <div class="timeline-body">
+                  <p>
+                  </p>
+                </div>
+                <h6>
+                  <h6>
+                    <i class="ti-time"></i>
+                  </h6>
+                </h6>
+              </div>
+            </li>
+
+
+          </ul>
+        </div>
+      </div>
+
       <div class="md-layout-item md-medium-size-100 md-size-40 mx-auto">
+        <h3>Reservation details</h3>
+        <br>
         <form>
           <md-card>
             <md-card-header class="md-card-header-icon md-card-header-green">
@@ -17,18 +70,7 @@
             <md-card-content>
               <div class="md-layout md-gutter md-size-100">
                 <div class="md-layout md-layout-item md-small-size-100 md-size-100">
-                  <div class="md-layout-item md-small-size-100 md-size-100">
-                    <md-field>
-                      <label>Pickup</label>
-                      <md-input v-model="pickup" disabled></md-input>
-                    </md-field>
-                  </div>
-                  <div class="md-layout-item md-small-size-100 md-size-100">
-                    <md-field>
-                      <label>Destination</label>
-                      <md-input v-model="destination" disabled></md-input>
-                    </md-field>
-                  </div>
+
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
                       <label>Date</label>
@@ -44,11 +86,17 @@
 
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
-                      <label>Status</label>
-                      <md-input v-model="status" disabled></md-input>
+                      <label>Payment Method</label>
+                      <md-input v-model="companyReservation.payment_method" disabled></md-input>
                     </md-field>
                   </div>
 
+                  <div class="md-layout-item md-small-size-100 md-size-100">
+                    <md-field>
+                      <label>Vehicle Type</label>
+                      <md-input v-model="companyReservation.vehicle_type" disabled></md-input>
+                    </md-field>
+                  </div>
                   <!-- <div class="md-layout-item md-size-100 text-right">
 
                   </div>-->

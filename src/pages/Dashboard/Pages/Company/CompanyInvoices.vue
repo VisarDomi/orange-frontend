@@ -45,17 +45,17 @@
               <md-table-row slot="md-table-row" slot-scope="{ item }"  @click.native="open_invoice(item)">
                 <md-table-cell md-label="Date recieved" md-sort-by="code">
                   {{
-                  item.date | prettyDate
+                  item.date 
                   }}
                 </md-table-cell>
                 <md-table-cell md-label="Date due" md-sort-by="date">
                   {{
-                  item.due | prettyDate
+                  item.due 
                   }}
                 </md-table-cell>
                 <md-table-cell md-label="Amount">{{ item.grand_total }}</md-table-cell>
-                <md-table-cell md-label="Employee">Figure out employee</md-table-cell>
-                <md-table-cell md-label="Destination">Figure out destination</md-table-cell>
+                <!-- <md-table-cell md-label="Employee">Figure out employee</md-table-cell>
+                <md-table-cell md-label="Destination">{{item.destination}}</md-table-cell> -->
                 <!-- <md-table-cell md-label="Status" style="justify-content:left;">{{ item.status }}</md-table-cell> -->
               </md-table-row>
             </md-table>
@@ -150,7 +150,7 @@ export default {
         perPageOptions: [5, 10, 25, 50],
         total: 0
       },
-      footerTable: ["Date recieved", "Date due", "Amount", "Employee", "Destination"],
+      footerTable: ["Date recieved", "Date due", "Amount"],
       searchQuery: "",
       propsToSearch: ["name", "email", "age"],
       tableData: [],

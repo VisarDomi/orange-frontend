@@ -52,7 +52,7 @@
               </div>
             </div>
 
-            <div class="md-layout">
+            <!-- <div class="md-layout">
               <label class="md-layout-item md-size-15 md-form-label">
                 AutoComplete
               </label>
@@ -63,7 +63,7 @@
                 </gmap-autocomplete>
                 <button @click="usePlace">Add</button>
               </div>
-            </div>
+            </div> -->
 
             <div class="md-layout" style="margin-top:50px;">
               <div class="md-layout-item mx-auto md-size-30">
