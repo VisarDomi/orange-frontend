@@ -4,4 +4,5 @@ export const getters = {
   isAuthenticated: state => state.isAuthenticated,
   role: state => state.role,
   goBack: state => state.goBack,
+  badEmail: state => state.badEmail,
 };

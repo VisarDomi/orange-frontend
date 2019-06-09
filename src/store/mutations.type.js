@@ -4,6 +4,7 @@ export const SET_AUTH = "setUserAndToken";
 export const PURGE_AUTH = "purgeAuth";
 export const SET_ROLE = "setRole";
 export const SET_GO_BACK = "setGoBack";
+export const SET_BAD_EMAIL = "setBadEmail";
 
 // loading
 export const START_LOADING = "startLoading";

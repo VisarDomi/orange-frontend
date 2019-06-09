@@ -6,7 +6,8 @@ import {
   PURGE_AUTH,
   START_LOADING,
   STOP_LOADING,
-  SET_GO_BACK
+  SET_GO_BACK,
+  SET_BAD_EMAIL
 } from "../../mutations.type";
 import { getToken } from "../../services/jwt";
 import { getUser } from "../../services/userstorage";
@@ -35,9 +36,11 @@ export const actions = {
         let status = Object.assign({}, error).request.status;
         if (status == 401) {
           console.log("status is: ", status);
-          // push to login again?, no put a new element where you click it to go back to /role
+          payload = { badEmail: true };
+          context.commit(SET_BAD_EMAIL, payload);
+        } else if (status == 403) {
           payload = { goBack: true };
-          console.log("payload.goBack", payload.goBack)
+          console.log("payload.goBack", payload.goBack);
           context.commit(SET_GO_BACK, payload);
         }
       });
