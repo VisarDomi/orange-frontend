@@ -72,8 +72,8 @@
           class="md-form-group"
         >
           <md-icon>face</md-icon>
-          <label>Pickup address for {{stop.employeeName}}</label>
-          <md-input v-model="stops.rowData[index].address" type="text" required></md-input>
+          <label>Pickup address for {{stop.full_name}}</label>
+          <md-input v-model="stops.rowData[index].pickup" type="text" required></md-input>
         </md-field>
 
         <md-field
@@ -414,7 +414,8 @@ export default {
             employeeStops.push({
               employee_id: employee.id,
               pickup: employee.address,
-              time: "14:00:00"
+              time: "14:00:00",
+              full_name: employee.full_name
             });
           }
         }
@@ -440,6 +441,9 @@ export default {
             time: this.hour + ":" + this.minutes + ":00", 
             smallLuggage: this.smallLuggage, 
             bigLuggage: this.bigLuggage
+          }
+          for(let stop of this.stops.rowData){
+            delete stop.full_name
           }
 
           this.$store.commit(SET_EMPLOYEE_STEP, data);
@@ -481,6 +485,7 @@ export default {
   },
   created() {
     this.$store.dispatch(GET_EMPLOYEES);
+    console.log(this.employees)
   },
   computed: {
     ...mapGetters(["employees"])
