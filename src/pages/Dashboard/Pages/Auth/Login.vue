@@ -79,6 +79,7 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
+import { loginReroute } from "@/common/functions";
 import { LOGIN } from "@/store/actions.type";
 import { SET_GO_BACK } from "@/store/mutations.type";
 import { SlideYDownTransition } from "vue2-transitions";
@@ -150,18 +151,20 @@ export default {
         console.log("in then of LOGIN: this.user.role", this.user.role);
         // now reroute to the pages depending on the this.user.role
       });
-      if (this.user.role == "admin") {
-        this.$router.push({ name: "Reservations" });
-      }
-      if (this.user.role == "company") {
-        this.$router.push({ name: "CompanyReservations" });
-      }
-      if (this.user.role == "employee") {
-        this.$router.push({ name: "EmployeeReservations" });
-      }
-      if (this.user.role == "driver"){
-        this.$router.push({ name: "DriverIncomingReservations"})
-      }
+
+      loginReroute(this.$router, this.user.role)
+      // if (this.user.role == "admin") {
+      //   this.$router.push({ name: "Reservations" });
+      // }
+      // if (this.user.role == "company") {
+      //   this.$router.push({ name: "CompanyReservations" });
+      // }
+      // if (this.user.role == "employee") {
+      //   this.$router.push({ name: "EmployeeReservations" });
+      // }
+      // if (this.user.role == "driver"){
+      //   this.$router.push({ name: "DriverIncomingReservations"})
+      // }
     }
   },
   watch: {

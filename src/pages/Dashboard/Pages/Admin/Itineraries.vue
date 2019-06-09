@@ -175,7 +175,7 @@ import { GET_ADMIN_INVOICES, GET_ADMIN_INVOICE } from "@/store/actions.type";
 import { mapGetters } from "vuex";
 
 export default {
-  name: "Invoices",
+  name: "Itineraries",
   components: {
     Pagination
   },
