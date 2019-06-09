@@ -2,16 +2,18 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import DashboardPlugin from "./material-dashboard";
 import { ApiService } from "./store/services/api";
-import { getToken } from './store/services/jwt';
+import { getToken } from "./store/services/jwt";
+import { getUser } from "./store/services/userstorage";
+import { loginReroute } from "@/common/functions";
 import { yearFormat, hourFormat, prettyDate } from "./common/date.filter";
 import ErrorFilter from "./common/error.filter";
-import * as VueGoogleMaps from 'vue2-google-maps'
+import * as VueGoogleMaps from "vue2-google-maps";
 
 Vue.use(VueGoogleMaps, {
   load: {
-    key: 'AIzaSyBzlLYISGjL_ovJwAehh6ydhB56fCCpPQw',
-    libraries: 'places'
-  },
+    key: "AIzaSyBzlLYISGjL_ovJwAehh6ydhB56fCCpPQw",
+    libraries: "places"
+  }
 });
 
 // Plugins
@@ -21,23 +23,23 @@ import Chartist from "chartist";
 // router setup
 import routes from "./routes";
 import store from "./store";
-import './registerServiceWorker'
-console.log("first")
-console.log("getToken()", getToken())
+import "./registerServiceWorker";
+console.log("first");
+console.log("getToken()", getToken());
 // plugin setup
 Vue.use(VueRouter);
 Vue.use(DashboardPlugin);
 
 Vue.config.productionTip = false;
 // filter
-Vue.filter('money', function (value) {
+Vue.filter("money", function(value) {
   if (typeof value !== "number") {
-      return value;
+    return value;
   }
-  let formatter = new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'EUR',
-      minimumFractionDigits: 0
+  let formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "EUR",
+    minimumFractionDigits: 0
   });
   return formatter.format(value);
 });
@@ -65,9 +67,9 @@ Object.defineProperty(Vue.prototype, "$Chartist", {
 
 // Ensure we checked auth before each page load.
 router.beforeEach((to, from, next) => {
-  console.log("router.beforeEach to: ", to)
-  console.log("router.beforeEach from: ", from)
-  console.log("router.beforeEach next: ", next)
+  console.log("router.beforeEach to: ", to);
+  console.log("router.beforeEach from: ", from);
+  console.log("router.beforeEach next: ", next);
   ApiService.setHeader();
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (getToken() == null) {
@@ -79,7 +81,15 @@ router.beforeEach((to, from, next) => {
       next();
     }
   } else {
-    next();
+    if (getToken() != null) {
+      console.log("should reroute to respective role homepage");
+      let role = "";
+      role = getUser().role
+      console.log("role is", role);
+      loginReroute(router, role)
+    } else {
+      next();
+    }
   }
 });
 

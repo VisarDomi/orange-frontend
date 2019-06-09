@@ -12,7 +12,7 @@
                 <md-icon>card_travel</md-icon>
               </div>
               <h4 class="title">
-                Reservation -
+                Itinerary -
                 <small>Details</small>
               </h4>
             </md-card-header>
@@ -143,7 +143,7 @@ import {
 } from "@/store/actions.type";
 
 export default {
-  name: "ReservationDetail",
+  name: "ItineraryDetail",
   components: {},
   data() {
     return {

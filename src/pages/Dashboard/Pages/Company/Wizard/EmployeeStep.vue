@@ -24,10 +24,7 @@
             <md-icon class="error" v-show="errors.has('destination')">close</md-icon>
           </slide-y-down-transition>
           <slide-y-down-transition>
-            <md-icon
-              class="success"
-              v-show="!errors.has('destination') && touched.destination"
-            >done</md-icon>
+            <md-icon class="success" v-show="!errors.has('destination') && touched.destination">done</md-icon>
           </slide-y-down-transition>
         </md-field>
 
@@ -79,8 +76,6 @@
           <md-input v-model="stops.rowData[index].address" type="text" required></md-input>
         </md-field>
 
-
-
         <md-field
           :class="[
             { 'md-valid': !errors.has('code') && touched.code },
@@ -102,26 +97,21 @@
             <md-icon class="error" v-show="errors.has('code')">close</md-icon>
           </slide-y-down-transition>
           <slide-y-down-transition>
-            <md-icon
-              class="success"
-              v-show="!errors.has('code') && touched.code"
-            >done</md-icon>
+            <md-icon class="success" v-show="!errors.has('code') && touched.code">done</md-icon>
           </slide-y-down-transition>
         </md-field>
-
-
       </div>
 
       <div class="md-layout-item md-size-60 mx-auto md-small-size-100">
-
-
         <div class="md-layout">
           <md-icon>date_range</md-icon>
-            <label
-              class="md-layout-item md-size-30  md-form-label"
-              style="text-align:left; padding-left:13px; padding-top:33px;"
-            >When is the journey?</label>
-          <md-field class="md-layout-item " style="padding-right: 30px;"
+          <label
+            class="md-layout-item md-size-30 md-form-label"
+            style="text-align:left; padding-left:13px; padding-top:33px;"
+          >When is the journey?</label>
+          <md-field
+            class="md-layout-item"
+            style="padding-right: 30px;"
             :class="[
                   { 'md-valid': !errors.has('date') && touched.date },
                   { 'md-form-group': true },
@@ -129,7 +119,6 @@
                 ]"
           >
             <md-datepicker
-              
               v-model="date"
               md-immediately
               style="padding-left: 0px;"
@@ -150,19 +139,27 @@
           </md-field>
 
           <div class="md-layout">
-            
             <label class="md-layout-item md-size-33 md-form-label" style="text-align:left;">
-              <md-icon style="color:black;">access_time</md-icon>&nbsp;&nbsp;&nbsp;&nbsp;Reservation Time</label>
+              <md-icon style="color:black;">access_time</md-icon>&nbsp;&nbsp;&nbsp;&nbsp;Reservation Time
+            </label>
             <div class="md-layout-item md-size-33">
-              <md-field class="md-size-15"
-                        :class="[
+              <md-field
+                class="md-size-15"
+                :class="[
             { 'md-valid': !errors.has('hour') && touched.hour },
             { 'md-form-group': true },
             { 'md-error': errors.has('hour') }
           ]"
-          >
+              >
                 <label>Hour</label>
-                <md-select v-model="hour" name="hour" id="hour" md-dense required v-validate="modelValidations.hour">
+                <md-select
+                  v-model="hour"
+                  name="hour"
+                  id="hour"
+                  md-dense
+                  required
+                  v-validate="modelValidations.hour"
+                >
                   <md-option value="1">1</md-option>
                   <md-option value="2">2</md-option>
                   <md-option value="3">3</md-option>
@@ -200,7 +197,7 @@
 
             <div class="md-layout-item md-size-33">
               <md-field
-              :class="[
+                :class="[
                     { 'md-valid': !errors.has('minutes') && touched.minutes },
                     { 'md-form-group': true },
                     { 'md-error': errors.has('minutes') }
@@ -208,7 +205,14 @@
               >
                 <md-icon></md-icon>
                 <label>Minutes</label>
-                <md-select v-model="minutes" name="minutes" id="minutes" md-dense required v-validate="modelValidations.minutes">
+                <md-select
+                  v-model="minutes"
+                  name="minutes"
+                  id="minutes"
+                  md-dense
+                  required
+                  v-validate="modelValidations.minutes"
+                >
                   <md-option value="00">00</md-option>
                   <md-option value="05">05</md-option>
                   <md-option value="10">10</md-option>
@@ -232,93 +236,108 @@
               </md-field>
             </div>
           </div>
-
         </div>
 
-      <!-- luggage -->
-          <div class="md-layout">
-            
-            <label class="md-layout-item md-size-33 md-form-label" style="text-align:left;">
-              <md-icon style="color:black;">work_outline</md-icon>&nbsp;&nbsp;&nbsp;&nbsp;Luggages</label>
-            <div class="md-layout-item md-size-33">
-              <md-field class="md-size-15"
-                        :class="[
+        <!-- luggage -->
+        <div class="md-layout">
+          <label class="md-layout-item md-size-33 md-form-label" style="text-align:left;">
+            <md-icon style="color:black;">work_outline</md-icon>&nbsp;&nbsp;&nbsp;&nbsp;Luggages
+          </label>
+          <div class="md-layout-item md-size-33">
+            <md-field
+              class="md-size-15"
+              :class="[
             { 'md-valid': !errors.has('smallLuggage') && touched.smallLuggage },
             { 'md-form-group': true },
             { 'md-error': errors.has('smallLuggage') }
           ]"
-          >
-                <label>Small</label>
-                <md-select v-model="smallLuggage" name="smallLuggage" id="smallLuggage" md-dense required v-validate="modelValidations.smallLuggage">
-                  <md-option value="1">1</md-option>
-                  <md-option value="2">2</md-option>
-                  <md-option value="3">3</md-option>
-                  <md-option value="4">4</md-option>
-                  <md-option value="5">5</md-option>
-                  <md-option value="6">6</md-option>
-                  <md-option value="7">7</md-option>
-                  <md-option value="8">8</md-option>
-                  <md-option value="9">9</md-option>
-                  <md-option value="10">10</md-option>
-                  <md-option value="11">11</md-option>
-                  <md-option value="12">12</md-option>
-                </md-select>
+            >
+              <label>Small</label>
+              <md-select
+                v-model="smallLuggage"
+                name="smallLuggage"
+                id="smallLuggage"
+                md-dense
+                required
+                v-validate="modelValidations.smallLuggage"
+              >
+                <md-option value="1">1</md-option>
+                <md-option value="2">2</md-option>
+                <md-option value="3">3</md-option>
+                <md-option value="4">4</md-option>
+                <md-option value="5">5</md-option>
+                <md-option value="6">6</md-option>
+                <md-option value="7">7</md-option>
+                <md-option value="8">8</md-option>
+                <md-option value="9">9</md-option>
+                <md-option value="10">10</md-option>
+                <md-option value="11">11</md-option>
+                <md-option value="12">12</md-option>
+              </md-select>
 
-                <slide-y-down-transition>
-                  <md-icon class="error" v-show="errors.has('smallLuggage')">close</md-icon>
-                </slide-y-down-transition>
-                <slide-y-down-transition>
-                  <md-icon class="success" v-show="!errors.has('smallLuggage') && touched.smallLuggage">done</md-icon>
-                </slide-y-down-transition>
-              </md-field>
-            </div>
+              <slide-y-down-transition>
+                <md-icon class="error" v-show="errors.has('smallLuggage')">close</md-icon>
+              </slide-y-down-transition>
+              <slide-y-down-transition>
+                <md-icon
+                  class="success"
+                  v-show="!errors.has('smallLuggage') && touched.smallLuggage"
+                >done</md-icon>
+              </slide-y-down-transition>
+            </md-field>
+          </div>
 
-            <div class="md-layout-item md-size-33">
-              <md-field
+          <div class="md-layout-item md-size-33">
+            <md-field
               :class="[
                     { 'md-valid': !errors.has('bigLuggage') && touched.bigLuggage },
                     { 'md-form-group': true },
                     { 'md-error': errors.has('bigLuggage') }
                   ]"
+            >
+              <md-icon></md-icon>
+              <label>Big</label>
+              <md-select
+                v-model="bigLuggage"
+                name="bigLuggage"
+                id="bigLuggage"
+                md-dense
+                required
+                v-validate="modelValidations.bigLuggage"
               >
-                <md-icon></md-icon>
-                <label>Big</label>
-                <md-select v-model="bigLuggage" name="bigLuggage" id="bigLuggage" md-dense required v-validate="modelValidations.bigLuggage">
-                  <md-option value="1">1</md-option>
-                  <md-option value="2">2</md-option>
-                  <md-option value="3">3</md-option>
-                  <md-option value="4">4</md-option>
-                  <md-option value="5">5</md-option>
-                  <md-option value="6">6</md-option>
-                  <md-option value="7">7</md-option>
-                  <md-option value="8">8</md-option>
-                  <md-option value="9">9</md-option>
-                  <md-option value="10">10</md-option>
-                  <md-option value="11">11</md-option>
-                  <md-option value="12">12</md-option>
-                </md-select>
+                <md-option value="1">1</md-option>
+                <md-option value="2">2</md-option>
+                <md-option value="3">3</md-option>
+                <md-option value="4">4</md-option>
+                <md-option value="5">5</md-option>
+                <md-option value="6">6</md-option>
+                <md-option value="7">7</md-option>
+                <md-option value="8">8</md-option>
+                <md-option value="9">9</md-option>
+                <md-option value="10">10</md-option>
+                <md-option value="11">11</md-option>
+                <md-option value="12">12</md-option>
+              </md-select>
 
-                <slide-y-down-transition>
-                  <md-icon class="error" v-show="errors.has('bigLuggage')">close</md-icon>
-                </slide-y-down-transition>
-                <slide-y-down-transition>
-                  <md-icon class="success" v-show="!errors.has('bigLuggage') && touched.bigLuggage">done</md-icon>
-                </slide-y-down-transition>
-              </md-field>
-            </div>
+              <slide-y-down-transition>
+                <md-icon class="error" v-show="errors.has('bigLuggage')">close</md-icon>
+              </slide-y-down-transition>
+              <slide-y-down-transition>
+                <md-icon
+                  class="success"
+                  v-show="!errors.has('bigLuggage') && touched.bigLuggage"
+                >done</md-icon>
+              </slide-y-down-transition>
+            </md-field>
           </div>
-
-      
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import {
-  GET_EMPLOYEES,
-  CREATE_COMPANY_RESERVATION,
-  UPDATE_EMPLOYEE_STEP
-} from "@/store/actions.type";
+import { GET_EMPLOYEES } from "@/store/actions.type";
+import { SET_EMPLOYEE_STEP } from "@/store/mutations.type";
 import { mapGetters } from "vuex";
 import { SlideYDownTransition } from "vue2-transitions";
 export default {
@@ -353,7 +372,7 @@ export default {
         code: false
       },
       modelValidations: {
-        code:{
+        code: {
           required: true
         },
         smallLuggage: {
@@ -394,9 +413,8 @@ export default {
           if (employee.id == selected) {
             employeeStops.push({
               employee_id: employee.id,
-              date: "1999-12-31",
               pickup: employee.address,
-              time: "2:00:00"
+              time: "14:00:00"
             });
           }
         }
@@ -411,12 +429,8 @@ export default {
     validate() {
       return this.$validator.validateAll().then(res => {
         this.$emit("on-validated", res);
-        console.log("res of validate is: ", res)
-        if(res == true){
-
-
-
-
+        console.log("res of validate is: ", res);
+        if (res == true) {
           let data = {
             code: this.code,
             destination: this.destination,
@@ -428,7 +442,7 @@ export default {
             bigLuggage: this.bigLuggage
           }
 
-          this.$store.dispatch(UPDATE_EMPLOYEE_STEP, data);
+          this.$store.commit(SET_EMPLOYEE_STEP, data);
           return res;
         }
         // return true;//for development speed
@@ -437,16 +451,15 @@ export default {
     }
   },
   watch: {
-    smallLuggage(){
+    smallLuggage() {
       this.touched.smallLuggage = true;
     },
-    code(){
+    code() {
       this.touched.code = true;
     },
 
-    bigLuggage(){
+    bigLuggage() {
       this.touched.bigLuggage = true;
-      
     },
     hour() {
       this.touched.hour = true;
@@ -482,7 +495,6 @@ export default {
 </style>
 <style>
 .md-card-wizard[data-color="green"] .moving-tab {
-    background-color: orange;
-
+  background-color: orange;
 }
 </style>

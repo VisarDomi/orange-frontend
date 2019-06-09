@@ -62,12 +62,25 @@
         </md-card>
       </form>
       <md-card v-if="goBack">
-          <md-card-header class="md-card-header-icon md-card-header-warning">
-            <div class="card-icon">
-              <md-icon>announcement</md-icon>
-            </div>
-            <h4 class="title">It seems this account is not associated with this role.</h4>
-          </md-card-header>
+        <md-card-header class="md-card-header-icon md-card-header-warning">
+          <div class="card-icon">
+            <md-icon>announcement</md-icon>
+          </div>
+          <h4 class="title">This account is not associated with this role.</h4>
+        </md-card-header>
+        <md-card-content>
+          <md-card-actions class="md-alignment-center">
+            <md-button class="md-warning" @click="goBackToRole()">Go Back</md-button>
+          </md-card-actions>
+        </md-card-content>
+      </md-card>
+      <md-card v-if="badEmail">
+        <md-card-header class="md-card-header-icon md-card-header-warning">
+          <div class="card-icon">
+            <md-icon>announcement</md-icon>
+          </div>
+          <h4 class="title">This account does not exist.</h4>
+        </md-card-header>
         <md-card-content>
           <md-card-actions class="md-alignment-center">
             <md-button class="md-warning" @click="goBackToRole()">Go Back</md-button>
@@ -79,8 +92,9 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
+import { loginReroute } from "@/common/functions";
 import { LOGIN } from "@/store/actions.type";
-import { SET_GO_BACK } from "@/store/mutations.type";
+import { SET_GO_BACK, SET_BAD_EMAIL } from "@/store/mutations.type";
 import { SlideYDownTransition } from "vue2-transitions";
 export default {
   name: "Login",
@@ -128,11 +142,16 @@ export default {
       if (this.role == "employee") {
         role = "Employee";
       }
+      if (this.role == "driver") {
+        role = "Driver";
+      }
       return role;
     },
     goBackToRole() {
-      let payload = { goBack: false };
-      this.$store.commit(SET_GO_BACK, payload);
+      let payload1 = { goBack: false };
+      let payload2 = { badEmail: false };
+      this.$store.commit(SET_GO_BACK, payload1);
+      this.$store.commit(SET_BAD_EMAIL, payload1);
       this.$router.push({ name: "Role" });
     },
     async onSubmit() {
@@ -147,21 +166,8 @@ export default {
         console.log("in then of LOGIN: this.user.role", this.user.role);
         // now reroute to the pages depending on the this.user.role
       });
-      if (this.user.role == "admin") {
-        this.$router.push({ name: "Reservations" });
-      }
-      if (this.user.role == "company") {
-        this.$router.push({ name: "CompanyReservations" });
-      }
-      if (this.user.role == "employee") {
-        // this.$router.push({ name: "EmployeeReservationDetail" });
-        console.log(
-          `you should now be routed to: this.$router.push({ name: "EmployeeReservationDetail" })`
-        );
-      }
-      if (this.user.role == "driver"){
-        this.$router.push({ name: "DriverIncomingReservations"})
-      }
+
+      loginReroute(this.$router, this.user.role);
     }
   },
   watch: {
@@ -173,7 +179,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["role", "user", "goBack"])
+    ...mapGetters(["role", "user", "goBack", "badEmail"])
   },
   created() {
     console.log("mounted role is ", this.role);

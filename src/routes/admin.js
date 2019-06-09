@@ -10,6 +10,7 @@ import DriverDetail from "@/pages/Dashboard/Pages/Admin/DriverDetail.vue";
 import CreateInvoice from "@/pages/Dashboard/Pages/Admin/CreateInvoice.vue";
 import Invoices from "@/pages/Dashboard/Pages/Admin/Invoices.vue";
 import InvoiceDetail from "@/pages/Dashboard/Pages/Admin/InvoiceDetail.vue";
+import ItineraryDetail from "@/pages/Dashboard/Pages/Admin/ItineraryDetail.vue";
 import Itineraries from "@/pages/Dashboard/Pages/Admin/Itineraries.vue";
 import Companies from "@/pages/Dashboard/Pages/Admin/Companies.vue";
 import CompanyDetail from "@/pages/Dashboard/Pages/Admin/CompanyDetail.vue";
@@ -44,6 +45,12 @@ export const admin = {
       name: "CompanyDetail",
       components: { default: CompanyDetail },
       meta: setMeta("Company Detail")
+    },
+    {
+      path: "/itinerarydetail-:id",
+      name: "ItineraryDetail",
+      components: {default: ItineraryDetail},
+      meta: setMeta("ItineraryDetail")
     },
     {
       path: "/itineraries",

@@ -5,7 +5,8 @@ import {
   SET_AUTH_SECOND,
   PURGE_AUTH,
   SET_ROLE,
-  SET_GO_BACK
+  SET_GO_BACK,
+  SET_BAD_EMAIL,
 } from "../../mutations.type";
 
 export const mutations = {
@@ -38,5 +39,8 @@ export const mutations = {
   },
   [SET_GO_BACK](state, payload) {
     state.goBack = payload.goBack
+  },
+  [SET_BAD_EMAIL](state, payload) {
+    state.badEmail = payload.badEmail
   }
 };

@@ -4,6 +4,7 @@ export const SET_AUTH = "setUserAndToken";
 export const PURGE_AUTH = "purgeAuth";
 export const SET_ROLE = "setRole";
 export const SET_GO_BACK = "setGoBack";
+export const SET_BAD_EMAIL = "setBadEmail";
 
 // loading
 export const START_LOADING = "startLoading";
@@ -31,16 +32,16 @@ export const SET_ADMIN_RESERVATION = "setAdminReservation";
 // reservation company
 export const SET_COMPANY_RESERVATIONS = "setCompanyReservations";
 export const SET_COMPANY_RESERVATION = "setCompanyReservation";
+export const SET_EMPLOYEE_STEP = "setEmployeeStep";
+export const SET_VEHICLE_STEP = "setVehicleStep";
+export const SET_PAYMENT_STEP = "setPaymentStep";
 
 // driver
 export const SET_DRIVERS = "setDrivers";
 export const SET_DRIVER = "setDriver";
-export const SET_INCOMING_RESERVATIONS = "setIncomingReservations";
-export const SET_RESERVATION_DETAILS = "setReservationDetails";
+export const SET_DRIVER_RESERVATIONS = "setDriverReservations";
+export const SET_DRIVER_RESERVATION = "setDriverReservation";
 
 // company
 export const SET_COMPANYS = "setCompanys";
 export const SET_COMPANY = "setCompany";
-export const SET_EMPLOYEE_STEP = "setEmployeeStep";
-export const SET_VEHICLE_STEP = "setVehicleStep";
-export const SET_PAYMENT_STEP = "setPaymentStep";

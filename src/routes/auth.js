@@ -18,7 +18,7 @@ export const auth = {
       path: "/logout",
       name: "Logout",
       components: {default: Logout},
-      meta: setMeta("Logout", true)
+      meta: setMeta("Logout")
     },
     {
       path: "/login",

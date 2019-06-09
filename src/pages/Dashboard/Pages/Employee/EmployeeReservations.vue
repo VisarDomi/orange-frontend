@@ -1,91 +1,287 @@
 <template>
-  <!-- <div>
-
-
+  <div>
     <div class="md-layout">
-      <div
-        v-for="reservation in this.employeeReservations"
-        :key="reservation.id"
-        class="md-layout-item md-large-size-20 md-xlarge-size-20 md-medium-size-33 md-small-size-50 md-xsmall-size-100 auto-mx"
-      >
+      <div class="md-layout-item">
         <md-card>
-
-
-          <md-card-header>
-            <div class="md-title">{{reservation.date}}</div>
-            <div class="md-subhead">3 days away</div>
+          <md-card-header class="md-card-header-icon md-card-header-green">
+            <div class="card-icon">
+              <md-icon>assignment</md-icon>
+            </div>
+            <h4 class="title">Reservations</h4>
           </md-card-header>
+          <md-card-content>
+            <md-table
+              :value="queriedData"
+              :md-sort.sync="currentSort"
+              :md-sort-order.sync="currentSortOrder"
+              :md-sort-fn="customSort"
+              class="paginated-table table-striped table-hover"
+            >
+              <md-table-toolbar>
+                <md-field>
+                  <label for="pages">Per page</label>
+                  <md-select v-model="pagination.perPage" name="pages">
+                    <md-option
+                      v-for="item in pagination.perPageOptions"
+                      :key="item"
+                      :label="item"
+                      :value="item"
+                    >{{ item }}</md-option>
+                  </md-select>
+                </md-field>
 
-          <md-card-expand>
-            <md-card-actions md-alignment="space-between">
-              <div>
-                <md-button class="md-warning" @click.native="open_reservation(reservation)">Itinerary Details</md-button>
-              </div>
-            </md-card-actions>
+                <md-field>
+                  <md-input
+                    type="search"
+                    class="mb-3"
+                    clearable
+                    style="width: 200px"
+                    placeholder="Search records"
+                    v-model="searchQuery"
+                  ></md-input>
+                </md-field>
+              </md-table-toolbar>
 
-            <md-card-expand-content>
-              <md-card-content>This trip is in 3 days.</md-card-content>
-            </md-card-expand-content>
-          </md-card-expand>
+              <md-table-row slot="md-table-row" slot-scope="{ item }" @click.native="open_reservation(item)">
+                <!-- ["Employee", "Date", "Destination", "Code"] -->
+                <md-table-cell md-label="Employee" md-sort-by="code">
+                  <span v-for="employee in item.employees" :key="employee.id">
+                  {{
+                  employee.full_name
+                  }},</span>
+                </md-table-cell>
+                <md-table-cell md-label="Date" md-sort-by="date">
+                  {{
+                  item.date | prettyDate
+                  }} {{item.time}}
+                </md-table-cell>
+                <md-table-cell md-label="Destination">{{ item.destination }}</md-table-cell>
+                <md-table-cell md-label="Code">{{ item.code }}</md-table-cell>
+                <!-- <md-table-cell md-label="Destination">{{ item.destination }}</md-table-cell>
+                <md-table-cell md-label="Status" style="justify-content:left;">{{ item.status }}</md-table-cell> -->
+              </md-table-row>
+            </md-table>
+            <div class="footer-table md-table">
+              <table>
+                <tfoot>
+                  <tr>
+                    <th v-for="item in footerTable" :key="item.name" class="md-table-head">
+                      <div class="md-table-head-container md-ripple md-disabled">
+                        <div class="md-table-head-label">{{ item }}</div>
+                      </div>
+                    </th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </md-card-content>
+          <md-card-actions md-alignment="space-between">
+            <div class>
+              <p class="card-category">Showing {{ from + 1 }} to {{ to }} of {{ total }} entries</p>
+            </div>
+            <pagination
+              class="pagination-no-border pagination-success"
+              v-model="pagination.currentPage"
+              :per-page="pagination.perPage"
+              :total="total"
+            ></pagination>
+          </md-card-actions>
         </md-card>
       </div>
     </div>
-  </div> -->
+  </div>
 </template>
 
 <script>
-// import { PricingCard, TestimonialCard } from "@/components";
-// import { GET_EMPLOYEE_RESERVATION, GET_EMPLOYEE_RESERVATION } from "@/store/actions.type";
+import { Pagination } from "@/components";
+import users from "../../Tables/users";
+import Fuse from "fuse.js";
+import swal from "sweetalert2";
+import { GET_EMPLOYEE_RESERVATIONS, GET_EMPLOYEE_RESERVATION } from "@/store/actions.type";
+import { mapGetters } from "vuex";
 
-// import { mapGetters } from "vuex";
-// export default {
-//   name: "EmployeeReservations",
-//   components: {
-//     PricingCard,
-
-//     TestimonialCard
-//   },
-//   props: {
-//     profileCard: {
-//       type: String,
-//       default: "./img/faces/card-profile1-square.jpg"
-//     }
-//   },
-//   data() {
-//     return {};
-//   },
-//   methods: {
-//     open_resevation(reservation) {
-//       console.log("open_employee")
-//       this.$store.dispatch(GET_EMPLOYEE_RESERVATION, { reservationId: reservation.id });
-//       this.$router.push({
-//         name: "EmployeeReservationDetail",
-//         params: {
-//           id: reservation.id
-//         }
-//       });
-//     },
-
-//     onResponsiveInverted() {
-//       if (window.innerWidth < 768) {
-//         this.responsive = true;
-//       } else {
-//         this.responsive = false;
-//       }
-//     }
-//   },
-//   mounted() {
-//     this.$store.dispatch(GET_EMPLOYEE_RESERVATIONS)
-//     this.onResponsiveInverted();
-//     window.addEventListener("resize", this.onResponsiveInverted);
-//   },
-//   computed: {
-//     ...mapGetters(['employeeReservations'])
-//   },
-//   beforeDestroy() {
-//     window.removeEventListener("resize", this.onResponsiveInverted);
-//   }
-// };
+export default {
+  name: "EmployeeReservations",
+  components: {
+    Pagination
+  },
+  computed: {
+    ...mapGetters(["employeeReservations"]),
+    /***
+     * Returns a page from the searched data or the whole data. Search is performed in the watch section below
+     */
+    queriedData() {
+      console.log("Table data is: ", this.tableData);
+      let result = this.tableData;
+      if (result == undefined) {
+        console.log("returning nothing");
+        return [];
+      }
+      if (this.searchedData.length > 0) {
+        result = this.searchedData;
+      }
+      return result.slice(this.from, this.to);
+    },
+    to() {
+      let highBound = this.from + this.pagination.perPage;
+      if (this.total < highBound) {
+        highBound = this.total;
+      }
+      return highBound;
+    },
+    from() {
+      return this.pagination.perPage * (this.pagination.currentPage - 1);
+    },
+    total() {
+      if (this.searchedData == undefined) {
+        return 0;
+      } else {
+        return this.searchedData.length > 0
+          ? this.searchedData.length
+          : this.tableData.length;
+      }
+    }
+  },
+  data() {
+    return {
+      currentSort: "name",
+      currentSortOrder: "asc",
+      pagination: {
+        perPage: 10,
+        currentPage: 1,
+        perPageOptions: [5, 10, 25, 50],
+        total: 0
+      },
+      footerTable: ["Employee", "Date", "Destination", "Code"],
+      searchQuery: "",
+      propsToSearch: ["name", "email", "age"],
+      tableData: [],
+      searchedData: [],
+      fuseSearch: null
+    };
+  },
+  methods: {
+    customSort(value) {
+      return value.sort((a, b) => {
+        const sortBy = this.currentSort;
+        if (this.currentSortOrder === "desc") {
+          return a[sortBy].localeCompare(b[sortBy]);
+        }
+        return b[sortBy].localeCompare(a[sortBy]);
+      });
+    },
+    handleLike(item) {
+      swal({
+        title: `You liked ${item.name}`,
+        buttonsStyling: false,
+        type: "success",
+        confirmButtonClass: "md-button md-success"
+      });
+    },
+    handleEdit(item) {
+      swal({
+        title: `You want to edit ${item.name}`,
+        buttonsStyling: false,
+        confirmButtonClass: "md-button md-info"
+      });
+    },
+    open_reservation(item) {
+      this.$store
+        .dispatch(GET_EMPLOYEE_RESERVATION, { reservationId: item.id })
+        .then(() => {
+          console.log("after dispatch reservation");
+        });
+      this.$router.push({
+        name: "EmployeeReservationDetail",
+        params: {
+          id: item.id
+        }
+      });
+    },
+    handleDelete(item) {
+      swal({
+        title: "Are you sure?",
+        text: `You won't be able to revert this!`,
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonClass: "md-button md-success btn-fill",
+        cancelButtonClass: "md-button md-danger btn-fill",
+        confirmButtonText: "Yes, delete it!",
+        buttonsStyling: false
+      }).then(result => {
+        if (result.value) {
+          this.deleteRow(item);
+          swal({
+            title: "Deleted!",
+            text: `You deleted ${item.name}`,
+            type: "success",
+            confirmButtonClass: "md-button md-success btn-fill",
+            buttonsStyling: false
+          });
+        }
+      });
+    },
+    deleteRow(item) {
+      let indexToDelete = this.tableData.findIndex(
+        tableRow => tableRow.id === item.id
+      );
+      if (indexToDelete >= 0) {
+        this.tableData.splice(indexToDelete, 1);
+      }
+    }
+  },
+  created() {
+    this.$store.dispatch(GET_EMPLOYEE_RESERVATIONS).then(() => {
+      console.log("GET employeeReservations now: ", this.employeeReservations);
+      this.tableData = this.employeeReservations;
+    });
+  },
+  mounted() {
+    // Fuse search initialization.
+    this.fuseSearch = new Fuse(this.tableData, {
+      keys: ["name", "email"],
+      threshold: 0.3
+    });
+  },
+  watch: {
+    /**
+     * Searches through the table data by a given query.
+     * NOTE: If you have a lot of data, it's recommended to do the search on the Server Side and only display the results here.
+     * @param value of the query
+     */
+    searchQuery(value) {
+      let result = this.tableData;
+      if (value !== "") {
+        result = this.fuseSearch.search(this.searchQuery);
+      }
+      this.searchedData = result;
+    }
+  }
+};
 </script>
 
-<style lang="css"></style>
+<style lang="css" scoped>
+.md-card .md-card-actions {
+  border: 0;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+</style>
+
+<style>
+.pagination.pagination-success > .page-item.active > a{
+   background-color: orange;
+    border-color: orange;
+
+}
+
+.md-select-menu .md-list-item.md-selected .md-list-item-button {
+    background-color: orange;
+
+}
+
+
+.md-select-menu .md-list-item .md-list-item-button:hover {
+    background-color: orange !important;
+}
+</style>

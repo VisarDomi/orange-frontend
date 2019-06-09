@@ -6,5 +6,6 @@ export const state = {
   token: "",
   isAuthenticated: !!getToken(),
   role: "",
-  goBack: false
+  goBack: false,
+  badEmail: false
 };
