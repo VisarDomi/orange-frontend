@@ -7,7 +7,7 @@
             <div class="card-icon">
               <md-icon>commute</md-icon>
             </div>
-            <h4 class="title">Itineraries</h4>
+            <h4 class="title">Itineraries Price</h4>
           </md-card-header>
           <md-card-content>
             <md-table
@@ -84,7 +84,7 @@
                     </div>
 
                     <div v-else>
-                        {{item.id}}
+                        {{item.destination}}
                     </div >
 
 
@@ -163,6 +163,11 @@
         </md-card>
       </div>
     </div>
+    <div class="md-layout">
+      <div class="md-layout-item">
+        <md-button class="md-warning" @click="addItinerary()">Add new itinerary...</md-button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -171,6 +176,8 @@ import { Pagination } from "@/components";
 import users from "../../Tables/users";
 import Fuse from "fuse.js";
 import swal from "sweetalert2";
+// import { GET_ADMIN_ITINERARYS, GET_ADMIN_ITINERARY } from "@/store/actions.type";
+// import { GET_ADMIN_ITINERARYS, GET_ADMIN_ITINERARY } from "@/store/actions.type";
 import { GET_ADMIN_INVOICES, GET_ADMIN_INVOICE } from "@/store/actions.type";
 import { mapGetters } from "vuex";
 
@@ -181,6 +188,7 @@ export default {
   },
   computed: {
     ...mapGetters(["adminInvoices"]),
+    // ...mapGetters(["adminItinerarys"]),
     /***
      * Returns a page from the searched data or the whole data. Search is performed in the watch section below
      */
@@ -245,27 +253,34 @@ export default {
       });
     },
 
+    addItinerary(){
+      // console.log(this.tableData);
+      // let itinerary = {
+      //   departure: "departure",
+      //   destination: "destination",
+      //   price: "99"
+      // }
+      // this.$store.dispatch(CREATE_ADMIN_ITINERARY, itinerary);
+      // update tableData
+      // this.$store.dispatch(GET_ADMIN_ITINERARYS).then(() => {
+      //     let clone = JSON.parse(JSON.stringify(this.adminItinerarys));
+      //     this.tableData = clone;
+      this.tableData.push({id: "placeholder", destination: "placeholder", grand_total: "placeholder"})
+    },
+
     handleEdit(item) {
         console.log("on handle edit: ", item)
         item.editable=true;
         console.log(item.editable)
         this.updateTableData(item.id)
 
-
-
-        
-
-
-
-
-        // swal({});
-    //   swal({
-    //     title: `You want to edit ${item.id}`,
-    //     buttonsStyling: false,
-    //     confirmButtonClass: "md-button md-info"
-    //   }).fire();
+      //   swal({});
+      // swal({
+      //   title: `You want to edit ${item.id}`,
+      //   buttonsStyling: false,
+      //   confirmButtonClass: "md-button md-info"
+      // }).fire();
     },
-
 
     handleDone(item){
 
@@ -273,7 +288,6 @@ export default {
         this.updateTableData(item.id)
 
     },
-
 
     //this hole shitfuck is to force vue to rerender the row, since it wont play nice to just change the variable, i'm assuming since its inside an object, and it doesnt
     //watch it. probably needs an issue open on github
@@ -294,38 +308,35 @@ export default {
 
 
     addEditableToData(){
-         for(let item in this.tableData){
+      for(let item in this.tableData){
             this.tableData[item].editable = false;
         }       
     },
 
     handleDelete(item) {
 
-
-
-
-    //   swal({
-    //     title: "Are you sure?",
-    //     text: `You won't be able to revert this!`,
-    //     type: "warning",
-    //     showCancelButton: true,
-    //     confirmButtonClass: "md-button md-success btn-fill",
-    //     cancelButtonClass: "md-button md-danger btn-fill",
-    //     confirmButtonText: "Yes, delete it!",
-    //     buttonsStyling: false
-    //   }).then(result => {
-    //     if (result.value) {
-    //     //   this.deleteRow(item);
-    //       console.log("pretend delete")
-    //       swal({
-    //         title: "Deleted!",
-    //         text: `You deleted ${item.name}`,
-    //         type: "success",
-    //         confirmButtonClass: "md-button md-success btn-fill",
-    //         buttonsStyling: false
-    //       });
-    //     }
-    //   });
+      //   swal({
+      //     title: "Are you sure?",
+      //     text: `You won't be able to revert this!`,
+      //     type: "warning",
+      //     showCancelButton: true,
+      //     confirmButtonClass: "md-button md-success btn-fill",
+      //     cancelButtonClass: "md-button md-danger btn-fill",
+      //     confirmButtonText: "Yes, delete it!",
+      //     buttonsStyling: false
+      //   }).then(result => {
+      //     if (result.value) {
+      //     //   this.deleteRow(item);
+      //       console.log("pretend delete")
+      //       swal({
+      //         title: "Deleted!",
+      //         text: `You deleted ${item.name}`,
+      //         type: "success",
+      //         confirmButtonClass: "md-button md-success btn-fill",
+      //         buttonsStyling: false
+      //       });
+      //     }
+      //   });
     },
     deleteRow(item) {
       let indexToDelete = this.tableData.findIndex(
@@ -337,6 +348,17 @@ export default {
     }
   },
   created() {
+    // this.$store.dispatch(GET_ADMIN_ITINERARYS).then(() => {
+    //   console.log("GET itinerarys now: ", this.adminItinerarys);
+    //     for(let item in this.adminItinerarys){
+    //         this.adminItinerarys[item].editable = false;
+    //     }     
+
+    //     //more shitfuck to clone the state array coming from store to stop vue from complaining about messing with state outside mutators
+    //     let clone = JSON.parse(JSON.stringify(this.adminItinerarys));
+    //     console.log("b? ", clone)
+    //   this.tableData = clone;
+    // });
     this.$store.dispatch(GET_ADMIN_INVOICES).then(() => {
       console.log("GET invoices now: ", this.adminInvoices);
         for(let item in this.adminInvoices){

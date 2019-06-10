@@ -118,6 +118,7 @@ export const AdminService = {
       invoice
     );
   },
+
   deleteInvoice(reservationId, invoiceId) {
     return ApiService.delete(
       `admin/reservation/${reservationId}/invoice/${invoiceId}`
@@ -131,7 +132,23 @@ export const AdminService = {
   },
   putReservation(reservationId, reservation) {
     return ApiService.put(`admin/reservation/${reservationId}`, reservation);
-  }
+  },
+
+  // // postItinerary(itinerary){
+  // //   return ApiService.post(
+  // //     `admin/itinerary`, itinerary
+  // //   )
+  // // }
+  // getItinerary(itineraryId){
+  //   return ApiService.get(`admin/itinerary/${itineraryId}`)
+  // },
+  // getItinerarys(){
+  //   return ApiService.get(`admin/itinerary/all`)
+  // },
+  // putItinerary(itineraryId, itinerary){
+  //   return ApiService.put(`admin/itinerary/${itineraryId}`, itinerary)
+  // },
+  
 };
 
 export const DriverService = {

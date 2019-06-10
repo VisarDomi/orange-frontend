@@ -45,3 +45,8 @@ export const SET_DRIVER_RESERVATION = "setDriverReservation";
 // company
 export const SET_COMPANYS = "setCompanys";
 export const SET_COMPANY = "setCompany";
+
+// itinerarys
+
+export const SET_ADMIN_ITINERARYS = "setAdminItinerarys";
+export const SET_ADMIN_ITINERARY = "setAdminItinerary";

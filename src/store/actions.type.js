@@ -44,3 +44,9 @@ export const UPDATE_DRIVER_RESERVATION = "updateDriverReservation";
 export const CREATE_COMPANY = "createCompany";
 export const GET_COMPANYS = "getCompanys";
 export const GET_COMPANY = "getCompany";
+
+// itinerary
+export const CREATE_ADMIN_ITINERARY = "createAdminItinerary";
+export const GET_ADMIN_ITINERARYS = "getAdminItinerarys";
+export const GET_ADMIN_ITINERARY = "getAdminItinerary";
+export const UPDATE_ADMIN_ITINERARY = "updateAdminItinerary";

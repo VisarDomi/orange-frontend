@@ -2,7 +2,9 @@ import {
   SET_ADMIN_INVOICE,
   SET_ADMIN_INVOICES,
   SET_ADMIN_RESERVATIONS,
-  SET_ADMIN_RESERVATION
+  SET_ADMIN_RESERVATION,
+  SET_ADMIN_ITINERARYS,
+  SET_ADMIN_ITINERARY
 } from "../../mutations.type";
 
 export const mutations = {
@@ -25,5 +27,17 @@ export const mutations = {
     console.log("setting state...");
     state.adminReservation = reservation;
     console.log("state.adminreservation is now: ", state.adminReservation);
-  }
+  },
+  
+  [SET_ADMIN_ITINERARYS](state, itinerarys){
+    console.log("setting state...");
+    state.adminItinerarys = itinerarys;
+    console.log("state.admin itinerary is now: ", state.adminItinerarys);  
+  },
+  [SET_ADMIN_ITINERARY](state, itinerary){
+    console.log("setting state...");
+    state.adminItinerary = itinerary;
+    console.log("state.admin itinerary is now: ", state.adminItinerary);  
+  },
+
 };
