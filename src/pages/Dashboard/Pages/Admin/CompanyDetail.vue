@@ -96,13 +96,14 @@
                         <md-input
                             type="text"
                             clearable
+                            v-model="item.departure"
                             style="width: 50px"
                         ></md-input>
                         </md-field>
                     </div>
 
                     <div v-else>
-                        {{item.id}}
+                        {{item.departure}}
                     </div >
 
 
@@ -120,13 +121,14 @@
                         <md-input
                             type="text"
                             clearable
+                            v-model="item.destination"
                             style="width: 50px"
                         ></md-input>
                         </md-field>
                     </div>
 
                     <div v-else>
-                        {{item.id}}
+                        {{item.destination}}
                     </div >
 
 
@@ -142,13 +144,14 @@
                         <md-input
                             type="number"
                             clearable
+                            v-model="item.price"
                             style="width: 50px"
                         ></md-input>
                         </md-field>
                     </div>
 
                     <div v-else>
-                        {{item.id}}
+                        {{item.price}}
                     </div >    
 
 
@@ -207,77 +210,79 @@
 
     </div>
 
-
-<!-- here starts the company employees -->
+    <div class="md-layout">
+      <md-button class="md-warning mx-auto" @click="addItinerary()">Add new itinerary</md-button>
+    </div>
+    <!-- here starts the company employees -->
     <div class="md-layout ">
       
       <div class="md-layout-item md-size-40 ">
         <md-button class="md-warning mx-auto" @click="addEmployee()">Add new employee</md-button>
         <!-- employee creation form -->
 
-  <form @submit.prevent="onSubmit" v-if="!formCollapsed">
-    <div class="md-layout">
-      <div
-        class="md-layout-item md-xlarge-size-100 md-large-size-100 md-medium-size-70 md-small-size-100"
-      >
-        <md-card>
-          <md-card-header class="md-card-header-text md-card-header-green">
-            <div class="card-text">
-              <h4 class="title">Add Employee</h4>
-            </div>
-          </md-card-header>
+        <form @submit.prevent="onSubmit" v-if="!formCollapsed">
+          <div class="md-layout">
+            <div
+              class="md-layout-item md-xlarge-size-100 md-large-size-100 md-medium-size-70 md-small-size-100"
+            >
+              <md-card>
+                <md-card-header class="md-card-header-text md-card-header-green">
+                  <div class="card-text">
+                    <h4 class="title">Add Employee</h4>
+                  </div>
+                </md-card-header>
 
-          <md-card-content>
-            <div class="md-layout">
-              <label class="md-layout-item md-size-15 md-form-label">Email</label>
-              <div class="md-layout-item">
-                <md-field>
-                  <label>Employee email</label>
-                  <md-input v-model="email" placeholder="Email"></md-input>
-                </md-field>
-              </div>
-            </div>
+                <md-card-content>
+                  <div class="md-layout">
+                    <label class="md-layout-item md-size-15 md-form-label">Email</label>
+                    <div class="md-layout-item">
+                      <md-field>
+                        <label>Employee email</label>
+                        <md-input v-model="email" placeholder="Email"></md-input>
+                      </md-field>
+                    </div>
+                  </div>
 
-            <div class="md-layout">
-              <label class="md-layout-item md-size-15 md-form-label">Password</label>
-              <div class="md-layout-item">
-                <md-field>
-                  <label>Employee password</label>
-                  <md-input v-model="password" placeholder="Password"></md-input>
-                </md-field>
-              </div>
-            </div>
+                  <div class="md-layout">
+                    <label class="md-layout-item md-size-15 md-form-label">Password</label>
+                    <div class="md-layout-item">
+                      <md-field>
+                        <label>Employee password</label>
+                        <md-input v-model="password" placeholder="Password"></md-input>
+                      </md-field>
+                    </div>
+                  </div>
 
-            <div class="md-layout">
-              <label class="md-layout-item md-size-15 md-form-label">Name</label>
-              <div class="md-layout-item">
-                <md-field>
-                  <label>Employee name</label>
-                  <md-input v-model="name" placeholder="Name and surname"></md-input>
-                </md-field>
-              </div>
-            </div>
+                  <div class="md-layout">
+                    <label class="md-layout-item md-size-15 md-form-label">Name</label>
+                    <div class="md-layout-item">
+                      <md-field>
+                        <label>Employee name</label>
+                        <md-input v-model="name" placeholder="Name and surname"></md-input>
+                      </md-field>
+                    </div>
+                  </div>
 
-            <div class="md-layout">
-              <label class="md-layout-item md-size-15 md-form-label">Address</label>
-              <div class="md-layout-item">
-                <md-field>
-                  <label>Employee address</label>
-                  <md-input v-model="address" placeholder="Employee home address"></md-input>
-                </md-field>
-              </div>
-            </div>
+                  <div class="md-layout">
+                    <label class="md-layout-item md-size-15 md-form-label">Address</label>
+                    <div class="md-layout-item">
+                      <md-field>
+                        <label>Employee address</label>
+                        <md-input v-model="address" placeholder="Employee home address"></md-input>
+                      </md-field>
+                    </div>
+                  </div>
 
-            <div class="md-layout" style="margin-top:50px;">
-              <div class="md-layout-item mx-auto md-size-30">
-                <md-button class="md-warning" type="submit">Add Employee</md-button>
-              </div>
+                  <div class="md-layout" style="margin-top:50px;">
+                    <div class="md-layout-item mx-auto md-size-30">
+                      <md-button class="md-warning" type="submit">Add Employee</md-button>
+                    </div>
+                  </div>
+                </md-card-content>
+              </md-card>
             </div>
-          </md-card-content>
-        </md-card>
-      </div>
-    </div>
-  </form>
+          </div>
+        </form>
 
 
 
@@ -287,37 +292,37 @@
       </div>
     
 
-    <div class="md-layout md-size-60">
-      
-      <div
-        v-for="employee in this.employees"
-        :key="employee.id"
-        class="md-layout-item md-large-size-20 md-xlarge-size-20 md-medium-size-33 md-small-size-50 md-xsmall-size-100 auto-mx"
-      >
-        <md-card>
-          <!-- <md-card-media md-medium>
-          <img class="img" :src="profileCard">
-          </md-card-media>-->
+      <div class="md-layout md-size-40">
+        
+        <div
+          v-for="employee in this.employees"
+          :key="employee.id"
+          class="md-layout-item md-large-size-20 md-xlarge-size-20 md-medium-size-33 md-small-size-50 md-xsmall-size-100 auto-mx"
+        >
+          <md-card>
+            <!-- <md-card-media md-medium>
+            <img class="img" :src="profileCard">
+            </md-card-media>-->
 
-          <md-card-header>
-            <div class="md-title">{{employee.full_name}}</div>
-            <div class="md-subhead">Employee</div>
-          </md-card-header>
+            <md-card-header>
+              <div class="md-title">{{employee.full_name}}</div>
+              <div class="md-subhead">Employee</div>
+            </md-card-header>
 
-          <md-card-expand>
-            <md-card-actions md-alignment="space-between">
-              <div>
-                <md-button class="md-warning" @click.native="open_employee(employee)">Details</md-button>
-              </div>
-            </md-card-actions>
+            <md-card-expand>
+              <md-card-actions md-alignment="space-between">
+                <div>
+                  <md-button class="md-warning" @click.native="open_employee(employee)">Details</md-button>
+                </div>
+              </md-card-actions>
 
-            <md-card-expand-content>
-              <md-card-content>Member of company since 2007.</md-card-content>
-            </md-card-expand-content>
-          </md-card-expand>
-        </md-card>
+              <md-card-expand-content>
+                <md-card-content>Member of company since 2007.</md-card-content>
+              </md-card-expand-content>
+            </md-card-expand>
+          </md-card>
+        </div>
       </div>
-    </div>
 
     </div>
 
@@ -332,11 +337,11 @@
 import { CREATE_EMPLOYEE } from "@/store/actions.type";
 // for employees part
 import { PricingCard, TestimonialCard } from "@/components";
-import { GET_EMPLOYEES_BY_ID, GET_EMPLOYEE } from "@/store/actions.type";
+import { GET_EMPLOYEES_BY_ID, GET_EMPLOYEE, GET_EMPLOYEES } from "@/store/actions.type";
 //-----------------------
 // for table part
 import { Pagination } from "@/components";
-import { GET_ADMIN_INVOICES, GET_ADMIN_INVOICE } from "@/store/actions.type"; //to be changed with itinerary store actions
+import {GET_COMPANY_ITINERARYS, CREATE_COMPANY_ITINERARY, DELETE_COMPANY_ITINERARY, UPDATE_COMPANY_ITINERARY } from "@/store/actions.type";
 import Fuse from "fuse.js";
 //--------------------------
 
@@ -354,10 +359,12 @@ export default {
   data() {
     return {
       //start create employee
-            email: "",
+      email: "",
       password: "",
       name: "",
       address: "",
+      // newRow: {},
+      tableData: [],
       formCollapsed: true,
       //--end create employee
       full_name: "",
@@ -374,7 +381,6 @@ export default {
       footerTable: ["Departure","","Destination","","Price","Actions" ],
       searchQuery: "",
       propsToSearch: ["name", "email", "age"], //this is to be fixed for a correct search
-      tableData: [],
       searchedData: [],
       fuseSearch: null
     };
@@ -398,9 +404,35 @@ export default {
         this.formCollapsed = true;
       });
     },
+    addItinerary(){
+      let newItinerary = {
+        companyId: this.$route.params.id,
+        departure: "Departure",
+        destination: "Destination",
+        price: "499"
+      };
+      this.$store.dispatch(CREATE_COMPANY_ITINERARY, newItinerary).then(() => {
+        // i'm pretty sure this isn't the way to do it
+        // after the itinerary is created in the store, the tableData needs to be updated
+        this.$store.dispatch(GET_COMPANY_ITINERARYS, {companyId: this.$route.params.id}).then(() => {
+          console.log("GET itinerarys now: ", this.companyItinerarys);
+            let table_id = 0;
+            for(let item in this.companyItinerarys){
+                this.companyItinerarys[item].editable = false;
+                this.companyItinerarys[item].tableId = table_id;
+                table_id += 1;
+            }     
+
+            //more shitfuck to clone the state array coming from store to stop vue from complaining about messing with state outside mutators
+            let clone = JSON.parse(JSON.stringify(this.companyItinerarys));
+            console.log("b? ", clone)
+          this.tableData = clone;
+        });
+      })
+    },
     //end create employee methods ------
     //company employee methods ---------------------
-        addEmployee() {
+    addEmployee() {
       this.formCollapsed = false;
     },
     open_employee(employee) {
@@ -425,44 +457,36 @@ export default {
       });
     },
     handleEdit(item) {
-        console.log("on handle edit: ", item)
         item.editable=true;
-        console.log(item.editable)
-        this.updateTableData(item.id)
 
         //swal isnt working for now, to be fixed too
         
         // swal({});
-    //   swal({
-    //     title: `You want to edit ${item.id}`,
-    //     buttonsStyling: false,
-    //     confirmButtonClass: "md-button md-info"
-    //   }).fire();
+      //   swal({
+      //     title: `You want to edit ${item.id}`,
+      //     buttonsStyling: false,
+      //     confirmButtonClass: "md-button md-info"
+      //   }).fire();
     },
     handleDone(item){
-
-        item.editable=false;
-        this.updateTableData(item.id)
-
-    },
-    updateTableData(id){
-        console.log("update table data id ", id)
-        for(let item in this.tableData){
-            console.log("item of table data", item)
-            if(this.tableData[item].id==id){
-                // this.tableData[item].editable = bool;
-                let changed = this.tableData[item]
-                 this.tableData.splice( item, 1, changed); // at index position 1, remove 0 elements, then add "baz" to that position
-                console.log("updated item: ", this.tableData[item].editable)
-            }
-        }
+      item.editable=false;
+      let itinerary = item
+      delete itinerary.editable
+      delete itinerary.timestamp
+      delete itinerary.tableId
+      delete itinerary.name
+      console.log(itinerary);
+      this.$store.dispatch(UPDATE_COMPANY_ITINERARY, itinerary)
     },
     handleDelete(item) {
-  //add swal here too eventually, and implement delete, check with Itineraries.vue
+      //add swal here too eventually
+      console.log(item);
+      this.$store.dispatch(DELETE_COMPANY_ITINERARY, {companyId: item.company_id, itineraryId: item.id})
+      this.tableData.splice(item.tableId+1, 1)
     },
   },
   mounted() {
-    this.$store.dispatch(GET_EMPLOYEES_BY_ID, {companyId: this.company.id})
+    this.$store.dispatch(GET_EMPLOYEES_BY_ID, {companyId: this.$route.params.id})
         // Fuse search initialization.
         //doesnt work now but need to make functional
     this.fuseSearch = new Fuse(this.tableData, {
@@ -472,15 +496,18 @@ export default {
   },
   created() {
 
-    //get invoices this needs to be get companyitineraries
-        this.$store.dispatch(GET_ADMIN_INVOICES).then(() => {
-      console.log("GET invoices now: ", this.adminInvoices);
-        for(let item in this.adminInvoices){
-            this.adminInvoices[item].editable = false;
+    //get itinerarys this needs to be get companyitineraries
+    this.$store.dispatch(GET_COMPANY_ITINERARYS, {companyId: this.$route.params.id}).then(() => {
+      console.log("GET itinerarys now: ", this.companyItinerarys);
+        let table_id = 0;
+        for(let item in this.companyItinerarys){
+            this.companyItinerarys[item].editable = false;
+            this.companyItinerarys[item].tableId = table_id;
+            table_id += 1;
         }     
 
         //more shitfuck to clone the state array coming from store to stop vue from complaining about messing with state outside mutators
-        let clone = JSON.parse(JSON.stringify(this.adminInvoices));
+        let clone = JSON.parse(JSON.stringify(this.companyItinerarys));
         console.log("b? ", clone)
       this.tableData = clone;
     });
@@ -496,8 +523,8 @@ export default {
       });
   },
   computed: {
-    ...mapGetters(["company", "adminInvoices", "employees"]), //to be changed from adminInvoices to companyItineraries
-     /***
+    ...mapGetters(["company", "companyItinerarys", "employees"]),
+    /***
      * Returns a page from the searched data or the whole data. Search is performed in the watch section below
      */
     queriedData() {

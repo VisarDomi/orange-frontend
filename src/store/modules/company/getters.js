@@ -4,5 +4,7 @@ export const getters = {
   companyReservations: state => state.companyReservations,
   companyReservation: state => state.companyReservation,
   companyInvoices: state => state.companyInvoices,
-  companyInvoice: state => state.companyInvoice
+  companyInvoice: state => state.companyInvoice,
+  companyItinerarys: state => state.companyItinerarys,
+  companyItinerary: state => state.companyItinerary
 };

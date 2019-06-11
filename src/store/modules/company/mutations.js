@@ -8,6 +8,8 @@ import {
   SET_PAYMENT_STEP,
   SET_COMPANY_INVOICE,
   SET_COMPANY_INVOICES,
+  SET_COMPANY_ITINERARY,
+  SET_COMPANY_ITINERARYS
 } from "../../mutations.type";
 
 export const mutations = {
@@ -17,6 +19,7 @@ export const mutations = {
   [SET_COMPANY](state, company) {
     state.company = company;
   },
+
   [SET_COMPANY_RESERVATIONS](state, reservations) {
     console.log("setting state...");
     state.companyReservations = reservations;
@@ -27,6 +30,7 @@ export const mutations = {
     state.companyReservation = reservation;
     console.log("state.reservations is now: ", state.companyReservations);
   },
+
   [SET_EMPLOYEE_STEP](state, data) {
     console.log("we got some data on step employee mutation", data);
     state.companyReservation.code = data.code;
@@ -48,6 +52,7 @@ export const mutations = {
     state.companyReservation.payment_method = data.paymentMethod;
     console.log("company reservation state now: ", state.companyReservation);
   },
+
   [SET_COMPANY_INVOICES](state, invoices) {
     console.log("setting state...");
     state.companyInvoices = invoices;
@@ -57,5 +62,16 @@ export const mutations = {
     console.log("setting state...");
     state.companyInvoice = invoice;
     console.log("state.invoice is now: ", state.companyInvoice);
+  },
+
+  [SET_COMPANY_ITINERARYS](state, itinerarys){
+    console.log("setting state...");
+    state.companyItinerarys = itinerarys;
+    console.log("state.company itinerary is now: ", state.companyItinerarys);  
+  },
+  [SET_COMPANY_ITINERARY](state, itinerary){
+    console.log("setting state...");
+    state.companyItinerary = itinerary;
+    console.log("state.company itinerary is now: ", state.companyItinerary);  
   },
 };

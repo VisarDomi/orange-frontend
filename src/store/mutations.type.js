@@ -46,7 +46,10 @@ export const SET_DRIVER_RESERVATION = "setDriverReservation";
 export const SET_COMPANYS = "setCompanys";
 export const SET_COMPANY = "setCompany";
 
-// itinerarys
-
+// itinerarys admin
 export const SET_ADMIN_ITINERARYS = "setAdminItinerarys";
 export const SET_ADMIN_ITINERARY = "setAdminItinerary";
+
+// itinerarys admin
+export const SET_COMPANY_ITINERARYS = "setCompanyItinerarys";
+export const SET_COMPANY_ITINERARY = "setCompanyItinerary";
