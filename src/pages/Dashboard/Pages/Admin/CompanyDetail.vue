@@ -323,12 +323,12 @@
       </div>
     
 
-      <div class="md-layout md-size-40">
+      <div class="md-layout md-size-60">
         
         <div
-          v-for="employee in employees"
+          v-for="employee in employeesData"
           :key="employee.id"
-          class="md-layout-item md-large-size-30 md-xlarge-size-20 md-medium-size-33 md-small-size-50 md-xsmall-size-100 auto-mx"
+          class="md-layout-item md-large-size-40 md-xlarge-size-40 md-medium-size-53 md-small-size-70 md-xsmall-size-100 auto-mx"
         >
           <md-card>
             <!-- <md-card-media md-medium>
@@ -355,21 +355,51 @@
               <md-card-expand-content>
                 <md-card-content>
                   <md-field>
-                      <label>Name</label>
+                      <label>Full Name</label>
                       <md-input  
-                        :value="employee.full_name"
-                        @change="updateEmployeeField(employee.id, 'full_name', $event.target.value)"
+                        v-model="employee.full_name" 
+                        :disabled="!employee.nameEditable"
                       ></md-input>
+
+                      <md-button
+                        v-if="!employee.nameEditable"
+                        class="md-just-icon md-warning md-simple"
+                        @click="enableNameEditing(employee.id)"
+                      >
+                        <md-icon>edit</md-icon>
+                      </md-button>
+                      <md-button
+                        v-if="employee.nameEditable"
+                        class="md-just-icon md-warning md-simple"
+                        @click="saveEmployee(employee, 'employeeName')"
+                      >
+                        <md-icon>done</md-icon>
+                      </md-button>
+                      
                     </md-field>
                     <md-field>
                       <label>Address</label>
                       <md-input 
-                        :value="employee.address"
-                        @change="updateEmployeeField(employee.id, 'address', $event.target.value)"
+                        v-model="employee.address"
+                        :disabled="!employee.addressEditable"
                       ></md-input>
+                      <md-button
+                        v-if="!employee.addressEditable"
+                        class="md-just-icon md-warning md-simple"
+                        @click="employee.addressEditable=true"
+                      >
+                        <md-icon>edit</md-icon>
+                      </md-button>
+                      <md-button
+                        v-else="employee.addressEditable"
+                        class="md-just-icon md-warning md-simple"
+                        @click="saveEmployee(employee, 'employeeAddress')"
+                      >
+                        <md-icon>done</md-icon>
+                      </md-button>
                     </md-field>
                     <div>
-                      <md-button class="md-warning" @click.native="delete_employee(employee)">Delete</md-button>
+                      <md-button class="md-danger" @click.native="delete_employee(employee)">Delete</md-button>
                     </div>
                 </md-card-content>
               </md-card-expand-content>
@@ -420,10 +450,10 @@ export default {
       address: "",
       editingName: false,
       editingPayment: false,
-      employeesData: this.employees,
 
       // newRow: {},
       tableData: [],
+      employeesData: [],
       formCollapsed: true,
       //--end create employee
       full_name: "",
@@ -445,10 +475,16 @@ export default {
     };
   },
   methods: {
-    updateEmployeeField(employeeId, field, value) {
-      let payload = { employeeId, [field]: value };
-      console.log('payload', payload);
-      this.$store.dispatch(UPDATE_EMPLOYEE, payload);
+
+    enableNameEditing(id){
+      for(let employee in this.employeesData){
+        if(this.employeesData[employee].id == id){
+          this.employeesData[employee].nameEditable = true;
+          let cloneEmployee = {...this.employeesData[employee]}
+          this.employeesData.splice(employee, 1);
+          this.employeesData.splice(employee, 0, cloneEmployee);
+        }
+      }
     },
     saveChanges(editing){
       if(editing == "name"){
@@ -464,6 +500,21 @@ export default {
       }
       console.log(company)
       this.$store.dispatch(UPDATE_COMPANY, company);
+    },
+    saveEmployee(employee, editing){
+      if(editing == "employeeName"){
+        employee.nameEditable = false
+      }else{
+        employee.addressEditable = false
+      }
+      let employeeData = {
+        full_name: employee.full_name,
+        address: employee.address,
+        companyId: this.$route.params.id,
+        employeeId: employee.id
+      }
+      console.log(employeeData)
+      this.$store.dispatch(UPDATE_EMPLOYEE, employeeData);
     },
     //create employee methods------------
     onSubmit() {
@@ -578,7 +629,18 @@ export default {
     });
   },
   created() {
-    this.$store.dispatch(GET_EMPLOYEES_BY_ID, {companyId: this.$route.params.id})
+    this.$store.dispatch(GET_EMPLOYEES_BY_ID, {companyId: this.$route.params.id}).then(() => {
+      for(let employee of this.employees){
+        this.employeesData.push({...employee})
+        // spread operator is not needed
+      }
+      for(let employee of this.employeesData){
+        console.log("employee object is: ", employee)
+        employee.nameEditable = false
+        employee.addressEditable = false
+      }
+      console.log("Added new fields to employees: ", this.employeesData);
+    })
 
     //get itinerarys this needs to be get companyitineraries
     this.$store.dispatch(GET_COMPANY_ITINERARYS, {companyId: this.$route.params.id}).then(() => {
@@ -609,7 +671,7 @@ export default {
 
   computed: {
     ...mapGetters(["company", "companyItinerarys", "employees"]),
-    
+
     /***
      * Returns a page from the searched data or the whole data. Search is performed in the watch section below
      */
