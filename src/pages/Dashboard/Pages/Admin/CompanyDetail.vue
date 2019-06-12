@@ -21,13 +21,42 @@
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
                       <label>Name</label>
-                      <md-input v-model="full_name" :disabled="!editing"></md-input>
+                      <md-input v-model="full_name" :disabled="!editingName"></md-input>
+                      <md-button
+                        v-if="!editingName"
+                        class="md-just-icon md-warning md-simple"
+                        @click="editingName=true"
+                      >
+                        <md-icon>edit</md-icon>
+                      </md-button>
+                      <md-button
+                        v-else="editingName"
+                        class="md-just-icon md-warning md-simple"
+                        @click="saveChanges('name')"
+                      >
+                        <md-icon>done</md-icon>
+                      </md-button>
                     </md-field>
                   </div>
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
                       <label>Payment Frequency</label>
-                      <md-input  v-model="payment_frequency" :disabled="!editing"></md-input>
+                      <md-input  v-model="payment_frequency" :disabled="!editingPayment"></md-input>
+                      <md-button
+                        v-if="!editingPayment"
+                        class="md-just-icon md-warning md-simple"
+                        @click="editingPayment=true"
+                        
+                      >
+                        <md-icon>edit</md-icon>
+                      </md-button>
+                      <md-button
+                        v-else="editingPayment"
+                        class="md-just-icon md-warning md-simple"
+                        @click="saveChanges('payment')"
+                      >
+                        <md-icon>done</md-icon>
+                      </md-button>
                     </md-field>
                   </div>
 
@@ -41,13 +70,6 @@
         </form>
       </div>
 
-      <!-- <div class="md-layout"> -->
-      <div class="md-layout-item md-size-100 text-right">
-        <md-button v-if="editing" class="md-warning mx-auto" @click="cancelChanges()">Done</md-button>
-        <md-button v-else class="md-warning mx-auto" @click="editCompany()">Edit Company</md-button>
-        <md-button class="md-warning mx-auto" @click="saveChanges()">Save Changes</md-button>
-      </div>
-    <!-- </div> -->
 
 
       <!-- here starts the table -->
@@ -304,9 +326,9 @@
       <div class="md-layout md-size-40">
         
         <div
-          v-for="employee in this.employees"
+          v-for="employee in employees"
           :key="employee.id"
-          class="md-layout-item md-large-size-20 md-xlarge-size-20 md-medium-size-33 md-small-size-50 md-xsmall-size-100 auto-mx"
+          class="md-layout-item md-large-size-30 md-xlarge-size-20 md-medium-size-33 md-small-size-50 md-xsmall-size-100 auto-mx"
         >
           <md-card>
             <!-- <md-card-media md-medium>
@@ -323,10 +345,33 @@
                 <div>
                   <md-button class="md-warning" @click.native="open_employee(employee)">Details</md-button>
                 </div>
+                <md-card-expand-trigger>
+                  <md-button class="md-icon-button">
+                    <md-icon>keyboard_arrow_down</md-icon>
+                  </md-button>
+                </md-card-expand-trigger>
               </md-card-actions>
 
               <md-card-expand-content>
-                <md-card-content>Member of company since 2007.</md-card-content>
+                <md-card-content>
+                  <md-field>
+                      <label>Name</label>
+                      <md-input  
+                        :value="employee.full_name"
+                        @change="updateEmployeeField(employee.id, 'full_name', $event.target.value)"
+                      ></md-input>
+                    </md-field>
+                    <md-field>
+                      <label>Address</label>
+                      <md-input 
+                        :value="employee.address"
+                        @change="updateEmployeeField(employee.id, 'address', $event.target.value)"
+                      ></md-input>
+                    </md-field>
+                    <div>
+                      <md-button class="md-warning" @click.native="delete_employee(employee)">Delete</md-button>
+                    </div>
+                </md-card-content>
               </md-card-expand-content>
             </md-card-expand>
           </md-card>
@@ -346,7 +391,7 @@
 import { CREATE_EMPLOYEE } from "@/store/actions.type";
 // for employees part
 import { PricingCard, TestimonialCard } from "@/components";
-import { GET_EMPLOYEES_BY_ID, GET_EMPLOYEE, GET_EMPLOYEES } from "@/store/actions.type";
+import { GET_EMPLOYEES_BY_ID, GET_EMPLOYEE, GET_EMPLOYEES, UPDATE_EMPLOYEE, DELETE_EMPLOYEE } from "@/store/actions.type";
 //-----------------------
 // for table part
 import { Pagination } from "@/components";
@@ -373,7 +418,10 @@ export default {
       password: "",
       name: "",
       address: "",
-      editing: false,
+      editingName: false,
+      editingPayment: false,
+      employeesData: this.employees,
+
       // newRow: {},
       tableData: [],
       formCollapsed: true,
@@ -397,13 +445,17 @@ export default {
     };
   },
   methods: {
-    editCompany(){
-      this.editing = true;
+    updateEmployeeField(employeeId, field, value) {
+      let payload = { employeeId, [field]: value };
+      console.log('payload', payload);
+      this.$store.dispatch(UPDATE_EMPLOYEE, payload);
     },
-    cancelChanges(){
-      this.editing = false;
-    },
-    saveChanges(){
+    saveChanges(editing){
+      if(editing == "name"){
+        this.editingName = false
+      }else{
+        this.editingPayment = false
+      }
       let company = {
         full_name: this.full_name,
         payment_frequency: this.payment_frequency,
@@ -472,6 +524,12 @@ export default {
         }
       });
     },
+    delete_employee(employee){
+      console.log(employee);
+      this.$store.dispatch(DELETE_EMPLOYEE, employee).then(() => {
+        this.$store.dispatch(GET_EMPLOYEES);
+      });
+    },
     //end company employees methods --------------------
     //this function we may need in future but probably okay if deleted on refactor
     customSort(value) {
@@ -507,14 +565,12 @@ export default {
     },
     handleDelete(item) {
       //add swal here too eventually
-      console.log(item);
       this.$store.dispatch(DELETE_COMPANY_ITINERARY, {companyId: item.company_id, itineraryId: item.id})
       this.tableData.splice(item.tableId, 1)
     },
   },
   mounted() {
-    this.$store.dispatch(GET_EMPLOYEES_BY_ID, {companyId: this.$route.params.id})
-        // Fuse search initialization.
+    // Fuse search initialization.
         //doesnt work now but need to make functional
     this.fuseSearch = new Fuse(this.tableData, {
       keys: ["name", "email"],
@@ -522,6 +578,7 @@ export default {
     });
   },
   created() {
+    this.$store.dispatch(GET_EMPLOYEES_BY_ID, {companyId: this.$route.params.id})
 
     //get itinerarys this needs to be get companyitineraries
     this.$store.dispatch(GET_COMPANY_ITINERARYS, {companyId: this.$route.params.id}).then(() => {
@@ -547,10 +604,12 @@ export default {
       .then(() => {
         this.full_name = this.company.full_name;
         this.payment_frequency = this.company.payment_frequency;
-      });
+    });
   },
+
   computed: {
     ...mapGetters(["company", "companyItinerarys", "employees"]),
+    
     /***
      * Returns a page from the searched data or the whole data. Search is performed in the watch section below
      */
@@ -605,5 +664,15 @@ export default {
 <style lang="scss">
 .text-right {
   display: flex;
+  .card-expansion {
+    height: 480px;
+  }
+
+  .md-card {
+    width: 320px;
+    margin: 4px;
+    display: inline-block;
+    vertical-align: top;
+  }
 }
 </style>

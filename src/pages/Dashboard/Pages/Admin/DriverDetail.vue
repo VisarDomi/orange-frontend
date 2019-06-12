@@ -20,13 +20,41 @@
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
                       <label>Name</label>
-                      <md-input v-model="full_name" :disabled="!editing"></md-input>
+                      <md-input v-model="full_name" :disabled="!editingName"></md-input>
+                      <md-button
+                        v-if="!editingName"
+                        class="md-just-icon md-warning md-simple"
+                        @click="editingName=true"
+                      >
+                        <md-icon>edit</md-icon>
+                      </md-button>
+                      <md-button
+                        v-else="editingName"
+                        class="md-just-icon md-warning md-simple"
+                        @click="saveChanges('name')"
+                      >
+                        <md-icon>done</md-icon>
+                      </md-button>
                     </md-field>
                   </div>
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
                       <label>Status</label>
-                      <md-input v-model="status" :disabled="!editing"></md-input>
+                      <md-input v-model="status" :disabled="!editingStatus"></md-input>
+                      <!-- <md-button
+                        v-if="!editingStatus"
+                        class="md-just-icon md-warning md-simple"
+                        @click="editingStatus=true"
+                      >
+                        <md-icon>edit</md-icon>
+                      </md-button>
+                      <md-button
+                        v-else="editingStatus"
+                        class="md-just-icon md-warning md-simple"
+                        @click="saveChanges('status')"
+                      >
+                        <md-icon>done</md-icon>
+                      </md-button> -->
                     </md-field>
                   </div>
 
@@ -39,11 +67,6 @@
           </md-card>
         </form>
       </div>
-    </div>
-    <div class="md-layout">
-      <md-button v-if="editing" class="md-warning mx-auto" @click="cancelChanges()">Done</md-button>
-      <md-button v-else class="md-warning mx-auto" @click="editDriver()">Edit Driver</md-button>
-      <md-button class="md-warning mx-auto" @click="saveChanges()">Save Changes</md-button>
     </div>
   </div>
 </template>
@@ -61,17 +84,15 @@ export default {
     return {
       full_name: "",
       status: "",
-      editing: false,
+      editingName: false,
+      editingStatus: false,
     };
   },
   methods: {
-    editDriver(){
-      this.editing = true;
-    },
-    cancelChanges(){
-      this.editing = false;
-    },
-    saveChanges(){
+    saveChanges(field){
+      if(field == 'name'){
+        this.editingName = false
+      }
       let driver = {
         full_name: this.full_name,
         status: this.status,

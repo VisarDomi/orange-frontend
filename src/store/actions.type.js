@@ -18,6 +18,7 @@ export const GET_COMPANY_INVOICE = "getCompanyInvoice";
 export const CREATE_EMPLOYEE = "createEmployee";
 export const GET_EMPLOYEES = "getEmployees";
 export const UPDATE_EMPLOYEE = "updateEmployees";
+export const DELETE_EMPLOYEE = "deleteEmployees";
 export const GET_EMPLOYEES_BY_ID = "getEmployeesById";
 export const GET_EMPLOYEE = "getEmployee";
 export const GET_EMPLOYEE_RESERVATION = "getEmployeeReservation";
