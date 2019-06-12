@@ -342,12 +342,12 @@
 
             <md-card-expand>
               <md-card-actions md-alignment="space-between">
-                <div>
+                <!-- <div>
                   <md-button class="md-warning" @click.native="open_employee(employee)">Details</md-button>
-                </div>
+                </div> -->
                 <md-card-expand-trigger>
-                  <md-button class="md-icon-button">
-                    <md-icon>keyboard_arrow_down</md-icon>
+                  <md-button class="md-button md-warning">
+                    <md-icon>keyboard_arrow_down</md-icon>Details
                   </md-button>
                 </md-card-expand-trigger>
               </md-card-actions>
