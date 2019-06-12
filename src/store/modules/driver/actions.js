@@ -2,6 +2,7 @@ import {
   CREATE_DRIVER,
   GET_DRIVERS,
   GET_DRIVER,
+  UPDATE_DRIVER,
   GET_DRIVER_RESERVATIONS,
   GET_DRIVER_RESERVATION,
   UPDATE_DRIVER_RESERVATION
@@ -16,6 +17,16 @@ import { DriverService, UserService } from "../../services/api";
 import { getUser } from "../../services/userstorage";
 
 export const actions = {
+  async [UPDATE_DRIVER](context, payload) {
+    const { driverId } = payload;
+    delete payload.driverId
+    await DriverService.putDriver(driverId, payload).then(({data}) =>{
+      console.log("setting driver data...");
+      context.commit(SET_DRIVER, data);
+      return data
+    });
+  },
+
   async [CREATE_DRIVER](context, payload) {
     let user_id = "";
     console.log(payload.email);

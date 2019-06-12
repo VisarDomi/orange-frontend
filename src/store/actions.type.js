@@ -17,6 +17,7 @@ export const GET_COMPANY_INVOICE = "getCompanyInvoice";
 // employee
 export const CREATE_EMPLOYEE = "createEmployee";
 export const GET_EMPLOYEES = "getEmployees";
+export const UPDATE_EMPLOYEE = "updateEmployees";
 export const GET_EMPLOYEES_BY_ID = "getEmployeesById";
 export const GET_EMPLOYEE = "getEmployee";
 export const GET_EMPLOYEE_RESERVATION = "getEmployeeReservation";
@@ -36,6 +37,7 @@ export const GET_COMPANY_RESERVATION = "getCompanyReservation";
 export const CREATE_DRIVER = "createDriver";
 export const GET_DRIVERS = "getDrivers";
 export const GET_DRIVER = "getDriver";
+export const UPDATE_DRIVER = "updateDriver";
 export const GET_DRIVER_RESERVATIONS = "getDriverReservations";
 export const GET_DRIVER_RESERVATION = "getDriverReservation";
 export const UPDATE_DRIVER_RESERVATION = "updateDriverReservation";
@@ -44,6 +46,7 @@ export const UPDATE_DRIVER_RESERVATION = "updateDriverReservation";
 export const CREATE_COMPANY = "createCompany";
 export const GET_COMPANYS = "getCompanys";
 export const GET_COMPANY = "getCompany";
+export const UPDATE_COMPANY = "updateCompany";
 
 // itinerary admin
 // export const CREATE_ADMIN_ITINERARY = "createAdminItinerary";

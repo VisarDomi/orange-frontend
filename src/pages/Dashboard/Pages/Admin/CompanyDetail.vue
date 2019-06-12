@@ -21,13 +21,13 @@
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
                       <label>Name</label>
-                      <md-input v-model="full_name" disabled></md-input>
+                      <md-input v-model="full_name" :disabled="!editing"></md-input>
                     </md-field>
                   </div>
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
                       <label>Payment Frequency</label>
-                      <md-input  v-model="payment_frequency" disabled></md-input>
+                      <md-input  v-model="payment_frequency" :disabled="!editing"></md-input>
                     </md-field>
                   </div>
 
@@ -40,6 +40,14 @@
           </md-card>
         </form>
       </div>
+
+      <!-- <div class="md-layout"> -->
+      <div class="md-layout-item md-size-100 text-right">
+        <md-button v-if="editing" class="md-warning mx-auto" @click="cancelChanges()">Done</md-button>
+        <md-button v-else class="md-warning mx-auto" @click="editCompany()">Edit Company</md-button>
+        <md-button class="md-warning mx-auto" @click="saveChanges()">Save Changes</md-button>
+      </div>
+    <!-- </div> -->
 
 
       <!-- here starts the table -->
@@ -209,6 +217,7 @@
       </div>
 
     </div>
+    
 
     <div class="md-layout">
       <md-button class="md-warning mx-auto" @click="addItinerary()">Add new itinerary</md-button>
@@ -342,6 +351,7 @@ import { GET_EMPLOYEES_BY_ID, GET_EMPLOYEE, GET_EMPLOYEES } from "@/store/action
 // for table part
 import { Pagination } from "@/components";
 import {GET_COMPANY_ITINERARYS, CREATE_COMPANY_ITINERARY, DELETE_COMPANY_ITINERARY, UPDATE_COMPANY_ITINERARY } from "@/store/actions.type";
+import {UPDATE_COMPANY} from "@/store/actions.type";
 import Fuse from "fuse.js";
 //--------------------------
 
@@ -363,6 +373,7 @@ export default {
       password: "",
       name: "",
       address: "",
+      editing: false,
       // newRow: {},
       tableData: [],
       formCollapsed: true,
@@ -386,6 +397,22 @@ export default {
     };
   },
   methods: {
+    editCompany(){
+      this.editing = true;
+    },
+    cancelChanges(){
+      this.editing = false;
+    },
+    saveChanges(){
+      let company = {
+        full_name: this.full_name,
+        payment_frequency: this.payment_frequency,
+        code: "placeholder",
+        companyId: this.$route.params.id
+      }
+      console.log(company)
+      this.$store.dispatch(UPDATE_COMPANY, company);
+    },
     //create employee methods------------
     onSubmit() {
       let employee = {
@@ -482,7 +509,7 @@ export default {
       //add swal here too eventually
       console.log(item);
       this.$store.dispatch(DELETE_COMPANY_ITINERARY, {companyId: item.company_id, itineraryId: item.id})
-      this.tableData.splice(item.tableId+1, 1)
+      this.tableData.splice(item.tableId, 1)
     },
   },
   mounted() {

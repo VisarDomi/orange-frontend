@@ -20,13 +20,13 @@
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
                       <label>Name</label>
-                      <md-input v-model="full_name" disabled></md-input>
+                      <md-input v-model="full_name" :disabled="!editing"></md-input>
                     </md-field>
                   </div>
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
                       <label>Status</label>
-                      <md-input v-model="status" disabled></md-input>
+                      <md-input v-model="status" :disabled="!editing"></md-input>
                     </md-field>
                   </div>
 
@@ -40,12 +40,17 @@
         </form>
       </div>
     </div>
+    <div class="md-layout">
+      <md-button v-if="editing" class="md-warning mx-auto" @click="cancelChanges()">Done</md-button>
+      <md-button v-else class="md-warning mx-auto" @click="editDriver()">Edit Driver</md-button>
+      <md-button class="md-warning mx-auto" @click="saveChanges()">Save Changes</md-button>
+    </div>
   </div>
 </template>
 
 <script>
 import { UserCard } from "@/pages";
-import { GET_DRIVER } from "@/store/actions.type";
+import { GET_DRIVER, UPDATE_DRIVER } from "@/store/actions.type";
 import { mapGetters } from "vuex";
 export default {
   name: "DriverDetail",
@@ -55,10 +60,27 @@ export default {
   data() {
     return {
       full_name: "",
-      status: ""
+      status: "",
+      editing: false,
     };
   },
-  methods: {},
+  methods: {
+    editDriver(){
+      this.editing = true;
+    },
+    cancelChanges(){
+      this.editing = false;
+    },
+    saveChanges(){
+      let driver = {
+        full_name: this.full_name,
+        status: this.status,
+        driverId: this.$route.params.id
+      }
+      console.log(driver)
+      this.$store.dispatch(UPDATE_DRIVER, driver);
+    }
+  },
   mounted() {},
   created() {
     this.$store
