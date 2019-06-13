@@ -52,18 +52,19 @@
               </div>
             </div>
 
-            <!-- <div class="md-layout">
+            <div class="md-layout">
               <label class="md-layout-item md-size-15 md-form-label">
-                AutoComplete
+                AutoComplete {{address}}
               </label>
               <div class="md-layout-item">
+                <md-field>
                 <gmap-autocomplete
                   placeholder="This is a placeholder text"
                   @place_changed="setPlace">
                 </gmap-autocomplete>
-                <button @click="usePlace">Add</button>
+                </md-field>
               </div>
-            </div> -->
+            </div>
 
             <div class="md-layout" style="margin-top:50px;">
               <div class="md-layout-item mx-auto md-size-30">
@@ -111,7 +112,8 @@ export default {
         this.description = description;
       },
       setPlace(place) {
-        this.place = place
+        console.log(place)
+        this.address = place.name
       },
       usePlace(place) {
         if (this.place) {

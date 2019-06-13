@@ -21,7 +21,7 @@
             >
               <md-table-toolbar >
                 <md-field>
-                  <label for="pages">Per page</label>
+                  <label for="pages">Per Page</label>
                   <md-select v-model="pagination.perPage" name="pages">
                     <md-option
                       v-for="item in pagination.perPageOptions"
@@ -29,6 +29,30 @@
                       :label="item"
                       :value="item"
                     >{{ item }}</md-option>
+                  </md-select>
+                </md-field>
+
+                <md-field>
+                  
+                  <label for="monthsValue">Months filter</label>
+                  <md-select  
+                  name="monthsValue"
+                  v-model="monthsValue"
+                  md-dense
+                  >
+                    <md-option value="Any Month">Any Month</md-option>
+                    <md-option value="01">1</md-option>
+                    <md-option value="02">2</md-option>
+                    <md-option value="03">3</md-option>
+                    <md-option value="04">4</md-option>
+                    <md-option value="05">5</md-option>
+                    <md-option value="06">6</md-option>
+                    <md-option value="07">7</md-option>
+                    <md-option value="08">8</md-option>
+                    <md-option value="09">9</md-option>
+                    <md-option value="10">10</md-option>
+                    <md-option value="11">11</md-option>
+                    <md-option value="12">12</md-option>
                   </md-select>
                 </md-field>
 
@@ -70,18 +94,16 @@
                 'table-success': item.status == 'accepted',
                 'table-warning' : item.status =='waiting',
                 'table-danger' : item.status =='rejected'
-                }"
-          
-          >
+                }">
                 <md-table-cell md-label="Company" md-sort-by="company_id">
                   {{
-                  item.company.full_name
+                  item.company.name
                   }}
 
                 </md-table-cell>
                 <md-table-cell md-label="Driver" md-sort-by="driver_id">
                   {{
-                  item.driver.full_name
+                  item.driver.id
                   }}
                 </md-table-cell>
                 <md-table-cell md-label="Status" md-sort-by="status">{{ item.status }}</md-table-cell>
@@ -130,6 +152,13 @@ import Fuse from "fuse.js";
 import swal from "sweetalert2";
 import { GET_ADMIN_RESERVATIONS, GET_ADMIN_RESERVATION, GET_COMPANY } from "@/store/actions.type";
 import { mapGetters } from "vuex";
+
+const toLower = text => { return text.toString().toLowerCase() }
+
+const searchByName = (items, term) => {
+  if (term) { return items.filter(item => toLower(item.last_name).includes(toLower(term))) }
+  return items
+}
 
 export default {
   name: "Reservations",
@@ -184,6 +213,7 @@ export default {
         perPageOptions: [5, 10, 25, 50],
         total: 0
       },
+      monthsValue: "Any Month",
       footerTable: ["Company", "Driver", "Status", "Destination", "Date", "Drivers", "KSt"],
       searchQuery: "",
       propsToSearch: ["name", "email", "age"],
@@ -193,15 +223,40 @@ export default {
     };
   },
   methods: {
-      getAlternateLabel (count) {
-        let plural = ''
+    searchOnTable () {
+      console.log("search is: ", this.search)
+      this.searched = searchByName(this.members, this.search)
+    },
 
-        if (count > 1) {
-          plural = 's'
-        }
 
-        return `${count} reservation${plural} selected`
-      },
+    filterReservations(condition, value){
+      console.log("condition: ", condition)
+      console.log("value: ", value)
+
+      let searched = this.searchByMonth(this.tableData, this.value)
+      
+      this.tableData = searched
+    },
+    searchByMonth(items, term) {
+      // return list of reservations
+      var returnReservations = items.filter(this.withSameMonth)
+      return returnReservations
+    },
+    withSameMonth(reservation){
+      // console.log(reservationMonth)
+      let reservationMonth = reservation.date.split("-")[1]
+
+      return reservationMonth == this.monthsValue
+    },
+
+
+    getAlternateLabel (count) {
+      let plural = ''
+      if (count > 1) {
+        plural = 's'
+      }
+      return `${count} reservation${plural} selected`
+    },
     onSelect(items) {
       this.selected = items;
     },
@@ -301,6 +356,9 @@ export default {
         result = this.fuseSearch.search(this.searchQuery);
       }
       this.searchedData = result;
+    },
+    monthsValue(){
+      return this.filterReservations('months', this.monthsValue)
     }
   }
 };

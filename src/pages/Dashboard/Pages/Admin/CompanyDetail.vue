@@ -326,7 +326,7 @@
       <div class="md-layout md-size-60">
         
         <div
-          v-for="employee in employeesData"
+          v-for="(employee, index) in employeesData"
           :key="employee.id"
           class="md-layout-item md-large-size-40 md-xlarge-size-40 md-medium-size-53 md-small-size-70 md-xsmall-size-100 auto-mx"
         >
@@ -399,7 +399,7 @@
                       </md-button>
                     </md-field>
                     <div>
-                      <md-button class="md-danger" @click.native="delete_employee(employee)">Delete</md-button>
+                      <md-button class="md-danger" @click.native="delete_employee(employee, index)">Delete</md-button>
                     </div>
                 </md-card-content>
               </md-card-expand-content>
@@ -526,7 +526,19 @@ export default {
       };
 
       this.$store.dispatch(CREATE_EMPLOYEE, employee).then(() => {
-        this.$store.dispatch(GET_EMPLOYEES);
+        this.$store.dispatch(GET_EMPLOYEES_BY_ID, {companyId: this.$route.params.id}).then(() => {
+          this.employeesData = [];
+          for(let employee of this.employees){
+            this.employeesData.push({...employee})
+            // spread operator is not needed
+          }
+          for(let employee of this.employeesData){
+            console.log("employee object is: ", employee)
+            employee.nameEditable = false
+            employee.addressEditable = false
+          }
+          console.log("Added new fields to employees: ", this.employeesData);
+        })
         this.email="";
         this.password="";
         this.name="";
@@ -575,11 +587,12 @@ export default {
         }
       });
     },
-    delete_employee(employee){
+    delete_employee(employee, index){
       console.log(employee);
       this.$store.dispatch(DELETE_EMPLOYEE, employee).then(() => {
         this.$store.dispatch(GET_EMPLOYEES);
       });
+      this.employeesData.splice(index, 1);
     },
     //end company employees methods --------------------
     //this function we may need in future but probably okay if deleted on refactor
