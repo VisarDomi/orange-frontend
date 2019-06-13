@@ -2,6 +2,7 @@ import {
   CREATE_COMPANY,
   GET_COMPANYS,
   GET_COMPANY,
+  UPDATE_COMPANY,
   CREATE_COMPANY_RESERVATION,
   GET_COMPANY_RESERVATIONS,
   GET_COMPANY_RESERVATION,
@@ -50,6 +51,15 @@ export const actions = {
     };
     await CompanyService.createCompany(company).then(({ data }) => {
       return data;
+    });
+  },
+  async [UPDATE_COMPANY](context, payload) {
+    const { companyId } = payload;
+    delete payload.companyId
+    await CompanyService.putCompany(companyId, payload).then(({data}) =>{
+      console.log("setting company data...");
+      context.commit(SET_COMPANY, data);
+      return data
     });
   },
   async [GET_COMPANYS](context, payload) {

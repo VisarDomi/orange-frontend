@@ -2,6 +2,8 @@ import {
   CREATE_EMPLOYEE,
   GET_EMPLOYEES,
   GET_EMPLOYEE,
+  DELETE_EMPLOYEE,
+  UPDATE_EMPLOYEE,
   GET_EMPLOYEE_RESERVATION,
   GET_EMPLOYEES_BY_ID,
   GET_EMPLOYEE_RESERVATIONS
@@ -42,9 +44,20 @@ export const actions = {
     );
   },
 
+  async [UPDATE_EMPLOYEE](context, payload) {
+    const { companyId, employeeId } = payload;
+    delete payload.companyId
+    delete payload.employeeId
+    await EmployeeService.putEmployee(companyId, employeeId, payload).then(({data}) =>{
+      console.log("setting employee data...");
+      context.commit(SET_EMPLOYEE, data);
+      return data
+    });
+  },
 
 
   async [GET_EMPLOYEES_BY_ID](context, payload) {
+    
     const {companyId} = payload;
     await EmployeeService.getEmployees(companyId).then(({ data }) => {
       console.log("setting employee state to ", data);
@@ -95,5 +108,13 @@ export const actions = {
         return data;
       }
     );
+  },
+  async [DELETE_EMPLOYEE](context, payload){
+    const{company_id, id} = payload;
+    await EmployeeService.deleteEmployee(company_id, id).then(({data}) => {
+      console.log("deleting employee data...");
+      context.commit(SET_EMPLOYEE, data);
+      return data;
+    })
   }
 };

@@ -20,13 +20,41 @@
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
                       <label>Name</label>
-                      <md-input v-model="full_name" disabled></md-input>
+                      <md-input v-model="full_name" :disabled="!editingName"></md-input>
+                      <md-button
+                        v-if="!editingName"
+                        class="md-just-icon md-warning md-simple"
+                        @click="editingName=true"
+                      >
+                        <md-icon>edit</md-icon>
+                      </md-button>
+                      <md-button
+                        v-else="editingName"
+                        class="md-just-icon md-warning md-simple"
+                        @click="saveChanges('name')"
+                      >
+                        <md-icon>done</md-icon>
+                      </md-button>
                     </md-field>
                   </div>
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
                       <label>Status</label>
-                      <md-input v-model="status" disabled></md-input>
+                      <md-input v-model="status" :disabled="!editingStatus"></md-input>
+                      <!-- <md-button
+                        v-if="!editingStatus"
+                        class="md-just-icon md-warning md-simple"
+                        @click="editingStatus=true"
+                      >
+                        <md-icon>edit</md-icon>
+                      </md-button>
+                      <md-button
+                        v-else="editingStatus"
+                        class="md-just-icon md-warning md-simple"
+                        @click="saveChanges('status')"
+                      >
+                        <md-icon>done</md-icon>
+                      </md-button> -->
                     </md-field>
                   </div>
 
@@ -45,7 +73,7 @@
 
 <script>
 import { UserCard } from "@/pages";
-import { GET_DRIVER } from "@/store/actions.type";
+import { GET_DRIVER, UPDATE_DRIVER } from "@/store/actions.type";
 import { mapGetters } from "vuex";
 export default {
   name: "DriverDetail",
@@ -55,10 +83,25 @@ export default {
   data() {
     return {
       full_name: "",
-      status: ""
+      status: "",
+      editingName: false,
+      editingStatus: false,
     };
   },
-  methods: {},
+  methods: {
+    saveChanges(field){
+      if(field == 'name'){
+        this.editingName = false
+      }
+      let driver = {
+        full_name: this.full_name,
+        status: this.status,
+        driverId: this.$route.params.id
+      }
+      console.log(driver)
+      this.$store.dispatch(UPDATE_DRIVER, driver);
+    }
+  },
   mounted() {},
   created() {
     this.$store

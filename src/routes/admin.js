@@ -9,7 +9,7 @@ import Drivers from "@/pages/Dashboard/Pages/Admin/Drivers.vue";
 import DriverDetail from "@/pages/Dashboard/Pages/Admin/DriverDetail.vue";
 import CreateInvoice from "@/pages/Dashboard/Pages/Admin/CreateInvoice.vue";
 import Invoices from "@/pages/Dashboard/Pages/Admin/Invoices.vue";
-import InvoiceDetail from "@/pages/Dashboard/Pages/Admin/InvoiceDetail.vue";
+import InvoiceDetail from "@/pages/Dashboard/Pages/Admin/UglyInvoice.vue";
 import ItineraryDetail from "@/pages/Dashboard/Pages/Admin/ItineraryDetail.vue";
 import Itineraries from "@/pages/Dashboard/Pages/Admin/Itineraries.vue";
 import Companies from "@/pages/Dashboard/Pages/Admin/Companies.vue";

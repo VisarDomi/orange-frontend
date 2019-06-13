@@ -20,13 +20,13 @@
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
                       <label>Name</label>
-                      <md-input v-model="full_name" disabled></md-input>
+                      <md-input v-model="full_name" :disabled="!editing"></md-input>
                     </md-field>
                   </div>
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
                       <label>Address</label>
-                      <md-input v-model="address" disabled></md-input>
+                      <md-input v-model="address" :disabled="!editing"></md-input>
                     </md-field>
                   </div>
 
@@ -40,12 +40,16 @@
         </form>
       </div>
     </div>
+    <div class="md-layout">
+      <md-button v-if="editing" class="md-warning mx-auto" @click="saveChanges()">Done</md-button>
+      <md-button v-else class="md-warning mx-auto" @click="editEmployee()">Edit Employee</md-button>
+    </div>
   </div>
 </template>
 
 <script>
 import { UserCard } from "@/pages";
-import { GET_EMPLOYEE } from "@/store/actions.type";
+import { GET_EMPLOYEE, UPDATE_EMPLOYEE } from "@/store/actions.type";
 import { mapGetters } from "vuex";
 export default {
   name: "CompanyEmployeeDetail",
@@ -55,10 +59,26 @@ export default {
   data() {
     return {
       full_name: "",
-      address: ""
+      address: "",
+      editing: false
     };
   },
-  methods: {},
+  methods: {
+    editEmployee(){
+      this.editing = true;
+    },
+    saveChanges(){
+      this.editing = false;
+      let employee = {
+        companyId: this.employee.company_id,
+        employeeId: this.$route.params.id,
+        full_name: this.full_name,
+        address: this.address,
+      }
+      console.log(employee)
+      this.$store.dispatch(UPDATE_EMPLOYEE, employee);
+    }
+  },
   mounted() {
     // this.$store.dispatch(ADMIN_GET_EMPLOYEE) //get employee with store then store it in variable, then get it with mapGetters and plug it into POST invoice
   },
