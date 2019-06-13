@@ -284,7 +284,7 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
 table, tr, thead, td{
     margin:0;
     padding:0;
