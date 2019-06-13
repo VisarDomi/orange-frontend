@@ -1,11 +1,11 @@
 <template>
   <div class="md-layout">
-    404 Not Found
+    <div>404 Not Found-</div>
+    <router-link :to="{ name: 'Login'}">Go to Homepage</router-link>
   </div>
 </template>
 
 <script>
-
 export default {
   name: "NotFound"
 };
