@@ -41,9 +41,8 @@
       </div>
     </div>
     <div class="md-layout">
-      <md-button v-if="editing" class="md-warning mx-auto" @click="cancelChanges()">Done</md-button>
+      <md-button v-if="editing" class="md-warning mx-auto" @click="saveChanges()">Done</md-button>
       <md-button v-else class="md-warning mx-auto" @click="editEmployee()">Edit Employee</md-button>
-      <md-button class="md-warning mx-auto" @click="saveChanges()">Save Changes</md-button>
     </div>
   </div>
 </template>
@@ -68,12 +67,10 @@ export default {
     editEmployee(){
       this.editing = true;
     },
-    cancelChanges(){
-      this.editing = false;
-    },
     saveChanges(){
+      this.editing = false;
       let employee = {
-        companyId: this.employee.companyId,
+        companyId: this.employee.company_id,
         employeeId: this.$route.params.id,
         full_name: this.full_name,
         address: this.address,

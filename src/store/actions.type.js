@@ -38,6 +38,7 @@ export const GET_COMPANY_RESERVATION = "getCompanyReservation";
 export const CREATE_DRIVER = "createDriver";
 export const GET_DRIVERS = "getDrivers";
 export const GET_DRIVER = "getDriver";
+export const DELETE_DRIVER = "deleteDriver";
 export const UPDATE_DRIVER = "updateDriver";
 export const GET_DRIVER_RESERVATIONS = "getDriverReservations";
 export const GET_DRIVER_RESERVATION = "getDriverReservation";
