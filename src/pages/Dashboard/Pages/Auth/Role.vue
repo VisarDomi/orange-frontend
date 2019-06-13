@@ -28,7 +28,7 @@
             slot="description"
             class="card-description"
           >Make a personal or company limo reservation with Orange.</p>
-          <md-button slot="footer" class="md-warning md-round" @click="login('company')">Log-in</md-button>
+          <md-button slot="footer" class="md-warning md-round" @click="login('secretary')">Log-in</md-button>
         </pricing-card>
       </div>
       <!-- <div class="md-layout-item md-medium-size-33 md-small-size-50 md-xsmall-size-100">
