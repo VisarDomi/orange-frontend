@@ -11,7 +11,7 @@
           </md-card-header>
           <md-card-content>
             <md-table
-              :value="queriedData"
+              :value="tableReservationsData"
               :md-sort.sync="currentSort"
               :md-sort-order.sync="currentSortOrder"
               :md-sort-fn="customSort"
@@ -31,24 +31,34 @@
                   </md-select>
                 </md-field>
 
-                <md-field>
-                  <label for="monthsValue">Months filter</label>
-                  <md-select name="monthsValue" v-model="monthsValue" md-dense>
-                    <md-option value="Any Month">Any Month</md-option>
-                    <md-option value="01">1</md-option>
-                    <md-option value="02">2</md-option>
-                    <md-option value="03">3</md-option>
-                    <md-option value="04">4</md-option>
-                    <md-option value="05">5</md-option>
-                    <md-option value="06">6</md-option>
-                    <md-option value="07">7</md-option>
-                    <md-option value="08">8</md-option>
-                    <md-option value="09">9</md-option>
-                    <md-option value="10">10</md-option>
-                    <md-option value="11">11</md-option>
-                    <md-option value="12">12</md-option>
+                  <md-field>
+                  <label for="companySearchValue">Company filter</label>
+                  <md-select name="companySearchValue" v-model="companySearchValue" md-dense>
+                    <md-option value="All">All</md-option>
+                    <md-option v-for="name of this.companyOptions" :value="name">{{name}}</md-option>
                   </md-select>
                 </md-field>
+                <md-field>
+                
+                  <label for="monthSearchValue">Months filter</label>
+                  <md-select name="monthSearchValue" v-model="monthSearchValue" md-dense>
+                    <md-option value="All">All</md-option>
+                    <md-option value="01">January</md-option>
+                    <md-option value="02">February</md-option>
+                    <md-option value="03">March</md-option>
+                    <md-option value="04">April</md-option>
+                    <md-option value="05">May</md-option>
+                    <md-option value="06">June</md-option>
+                    <md-option value="07">July</md-option>
+                    <md-option value="08">August</md-option>
+                    <md-option value="09">September</md-option>
+                    <md-option value="10">October</md-option>
+                    <md-option value="11">November</md-option>
+                    <md-option value="12">December</md-option>
+                    <md-option value="All">All</md-option>
+                  </md-select>
+                </md-field>
+                
 
                 <md-field>
                   <md-input
@@ -146,7 +156,7 @@ import swal from "sweetalert2";
 import {
   GET_ADMIN_RESERVATIONS,
   GET_ADMIN_RESERVATION,
-  GET_COMPANY
+  GET_COMPANYS
 } from "@/store/actions.type";
 import { mapGetters } from "vuex";
 
@@ -169,13 +179,14 @@ export default {
     Pagination
   },
   computed: {
-    ...mapGetters(["getAdminReservations", "getCompany"]),
+    ...mapGetters(["getAdminReservations", "getCompanys"]),
     /***
      * Returns a page from the searched data or the whole data. Search is performed in the watch section below
      */
     queriedData() {
-      console.log("Table data is: ", this.tableData);
-      let result = this.tableData;
+      //  * in the v-for in table rows, tableReservationsData was queriedData
+      console.log("Table data is: ", this.tableReservationsData);
+      let result = this.tableReservationsData;
       if (result == undefined) {
         console.log("returning nothing");
         return [];
@@ -201,7 +212,7 @@ export default {
       } else {
         return this.searchedData.length > 0
           ? this.searchedData.length
-          : this.tableData.length;
+          : this.tableReservationsData.length;
       }
     }
   },
@@ -216,7 +227,6 @@ export default {
         perPageOptions: [5, 10, 25, 50],
         total: 0
       },
-      monthsValue: "Any Month",
       footerTable: [
         "Company",
         "Driver",
@@ -228,7 +238,11 @@ export default {
       ],
       searchQuery: "",
       propsToSearch: ["name", "email", "age"],
-      tableData: [],
+      monthSearchValue: "All",
+      companySearchValue: "All",
+      tableReservationsData: [],
+      companysName: [],
+      companyOptions: ["company1", "company2"],
       searchedData: [],
       fuseSearch: null
     };
@@ -242,21 +256,37 @@ export default {
     filterReservations(condition, value) {
       console.log("condition: ", condition);
       console.log("value: ", value);
+      this.tableReservationsData = []
+      for(let reservation of this.getAdminReservations){
+        this.tableReservationsData.push(reservation)
+      }
+      let searched = this.searchTable(value, condition); // months/companys
 
-      let searched = this.searchByMonth(this.tableData, this.value);
-
-      this.tableData = searched;
+      this.tableReservationsData = searched;
     },
-    searchByMonth(items, term) {
+    searchTable(term, condition) {
       // return list of reservations
-      var returnReservations = items.filter(this.withSameMonth);
+      if(term == "All"){
+        return this.tableReservationsData
+      }
+      if(condition == "companys"){
+        var returnReservations = this.tableReservationsData.filter(this.withSameCompany);
+      }else if(condition == "months"){
+        var returnReservations = this.tableReservationsData.filter(this.withSameMonth);
+      }
       return returnReservations;
     },
     withSameMonth(reservation) {
       // console.log(reservationMonth)
       let reservationMonth = reservation.date.split("-")[1];
 
-      return reservationMonth == this.monthsValue;
+      return reservationMonth == this.monthSearchValue; //this should be a string, value="01"
+    },
+    withSameCompany(reservation) {
+      // console.log(reservationMonth)
+      let reservationCompany = reservation.company.name; 
+
+      return reservationCompany == this.companySearchValue; //this should be a string, value="company1"
     },
 
     getAlternateLabel(count) {
@@ -330,26 +360,40 @@ export default {
       });
     },
     deleteRow(item) {
-      let indexToDelete = this.tableData.findIndex(
+      let indexToDelete = this.tableReservationsData.findIndex(
         tableRow => tableRow.id === item.id
       );
       if (indexToDelete >= 0) {
-        this.tableData.splice(indexToDelete, 1);
+        this.tableReservationsData.splice(indexToDelete, 1);
       }
     }
   },
   created() {
     this.$store.dispatch(GET_ADMIN_RESERVATIONS).then(() => {
       console.log("GET reservations now: ", this.getAdminReservations);
-      this.tableData = this.getAdminReservations;
+      this.tableReservationsData = this.getAdminReservations;
+    });
+
+    this.$store.dispatch(GET_COMPANYS).then(() => {
+      console.log("GET companys now: ", this.getCompanys)
+      // this.companysName = this.getCompanys;
+
+      this.companysName = []
+      for(let company of this.getCompanys){
+        this.companysName.push(company.name)
+      }
+      this.companysName.push("company2")
+      this.companysName.push("company3")
+      console.log("companysName now: ", this.companysName)
     });
   },
   mounted() {
     // Fuse search initialization.
-    this.fuseSearch = new Fuse(this.tableData, {
+    this.fuseSearch = new Fuse(this.tableReservationsData, {
       keys: ["code"],
       threshold: 0.3
     });
+    
   },
   watch: {
     /**
@@ -358,15 +402,18 @@ export default {
      * @param value of the query
      */
     searchQuery(value) {
-      let result = this.tableData;
+      let result = this.tableReservationsData;
       if (value !== "") {
         result = this.fuseSearch.search(this.searchQuery);
       }
       this.searchedData = result;
     },
-    monthsValue() {
-      return this.filterReservations("months", this.monthsValue);
-    }
+    monthSearchValue() {
+      return this.filterReservations("months", this.monthSearchValue);
+    },
+    companySearchValue() {
+      return this.filterReservations("companys", this.companySearchValue);
+    },
   }
 };
 </script>
