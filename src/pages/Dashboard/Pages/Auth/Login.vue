@@ -7,7 +7,7 @@
             <div class="card-icon">
               <md-icon>contacts</md-icon>
             </div>
-            <h4 class="title">{{setRole()}} log in</h4>
+            <h4 class="title">{{setRoleName()}} log in</h4>
           </md-card-header>
 
           <md-card-content>
@@ -130,22 +130,22 @@ export default {
       this.touched.email = true;
       this.touched.password = true;
     },
-    setRole() {
-      let role = "";
+    setRoleName() {
+      let roleName = "";
       console.log("role is", this.role);
       if (this.role == "admin") {
-        role = "Administrator";
+        roleName = "Administrator";
       }
       if (this.role == "company") {
-        role = "Company";
+        roleName = "Company";
       }
       if (this.role == "employee") {
-        role = "Employee";
+        roleName = "Employee";
       }
       if (this.role == "driver") {
-        role = "Driver";
+        roleName = "Driver";
       }
-      return role;
+      return roleName;
     },
     goBackToRole() {
       let payload1 = { goBack: false };

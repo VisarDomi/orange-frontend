@@ -2,7 +2,7 @@ export function loginReroute(router, role) {
   if (role == "admin") {
     router.push({ name: "Reservations" });
   }
-  if (role == "company") {
+  if (role == "secretary") {
     router.push({ name: "CompanyReservations" });
   }
   if (role == "employee") {
