@@ -68,7 +68,7 @@
                 </div>
               </div>
 
-              <div class="md-layout md-gutter" v-if="this.driverReservation.status == 'waiting'">
+              <div class="md-layout md-gutter" v-if="this.getDriverReservation.status == 'waiting'">
                 <div class="md-layout-item md-size-30 md-small-size-100 mx-auto">
                   <md-button class="md-warning" @click="acceptReservation()">Accept</md-button>
                 </div>
@@ -142,28 +142,28 @@ export default {
       })
       .then(reservation => {
         console.log("getting back from dispatch: ", reservation);
-        console.log("getting back from getter", this.driverReservation);
-        this.code = this.driverReservation.code;
-        this.date = this.driverReservation.date;
-        this.destination = this.driverReservation.destination;
-        this.pickup = this.driverReservation.pickup;
-        if (this.driverReservation.status == "waiting") {
+        console.log("getting back from getter", this.getDriverReservation);
+        this.code = this.getDriverReservation.code;
+        this.date = this.getDriverReservation.date;
+        this.destination = this.getDriverReservation.destination;
+        this.pickup = this.getDriverReservation.pickup;
+        if (this.getDriverReservation.status == "waiting") {
           this.status = "Waiting for response.";
         }
-        if (this.driverReservation.status == "accepted") {
+        if (this.getDriverReservation.status == "accepted") {
           this.status = "You accepted this itinerary.";
         }
-        if (this.driverReservation.status == "rejected") {
+        if (this.getDriverReservation.status == "rejected") {
           this.status = "You rejected this itinerary.";
         }
 
-        this.company = this.driverReservation.company_id;
-        this.time = this.driverReservation.time;
+        this.company = this.getDriverReservation.company_id;
+        this.time = this.getDriverReservation.time;
       }); //get reservation with store then store it in variable, then get it with mapGetters and plug it into POST invoice
   },
   created() {},
   computed: {
-    ...mapGetters(["driverReservation"])
+    ...mapGetters(["getDriverReservation"])
   }
 
   //need map getter reservationId

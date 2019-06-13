@@ -111,7 +111,7 @@ export default {
     Pagination
   },
   computed: {
-    ...mapGetters(["companyReservations"]),
+    ...mapGetters(["getCompanyReservations"]),
     /***
      * Returns a page from the searched data or the whole data. Search is performed in the watch section below
      */
@@ -240,8 +240,8 @@ export default {
   },
   created() {
     this.$store.dispatch(GET_COMPANY_RESERVATIONS).then(() => {
-      console.log("GET companyReservations now: ", this.companyReservations);
-      this.tableData = this.companyReservations;
+      console.log("GET getCompanyReservations now: ", this.getCompanyReservations);
+      this.tableData = this.getCompanyReservations;
     });
   },
   mounted() {

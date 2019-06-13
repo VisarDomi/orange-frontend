@@ -1,7 +1,10 @@
 <template>
   <div class="content">
     <div class="md-layout">
-      <div class="md-layout-item md-medium-size-100 md-size-66 mx-auto" style="margin-bottom: 50px;">
+      <div
+        class="md-layout-item md-medium-size-100 md-size-66 mx-auto"
+        style="margin-bottom: 50px;"
+      >
         <md-button class="md-warning" @click="createInvoice()">Create invoice for this reservation</md-button>
       </div>
       <div class="md-layout-item md-medium-size-100 md-size-66 mx-auto">
@@ -54,7 +57,6 @@
                       <md-input v-model="companyName" disabled></md-input>
                     </md-field>
                   </div>
-                
 
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
@@ -76,48 +78,35 @@
                       <md-input v-model="status" disabled></md-input>
                     </md-field>
                   </div>
+                </div>
 
-                  </div>
-
-                  
-                    <div class="md-layout-item md-small-size-100 md-size-100">
-                      <div class="md-layout">
-
-                  <div class="md-layout-item md-medium-size-50 md-size-40 mx-auto">
-                        <md-field>
-                      <label class="">Driver</label>
-                          <md-select v-model="selectedDriver" name="driver" id="driver" md-dense>
-                            <md-option
-                              v-for="driver in this.drivers"
-                              :value="driver.id"
-                              :key="driver.id"
-                            >{{driver.full_name}}</md-option>
-                          </md-select>
-                        </md-field>
-                  </div>
-                      <div class="md-layout-item md-medium-size-50 md-size-40 mx-auto">
-                      <md-button class="md-warning" @click="assignDrivers()">Assign driver to this reservation</md-button>
+                <div class="md-layout-item md-small-size-100 md-size-100">
+                  <div class="md-layout">
+                    <div class="md-layout-item md-medium-size-50 md-size-40 mx-auto">
+                      <md-field>
+                        <label class>Driver</label>
+                        <md-select v-model="selectedDriver" name="driver" id="driver" md-dense>
+                          <md-option
+                            v-for="driver in this.getDrivers"
+                            :value="driver.id"
+                            :key="driver.id"
+                          >{{driver.full_name}}</md-option>
+                        </md-select>
+                      </md-field>
                     </div>
-
-
-
-                      </div>
+                    <div class="md-layout-item md-medium-size-50 md-size-40 mx-auto">
+                      <md-button
+                        class="md-warning"
+                        @click="assignDrivers()"
+                      >Assign driver to this reservation</md-button>
                     </div>
+                  </div>
+                </div>
 
-
-
-                  
-
-                    
-                    
-                  
-
-
-
-                  <!-- <div class="md-layout-item md-size-100 text-right">
-                  </div>-->
+                <!-- <div class="md-layout-item md-size-100 text-right">
+                </div>-->
                 <!-- <div class="md-layout md-layout-item md-small-size-100">
-                </div> -->
+                </div>-->
               </div>
             </md-card-content>
           </md-card>
@@ -214,8 +203,8 @@ export default {
       this.$router.push({ name: "Reservations" });
     },
     changeDriverName() {
-      this.driverName = this.driver.full_name;
-      this.status = this.adminReservation.status;
+      this.driverName = this.getDriver.full_name;
+      this.status = this.getAdminReservation.status;
     },
     async updateData() {
       await this.$store
@@ -223,21 +212,21 @@ export default {
           reservationId: this.$route.params.id
         })
         .then(() => {
-          this.code = this.adminReservation.code;
-          this.date = this.adminReservation.date;
-          this.destination = this.adminReservation.destination;
-          this.employees = this.adminReservation.employees;
-          this.pickup = this.adminReservation.pickup;
-          this.time = this.adminReservation.time;
+          this.code = this.getAdminReservation.code;
+          this.date = this.getAdminReservation.date;
+          this.destination = this.getAdminReservation.destination;
+          this.employees = this.getAdminReservation.employees;
+          this.pickup = this.getAdminReservation.pickup;
+          this.time = this.getAdminReservation.time;
         });
       await this.$store.dispatch(GET_DRIVERS).then(() => {
-        console.log(this.drivers);
+        console.log(this.getDrivers);
       });
     },
     async updateDriver() {
       await this.updateData().then(() => {
-        let driverId = this.adminReservation.driver_id;
-        let companyId = this.adminReservation.company_id;
+        let driverId = this.getAdminReservation.driver_id;
+        let companyId = this.getAdminReservation.company_id;
         console.log("driverId is", driverId);
         if (driverId) {
           this.$store.dispatch(GET_DRIVER, { driverId }).then(() => {
@@ -246,21 +235,20 @@ export default {
         }
         if (companyId) {
           this.$store.dispatch(GET_COMPANY, { companyId }).then(() => {
-            this.companyName = this.company.full_name;
+            this.companyName = this.getCompany.full_name;
           });
         }
-        
       });
     }
   },
   mounted() {
     // this.$store.dispatch(ADMIN_GET_RESERVATION) //get reservation with store then store it in variable, then get it with mapGetters and plug it into POST invoice
-    console.log("this.adminReservation.code", this.adminReservation);
+    console.log("this.getAdminReservation.code", this.getAdminReservation);
     this.updateDriver();
   },
   created() {},
   computed: {
-    ...mapGetters(["adminReservation", "drivers", "driver", "company"])
+    ...mapGetters(["getAdminReservation", "getDrivers", "getDriver", "getCompany"])
   }
 
   //need map getter reservationId

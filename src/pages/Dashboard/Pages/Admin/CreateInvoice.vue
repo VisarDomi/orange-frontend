@@ -744,14 +744,14 @@ export default {
           this.completed_invoice.tax = invoice_tax + "";
           this.completed_invoice.sub_total = invoice_sub_total + "";
           console.log(this.invoice_item.rowData)
-          console.log(this.adminInvoice.id)
+          console.log(this.getAdminInvoice.id)
           console.log(UPDATE_ADMIN_INVOICE)
-          console.log(this.adminInvoice.reservation_id)
+          console.log(this.getAdminInvoice.reservation_id)
           console.log(this.completed_invoice)
           this.$store
             .dispatch(UPDATE_ADMIN_INVOICE, {
-              reservationId: this.adminInvoice.reservation_id,
-              invoiceId: this.adminInvoice.id,
+              reservationId: this.getAdminInvoice.reservation_id,
+              invoiceId: this.getAdminInvoice.id,
               invoice: this.completed_invoice,
               items: this.invoice_item.rowData
             })
@@ -760,7 +760,7 @@ export default {
               console.log("Updated invoice.");
               this.$router.push({ name: "InvoiceDetail"        
               ,params: {
-          id: this.adminInvoice.id
+          id: this.getAdminInvoice.id
         } });
             });          
         // }
@@ -769,7 +769,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['adminInvoice'])
+    ...mapGetters(['getAdminInvoice'])
   },
   watch: {
     range() {

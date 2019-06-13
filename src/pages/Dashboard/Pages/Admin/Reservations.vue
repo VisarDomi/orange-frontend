@@ -16,10 +16,9 @@
               :md-sort-order.sync="currentSortOrder"
               :md-sort-fn="customSort"
               @md-selected="onSelect"
-              class="paginated-table  table-hover"
-
+              class="paginated-table table-hover"
             >
-              <md-table-toolbar >
+              <md-table-toolbar>
                 <md-field>
                   <label for="pages">Per page</label>
                   <md-select v-model="pagination.perPage" name="pages">
@@ -44,40 +43,37 @@
                 </md-field>
               </md-table-toolbar>
 
-
-
-              <md-table-toolbar slot="md-table-alternate-header" slot-scope="{ count }" >
+              <md-table-toolbar slot="md-table-alternate-header" slot-scope="{ count }">
                 <div class="md-toolbar-section-start">{{ getAlternateLabel(count) }}</div>
 
                 <div class="md-toolbar-section-end">
-                  <md-button class="md-button md-warning">Create Invoice
+                  <md-button class="md-button md-warning">
+                    Create Invoice
                     <md-icon>credit_card</md-icon>
                   </md-button>
 
                   <md-button class="md-button md-danger">
                     <md-icon>delete</md-icon>
                   </md-button>
-
                 </div>
               </md-table-toolbar>
-        
 
-              <md-table-row 
-                slot="md-table-row" slot-scope="{ item }" 
-                @click.native="open_reservation(item)" 
-                md-selectable="multiple" md-auto-select
+              <md-table-row
+                slot="md-table-row"
+                slot-scope="{ item }"
+                @click.native="open_reservation(item)"
+                md-selectable="multiple"
+                md-auto-select
                 :class="{
                 'table-success': item.status == 'accepted',
                 'table-warning' : item.status =='waiting',
                 'table-danger' : item.status =='rejected'
                 }"
-          
-          >
+              >
                 <md-table-cell md-label="Company" md-sort-by="company_id">
                   {{
-                  item.company.full_name
+                  item.company.name
                   }}
-
                 </md-table-cell>
                 <md-table-cell md-label="Driver" md-sort-by="driver_id">
                   {{
@@ -90,7 +86,7 @@
                 <md-table-cell md-label="KSt" style="justify-content:left;">{{ item.code }}</md-table-cell>
               </md-table-row>
             </md-table>
-            <p>Selected: </p>
+            <p>Selected:</p>
             {{selected}}
             <div class="footer-table md-table">
               <table>
@@ -128,7 +124,11 @@ import { Pagination } from "@/components";
 import users from "../../Tables/users";
 import Fuse from "fuse.js";
 import swal from "sweetalert2";
-import { GET_ADMIN_RESERVATIONS, GET_ADMIN_RESERVATION, GET_COMPANY } from "@/store/actions.type";
+import {
+  GET_ADMIN_RESERVATIONS,
+  GET_ADMIN_RESERVATION,
+  GET_COMPANY
+} from "@/store/actions.type";
 import { mapGetters } from "vuex";
 
 export default {
@@ -137,7 +137,7 @@ export default {
     Pagination
   },
   computed: {
-    ...mapGetters(["adminReservations", "company"]),
+    ...mapGetters(["getAdminReservations", "getCompany"]),
     /***
      * Returns a page from the searched data or the whole data. Search is performed in the watch section below
      */
@@ -184,7 +184,15 @@ export default {
         perPageOptions: [5, 10, 25, 50],
         total: 0
       },
-      footerTable: ["Company", "Driver", "Status", "Destination", "Date", "Drivers", "KSt"],
+      footerTable: [
+        "Company",
+        "Driver",
+        "Status",
+        "Destination",
+        "Date",
+        "Drivers",
+        "KSt"
+      ],
       searchQuery: "",
       propsToSearch: ["name", "email", "age"],
       tableData: [],
@@ -193,15 +201,15 @@ export default {
     };
   },
   methods: {
-      getAlternateLabel (count) {
-        let plural = ''
+    getAlternateLabel(count) {
+      let plural = "";
 
-        if (count > 1) {
-          plural = 's'
-        }
+      if (count > 1) {
+        plural = "s";
+      }
 
-        return `${count} reservation${plural} selected`
-      },
+      return `${count} reservation${plural} selected`;
+    },
     onSelect(items) {
       this.selected = items;
     },
@@ -276,11 +284,9 @@ export default {
   },
   created() {
     this.$store.dispatch(GET_ADMIN_RESERVATIONS).then(() => {
-      console.log("GET reservations now: ", this.adminReservations);
-      this.tableData = this.adminReservations;
-      
+      console.log("GET reservations now: ", this.getAdminReservations);
+      this.tableData = this.getAdminReservations;
     });
-
   },
   mounted() {
     // Fuse search initialization.
@@ -314,13 +320,16 @@ export default {
 }
 
 .md-table.md-theme-default .md-table-alternate-header .md-table-toolbar {
-    color: rgba(0, 0, 0, 0.87);
-    color: var(--md-theme-default-text-primary-on-background, rgba(0, 0, 0, 0.87));
-    background-color: rgba(255, 82, 82, 0.2);
-    background-color: var(--md-theme-default-accent-on-, rgba(255, 82, 82, 0.2));
+  color: rgba(0, 0, 0, 0.87);
+  color: var(
+    --md-theme-default-text-primary-on-background,
+    rgba(0, 0, 0, 0.87)
+  );
+  background-color: rgba(255, 82, 82, 0.2);
+  background-color: var(--md-theme-default-accent-on-, rgba(255, 82, 82, 0.2));
 }
 
-.md-table-alternate-header{
+.md-table-alternate-header {
   padding-left: 30px;
   padding-right: 30px;
 }
@@ -328,8 +337,6 @@ export default {
 
 
 <style>
-
-
 .md-card .md-card-actions {
   border: 0;
   margin-left: 20px;
@@ -337,74 +344,70 @@ export default {
 }
 
 .md-table.md-theme-default .md-table-alternate-header .md-table-toolbar {
-    color: rgba(0, 0, 0, 0.87);
-    color: var(--md-theme-default-text-primary-on-background, rgba(0, 0, 0, 0.87));
-    background-color: rgba(255, 82, 82, 0.2);
-    background-color: var(--md-theme-default-accent-on-, rgba(255, 82, 82, 0.2));
+  color: rgba(0, 0, 0, 0.87);
+  color: var(
+    --md-theme-default-text-primary-on-background,
+    rgba(0, 0, 0, 0.87)
+  );
+  background-color: rgba(255, 82, 82, 0.2);
+  background-color: var(--md-theme-default-accent-on-, rgba(255, 82, 82, 0.2));
 }
 
-.md-table-alternate-header{
+.md-table-alternate-header {
   padding-left: 20px;
   margin-top: 13px;
   padding-right: 20px;
 }
 
-
-
-
-
-
 .md-card .md-card-header-green .card-icon {
-    background: orange;
+  background: orange;
 }
 
-.md-toolbar-section-end .md-button{
-    margin-bottom: 5px;
-    margin-right: 5px;
+.md-toolbar-section-end .md-button {
+  margin-bottom: 5px;
+  margin-right: 5px;
 }
 
 .md-toolbar .md-button:first-child {
-    margin-left: 0;
-    margin-bottom: 5px;
-    margin-right: 5px;
+  margin-left: 0;
+  margin-bottom: 5px;
+  margin-right: 5px;
 }
 
-.md-toolbar-section-end, .md-toolbar-section-start {
-    display: flex;
-    align-items: center;
-    flex: 1;
-    margin-left: 5px;
+.md-toolbar-section-end,
+.md-toolbar-section-start {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  margin-left: 5px;
 }
 
-tr > .md-ripple{
-  display:none;
+tr > .md-ripple {
+  display: none;
 }
 
-
-.md-table-alternate-header .md-transparent{
-      background-color: #eee !important;
-    -webkit-box-shadow: none;
-    box-shadow: none;
+.md-table-alternate-header .md-transparent {
+  background-color: #eee !important;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
-.md-table-cell-selection .md-table-cell-container{
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: left;
-    overflow: visible;
-    margin-left: 5px;
-}
-
- .md-table-cell-selection .md-table-head-label {
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: left;
-    overflow: visible;
-    margin-left: 5px;
+.md-table-cell-selection .md-table-cell-container {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  overflow: visible;
+  margin-left: 5px;
 }
 
-
+.md-table-cell-selection .md-table-head-label {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  overflow: visible;
+  margin-left: 5px;
+}
 
 /* .md-toolbar.md-transparent.md-theme-default {
     background-color: lightblue !important;
@@ -412,7 +415,7 @@ tr > .md-ripple{
     box-shadow: none;
 } */
 
-.md-table-cell-selection .md-table-head-container{
-  justify-content:left;
+.md-table-cell-selection .md-table-head-container {
+  justify-content: left;
 }
 </style>

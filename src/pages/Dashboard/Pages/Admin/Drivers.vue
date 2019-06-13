@@ -26,7 +26,7 @@
             <md-card-actions md-alignment="space-between">
               <!-- <div>
                 <md-button class="md-warning" @click.native="open_driver(driver)">Details</md-button>
-              </div> -->
+              </div>-->
               <md-card-expand-trigger>
                 <md-button class="md-button md-warning">
                   <md-icon>keyboard_arrow_down</md-icon>Details
@@ -37,38 +37,31 @@
             <md-card-expand-content>
               <md-card-content>
                 <md-field>
-                    <label>Full Name</label>
-                    <md-input  
-                      v-model="driver.full_name" 
-                      :disabled="!driver.nameEditable"
-                    ></md-input>
+                  <label>Full Name</label>
+                  <md-input v-model="driver.full_name" :disabled="!driver.nameEditable"></md-input>
 
-                    <md-button
-                      v-if="!driver.nameEditable"
-                      class="md-just-icon md-warning md-simple"
-                      @click="enableNameEditing(driver.id)"
-                    >
-                      <md-icon>edit</md-icon>
-                    </md-button>
-                    <md-button
-                      v-if="driver.nameEditable"
-                      class="md-just-icon md-warning md-simple"
-                      @click="saveDriver(driver, 'driverName')"
-                    >
-                      <md-icon>done</md-icon>
-                    </md-button>
-                    
-                  </md-field>
-                  <md-field>
-                    <label>Status</label>
-                    <md-input 
-                      v-model="driver.status"
-                      :disabled="!driver.statusEditable"
-                    ></md-input>
-                  </md-field>
-                  <div>
-                    <md-button class="md-danger" @click.native="delete_driver(driver, index)">Delete</md-button>
-                  </div>
+                  <md-button
+                    v-if="!driver.nameEditable"
+                    class="md-just-icon md-warning md-simple"
+                    @click="enableNameEditing(driver.id)"
+                  >
+                    <md-icon>edit</md-icon>
+                  </md-button>
+                  <md-button
+                    v-if="driver.nameEditable"
+                    class="md-just-icon md-warning md-simple"
+                    @click="saveDriver(driver, 'driverName')"
+                  >
+                    <md-icon>done</md-icon>
+                  </md-button>
+                </md-field>
+                <md-field>
+                  <label>Status</label>
+                  <md-input v-model="driver.status" :disabled="!driver.statusEditable"></md-input>
+                </md-field>
+                <div>
+                  <md-button class="md-danger" @click.native="delete_driver(driver, index)">Delete</md-button>
+                </div>
               </md-card-content>
             </md-card-expand-content>
           </md-card-expand>
@@ -80,7 +73,12 @@
 
 <script>
 import { PricingCard, TestimonialCard } from "@/components";
-import { GET_DRIVERS, GET_DRIVER, UPDATE_DRIVER, DELETE_DRIVER } from "@/store/actions.type";
+import {
+  GET_DRIVERS,
+  GET_DRIVER,
+  UPDATE_DRIVER,
+  DELETE_DRIVER
+} from "@/store/actions.type";
 
 import { mapGetters } from "vuex";
 export default {
@@ -98,39 +96,39 @@ export default {
   },
   data() {
     return {
-      driversData: [],
+      driversData: []
     };
   },
   methods: {
-    enableNameEditing(id){
-      for(let driver in this.driversData){
-        if(this.driversData[driver].id == id){
+    enableNameEditing(id) {
+      for (let driver in this.driversData) {
+        if (this.driversData[driver].id == id) {
           this.driversData[driver].nameEditable = true;
-          let cloneDriver = {...this.driversData[driver]}
+          let cloneDriver = { ...this.driversData[driver] };
           this.driversData.splice(driver, 1);
           this.driversData.splice(driver, 0, cloneDriver);
         }
       }
     },
-    saveDriver(driver, editing){
-      if(editing == "driverName"){
-        driver.nameEditable = false
-      }else{
-        driver.statusEditable = false
+    saveDriver(driver, editing) {
+      if (editing == "driverName") {
+        driver.nameEditable = false;
+      } else {
+        driver.statusEditable = false;
       }
       let driverData = {
         full_name: driver.full_name,
         status: driver.status,
         driverId: driver.id
-      }
-      console.log(driverData)
+      };
+      console.log(driverData);
       this.$store.dispatch(UPDATE_DRIVER, driverData);
     },
-    delete_driver(driver, index){
+    delete_driver(driver, index) {
       this.$store.dispatch(DELETE_DRIVER, driver).then(() => {
         this.$store.dispatch(GET_DRIVERS);
       });
-      
+
       this.driversData.splice(index, 1);
     },
     addDriver() {
@@ -155,20 +153,20 @@ export default {
   },
   mounted() {
     this.$store.dispatch(GET_DRIVERS).then(() => {
-      for(let driver of this.drivers){
+      for (let driver of this.getDrivers) {
         this.driversData.push(driver);
       }
-      for(let driver of this.driversData){
-        console.log("driver object is: ", driver)
-        driver.nameEditable = false
-        driver.statusEditable = false
+      for (let driver of this.driversData) {
+        console.log("driver object is: ", driver);
+        driver.nameEditable = false;
+        driver.statusEditable = false;
       }
-    })
+    });
     this.onResponsiveInverted();
     window.addEventListener("resize", this.onResponsiveInverted);
   },
   computed: {
-    ...mapGetters(["drivers"])
+    ...mapGetters(["getDrivers"])
   },
   beforeDestroy() {
     window.removeEventListener("resize", this.onResponsiveInverted);

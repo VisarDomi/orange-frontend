@@ -72,7 +72,7 @@ export default {
     return {};
   },
   computed: {
-    ...mapGetters(["role"])
+    // ...mapGetters(["getRole"])
   },
   methods: {
     login(role) {

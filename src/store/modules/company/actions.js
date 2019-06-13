@@ -113,7 +113,7 @@ export const actions = {
     let companyId = getUser().role_id;
     console.log("companyID is: ", companyId);
     await CompanyService.getInvoices(companyId).then(({ data }) => {
-      console.log("Setting companyInvoice data...");
+      console.log("Setting getCompanyInvoice data...");
       context.commit(SET_COMPANY_INVOICES, data);
       return data;
     });
@@ -122,7 +122,7 @@ export const actions = {
     const { invoiceId } = payload;
     let companyId = getUser().role_id;
     await CompanyService.getInvoice(companyId, invoiceId).then(({ data }) => {
-      console.log("Setting companyInvoice data...");
+      console.log("Setting getCompanyInvoice data...");
       context.commit(SET_COMPANY_INVOICE, data);
       return data;
     });

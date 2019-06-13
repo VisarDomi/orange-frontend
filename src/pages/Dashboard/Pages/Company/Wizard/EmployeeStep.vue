@@ -49,7 +49,7 @@
           >
             <!-- vue will complain about value holding an object, but its just a warning -->
             <md-option
-              v-for="employee in this.employees"
+              v-for="employee in this.getEmployees"
               :value="employee.id"
               :key="employee.id"
             >{{employee.full_name}}</md-option>
@@ -408,7 +408,7 @@ export default {
       //go through array employees, then handpick the ones that have been selected from the dropdown
       //and push them into the row data
 
-      for (let employee of this.employees) {
+      for (let employee of this.getEmployees) {
         for (let selected of this.selectedEmployees) {
           if (employee.id == selected) {
             employeeStops.push({
@@ -485,10 +485,10 @@ export default {
   },
   created() {
     this.$store.dispatch(GET_EMPLOYEES);
-    console.log(this.employees)
+    console.log(this.getEmployees)
   },
   computed: {
-    ...mapGetters(["employees"])
+    ...mapGetters(["getEmployees"])
   }
 };
 </script>

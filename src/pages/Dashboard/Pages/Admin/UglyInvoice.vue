@@ -278,7 +278,7 @@ export default {
   //     this.$store.dispatch(GET_ADMIN_INVOICE, { invoiceId: this.$route.params.id });
   //   },
   //   computed: {
-  //     ...mapGetters(["adminInvoice"])
+  //     ...mapGetters(["getAdminInvoice"])
   //   }
 };
 </script>

@@ -1,6 +1,6 @@
 export const getters = {
-  drivers: state => state.drivers,
-  driver: state => state.driver,
-  driverReservations: state => state.driverReservations,
-  driverReservation: state => state.driverReservation
+  getDrivers: state => state.drivers,
+  getDriver: state => state.driver,
+  getDriverReservations: state => state.driverReservations,
+  getDriverReservation: state => state.driverReservation
 };

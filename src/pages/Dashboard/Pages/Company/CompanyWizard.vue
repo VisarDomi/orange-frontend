@@ -49,7 +49,7 @@ export default {
     WizardTab
   },
   computed: {
-    ...mapGetters(["companyReservation"])
+    ...mapGetters(["getCompanyReservation"])
   },
   methods: {
     validateStep(ref) {
@@ -60,7 +60,7 @@ export default {
     },
     wizardComplete() {
       console.log("COMPLETED");
-      let payload = this.companyReservation;
+      let payload = this.getCompanyReservation;
       this.$store.dispatch(CREATE_COMPANY_RESERVATION, payload);
 
       this.$router.push({ name: "CompanyReservations" });

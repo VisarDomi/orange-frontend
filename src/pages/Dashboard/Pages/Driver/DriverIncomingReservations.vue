@@ -85,12 +85,12 @@ export default {
   },
   created() {
     this.$store.dispatch(GET_DRIVER_RESERVATIONS).then(() => {
-      console.log("incomingReservaitons ", this.driverReservations);
-      this.incomingReservationsData = this.driverReservations;
+      console.log("incomingReservaitons ", this.getDriverReservations);
+      this.incomingReservationsData = this.getDriverReservations;
     });
   },
   computed: {
-    ...mapGetters(["driverReservations"])
+    ...mapGetters(["getDriverReservations"])
   },
   beforeDestroy() {
     window.removeEventListener("resize", this.onResponsiveInverted);

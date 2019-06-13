@@ -1,3 +1,3 @@
 export const getters = {
-  isLoading: state => state.isLoading
+  getIsLoading: state => state.isLoading
 };

@@ -8,7 +8,7 @@
 
     <div class="md-layout">
       <div
-        v-for="company in this.companys"
+        v-for="company in this.getCompanys"
         :key="company.id"
         class="md-layout-item md-large-size-20 md-xlarge-size-20 md-medium-size-33 md-small-size-50 md-xsmall-size-100 auto-mx"
       >
@@ -18,7 +18,7 @@
           </md-card-media>-->
 
           <md-card-header>
-            <div class="md-title">{{company.full_name}}</div>
+            <div class="md-title">{{company.name}}</div>
             <div class="md-subhead">Company</div>
           </md-card-header>
 
@@ -87,7 +87,7 @@ export default {
     window.addEventListener("resize", this.onResponsiveInverted);
   },
   computed: {
-    ...mapGetters(["companys"])
+    ...mapGetters(["getCompanys"])
   },
   beforeDestroy() {
     window.removeEventListener("resize", this.onResponsiveInverted);

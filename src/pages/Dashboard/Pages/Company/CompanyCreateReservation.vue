@@ -25,7 +25,7 @@
                     multiple
                   >
                     <md-option
-                      v-for="employee in this.employees"
+                      v-for="employee in this.getEmployees"
                       :value="employee.id"
                       :key="employee.id"
                     >{{employee.full_name}}</md-option>
@@ -222,7 +222,7 @@ export default {
     window.removeEventListener("resize", this.onResponsiveInverted);
   },
   computed: {
-    ...mapGetters(["employees"])
+    ...mapGetters(["getEmployees"])
   }
 };
 </script>

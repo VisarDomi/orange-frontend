@@ -5,7 +5,7 @@
         <h3>Reservation stops</h3>
         <div class="md-card md-card-timeline md-theme-default md-card-plain">
           <ul class="timeline timeline-simple">
-            <li class="timeline-inverted" v-for="stop of companyReservation.stops" >
+            <li class="timeline-inverted" v-for="stop of getCompanyReservation.stops" >
               <div class="timeline-badge warning">
                 <i class="md-icon md-icon-font md-theme-default">person</i>
               </div>
@@ -33,7 +33,7 @@
               </div>
               <div class="timeline-panel">
                 <div class="timeline-heading">
-                  <span class="badge badge-danger">{{companyReservation.destination}}</span>
+                  <span class="badge badge-danger">{{getCompanyReservation.destination}}</span>
                 </div>
                 <div class="timeline-body">
                   <p>
@@ -87,14 +87,14 @@
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
                       <label>Payment Method</label>
-                      <md-input v-model="companyReservation.payment_method" disabled></md-input>
+                      <md-input v-model="getCompanyReservation.payment_method" disabled></md-input>
                     </md-field>
                   </div>
 
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
                       <label>Vehicle Type</label>
-                      <md-input v-model="companyReservation.vehicle_type" disabled></md-input>
+                      <md-input v-model="getCompanyReservation.vehicle_type" disabled></md-input>
                     </md-field>
                   </div>
                   <!-- <div class="md-layout-item md-size-100 text-right">
@@ -121,7 +121,7 @@ export default {
   },
   data() {
     return {
-      code: "",
+      name: "",
       date: "",
       destination: "",
       employees: "",
@@ -138,17 +138,17 @@ export default {
         reservationId: this.$route.params.id
       })
       .then(() => {
-        this.code = this.companyReservation.code;
-        this.date = this.companyReservation.date;
-        this.destination = this.companyReservation.destination;
-        this.employees = this.companyReservation.employees;
-        this.pickup = this.companyReservation.pickup;
-        this.status = this.companyReservation.status;
-        this.time = this.companyReservation.time;
+        this.name = this.getCompanyReservation.name;
+        this.date = this.getCompanyReservation.date;
+        this.destination = this.getCompanyReservation.destination;
+        this.employees = this.getCompanyReservation.employees;
+        this.pickup = this.getCompanyReservation.pickup;
+        this.status = this.getCompanyReservation.status;
+        this.time = this.getCompanyReservation.time;
       });
   },
   computed: {
-    ...mapGetters(["companyReservation"])
+    ...mapGetters(["getCompanyReservation"])
   }
 };
 </script>

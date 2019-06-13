@@ -42,15 +42,13 @@
               </div>
             </div>
 
-          <div class="md-layout">
-            <label class="md-layout-item md-size-15 md-form-label">
-              Payment frequency
-            </label>
-            <div class="md-layout-item md-inline-checkboxes" style="padding-top: 20px;">
-              <md-radio v-model="paymentFrequency" :value="true">Monthly</md-radio>
-              <md-radio v-model="paymentFrequency" :value="false">Individual</md-radio>
+            <div class="md-layout">
+              <label class="md-layout-item md-size-15 md-form-label">Payment frequency</label>
+              <div class="md-layout-item md-inline-checkboxes" style="padding-top: 20px;">
+                <md-radio v-model="paymentFrequency" :value="true">Monthly</md-radio>
+                <md-radio v-model="paymentFrequency" :value="false">Individual</md-radio>
+              </div>
             </div>
-          </div>
 
             <div class="md-layout" style="margin-top:50px;">
               <div class="md-layout-item mx-auto md-size-30">
@@ -89,19 +87,18 @@ export default {
   },
   methods: {
     onSubmit() {
-
       let company = {
         email: this.email,
         password: this.password,
-        name: this.name, 
-        paymentFrequency: ""
+        name: this.name,
+        payment_frequency: ""
       };
-        if(this.paymentFrequency == true){
-            company.paymentFrequency = "monthly"
-        }else{
-            company.paymentFrequency = "individual"
-        }
-        console.log("value of radio: ", company)
+      if (this.paymentFrequency == true) {
+        company.payment_frequency = "monthly";
+      } else {
+        company.payment_frequency = "individual";
+      }
+      console.log("value of radio: ", company);
 
       this.$store.dispatch(CREATE_COMPANY, company).then(() => {
         this.$router.push({ name: "Companies" });
@@ -154,8 +151,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-
-
 .md-card .md-card-actions {
   border: none;
 }
@@ -198,10 +193,10 @@ export default {
 
 <style>
 .md-radio.md-checked .md-radio-container {
-    border-color: orange !important;
+  border-color: orange !important;
 }
 
 .md-radio.md-checked .md-radio-container:after {
-    background-color: orange !important;
+  background-color: orange !important;
 }
 </style>

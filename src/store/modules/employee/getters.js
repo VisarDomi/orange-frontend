@@ -1,6 +1,6 @@
 export const getters = {
-  employees: state => state.employees,
-  employee: state => state.employee,
-  employeeReservations: state => state.employeeReservations,
-  employeeReservation: state => state.employeeReservation
+  getEmployees: state => state.employees,
+  getEmployee: state => state.employee,
+  getEmployeeReservations: state => state.employeeReservations,
+  getEmployeeReservation: state => state.employeeReservation
 };

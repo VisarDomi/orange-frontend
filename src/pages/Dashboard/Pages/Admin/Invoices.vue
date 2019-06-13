@@ -105,7 +105,7 @@ export default {
     Pagination
   },
   computed: {
-    ...mapGetters(["adminInvoices"]),
+    ...mapGetters(["getAdminInvoices"]),
     /***
      * Returns a page from the searched data or the whole data. Search is performed in the watch section below
      */
@@ -231,8 +231,8 @@ export default {
   },
   created() {
     this.$store.dispatch(GET_ADMIN_INVOICES).then(() => {
-      console.log("GET invoices now: ", this.adminInvoices);
-      this.tableData = this.adminInvoices;
+      console.log("GET invoices now: ", this.getAdminInvoices);
+      this.tableData = this.getAdminInvoices;
     });
   },
   mounted() {

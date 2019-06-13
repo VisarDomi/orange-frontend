@@ -45,7 +45,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['companyReservation'])
+    ...mapGetters(['getCompanyReservation'])
   },
   methods: {
     validate() {
@@ -87,8 +87,8 @@ export default {
         ["0", "0"]
       ]
       let luggages = [
-        this.companyReservation.big_luggage,
-        this.companyReservation.small_luggage
+        this.getCompanyReservation.big_luggage,
+        this.getCompanyReservation.small_luggage
       ]
       for(let combination of combinations){
         if(JSON.stringify(luggages)==JSON.stringify(combination)){
@@ -98,7 +98,7 @@ export default {
       return false
     },
     economyLimoSelected() {
-      if(!this.companyReservation.stops.length > 2 && this.controllLuggage()){
+      if(!this.getCompanyReservation.stops.length > 2 && this.controllLuggage()){
         this.model.economyLimo = true;
         this.model.economyBus = false;
         this.model.businessBus = false;
@@ -116,7 +116,7 @@ export default {
       this.message = "Please Continue"
     },
     businessLimoSelected() {
-      if(!this.companyReservation.stops.length > 3 && this.controllLuggage()){
+      if(!this.getCompanyReservation.stops.length > 3 && this.controllLuggage()){
         this.model.economyLimo = false;
         this.model.economyBus = false;
         this.model.businessBus = false;

@@ -38,46 +38,46 @@
                     <small>From,</small>
                     <br>
                     <br>
-                    <h6>{{adminInvoice.from_business_name}}</h6>
+                    <h6>{{getAdminInvoice.from_business_name}}</h6>
                     <address>
-                      {{adminInvoice.from_addressline_1}}
+                      {{getAdminInvoice.from_addressline_1}}
                       <br>
-                      {{adminInvoice.from_addressline_2}}
+                      {{getAdminInvoice.from_addressline_2}}
                       <br>
-                      {{adminInvoice.from_city}}, {{adminInvoice.from_postcode}}
+                      {{getAdminInvoice.from_city}}, {{getAdminInvoice.from_postcode}}
                       <br>
-                      Phone: {{adminInvoice.from_phone}}
+                      Phone: {{getAdminInvoice.from_phone}}
                       <br>
-                      VAT: {{adminInvoice.from_vat}}
+                      VAT: {{getAdminInvoice.from_vat}}
                     </address>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-4">
                     <small>To,</small>
                     <br>
                     <br>
-                    <h6>{{adminInvoice.to_client_name}}</h6>
+                    <h6>{{getAdminInvoice.to_client_name}}</h6>
                     <address>
-                      {{adminInvoice.to_addressline_1}}
+                      {{getAdminInvoice.to_addressline_1}}
                       <br>
-                      {{adminInvoice.to_addressline_2}}
+                      {{getAdminInvoice.to_addressline_2}}
                       <br>
-                      {{adminInvoice.to_city}}, {{adminInvoice.to_postcode}}
+                      {{getAdminInvoice.to_city}}, {{getAdminInvoice.to_postcode}}
                       <br>
-                      Phone: {{adminInvoice.to_phone}}
+                      Phone: {{getAdminInvoice.to_phone}}
                       <br>
-                      VAT: {{adminInvoice.to_vat}}
+                      VAT: {{getAdminInvoice.to_vat}}
                     </address>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-4">
                     <div class="invoice-details">
                       <small>
                         Invoice No -
-                        <span class="badge badge-warning">#{{adminInvoice.ref}}</span>
+                        <span class="badge badge-warning">#{{getAdminInvoice.ref}}</span>
                       </small>
                       <br>
-                      <small>Sent - {{adminInvoice.date | prettyDate}}</small>
+                      <small>Sent - {{getAdminInvoice.date | prettyDate}}</small>
                       <br>
-                      <small>Due - {{adminInvoice.due | prettyDate}}</small>
+                      <small>Due - {{getAdminInvoice.due | prettyDate}}</small>
                       <br>
                     </div>
                   </div>
@@ -91,9 +91,9 @@
                 <div class="row gutters">
                   <div class="col-lg-6 col-md-6 col-sm-6">
                     <p>
-                      <b>Hello, {{adminInvoice.to_client_name}}</b>
+                      <b>Hello, {{getAdminInvoice.to_client_name}}</b>
                     </p>
-                    <p>{{adminInvoice.invoice_notes}}</p>
+                    <p>{{getAdminInvoice.invoice_notes}}</p>
                     <br>
                   </div>
                   <div class="col-lg-6 col-md-6 col-sm-6"></div>
@@ -117,7 +117,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr v-for="item in adminInvoice.items" :key="item.id">
+                          <tr v-for="item in getAdminInvoice.items" :key="item.id">
                             <td>
                               {{item.description}}
                               <!-- <p class="m-0 text-muted">
@@ -165,14 +165,14 @@
                             </td>
                             <td>
                               <h5 class="text-warning">
-                                <strong>{{parseFloat(adminInvoice.grand_total) | money}}</strong>
+                                <strong>{{parseFloat(getAdminInvoice.grand_total) | money}}</strong>
                               </h5>
                               <p>
-                                <!-- {{adminInvoice.sub_total | money}} -->
+                                <!-- {{getAdminInvoice.sub_total | money}} -->
                                 <!-- <br> -->
-                                {{parseFloat(adminInvoice.discount) | money}}
+                                {{parseFloat(getAdminInvoice.discount) | money}}
                                 <br>
-                                {{parseFloat(adminInvoice.tax) | money}}
+                                {{parseFloat(getAdminInvoice.tax) | money}}
                                 <br>
                               </p>
                             </td>
@@ -208,9 +208,9 @@
                           <td style="text-align: left;">
                             <br>
                             <br>
-                            <p>{{adminInvoice.payment_account_name}}</p>
-                            <p>{{adminInvoice.payment_account_sortcode}}</p>
-                            <p>{{adminInvoice.payment_account_number}}</p>
+                            <p>{{getAdminInvoice.payment_account_name}}</p>
+                            <p>{{getAdminInvoice.payment_account_sortcode}}</p>
+                            <p>{{getAdminInvoice.payment_account_number}}</p>
                           </td>
                         </tr>
                       </tbody>
@@ -269,7 +269,7 @@ export default {
     this.$store.dispatch(GET_ADMIN_INVOICE, { invoiceId: this.$route.params.id });
   },
   computed: {
-    ...mapGetters(["adminInvoice"])
+    ...mapGetters(["getAdminInvoice"])
   }
 };
 </script>

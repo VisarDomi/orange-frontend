@@ -61,7 +61,7 @@
           </md-card-actions>
         </md-card>
       </form>
-      <md-card v-if="goBack">
+      <md-card v-if="getGoBack">
         <md-card-header class="md-card-header-icon md-card-header-warning">
           <div class="card-icon">
             <md-icon>announcement</md-icon>
@@ -74,7 +74,7 @@
           </md-card-actions>
         </md-card-content>
       </md-card>
-      <md-card v-if="badEmail">
+      <md-card v-if="getBadEmail">
         <md-card-header class="md-card-header-icon md-card-header-warning">
           <div class="card-icon">
             <md-icon>announcement</md-icon>
@@ -132,17 +132,17 @@ export default {
     },
     setRoleName() {
       let roleName = "";
-      console.log("role is", this.role);
-      if (this.role == "admin") {
+      console.log("role is", this.getRole);
+      if (this.getRole == "admin") {
         roleName = "Administrator";
       }
-      if (this.role == "company") {
+      if (this.getRole == "company") {
         roleName = "Company";
       }
-      if (this.role == "employee") {
+      if (this.getRole == "employee") {
         roleName = "Employee";
       }
-      if (this.role == "driver") {
+      if (this.getRole == "driver") {
         roleName = "Driver";
       }
       return roleName;
@@ -158,16 +158,16 @@ export default {
       let payload = {
         username: this.email,
         password: this.password,
-        role: this.role
+        role: this.getRole
       };
       console.log("payload are", payload);
 
       await this.$store.dispatch(LOGIN, payload).then(() => {
-        console.log("in then of LOGIN: this.user.role", this.user.role);
-        // now reroute to the pages depending on the this.user.role
+        console.log("in then of LOGIN: this.getUser.role", this.getUser.role);
+        // now reroute to the pages depending on the this.getUser.role
       });
 
-      loginReroute(this.$router, this.user.role);
+      loginReroute(this.$router, this.getUser.role);
     }
   },
   watch: {
@@ -179,11 +179,11 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["role", "user", "goBack", "badEmail"])
+    ...mapGetters(["getRole", "getUser", "getGoBack", "getBadEmail"])
   },
   created() {
-    console.log("mounted role is ", this.role);
-    if (this.role == "") {
+    console.log("mounted role is ", this.getRole);
+    if (this.getRole == "") {
       this.$router.push({ name: "Role" });
     }
   }

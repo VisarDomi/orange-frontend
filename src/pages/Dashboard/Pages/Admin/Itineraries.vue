@@ -187,8 +187,8 @@ export default {
     Pagination
   },
   computed: {
-    ...mapGetters(["adminInvoices"]),
-    // ...mapGetters(["adminItinerarys"]),
+    ...mapGetters(["getAdminInvoices"]),
+    // ...mapGetters(["getAdminItinerarys"]),
     /***
      * Returns a page from the searched data or the whole data. Search is performed in the watch section below
      */
@@ -263,7 +263,7 @@ export default {
       // this.$store.dispatch(CREATE_ADMIN_ITINERARY, itinerary);
       // update tableData
       // this.$store.dispatch(GET_ADMIN_ITINERARYS).then(() => {
-      //     let clone = JSON.parse(JSON.stringify(this.adminItinerarys));
+      //     let clone = JSON.parse(JSON.stringify(this.getAdminItinerarys));
       //     this.tableData = clone;
       this.tableData.push({id: "placeholder", destination: "placeholder", grand_total: "placeholder"})
     },
@@ -349,24 +349,24 @@ export default {
   },
   created() {
     // this.$store.dispatch(GET_ADMIN_ITINERARYS).then(() => {
-    //   console.log("GET itinerarys now: ", this.adminItinerarys);
-    //     for(let item in this.adminItinerarys){
-    //         this.adminItinerarys[item].editable = false;
+    //   console.log("GET itinerarys now: ", this.getAdminItinerarys);
+    //     for(let item in this.getAdminItinerarys){
+    //         this.getAdminItinerarys[item].editable = false;
     //     }     
 
     //     //more shitfuck to clone the state array coming from store to stop vue from complaining about messing with state outside mutators
-    //     let clone = JSON.parse(JSON.stringify(this.adminItinerarys));
+    //     let clone = JSON.parse(JSON.stringify(this.getAdminItinerarys));
     //     console.log("b? ", clone)
     //   this.tableData = clone;
     // });
     this.$store.dispatch(GET_ADMIN_INVOICES).then(() => {
-      console.log("GET invoices now: ", this.adminInvoices);
-        for(let item in this.adminInvoices){
-            this.adminInvoices[item].editable = false;
+      console.log("GET invoices now: ", this.getAdminInvoices);
+        for(let item in this.getAdminInvoices){
+            this.getAdminInvoices[item].editable = false;
         }     
 
         //more shitfuck to clone the state array coming from store to stop vue from complaining about messing with state outside mutators
-        let clone = JSON.parse(JSON.stringify(this.adminInvoices));
+        let clone = JSON.parse(JSON.stringify(this.getAdminInvoices));
         console.log("b? ", clone)
       this.tableData = clone;
     });

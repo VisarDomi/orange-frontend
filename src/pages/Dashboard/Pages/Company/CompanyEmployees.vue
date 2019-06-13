@@ -8,7 +8,7 @@
 
     <div class="md-layout">
       <div
-        v-for="employee in this.employees"
+        v-for="employee in this.getEmployees"
         :key="employee.id"
         class="md-layout-item md-large-size-20 md-xlarge-size-20 md-medium-size-33 md-small-size-50 md-xsmall-size-100 auto-mx"
       >
@@ -89,7 +89,7 @@ export default {
     window.addEventListener("resize", this.onResponsiveInverted);
   },
   computed: {
-    ...mapGetters(["employees"])
+    ...mapGetters(["getEmployees"])
   },
   beforeDestroy() {
     window.removeEventListener("resize", this.onResponsiveInverted);

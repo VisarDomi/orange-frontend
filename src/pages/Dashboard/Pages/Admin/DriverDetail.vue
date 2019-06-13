@@ -109,12 +109,12 @@ export default {
         driverId: this.$route.params.id
       })
       .then(() => {
-        this.full_name = this.driver.full_name;
-        this.status = this.driver.status;
+        this.full_name = this.getDriver.full_name;
+        this.status = this.getDriver.status;
       });
   },
   computed: {
-    ...mapGetters(["driver"])
+    ...mapGetters(["getDriver"])
   }
 };
 </script>
