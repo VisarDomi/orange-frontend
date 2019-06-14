@@ -14,25 +14,14 @@ import {
   SET_DRIVER_RESERVATIONS,
   SET_DRIVER_RESERVATION
 } from "../../mutations.type";
-import { DriverService, UserService } from "../../services/api";
+import { DriverService } from "../../services/api";
 import { getUser } from "../../services/userstorage";
 
 export const actions = {
-  async [CREATE_DRIVER](context, payload) {
-    let user_id = "";
-    console.log(payload.email);
-    await UserService.createUser({
-      email: payload.email,
-      password: payload.password
-    }).then(({ data }) => {
-      user_id = data.id + "";
-      return data;
-    });
-    let driver = {
-      full_name: payload.name,
-      user_id: user_id
-    };
+  async [CREATE_DRIVER](context, driver) {
+    console.log("driver:", driver)
     await DriverService.createDriver(driver).then(({ data }) => {
+      console.log("create driver return data", data)
       return data;
     });
   },
@@ -54,7 +43,6 @@ export const actions = {
       return data
     });
   },
-
 
   async [DELETE_DRIVER](context, payload){
     const{id} = payload;

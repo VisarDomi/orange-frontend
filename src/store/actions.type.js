@@ -19,7 +19,6 @@ export const CREATE_EMPLOYEE = "createEmployee";
 export const GET_EMPLOYEES = "getEmployees";
 export const UPDATE_EMPLOYEE = "updateEmployees";
 export const DELETE_EMPLOYEE = "deleteEmployees";
-export const GET_EMPLOYEES_BY_ID = "getEmployeesById";
 export const GET_EMPLOYEE = "getEmployee";
 export const GET_EMPLOYEE_RESERVATION = "getEmployeeReservation";
 export const GET_EMPLOYEE_RESERVATIONS = "getEmployeeReservations";
@@ -51,16 +50,16 @@ export const GET_COMPANY = "getCompany";
 export const UPDATE_COMPANY = "updateCompany";
 
 // itinerary admin
-// export const CREATE_ADMIN_ITINERARY = "createAdminItinerary";
-// export const GET_ADMIN_ITINERARYS = "getAdminItinerarys";
-// export const GET_ADMIN_ITINERARY = "getAdminItinerary";
-// export const UPDATE_ADMIN_ITINERARY = "updateAdminItinerary";
-// export const DELETE_ADMIN_ITINERARY = "deleteAdminItinerary";
+export const CREATE_ADMIN_ITINERARY = "createAdminItinerary";
+export const GET_ADMIN_ITINERARYS = "getAdminItinerarys";
+export const GET_ADMIN_ITINERARY = "getAdminItinerary";
+export const UPDATE_ADMIN_ITINERARY = "updateAdminItinerary";
+export const DELETE_ADMIN_ITINERARY = "deleteAdminItinerary";
 
 // itinerary company
-export const CREATE_COMPANY_ITINERARY = "createCompanyItinerary";
-export const GET_COMPANY_ITINERARYS = "getCompanyItinerarys";
-export const GET_COMPANY_ITINERARY = "getCompanyItinerary";
-export const UPDATE_COMPANY_ITINERARY = "updateCompanyItinerary";
-export const DELETE_COMPANY_ITINERARY = "deleteCompanyItinerary";
+// export const CREATE_COMPANY_ITINERARY = "createCompanyItinerary";
+// export const GET_COMPANY_ITINERARYS = "getCompanyItinerarys";
+// export const GET_COMPANY_ITINERARY = "getCompanyItinerary";
+// export const UPDATE_COMPANY_ITINERARY = "updateCompanyItinerary";
+// export const DELETE_COMPANY_ITINERARY = "deleteCompanyItinerary";
 

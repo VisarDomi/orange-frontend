@@ -13,11 +13,21 @@
 
           <md-card-content>
             <div class="md-layout">
+              <label class="md-layout-item md-size-15 md-form-label">Name</label>
+              <div class="md-layout-item">
+                <md-field>
+                  <label>Employee name</label>
+                  <md-input v-model="name" placeholder="Name of employee"></md-input>
+                </md-field>
+              </div>
+            </div>
+
+            <div class="md-layout">
               <label class="md-layout-item md-size-15 md-form-label">Email</label>
               <div class="md-layout-item">
                 <md-field>
                   <label>Employee email</label>
-                  <md-input v-model="email" placeholder="Email"></md-input>
+                  <md-input v-model="user.email" placeholder="Email of employee"></md-input>
                 </md-field>
               </div>
             </div>
@@ -27,17 +37,7 @@
               <div class="md-layout-item">
                 <md-field>
                   <label>Employee password</label>
-                  <md-input v-model="password" placeholder="Password"></md-input>
-                </md-field>
-              </div>
-            </div>
-
-            <div class="md-layout">
-              <label class="md-layout-item md-size-15 md-form-label">Name</label>
-              <div class="md-layout-item">
-                <md-field>
-                  <label>Employee name</label>
-                  <md-input v-model="name" placeholder="Name and surname"></md-input>
+                  <md-input v-model="user.password" placeholder="Password of employee"></md-input>
                 </md-field>
               </div>
             </div>
@@ -53,15 +53,13 @@
             </div>
 
             <div class="md-layout">
-              <label class="md-layout-item md-size-15 md-form-label">
-                AutoComplete {{address}}
-              </label>
+              <label class="md-layout-item md-size-15 md-form-label">AutoComplete {{address}}</label>
               <div class="md-layout-item">
                 <md-field>
-                <gmap-autocomplete
-                  placeholder="This is a placeholder text"
-                  @place_changed="setPlace">
-                </gmap-autocomplete>
+                  <gmap-autocomplete
+                    placeholder="This is a placeholder text"
+                    @place_changed="setPlace"
+                  ></gmap-autocomplete>
                 </md-field>
               </div>
             </div>
@@ -95,49 +93,46 @@ export default {
   },
   data() {
     return {
-      email: "",
-      password: "",
       name: "",
       address: "",
-
+      user: {
+        email: "",
+        password: ""
+      },
 
       markers: [],
-      place: null,
+      place: null
     };
   },
   methods: {
-
-
     setDescription(description) {
-        this.description = description;
-      },
-      setPlace(place) {
-        console.log(place)
-        this.address = place.name
-      },
-      usePlace(place) {
-        if (this.place) {
-          this.markers.push({
-            position: {
-              lat: this.place.geometry.location.lat(),
-              lng: this.place.geometry.location.lng(),
-            }
-          })
-          this.place = null;
-        }
-      },
+      this.description = description;
+    },
+    setPlace(place) {
+      console.log(place);
+      this.address = place.name;
+    },
+    usePlace(place) {
+      if (this.place) {
+        this.markers.push({
+          position: {
+            lat: this.place.geometry.location.lat(),
+            lng: this.place.geometry.location.lng()
+          }
+        });
+        this.place = null;
+      }
+    },
 
-    onSubmit() {
+    async onSubmit() {
       let employee = {
-        email: this.email,
-        password: this.password,
-        name: this.name,
-        address: this.address
+        full_name: this.name,
+        address: this.address,
+        user: this.user
       };
 
-      this.$store.dispatch(CREATE_EMPLOYEE, employee).then(() => {
-        this.$router.push({ name: "CompanyEmployees" });
-      });
+      await this.$store.dispatch(CREATE_EMPLOYEE, employee);
+      this.$router.push({ name: "CompanyEmployees" });
     },
     onFileChange(e) {
       let files = e.target.files || e.dataTransfer.files;

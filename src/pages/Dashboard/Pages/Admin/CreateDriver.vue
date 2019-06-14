@@ -13,11 +13,21 @@
 
           <md-card-content>
             <div class="md-layout">
+              <label class="md-layout-item md-size-15 md-form-label">Name</label>
+              <div class="md-layout-item">
+                <md-field>
+                  <label>Driver name</label>
+                  <md-input v-model="name" placeholder="Name of driver"></md-input>
+                </md-field>
+              </div>
+            </div>
+
+            <div class="md-layout">
               <label class="md-layout-item md-size-15 md-form-label">Email</label>
               <div class="md-layout-item">
                 <md-field>
                   <label>Driver email</label>
-                  <md-input v-model="email" placeholder="Email"></md-input>
+                  <md-input v-model="user.email" placeholder="Email of driver"></md-input>
                 </md-field>
               </div>
             </div>
@@ -27,17 +37,7 @@
               <div class="md-layout-item">
                 <md-field>
                   <label>Driver password</label>
-                  <md-input v-model="password" placeholder="Password"></md-input>
-                </md-field>
-              </div>
-            </div>
-
-            <div class="md-layout">
-              <label class="md-layout-item md-size-15 md-form-label">Name</label>
-              <div class="md-layout-item">
-                <md-field>
-                  <label>Driver name</label>
-                  <md-input v-model="name" placeholder="Name and surname"></md-input>
+                  <md-input v-model="user.password" placeholder="Password of driver"></md-input>
                 </md-field>
               </div>
             </div>
@@ -71,22 +71,22 @@ export default {
   },
   data() {
     return {
-      email: "",
-      password: "",
-      name: ""
+      name: "",
+      user: {
+        email: "",
+        password: ""
+      }
     };
   },
   methods: {
-    onSubmit() {
+    async onSubmit() {
       let driver = {
-        email: this.email,
-        password: this.password,
-        name: this.name
+        full_name: this.name,
+        user: this.user
       };
 
-      this.$store.dispatch(CREATE_DRIVER, driver).then(() => {
-        this.$router.push({ name: "Drivers" });
-      });
+      await this.$store.dispatch(CREATE_DRIVER, driver);
+      this.$router.push({ name: "Drivers" });
     },
     onFileChange(e) {
       let files = e.target.files || e.dataTransfer.files;
@@ -135,8 +135,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-
-
 .md-card .md-card-actions {
   border: none;
 }

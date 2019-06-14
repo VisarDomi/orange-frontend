@@ -21,57 +21,51 @@ export const mutations = {
   },
 
   [SET_COMPANY_RESERVATIONS](state, reservations) {
-    console.log("setting state...");
     state.companyReservations = reservations;
-    console.log("state.reservations is now: ", state.companyReservations);
+    console.log("state.reservations: ", state.companyReservations);
   },
   [SET_COMPANY_RESERVATION](state, reservation) {
-    console.log("setting state...");
     state.companyReservation = reservation;
-    console.log("state.reservations is now: ", state.companyReservations);
+    console.log("state.reservation: ", state.companyReservation);
   },
 
   [SET_EMPLOYEE_STEP](state, data) {
-    console.log("we got some data on step employee mutation", data);
-    state.companyReservation.code = data.code;
+    state.companyReservation.name = data.name;
     state.companyReservation.destination = data.destination;
     state.companyReservation.date = data.date;
     state.companyReservation.time = data.time;
-    state.companyReservation.stops = data.stops;
+    state.companyReservation.status = "unassigned";
+    // state.companyReservation.payment_method = data.paymentMethod;
     state.companyReservation.big_luggage = data.bigLuggage;
     state.companyReservation.small_luggage = data.smallLuggage;
-    console.log("company reservation state now: ", state.companyReservation);
+    // state.companyReservation.vehicle_type = data.vehicleType;
+    state.companyReservation.stops = data.stops;
+    console.log("state.companyReservation: ", state.companyReservation);
   },
   [SET_VEHICLE_STEP](state, data) {
-    console.log("we got some data on step vehicle mutation", data);
     state.companyReservation.vehicle_type = data.vehicleType;
-    console.log("company reservation state now: ", state.companyReservation);
+    console.log("state.companyReservation: ", state.companyReservation);
   },
   [SET_PAYMENT_STEP](state, data) {
-    console.log("we got some data on step payment mutation", data);
     state.companyReservation.payment_method = data.paymentMethod;
-    console.log("company reservation state now: ", state.companyReservation);
+    console.log("state.companyReservation: ", state.companyReservation);
   },
 
   [SET_COMPANY_INVOICES](state, invoices) {
-    console.log("setting state...");
     state.companyInvoices = invoices;
-    console.log("state.invoices is now: ", state.companyInvoices);
+    console.log("state.companyInvoices: ", state.companyInvoices);
   },
   [SET_COMPANY_INVOICE](state, invoice) {
-    console.log("setting state...");
     state.companyInvoice = invoice;
-    console.log("state.invoice is now: ", state.companyInvoice);
+    console.log("state.invoice: ", state.companyInvoice);
   },
 
-  [SET_COMPANY_ITINERARYS](state, itinerarys){
-    console.log("setting state...");
+  [SET_COMPANY_ITINERARYS](state, itinerarys) {
     state.companyItinerarys = itinerarys;
-    console.log("state.company itinerary is now: ", state.companyItinerarys);  
+    console.log("state.companyItinerarys: ", state.companyItinerarys);
   },
-  [SET_COMPANY_ITINERARY](state, itinerary){
-    console.log("setting state...");
+  [SET_COMPANY_ITINERARY](state, itinerary) {
     state.companyItinerary = itinerary;
-    console.log("state.company itinerary is now: ", state.companyItinerary);  
-  },
+    console.log("state.companyItinerary: ", state.companyItinerary);
+  }
 };

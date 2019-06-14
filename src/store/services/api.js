@@ -53,135 +53,6 @@ export const ApiService = {
   }
 };
 
-export const UserService = {
-  createUser(user) {
-    return ApiService.post("user", user);
-  },
-  getUsers() {
-    return ApiService.get(`user/all`);
-  },
-  getUser(userId) {
-    return ApiService.get(`user/${userId}`);
-  },
-  putUser(userId, user) {
-    return ApiService.put(`user/${userId}`, user);
-  },
-  deleteUser(userId) {
-    return ApiService.delete(`user/${userId}`);
-  }
-};
-
-export const InvoiceService = {
-  createInvoice(reservationId, invoice) {
-    return ApiService.post(
-      `admin/reservation/${reservationId}/invoice`,
-      invoice
-    );
-  },
-  getInvoices(reservationId) {
-    return ApiService.get(`admin/reservation/${reservationId}/invoice/all`);
-  },
-  getInvoice(reservationId, invoiceId) {
-    return ApiService.get(
-      `admin/reservation/${reservationId}/invoice/${invoiceId}`
-    );
-  },
-  putInvoice(reservationId, invoiceId, invoice) {
-    return ApiService.put(
-      `admin/reservation/${reservationId}/invoice/${invoiceId}`,
-      invoice
-    );
-  },
-  deleteInvoice(reservationId, invoiceId) {
-    return ApiService.delete(
-      `admin/reservation/${reservationId}/invoice/${invoiceId}`
-    );
-  }
-};
-
-export const AdminService = {
-  postInvoice(reservationId, invoice) {
-    return ApiService.post(
-      `admin/reservation/${reservationId}/invoice`,
-      invoice
-    );
-  },
-  getInvoices() {
-    return ApiService.get(`admin/invoice/all`);
-  },
-  getInvoice(invoiceId) {
-    return ApiService.get(`admin/invoice/${invoiceId}`);
-  },
-  putInvoice(reservationId, invoiceId, invoice) {
-    return ApiService.put(
-      `admin/reservation/${reservationId}/invoice/${invoiceId}`,
-      invoice
-    );
-  },
-
-  deleteInvoice(reservationId, invoiceId) {
-    return ApiService.delete(
-      `admin/reservation/${reservationId}/invoice/${invoiceId}`
-    );
-  },
-  getReservations() {
-    return ApiService.get(`admin/reservation/all`);
-  },
-  getReservation(reservationId) {
-    return ApiService.get(`admin/reservation/${reservationId}`);
-  },
-  putReservation(reservationId, reservation) {
-    return ApiService.put(`admin/reservation/${reservationId}`, reservation);
-  },
-
-  // createItinerary(itinerary){
-  //   return ApiService.post(`admin/itinerary`, itinerary)
-  // },
-  // getItinerary(itineraryId){
-  //   return ApiService.get(`admin/itinerary/${itineraryId}`)
-  // },
-  // getItinerarys(){
-  //   return ApiService.get(`admin/itinerary/all`)
-  // },
-  // putItinerary(itineraryId, itinerary){
-  //   return ApiService.put(`admin/itinerary/${itineraryId}`, itinerary)
-  // },
-  // deleteItinerary(itineraryId){
-  //   return ApiService.delete(`admin/itinerary/${itineraryId}`);
-  // }
-  
-};
-
-export const DriverService = {
-  createDriver(driver) {
-    return ApiService.post(`driver`, driver);
-  },
-  getDrivers() {
-    return ApiService.get(`driver/all`);
-  },
-  getDriver(driverId) {
-    return ApiService.get(`driver/${driverId}`);
-  },
-  putDriver(driverId, driver) {
-    return ApiService.put(`driver/${driverId}`, driver);
-  },
-  deleteDriver(driverId) {
-    return ApiService.delete(`driver/${driverId}`);
-  },
-  getReservations(driverId) {
-    return ApiService.get(`driver/${driverId}/reservation/all`);
-  },
-  getReservation(driverId, reservationId) {
-    return ApiService.get(`driver/${driverId}/reservation/${reservationId}`);
-  },
-  putReservation(driverId, reservationId, reservation) {
-    return ApiService.put(
-      `driver/${driverId}/reservation/${reservationId}`,
-      reservation
-    );
-  }
-};
-
 export const CompanyService = {
   createCompany(company) {
     return ApiService.post(`company`, company);
@@ -226,39 +97,13 @@ export const EmployeeService = {
     return ApiService.delete(`company/${companyId}/employee/${employeeId}`);
   },
   getReservations(companyId, employeeId) {
-    return ApiService.get(`company/${companyId}/employee/${employeeId}/reservation/all`);
+    return ApiService.get(
+      `company/${companyId}/employee/${employeeId}/reservation/all`
+    );
   },
   getReservation(companyId, employeeId, reservationId) {
-    return ApiService.get(`company/${companyId}/employee/${employeeId}/reservation/${reservationId}`);
-  },
-};
-
-export const ItemService = {
-  postItem(reservationId, invoiceId, item) {
-    return ApiService.post(
-      `admin/reservation/${reservationId}/invoice/${invoiceId}/item`,
-      item
-    );
-  },
-  getItems(reservationId, invoiceId) {
     return ApiService.get(
-      `admin/reservation/${reservationId}/invoice/${invoiceId}/item/all`
-    );
-  },
-  getItem(reservationId, invoiceId, itemId) {
-    return ApiService.get(
-      `admin/reservation/${reservationId}/invoice/${invoiceId}/item/${itemId}`
-    );
-  },
-  putItem(reservationId, invoiceId, itemId, item) {
-    return ApiService.put(
-      `admin/reservation/${reservationId}/invoice/${invoiceId}/item/${itemId}`,
-      item
-    );
-  },
-  deleteItem(reservationId, invoiceId, itemId) {
-    return ApiService.delete(
-      `admin/reservation/${reservationId}/invoice/${invoiceId}/item/${itemId}`
+      `company/${companyId}/employee/${employeeId}/reservation/${reservationId}`
     );
   }
 };
@@ -286,6 +131,126 @@ export const ReservationService = {
   }
 };
 
+export const DriverService = {
+  createDriver(driver) {
+    return ApiService.post(`driver`, driver);
+  },
+  getDrivers() {
+    return ApiService.get(`driver/all`);
+  },
+  getDriver(driverId) {
+    return ApiService.get(`driver/${driverId}`);
+  },
+  putDriver(driverId, driver) {
+    return ApiService.put(`driver/${driverId}`, driver);
+  },
+  deleteDriver(driverId) {
+    return ApiService.delete(`driver/${driverId}`);
+  },
+  getReservations(driverId) {
+    return ApiService.get(`driver/${driverId}/reservation/all`);
+  },
+  getReservation(driverId, reservationId) {
+    return ApiService.get(`driver/${driverId}/reservation/${reservationId}`);
+  },
+  putReservation(driverId, reservationId, reservation) {
+    return ApiService.put(
+      `driver/${driverId}/reservation/${reservationId}`,
+      reservation
+    );
+  }
+};
+
+export const AdminService = {
+  postInvoice(reservationId, invoice) {
+    return ApiService.post(
+      `admin/reservation/${reservationId}/invoice`,
+      invoice
+    );
+  },
+  getInvoices() {
+    return ApiService.get(`admin/invoice/all`);
+  },
+  getInvoice(invoiceId) {
+    return ApiService.get(`admin/invoice/${invoiceId}`);
+  },
+  putInvoice(reservationId, invoiceId, invoice) {
+    return ApiService.put(
+      `admin/reservation/${reservationId}/invoice/${invoiceId}`,
+      invoice
+    );
+  },
+
+  deleteInvoice(reservationId, invoiceId) {
+    return ApiService.delete(
+      `admin/reservation/${reservationId}/invoice/${invoiceId}`
+    );
+  },
+  getReservations() {
+    return ApiService.get(`admin/reservation/all`);
+  },
+  getReservation(reservationId) {
+    return ApiService.get(`admin/reservation/${reservationId}`);
+  },
+  putReservation(reservationId, reservation) {
+    return ApiService.put(`admin/reservation/${reservationId}`, reservation);
+  }
+};
+
+export const InvoiceService = {
+  createInvoice(reservationId, invoice) {
+    return ApiService.post(
+      `admin/reservation/${reservationId}/invoice`,
+      invoice
+    );
+  },
+  getInvoices(reservationId) {
+    return ApiService.get(`admin/reservation/${reservationId}/invoice/all`);
+  },
+  putInvoice(reservationId, invoiceId, invoice) {
+    return ApiService.put(
+      `admin/reservation/${reservationId}/invoice/${invoiceId}`,
+      invoice
+    );
+  },
+  deleteInvoice(reservationId, invoiceId) {
+    return ApiService.delete(
+      `admin/reservation/${reservationId}/invoice/${invoiceId}`
+    );
+  }
+};
+
+export const SecretaryService = {
+  createSecretary(companyId, secretary) {
+    return ApiService.post(`company/${companyId}/secretary`, secretary);
+  },
+  getSecretarys(companyId) {
+    return ApiService.get(`company/${companyId}/secretary/all`);
+  },
+  getSecretary(companyId, secretaryId) {
+    return ApiService.get(`company/${companyId}/secretary/${secretaryId}`);
+  },
+  putSecretary(companyId, secretaryId, secretary) {
+    return ApiService.put(
+      `company/${companyId}/secretary/${secretaryId}`,
+      secretary
+    );
+  },
+  deleteSecretary(companyId, secretaryId) {
+    return ApiService.delete(`company/${companyId}/secretary/${secretaryId}`);
+  },
+  getReservations(companyId, secretaryId) {
+    return ApiService.get(
+      `company/${companyId}/secretary/${secretaryId}/reservation/all`
+    );
+  },
+  getReservation(companyId, secretaryId, reservationId) {
+    return ApiService.get(
+      `company/${companyId}/secretary/${secretaryId}/reservation/${reservationId}`
+    );
+  }
+};
+
 export const ItineraryService = {
   createItinerary(companyId, itinerary) {
     return ApiService.post(`company/${companyId}/itinerary`, itinerary);
@@ -304,24 +269,6 @@ export const ItineraryService = {
   },
   deleteItinerary(companyId, itineraryId) {
     return ApiService.delete(`company/${companyId}/itinerary/${itineraryId}`);
-  }
-};
-
-export const StopService = {
-  createStop(stop) {
-    return ApiService.post(`stop`, stop);
-  },
-  getStops() {
-    return ApiService.get(`stop/all`);
-  },
-  getStop(stopId) {
-    return ApiService.get(`stop/${stopId}`);
-  },
-  putStop(stopId, stop) {
-    return ApiService.put(`stop/${stopId}`, stop);
-  },
-  deleteStop(stopId) {
-    return ApiService.delete(`stop/${stopId}`);
   }
 };
 
@@ -345,30 +292,3 @@ export const ItineraryMasterService = {
     return ApiService.delete(`itinerary_master/${itineraryMasterId}`);
   }
 };
-
-// export const MediaService = {
-//   getPicture(userId) {
-//     return ApiService.get(`user/${userId}/media/all`);
-//   },
-//   getCommunicationMedia(communicationId) {
-//     return ApiService.get(`officialcommunication/${communicationId}/media/all`);
-//   },
-//   postProfileMedia(userId, media) {
-//     return ApiService.post(`user/${userId}/media`, media);
-//   },
-//   postEducationMedia(userId, educationId, media) {
-//     return ApiService.post(
-//       `user/${userId}/education/${educationId}/media`,
-//       media
-//     );
-//   },
-//   postExperienceMedia(userId, experienceId, media) {
-//     return ApiService.post(
-//       `user/${userId}/experience/${experienceId}/media`,
-//       media
-//     );
-//   },
-//   postSkillMedia(userId, skillId, media) {
-//     return ApiService.post(`user/${userId}/skill/${skillId}/media`, media);
-//   }
-// };

@@ -12,32 +12,13 @@
           </md-card-header>
 
           <md-card-content>
-            <div class="md-layout">
-              <label class="md-layout-item md-size-15 md-form-label">Email</label>
-              <div class="md-layout-item">
-                <md-field>
-                  <label>Company email</label>
-                  <md-input v-model="email" placeholder="Email"></md-input>
-                </md-field>
-              </div>
-            </div>
-
-            <div class="md-layout">
-              <label class="md-layout-item md-size-15 md-form-label">Password</label>
-              <div class="md-layout-item">
-                <md-field>
-                  <label>Company password</label>
-                  <md-input v-model="password" placeholder="Password"></md-input>
-                </md-field>
-              </div>
-            </div>
 
             <div class="md-layout">
               <label class="md-layout-item md-size-15 md-form-label">Name</label>
               <div class="md-layout-item">
                 <md-field>
                   <label>Company name</label>
-                  <md-input v-model="name" placeholder="Name and surname"></md-input>
+                  <md-input v-model="name" placeholder="Name of company"></md-input>
                 </md-field>
               </div>
             </div>
@@ -47,6 +28,76 @@
               <div class="md-layout-item md-inline-checkboxes" style="padding-top: 20px;">
                 <md-radio v-model="paymentFrequency" :value="true">Monthly</md-radio>
                 <md-radio v-model="paymentFrequency" :value="false">Individual</md-radio>
+              </div>
+            </div>
+
+            <div class="md-layout">
+              <label class="md-layout-item md-size-15 md-form-label">Code</label>
+              <div class="md-layout-item">
+                <md-field>
+                  <label>Company code</label>
+                  <md-input v-model="code" placeholder="Code of company"></md-input>
+                </md-field>
+              </div>
+            </div>
+
+            <div class="md-layout">
+              <label class="md-layout-item md-size-15 md-form-label">Invoice Number</label>
+              <div class="md-layout-item">
+                <md-field>
+                  <label>Company invoice number</label>
+                  <md-input v-model="invoiceNumber" placeholder="Invoice Number of company"></md-input>
+                </md-field>
+              </div>
+            </div>
+
+            <div class="md-layout">
+              <label class="md-layout-item md-size-15 md-form-label">KST</label>
+              <div class="md-layout-item">
+                <md-field>
+                  <label>Company KST</label>
+                  <md-input v-model="kst" placeholder="KST of company"></md-input>
+                </md-field>
+              </div>
+            </div>
+
+            <div class="md-layout">
+              <label class="md-layout-item md-size-15 md-form-label">Address</label>
+              <div class="md-layout-item">
+                <md-field>
+                  <label>Company Address</label>
+                  <md-input v-model="address" placeholder="Address of company"></md-input>
+                </md-field>
+              </div>
+            </div>
+
+            <div class="md-layout">
+              <label class="md-layout-item md-size-15 md-form-label">Name</label>
+              <div class="md-layout-item">
+                <md-field>
+                  <label>Head secretary name</label>
+                  <md-input v-model="headSecretary.full_name" placeholder="Name of head secretary"></md-input>
+                </md-field>
+              </div>
+            </div>
+
+            <div class="md-layout">
+              <label class="md-layout-item md-size-15 md-form-label">Email</label>
+              <div class="md-layout-item">
+                <md-field>
+                  <label>Head secretary email</label>
+                  <md-input v-model="headSecretary.user.email" placeholder="Email of head secretary"></md-input>
+                </md-field>
+              </div>
+            </div>
+
+            <div class="md-layout">
+              <label class="md-layout-item md-size-15 md-form-label">Password</label>
+              <div class="md-layout-item">
+                <md-field>
+                  <label>Head secretary password</label>
+                  <md-input v-model="headSecretary.user.password" placeholder="Password of head secretary"></md-input>
+                </md-field>
               </div>
             </div>
 
@@ -79,19 +130,31 @@ export default {
   },
   data() {
     return {
-      email: "",
-      password: "",
       name: "",
-      paymentFrequency: ""
+      paymentFrequency: "",
+      code: "",
+      invoiceNumber: "",
+      kst: "",
+      address: "",
+      headSecretary: {
+        full_name: "",
+        user: {
+          email: "",
+          password: ""
+        }
+      }
     };
   },
   methods: {
-    onSubmit() {
+    async onSubmit() {
       let company = {
-        email: this.email,
-        password: this.password,
         name: this.name,
-        payment_frequency: ""
+        payment_frequency: "",
+        code: this.code,
+        invoice_number: this.invoiceNumber,
+        kst: this.kst,
+        address: this.address,
+        head_secretary: this.headSecretary
       };
       if (this.paymentFrequency == true) {
         company.payment_frequency = "monthly";
@@ -99,10 +162,8 @@ export default {
         company.payment_frequency = "individual";
       }
       console.log("value of radio: ", company);
-
-      this.$store.dispatch(CREATE_COMPANY, company).then(() => {
-        this.$router.push({ name: "Companies" });
-      });
+      await this.$store.dispatch(CREATE_COMPANY, company);
+      this.$router.push({ name: "Companies" });
     },
     onFileChange(e) {
       let files = e.target.files || e.dataTransfer.files;

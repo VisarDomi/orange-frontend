@@ -46,9 +46,11 @@ export const actions = {
       });
     context.commit(STOP_LOADING);
   },
+
   [LOGOUT](context) {
     context.commit(PURGE_AUTH);
   },
+
   async [REGISTER](context, credentials) {
     context.commit(START_LOADING);
     await ApiService.post("user", credentials).then(res => {
