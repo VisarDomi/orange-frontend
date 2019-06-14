@@ -161,12 +161,8 @@ export default {
         role: this.getRole
       };
       console.log("payload are", payload);
-
-      await this.$store.dispatch(LOGIN, payload).then(() => {
-        console.log("in then of LOGIN: this.getUser.role", this.getUser.role);
-        // now reroute to the pages depending on the this.getUser.role
-      });
-
+      await this.$store.dispatch(LOGIN, payload)
+      console.log("in then of LOGIN: this.getUser.role", this.getUser.role);
       loginReroute(this.$router, this.getUser.role);
     }
   },

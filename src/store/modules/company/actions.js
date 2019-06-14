@@ -35,21 +35,10 @@ import {
 import { getUser } from "../../services/userstorage";
 
 export const actions = {
-  async [CREATE_COMPANY](context, payload) {
-    let user_id = "";
-    console.log(payload.email);
-    await UserService.createUser({
-      email: payload.email,
-      password: payload.password
-    }).then(({ data }) => {
-      user_id = data.id + "";
-      return data;
-    });
-    let company = {
-      full_name: payload.name,
-      user_id: user_id
-    };
+  async [CREATE_COMPANY](context, company) {
+    console.log("company:", company)
     await CompanyService.createCompany(company).then(({ data }) => {
+      console.log("create company return data", data)
       return data;
     });
   },
