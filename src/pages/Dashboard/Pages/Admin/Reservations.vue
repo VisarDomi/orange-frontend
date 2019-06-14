@@ -15,6 +15,7 @@
               :md-sort.sync="currentSort"
               :md-sort-order.sync="currentSortOrder"
               :md-sort-fn="customSort"
+              :key="this.rerender"
               @md-selected="onSelect"
               class="paginated-table table-hover"
             >
@@ -31,13 +32,14 @@
                   </md-select>
                 </md-field>
 
-                  <md-field>
-                  <label for="companySearchValue">Company filter</label>
-                  <md-select name="companySearchValue" v-model="companySearchValue" md-dense>
-                    <md-option value="All">All</md-option>
-                    <md-option v-for="name of this.companyOptions" :value="name">{{name}}</md-option>
+                <md-field>
+                  <label for="companySearchValue">Companys filter</label>
+                  <md-select name="companySearchValue" v-model="companySearchValue" md-dense >
+                    <md-option value="All">All </md-option>
+                    <md-option v-for="(company, index) in this.companysName" :key="company.id" :value="company.name">{{company.name}}</md-option>
                   </md-select>
                 </md-field>
+
                 <md-field>
                 
                   <label for="monthSearchValue">Months filter</label>
@@ -221,6 +223,7 @@ export default {
       currentSort: "name",
       selected: [],
       currentSortOrder: "asc",
+      rerender: 0,
       pagination: {
         perPage: 10,
         currentPage: 1,
@@ -242,7 +245,6 @@ export default {
       companySearchValue: "All",
       tableReservationsData: [],
       companysName: [],
-      companyOptions: ["company1", "company2"],
       searchedData: [],
       fuseSearch: null
     };
@@ -252,7 +254,6 @@ export default {
       console.log("search is: ", this.search);
       this.searched = searchByName(this.members, this.search);
     },
-
     filterReservations(condition, value) {
       console.log("condition: ", condition);
       console.log("value: ", value);
@@ -369,25 +370,40 @@ export default {
     }
   },
   created() {
+    // this.$store.dispatch(GET_ADMIN_RESERVATIONS).then(() => {
+    //   console.log("GET reservations now: ", this.getAdminReservations);
+    //   this.tableReservationsData = this.getAdminReservations;
+    // });
+    // this.$store.dispatch(GET_COMPANYS).then(() => {
+
+    //   this.companysName = []
+    //   for(let company of this.getCompanys){
+    //     this.companysName.push(
+    //       {name: company.name,
+    //         id: company.id})
+    //   }
+    //   this.isLoading = false
+    //   console.log("")
+    //   console.log("names: ", this.companysName)
+    //   console.log("loading: ", this.isLoading)
+    //   console.log("")
+    // })
+  },
+  mounted() {
     this.$store.dispatch(GET_ADMIN_RESERVATIONS).then(() => {
       console.log("GET reservations now: ", this.getAdminReservations);
       this.tableReservationsData = this.getAdminReservations;
     });
-
     this.$store.dispatch(GET_COMPANYS).then(() => {
-      console.log("GET companys now: ", this.getCompanys)
-      // this.companysName = this.getCompanys;
-
-      this.companysName = []
+      
       for(let company of this.getCompanys){
-        this.companysName.push(company.name)
+        this.companysName.push(
+          {name: company.name,
+            id: company.id})
       }
-      this.companysName.push("company2")
-      this.companysName.push("company3")
-      console.log("companysName now: ", this.companysName)
-    });
-  },
-  mounted() {
+      console.log("names: ", this.companysName)
+      this.rerender += 1;
+    })
     // Fuse search initialization.
     this.fuseSearch = new Fuse(this.tableReservationsData, {
       keys: ["code"],
