@@ -51,6 +51,8 @@
 import { UserCard } from "@/pages";
 import { GET_EMPLOYEE, UPDATE_EMPLOYEE } from "@/store/actions.type";
 import { mapGetters } from "vuex";
+import { getUser } from "@/store/services/userstorage"
+
 export default {
   name: "CompanyEmployeeDetail",
   components: {
@@ -64,18 +66,18 @@ export default {
     };
   },
   methods: {
-    editEmployee(){
+    editEmployee() {
       this.editing = true;
     },
-    saveChanges(){
+    saveChanges() {
       this.editing = false;
       let employee = {
-        companyId: this.employee.company_id,
+        companyId: this.getEmployee.company_id,
         employeeId: this.$route.params.id,
         full_name: this.full_name,
-        address: this.address,
-      }
-      console.log(employee)
+        address: this.address
+      };
+      console.log(employee);
       this.$store.dispatch(UPDATE_EMPLOYEE, employee);
     }
   },
@@ -83,17 +85,17 @@ export default {
     // this.$store.dispatch(ADMIN_GET_EMPLOYEE) //get employee with store then store it in variable, then get it with mapGetters and plug it into POST invoice
   },
   created() {
-    this.$store
-      .dispatch(GET_EMPLOYEE, {
-        employeeId: this.$route.params.id
-      })
-      .then(() => {
-        this.full_name = this.employee.full_name;
-        this.address = this.employee.address;
-      });
+    let payload = {
+      companyId: getUser().company_id,
+      employeeId: this.$route.params.id
+    };
+    this.$store.dispatch(GET_EMPLOYEE, payload).then(() => {
+      this.full_name = this.getEmployee.full_name;
+      this.address = this.getEmployee.address;
+    });
   },
   computed: {
-    ...mapGetters(["employee"])
+    ...mapGetters(["getEmployee"])
   }
   //need map getter employeeId
 };

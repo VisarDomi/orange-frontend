@@ -77,6 +77,7 @@
 </template>
 <script>
 import { CREATE_EMPLOYEE } from "@/store/actions.type";
+import { getUser } from "@/store/services/userstorage"
 
 export default {
   name: "CompanyCreateEmployee",
@@ -125,13 +126,14 @@ export default {
     },
 
     async onSubmit() {
-      let employee = {
+      let payload = {
         full_name: this.name,
         address: this.address,
-        user: this.user
+        user: this.user,
+        companyId: getUser().company_id
       };
 
-      await this.$store.dispatch(CREATE_EMPLOYEE, employee);
+      await this.$store.dispatch(CREATE_EMPLOYEE, payload);
       this.$router.push({ name: "CompanyEmployees" });
     },
     onFileChange(e) {

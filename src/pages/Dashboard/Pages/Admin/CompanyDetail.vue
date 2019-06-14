@@ -355,33 +355,29 @@
 </template>
 
 <script>
-//for employee creation
-import { CREATE_EMPLOYEE } from "@/store/actions.type";
 // for employees part
 import { PricingCard, TestimonialCard } from "@/components";
-import {
-  GET_EMPLOYEES_BY_ID,
-  GET_EMPLOYEE,
-  GET_EMPLOYEES,
-  UPDATE_EMPLOYEE,
-  DELETE_EMPLOYEE
-} from "@/store/actions.type";
 //-----------------------
 // for table part
 import { Pagination } from "@/components";
 import {
+  CREATE_EMPLOYEE,
+  GET_EMPLOYEE,
+  GET_EMPLOYEES,
+  UPDATE_EMPLOYEE,
+  DELETE_EMPLOYEE,
+  UPDATE_COMPANY,
+  GET_COMPANY,
   GET_COMPANY_ITINERARYS,
   CREATE_COMPANY_ITINERARY,
   DELETE_COMPANY_ITINERARY,
   UPDATE_COMPANY_ITINERARY
 } from "@/store/actions.type";
-import { UPDATE_COMPANY } from "@/store/actions.type";
 import Fuse from "fuse.js";
 //--------------------------
 
 // for company details
 import { UserCard } from "@/pages";
-import { GET_COMPANY } from "@/store/actions.type";
 import { mapGetters } from "vuex";
 // --------------------
 export default {
@@ -393,10 +389,14 @@ export default {
   data() {
     return {
       //start create employee
-      email: "",
-      password: "",
-      name: "",
-      address: "",
+      employee: {
+        full_name: "",
+        address: "",
+        user: {
+          email: "",
+          password: ""
+        }
+      },
       editingName: false,
       editingPayment: false,
 
@@ -405,8 +405,8 @@ export default {
       employeesData: [],
       formCollapsed: true,
       //--end create employee
-      full_name: "",
-      payment_frequency: "",
+      name: "",
+      paymentFrequency: "",
       //so far for the details of company, below, the table needed variables
       currentSort: "name",
       currentSortOrder: "asc",
@@ -441,8 +441,8 @@ export default {
         this.editingPayment = false;
       }
       let company = {
-        full_name: this.full_name,
-        payment_frequency: this.payment_frequency,
+        full_name: this.name,
+        payment_frequency: this.paymentFrequency,
         code: "placeholder",
         companyId: this.$route.params.id
       };
@@ -465,66 +465,58 @@ export default {
       this.$store.dispatch(UPDATE_EMPLOYEE, employeeData);
     },
     //create employee methods------------
-    onSubmit() {
+    async onSubmit() {
       let employee = {
         email: this.email,
         password: this.password,
         name: this.name,
-        address: this.address
+        address: this.address,
+        companyId: this.$route.params.id
       };
 
-      this.$store.dispatch(CREATE_EMPLOYEE, employee).then(() => {
-        this.$store
-          .dispatch(GET_EMPLOYEES_BY_ID, { companyId: this.$route.params.id })
-          .then(() => {
-            this.employeesData = [];
-            for (let employee of this.getEmployees) {
-              this.employeesData.push({ ...employee });
-              // spread operator is not needed
-            }
-            for (let employee of this.employeesData) {
-              console.log("employee object is: ", employee);
-              employee.nameEditable = false;
-              employee.addressEditable = false;
-            }
-            console.log("Added new fields to employees: ", this.employeesData);
-          });
-        this.email = "";
-        this.password = "";
-        this.name = "";
-        this.address = "";
-        this.formCollapsed = true;
-      });
+      await this.$store.dispatch(CREATE_EMPLOYEE, employee);
+      await this.$store.dispatch(GET_EMPLOYEES);
+      this.employeesData = [];
+      for (let employee of this.getEmployees) {
+        this.employeesData.push({ ...employee });
+        // spread operator is not needed
+      }
+      for (let employee of this.employeesData) {
+        console.log("employee object is: ", employee);
+        employee.nameEditable = false;
+        employee.addressEditable = false;
+      }
+      console.log("Added new fields to employees: ", this.employeesData);
+
+      this.email = "";
+      this.password = "";
+      this.name = "";
+      this.address = "";
+      this.formCollapsed = true;
     },
-    addItinerary() {
+    async addItinerary() {
       let newItinerary = {
         companyId: this.$route.params.id,
         departure: "Departure",
         destination: "Destination",
         price: "499"
       };
-      this.$store.dispatch(CREATE_COMPANY_ITINERARY, newItinerary).then(() => {
-        // i'm pretty sure this isn't the way to do it
-        // after the itinerary is created in the store, the tableData needs to be updated
-        this.$store
-          .dispatch(GET_COMPANY_ITINERARYS, {
-            companyId: this.$route.params.id
-          })
-          .then(() => {
-            console.log("GET itinerarys now: ", this.companyItinerarys);
-            let table_id = 0;
-            for (let item in this.companyItinerarys) {
-              this.companyItinerarys[item].editable = false;
-              this.companyItinerarys[item].tableId = table_id;
-              table_id += 1;
-            }
-
-            //more shitfuck to clone the state array coming from store to stop vue from complaining about messing with state outside mutators
-            let clone = JSON.parse(JSON.stringify(this.companyItinerarys));
-            console.log("b? ", clone);
-            this.tableData = clone;
-          });
+      await this.$store.dispatch(CREATE_COMPANY_ITINERARY, newItinerary);
+      await this.$store.dispatch(GET_COMPANY_ITINERARYS, {
+        companyId: this.$route.params.id
       });
+      console.log("GET itinerarys now: ", this.getCompanyItinerarys);
+      let table_id = 0;
+      for (let index in this.getCompanyItinerarys) {
+        this.getCompanyItinerarys[index].editable = false;
+        this.getCompanyItinerarys[index].tableId = table_id;
+        table_id += 1;
+      }
+
+      //more shitfuck to clone the state array coming from store to stop vue from complaining about messing with state outside mutators
+      let clone = JSON.parse(JSON.stringify(this.getCompanyItinerarys));
+      console.log("b? ", clone);
+      this.tableData = clone;
     },
     //end create employee methods ------
     //company employee methods ---------------------
@@ -600,9 +592,10 @@ export default {
   },
   created() {
     this.$store
-      .dispatch(GET_EMPLOYEES_BY_ID, { companyId: this.$route.params.id })
+      .dispatch(GET_EMPLOYEES, { companyId: this.$route.params.id })
       .then(() => {
         for (let employee of this.getEmployees) {
+          // don't change getters without mutations
           this.employeesData.push({ ...employee });
           // spread operator is not needed
         }
@@ -618,33 +611,33 @@ export default {
     this.$store
       .dispatch(GET_COMPANY_ITINERARYS, { companyId: this.$route.params.id })
       .then(() => {
-        console.log("GET itinerarys now: ", this.companyItinerarys);
+        console.log("GET itinerarys now: ", this.getCompanyItinerarys);
         let table_id = 0;
-        for (let item in this.companyItinerarys) {
-          this.companyItinerarys[item].editable = false;
-          this.companyItinerarys[item].tableId = table_id;
+        for (let item in this.getCompanyItinerarys) {
+          this.getCompanyItinerarys[item].editable = false;
+          this.getCompanyItinerarys[item].tableId = table_id;
           table_id += 1;
         }
 
         //more shitfuck to clone the state array coming from store to stop vue from complaining about messing with state outside mutators
-        let clone = JSON.parse(JSON.stringify(this.companyItinerarys));
+        let clone = JSON.parse(JSON.stringify(this.getCompanyItinerarys));
         console.log("b? ", clone);
         this.tableData = clone;
       });
-
+    console.log("this.$route.params.id", this.$route.params.id);
     //this is for company details
     this.$store
       .dispatch(GET_COMPANY, {
         companyId: this.$route.params.id
       })
       .then(() => {
-        this.full_name = this.getCompany.full_name;
-        this.payment_frequency = this.getCompany.payment_frequency;
+        this.name = this.getCompany.name;
+        this.paymentFrequency = this.getCompany.payment_frequency;
       });
   },
 
   computed: {
-    ...mapGetters(["getCompany", "companyItinerarys", "getEmployees"]),
+    ...mapGetters(["getCompany", "getCompanyItinerarys", "getEmployees"]),
 
     /***
      * Returns a page from the searched data or the whole data. Search is performed in the watch section below

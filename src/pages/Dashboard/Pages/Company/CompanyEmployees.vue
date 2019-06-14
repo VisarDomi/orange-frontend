@@ -42,8 +42,9 @@
 <script>
 import { PricingCard, TestimonialCard } from "@/components";
 import { GET_EMPLOYEES, GET_EMPLOYEE } from "@/store/actions.type";
-
 import { mapGetters } from "vuex";
+import { getUser } from "@/store/services/userstorage";
+
 export default {
   name: "CompanyEmployees",
   components: {
@@ -58,15 +59,20 @@ export default {
     }
   },
   data() {
-    return {};
+    return {
+      companyId: getUser().company_id
+    };
   },
   methods: {
     addEmployee() {
       this.$router.push({ name: "CompanyCreateEmployee" });
     },
     open_employee(employee) {
-      console.log("open_employee")
-      this.$store.dispatch(GET_EMPLOYEE, { employeeId: employee.id });
+      let payload = {
+        companyId: this.companyId,
+        employeeId: employee.id
+      };
+      this.$store.dispatch(GET_EMPLOYEE, payload);
       this.$router.push({
         name: "CompanyEmployeeDetail",
         params: {
@@ -84,7 +90,8 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch(GET_EMPLOYEES)
+    let payload = { companyId: this.companyId };
+    this.$store.dispatch(GET_EMPLOYEES, payload);
     this.onResponsiveInverted();
     window.addEventListener("resize", this.onResponsiveInverted);
   },
