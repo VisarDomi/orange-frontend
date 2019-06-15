@@ -130,7 +130,6 @@ export default {
     return {
       selectedEmployees: [],
       destination: "",
-      status: "",
       hours: "",
       minutes: "",
       date: ""

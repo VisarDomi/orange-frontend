@@ -53,7 +53,7 @@
                 @click.native="openReservation(item)"
               >
                 <!-- ["Employee", "Date", "Destination", "Code"] -->
-                <md-table-cell md-label="Employee" md-sort-by="code">
+                <md-table-cell md-label="Employee" md-sort-by="date">
                   <span v-for="stop in item.stops" :key="stop.id">
                     {{
                     stop.employee_full_name
@@ -66,7 +66,7 @@
                   }}
                 </md-table-cell>
                 <md-table-cell md-label="Destination">{{ item.destination }}</md-table-cell>
-                <md-table-cell md-label="KSt">{{ item.code }}</md-table-cell>
+                <!-- <md-table-cell md-label="KSt">{{ item.kst }}</md-table-cell> -->
                 <!-- <md-table-cell md-label="Destination">{{ item.destination }}</md-table-cell>
                 <md-table-cell md-label="Status" style="justify-content:left;">{{ item.status }}</md-table-cell>-->
               </md-table-row>
@@ -166,7 +166,7 @@ export default {
         perPageOptions: [5, 10, 25, 50],
         total: 0
       },
-      footerTable: ["Employee", "Date", "Destination", "KSt"],
+      footerTable: ["Employee", "Date", "Destination"],
       searchQuery: "",
       propsToSearch: ["name", "email", "age"],
       tableData: [],

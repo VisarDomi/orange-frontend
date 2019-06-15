@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h5 class="info-text">Based on your luggage amount and size you can select: </h5>
+    <h5 class="info-text">Based on your luggage amount and size you can select:</h5>
     <h5 class="info-text">{{this.message}}</h5>
     <div class="md-layout">
       <div class="md-layout-item">
@@ -45,7 +45,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['getCompanyReservation'])
+    ...mapGetters(["getCompanyReservation"])
   },
   methods: {
     validate() {
@@ -69,43 +69,47 @@ export default {
         return true;
       });
     },
-    controllLuggage(){
+    controllLuggage() {
       let combinations = [
         ["2", "2"],
         ["2", "1"],
         ["2", "0"],
-        
+
         ["1", "3"],
         ["1", "2"],
         ["1", "1"],
         ["1", "0"],
 
-        ["0", "4"]
-        ["0", "3"]
-        ["0", "2"]
-        ["0", "1"]
+        ["0", "4"],
+        ["0", "3"],
+        ["0", "2"],
+        ["0", "1"],
         ["0", "0"]
-      ]
+      ];
       let luggages = [
         this.getCompanyReservation.big_luggage,
         this.getCompanyReservation.small_luggage
-      ]
-      for(let combination of combinations){
-        if(JSON.stringify(luggages)==JSON.stringify(combination)){
-          return true
+      ];
+      for (let combination of combinations) {
+        if (JSON.stringify(luggages) == JSON.stringify(combination)) {
+          return true;
         }
       }
-      return false
+      return false;
     },
     economyLimoSelected() {
-      if(!this.getCompanyReservation.stops.length > 2 && this.controllLuggage()){
+      if (
+        !this.getCompanyReservation.stops.length > 2 &&
+        this.controllLuggage()
+      ) {
         this.model.economyLimo = true;
         this.model.economyBus = false;
         this.model.businessBus = false;
         this.model.businessLimo = false;
-      }else{
+      } else {
         this.model.economyLimo = false;
-        this.message = "You cannot select a limo, number of employeers and/or luggage doesn't fit the criteria"
+        this.message =
+          "You cannot select a limo, number of employeers and/or luggage doesn't fit the criteria";
       }
     },
     economyBusSelected() {
@@ -113,17 +117,21 @@ export default {
       this.model.economyBus = true;
       this.model.businessBus = false;
       this.model.businessLimo = false;
-      this.message = "Please Continue"
+      this.message = "Please Continue";
     },
     businessLimoSelected() {
-      if(!this.getCompanyReservation.stops.length > 3 && this.controllLuggage()){
+      if (
+        !this.getCompanyReservation.stops.length > 3 &&
+        this.controllLuggage()
+      ) {
         this.model.economyLimo = false;
         this.model.economyBus = false;
         this.model.businessBus = false;
         this.model.businessLimo = true;
-      }else{
+      } else {
         this.model.businessLimo = false;
-        this.message = "You cannot select a limo, number of employeers and/or luggage doesn't fit the criteria"
+        this.message =
+          "You cannot select a limo, number of employeers and/or luggage doesn't fit the criteria";
       }
     },
     businessBusSelected() {
@@ -131,7 +139,7 @@ export default {
       this.model.economyBus = false;
       this.model.businessBus = true;
       this.model.businessLimo = false;
-      this.message = "Please Continue"
+      this.message = "Please Continue";
     }
   }
 };

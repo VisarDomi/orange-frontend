@@ -57,7 +57,6 @@ export const actions = {
 
   async [CREATE_COMPANY_RESERVATION](context, payload) {
     const { companyId, reservation } = payload;
-    reservation.status = "unassigned";
     await ReservationService.createReservation(companyId, reservation).then(
       ({ data }) => {
         return data;

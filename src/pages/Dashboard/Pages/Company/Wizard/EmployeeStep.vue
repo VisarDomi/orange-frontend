@@ -76,30 +76,6 @@
           <md-input v-model="stops.rowData[index].pickup" type="text" required></md-input>
         </md-field>
 
-        <md-field
-          :class="[
-            { 'md-valid': !errors.has('code') && touched.code },
-            { 'md-form-group': true },
-            { 'md-error': errors.has('code') }
-          ]"
-        >
-          <md-icon>business</md-icon>
-          <label>What is your company KST?</label>
-          <md-input
-            v-model="code"
-            data-vv-name="code"
-            type="text"
-            name="code"
-            required
-            v-validate="modelValidations.code"
-          ></md-input>
-          <slide-y-down-transition>
-            <md-icon class="error" v-show="errors.has('code')">close</md-icon>
-          </slide-y-down-transition>
-          <slide-y-down-transition>
-            <md-icon class="success" v-show="!errors.has('code') && touched.code">done</md-icon>
-          </slide-y-down-transition>
-        </md-field>
       </div>
 
       <div class="md-layout-item md-size-60 mx-auto md-small-size-100">
@@ -363,7 +339,6 @@ export default {
       minutes: "",
       smallLuggage: "",
       bigLuggage: "",
-      code: "",
       single: null,
       touched: {
         passangerCount: false,
@@ -371,12 +346,8 @@ export default {
         date: false,
         hour: false,
         minutes: false,
-        code: false
       },
       modelValidations: {
-        code: {
-          required: true
-        },
         smallLuggage: {
           required: true
         },
@@ -414,7 +385,7 @@ export default {
         for (let selected of this.selectedEmployees) {
           if (employee.id == selected) {
             employeeStops.push({
-              employee_id: employee.id,
+              employee_id: employee.id + "",
               pickup: employee.address,
               time: "14:00:00",
               full_name: employee.full_name
@@ -422,9 +393,7 @@ export default {
           }
         }
       }
-
       this.stops.rowData = employeeStops;
-      console.log("row data is: ", this.stops.rowData);
     },
     getError(fieldName) {
       return this.errors.first(fieldName);
@@ -435,14 +404,12 @@ export default {
         console.log("res of validate is: ", res);
         if (res == true) {
           let data = {
-            code: this.code,
             destination: this.destination,
-            employeeIds: this.selectedEmployees,
             stops: this.stops.rowData,
             date: this.date,
             time: this.hour + ":" + this.minutes + ":00",
-            smallLuggage: this.smallLuggage,
-            bigLuggage: this.bigLuggage
+            smallLuggage: this.smallLuggage + "",
+            bigLuggage: this.bigLuggage + ""
           };
           for (let stop of this.stops.rowData) {
             delete stop.full_name;
@@ -451,7 +418,7 @@ export default {
           this.$store.commit(SET_EMPLOYEE_STEP, data);
           return res;
         }
-        // return true;//for development speed
+        // return true; //for development speed
         return res;
       });
     }
@@ -460,10 +427,6 @@ export default {
     smallLuggage() {
       this.touched.smallLuggage = true;
     },
-    code() {
-      this.touched.code = true;
-    },
-
     bigLuggage() {
       this.touched.bigLuggage = true;
     },
@@ -486,9 +449,7 @@ export default {
     }
   },
   created() {
-    payload = {
-      companyId: getUser().company_id
-    };
+    let payload = { companyId: getUser().company_id };
     this.$store.dispatch(GET_EMPLOYEES, payload);
   },
   computed: {

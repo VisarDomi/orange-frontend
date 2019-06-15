@@ -28,15 +28,11 @@ export const mutations = {
   },
 
   [SET_EMPLOYEE_STEP](state, data) {
-    state.companyReservation.name = data.name;
     state.companyReservation.destination = data.destination;
     state.companyReservation.date = data.date;
     state.companyReservation.time = data.time;
-    state.companyReservation.status = "unassigned";
-    // state.companyReservation.payment_method = data.paymentMethod;
     state.companyReservation.big_luggage = data.bigLuggage;
     state.companyReservation.small_luggage = data.smallLuggage;
-    // state.companyReservation.vehicle_type = data.vehicleType;
     state.companyReservation.stops = data.stops;
   },
   [SET_VEHICLE_STEP](state, data) {
