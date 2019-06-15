@@ -1,4 +1,4 @@
-import { AdminService, ItemService } from "../../services/api";
+import { AdminService, ItineraryService } from "../../services/api";
 import {
   CREATE_ADMIN_INVOICE,
   GET_ADMIN_INVOICE,
@@ -25,19 +25,14 @@ import {
 export const actions = {
   async [CREATE_ADMIN_INVOICE](context, payload) {
     const { reservationId, invoice } = payload;
-    delete payload.reservationId;
     await AdminService.postInvoice(reservationId, invoice).then(({ data }) => {
-      console.log("Setting admin invoice data...");
       context.commit(SET_ADMIN_INVOICE, data);
-      return data;
     });
   },
 
   async [GET_ADMIN_INVOICES](context, payload) {
     await AdminService.getInvoices().then(({ data }) => {
-      console.log("Setting admin invoice data...");
       context.commit(SET_ADMIN_INVOICES, data);
-      return data;
     });
   },
 
@@ -50,8 +45,6 @@ export const actions = {
 
   async [UPDATE_ADMIN_INVOICE](context, payload) {
     const { reservationId, invoiceId, invoice } = payload;
-    delete invoice.reservationId;
-    delete invoice.invoiceId;
     await AdminService.putInvoice(reservationId, invoiceId, invoice).then(
       ({ data }) => {
         context.commit(SET_ADMIN_INVOICE, data);
@@ -62,8 +55,6 @@ export const actions = {
   async [GET_ADMIN_RESERVATIONS](context) {
     await AdminService.getReservations().then(({ data }) => {
       context.commit(SET_ADMIN_RESERVATIONS, data);
-      console.log("setting reservations", data);
-      return data;
     });
   },
 
@@ -71,67 +62,52 @@ export const actions = {
     const { reservationId } = payload;
     await AdminService.getReservation(reservationId).then(({ data }) => {
       context.commit(SET_ADMIN_RESERVATION, data);
-      console.log("setting reservation", data);
-      return data;
     });
   },
 
   async [UPDATE_ADMIN_RESERVATION](context, payload) {
     const { reservationId, driverId } = payload;
-    let reservation = {
-      driver_id: driverId + ""
-    };
+    let reservation = { driver_id: driverId + "" };
     await AdminService.putReservation(reservationId, reservation).then(
       ({ data }) => {
-        console.log("Setting invoice data...");
         context.commit(SET_ADMIN_RESERVATION, data);
-        context.dispatch(GET_DRIVER, { driverId });
-        return data;
       }
     );
+    await context.dispatch(GET_DRIVER, { driverId });
   },
 
-  async [GET_ADMIN_ITINERARYS](context) {
-    await AdminService.getItinerarys().then(({ data }) => {
+  async [CREATE_ADMIN_ITINERARY](context, payload) {
+    const { companyId, itinerary } = payload;
+    await ItineraryService.createItinerary(companyId, itinerary).then(({ data }) => {
+      context.commit(SET_ADMIN_ITINERARY, data);
+    });
+  },
+
+  async [GET_ADMIN_ITINERARYS](context, payload) {
+    const { companyId } = payload;
+    await ItineraryService.getItinerarys(companyId).then(({ data }) => {
       context.commit(SET_ADMIN_ITINERARYS, data);
-      console.log("setting itinerarys", data);
-      return data;
     });
   },
 
   async [GET_ADMIN_ITINERARY](context, payload) {
-    const { itineraryId } = payload;
-    await AdminService.getItinerary(itineraryId).then(({ data }) => {
-      console.log("Setting admin itinerary data...");
+    const { companyId, itineraryId } = payload;
+    await ItineraryService.getItinerary(companyId, itineraryId).then(({ data }) => {
       context.commit(SET_ADMIN_ITINERARY, data);
-      return data;
-    });
-  },
-
-  async [CREATE_ADMIN_ITINERARY](context, payload) {
-    await AdminService.createItinerary(payload).then(({ data }) => {
-      console.log("Setting admin itinerary data...");
-      context.commit(SET_ADMIN_ITINERARY, data);
-      return data;
     });
   },
 
   async [UPDATE_ADMIN_ITINERARY](context, payload) {
-    const { itineraryId, itinerary } = payload;
-
-    await AdminService.putItinerary(itineraryId, itinerary).then(({ data }) => {
-      console.log("setting itinerary data...");
+    const { companyId, itineraryId, itinerary } = payload;
+    await ItineraryService.putItinerary(companyId, itineraryId, itinerary).then(({ data }) => {
       context.commit(SET_ADMIN_ITINERARY, data);
-      return data;
     });
   },
 
   async [DELETE_ADMIN_ITINERARY](context, payload) {
-    const { itineraryId } = payload;
-    await AdminService.deleteItinerary(itineraryId).then(({ data }) => {
-      console.log("deleting itinerary data...");
+    const { companyId, itineraryId } = payload;
+    await ItineraryService.deleteItinerary(companyId, itineraryId).then(({ data }) => {
       context.commit(SET_ADMIN_ITINERARY, data);
-      return data;
     });
   }
 };

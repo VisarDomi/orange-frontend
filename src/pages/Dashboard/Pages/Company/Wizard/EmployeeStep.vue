@@ -340,6 +340,8 @@ import { GET_EMPLOYEES } from "@/store/actions.type";
 import { SET_EMPLOYEE_STEP } from "@/store/mutations.type";
 import { mapGetters } from "vuex";
 import { SlideYDownTransition } from "vue2-transitions";
+import { getUser } from "@/store/services/userstorage";
+
 export default {
   components: {
     SlideYDownTransition
@@ -437,13 +439,13 @@ export default {
             destination: this.destination,
             employeeIds: this.selectedEmployees,
             stops: this.stops.rowData,
-            date: this.date, 
-            time: this.hour + ":" + this.minutes + ":00", 
-            smallLuggage: this.smallLuggage, 
+            date: this.date,
+            time: this.hour + ":" + this.minutes + ":00",
+            smallLuggage: this.smallLuggage,
             bigLuggage: this.bigLuggage
-          }
-          for(let stop of this.stops.rowData){
-            delete stop.full_name
+          };
+          for (let stop of this.stops.rowData) {
+            delete stop.full_name;
           }
 
           this.$store.commit(SET_EMPLOYEE_STEP, data);
@@ -484,8 +486,10 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch(GET_EMPLOYEES);
-    console.log(this.getEmployees)
+    payload = {
+      companyId: getUser().company_id
+    };
+    this.$store.dispatch(GET_EMPLOYEES, payload);
   },
   computed: {
     ...mapGetters(["getEmployees"])

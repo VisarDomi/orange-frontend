@@ -42,7 +42,7 @@
                 </md-field>
               </md-table-toolbar>
 
-              <md-table-row slot="md-table-row" slot-scope="{ item }" @click.native="open_invoice(item)">
+              <md-table-row slot="md-table-row" slot-scope="{ item }" @click.native="openInvoice(item)">
                 
                 <md-table-cell md-label="Company" md-sort-by="company_id">
                   {{
@@ -184,7 +184,7 @@ export default {
         confirmButtonClass: "md-button md-info"
       });
     },
-    open_invoice(item) {
+    openInvoice(item) {
       this.$store
         .dispatch(GET_ADMIN_INVOICE, { invoiceId: item.id })
         .then(() => {

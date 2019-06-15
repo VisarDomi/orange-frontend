@@ -49,21 +49,16 @@ export const actions = {
   },
 
   async [UPDATE_COMPANY](context, payload) {
-    const { companyId } = payload;
-    delete payload.companyId;
-    await CompanyService.putCompany(companyId, payload).then(({ data }) => {
+    const { companyId, company } = payload;
+    await CompanyService.putCompany(companyId, company).then(({ data }) => {
       context.commit(SET_COMPANY, data);
-      return data;
     });
   },
 
   async [CREATE_COMPANY_RESERVATION](context, payload) {
-    // const { reservation } = payload; //not needed, left for artifact reasons
-    console.log("paylaod in action of create reservaton: ", payload);
-    const { companyId } = payload;
-    delete payload.companyId;
-    payload.status = "unassigned";
-    await ReservationService.createReservation(companyId, payload).then(
+    const { companyId, reservation } = payload;
+    reservation.status = "unassigned";
+    await ReservationService.createReservation(companyId, reservation).then(
       ({ data }) => {
         return data;
       }

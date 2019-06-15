@@ -282,7 +282,6 @@ export default {
     }
   },
   mounted() {
-    // this.$store.dispatch(ADMIN_GET_RESERVATION) //get reservation with store then store it in variable, then get it with mapGetters and plug it into POST invoice
     this.updateDriver();
   },
   created() {},

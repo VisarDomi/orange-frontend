@@ -180,7 +180,6 @@ export const AdminService = {
       invoice
     );
   },
-
   deleteInvoice(reservationId, invoiceId) {
     return ApiService.delete(
       `admin/reservation/${reservationId}/invoice/${invoiceId}`

@@ -34,14 +34,17 @@
 
                 <md-field>
                   <label for="companySearchValue">Companys filter</label>
-                  <md-select name="companySearchValue" v-model="companySearchValue" md-dense >
-                    <md-option value="All">All </md-option>
-                    <md-option v-for="(company, index) in this.companysName" :key="company.id" :value="company.name">{{company.name}}</md-option>
+                  <md-select name="companySearchValue" v-model="companySearchValue" md-dense>
+                    <md-option value="All">All</md-option>
+                    <md-option
+                      v-for="(company, index) in this.companysName"
+                      :key="company.id"
+                      :value="company.name"
+                    >{{company.name}}</md-option>
                   </md-select>
                 </md-field>
 
                 <md-field>
-                
                   <label for="monthSearchValue">Months filter</label>
                   <md-select name="monthSearchValue" v-model="monthSearchValue" md-dense>
                     <md-option value="All">All</md-option>
@@ -60,7 +63,6 @@
                     <md-option value="All">All</md-option>
                   </md-select>
                 </md-field>
-                
 
                 <md-field>
                   <md-input
@@ -92,7 +94,7 @@
               <md-table-row
                 slot="md-table-row"
                 slot-scope="{ item }"
-                @click.native="open_reservation(item)"
+                @click.native="openReservation(item)"
                 md-selectable="multiple"
                 md-auto-select
                 :class="{
@@ -257,9 +259,9 @@ export default {
     filterReservations(condition, value) {
       console.log("condition: ", condition);
       console.log("value: ", value);
-      this.tableReservationsData = []
-      for(let reservation of this.getAdminReservations){
-        this.tableReservationsData.push(reservation)
+      this.tableReservationsData = [];
+      for (let reservation of this.getAdminReservations) {
+        this.tableReservationsData.push(reservation);
       }
       let searched = this.searchTable(value, condition); // months/companys
 
@@ -267,13 +269,17 @@ export default {
     },
     searchTable(term, condition) {
       // return list of reservations
-      if(term == "All"){
-        return this.tableReservationsData
+      if (term == "All") {
+        return this.tableReservationsData;
       }
-      if(condition == "companys"){
-        var returnReservations = this.tableReservationsData.filter(this.withSameCompany);
-      }else if(condition == "months"){
-        var returnReservations = this.tableReservationsData.filter(this.withSameMonth);
+      if (condition == "companys") {
+        var returnReservations = this.tableReservationsData.filter(
+          this.withSameCompany
+        );
+      } else if (condition == "months") {
+        var returnReservations = this.tableReservationsData.filter(
+          this.withSameMonth
+        );
       }
       return returnReservations;
     },
@@ -285,7 +291,7 @@ export default {
     },
     withSameCompany(reservation) {
       // console.log(reservationMonth)
-      let reservationCompany = reservation.company.name; 
+      let reservationCompany = reservation.company.name;
 
       return reservationCompany == this.companySearchValue; //this should be a string, value="company1"
     },
@@ -324,7 +330,7 @@ export default {
         confirmButtonClass: "md-button md-info"
       });
     },
-    open_reservation(item) {
+    openReservation(item) {
       this.$store
         .dispatch(GET_ADMIN_RESERVATION, { reservationId: item.id })
         .then(() => {
@@ -375,7 +381,6 @@ export default {
     //   this.tableReservationsData = this.getAdminReservations;
     // });
     // this.$store.dispatch(GET_COMPANYS).then(() => {
-
     //   this.companysName = []
     //   for(let company of this.getCompanys){
     //     this.companysName.push(
@@ -395,21 +400,17 @@ export default {
       this.tableReservationsData = this.getAdminReservations;
     });
     this.$store.dispatch(GET_COMPANYS).then(() => {
-      
-      for(let company of this.getCompanys){
-        this.companysName.push(
-          {name: company.name,
-            id: company.id})
+      for (let company of this.getCompanys) {
+        this.companysName.push({ name: company.name, id: company.id });
       }
-      console.log("names: ", this.companysName)
+      console.log("names: ", this.companysName);
       this.rerender += 1;
-    })
+    });
     // Fuse search initialization.
     this.fuseSearch = new Fuse(this.tableReservationsData, {
       keys: ["code"],
       threshold: 0.3
     });
-    
   },
   watch: {
     /**
@@ -429,7 +430,7 @@ export default {
     },
     companySearchValue() {
       return this.filterReservations("companys", this.companySearchValue);
-    },
+    }
   }
 };
 </script>

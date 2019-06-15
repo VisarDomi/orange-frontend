@@ -30,7 +30,7 @@
                   </md-select>
                 </md-field>
 
-                <md-field >
+                <md-field>
                   <md-input
                     type="search"
                     class="mb-3"
@@ -43,96 +43,55 @@
               </md-table-toolbar>
 
               <md-table-row slot="md-table-row" slot-scope="{ item }">
-                
                 <md-table-cell md-label="Departure" md-sort-by="company_id">
-                    
+                  <div v-if="item.editable==true">
+                    <md-field>
+                      <md-input type="text" clearable style="width: 50px"></md-input>
+                    </md-field>
+                  </div>
 
-
-
-                    <div v-if="item.editable==true" > 
-                        <md-field >
-                        <md-input
-                            type="text"
-                            clearable
-                            style="width: 50px"
-                        ></md-input>
-                        </md-field>
-                    </div>
-
-                    <div v-else>
-                        {{item.id}}
-                    </div >
-
-
-
-
+                  <div v-else>{{item.id}}</div>
                 </md-table-cell>
-                <md-table-cell>
-                    &nbsp;
-                </md-table-cell>
+                <md-table-cell>&nbsp;</md-table-cell>
                 <md-table-cell md-label="Destination" md-sort-by="grand_total">
+                  <div v-if="item.editable==true">
+                    <md-field>
+                      <md-input type="text" clearable style="width: 50px"></md-input>
+                    </md-field>
+                  </div>
 
-
-                    <div v-if="item.editable==true" > 
-                        <md-field >
-                        <md-input
-                            type="text"
-                            clearable
-                            style="width: 50px"
-                        ></md-input>
-                        </md-field>
-                    </div>
-
-                    <div v-else>
-                        {{item.destination}}
-                    </div >
-
-
+                  <div v-else>{{item.destination}}</div>
                 </md-table-cell>
-                <md-table-cell>
-                    &nbsp;
-                </md-table-cell>
+                <md-table-cell>&nbsp;</md-table-cell>
                 <md-table-cell md-label="Price">
+                  <div v-if="item.editable==true">
+                    <md-field>
+                      <md-input type="number" clearable style="width: 50px"></md-input>
+                    </md-field>
+                  </div>
 
-
-                    <div v-if="item.editable==true" > 
-                        <md-field >
-                        <md-input
-                            type="number"
-                            clearable
-                            style="width: 50px"
-                        ></md-input>
-                        </md-field>
-                    </div>
-
-                    <div v-else>
-                        {{item.id}}
-                    </div >    
-
-
+                  <div v-else>{{item.id}}</div>
                 </md-table-cell>
-              <md-table-cell md-label="Actions" >
-
-                <md-button
-                  class="md-just-icon md-warning md-simple"
-                  @click.native="handleEdit(item)"
-                >
-                  <md-icon>edit</md-icon>
-                </md-button>
-                <md-button
-                  class="md-just-icon md-success md-simple"
-                  @click.native="handleDone(item)"
-                >
-                  <md-icon>done</md-icon>
-                </md-button>
-                <md-button
-                  class="md-just-icon md-danger md-simple"
-                  @click.native="handleDelete(item)"
-                >
-                  <md-icon>delete</md-icon>
-                </md-button>
-
-              </md-table-cell>
+                <md-table-cell md-label="Actions">
+                  <md-button
+                    class="md-just-icon md-warning md-simple"
+                    @click.native="handleEdit(item)"
+                  >
+                    <md-icon>edit</md-icon>
+                  </md-button>
+                  <md-button
+                    class="md-just-icon md-success md-simple"
+                    @click.native="handleDone(item)"
+                  >
+                    <md-icon>done</md-icon>
+                  </md-button>
+                  <md-button
+                    class="md-just-icon md-danger md-simple"
+                    @click.native="handleDelete(item)"
+                  >
+                    <md-icon>delete</md-icon>
+                  </md-button>
+                </md-table-cell>
               </md-table-row>
             </md-table>
             <div class="footer-table md-table">
@@ -234,7 +193,7 @@ export default {
         perPageOptions: [5, 10, 25, 50],
         total: 0
       },
-      footerTable: ["Departure","","Destination","","Price","Actions" ],
+      footerTable: ["Departure", "", "Destination", "", "Price", "Actions"],
       searchQuery: "",
       propsToSearch: ["name", "email", "age"],
       tableData: [],
@@ -253,26 +212,33 @@ export default {
       });
     },
 
-    addItinerary(){
-      // console.log(this.tableData);
-      // let itinerary = {
-      //   departure: "departure",
-      //   destination: "destination",
-      //   price: "99"
-      // }
-      // this.$store.dispatch(CREATE_ADMIN_ITINERARY, itinerary);
+    addItinerary() {
+      let itinerary = {
+        departure: "departure",
+        destination: "destination",
+        price: "99"
+      };
+      let payload = {
+        companyId: null,
+        itinerary: itinerary
+      };
+      this.$store.dispatch(CREATE_ADMIN_ITINERARY, payload);
       // update tableData
-      // this.$store.dispatch(GET_ADMIN_ITINERARYS).then(() => {
+      // this.$store.dispatch(GET_ADMIN_ITINERARYS)
       //     let clone = JSON.parse(JSON.stringify(this.getAdminItinerarys));
       //     this.tableData = clone;
-      this.tableData.push({id: "placeholder", destination: "placeholder", grand_total: "placeholder"})
+      this.tableData.push({
+        id: "placeholder",
+        destination: "placeholder",
+        grand_total: "placeholder"
+      });
     },
 
     handleEdit(item) {
-        console.log("on handle edit: ", item)
-        item.editable=true;
-        console.log(item.editable)
-        this.updateTableData(item.id)
+      console.log("on handle edit: ", item);
+      item.editable = true;
+      console.log(item.editable);
+      this.updateTableData(item.id);
 
       //   swal({});
       // swal({
@@ -282,39 +248,35 @@ export default {
       // }).fire();
     },
 
-    handleDone(item){
-
-        item.editable=false;
-        this.updateTableData(item.id)
-
+    handleDone(item) {
+      item.editable = false;
+      this.updateTableData(item.id);
     },
 
     //this hole shitfuck is to force vue to rerender the row, since it wont play nice to just change the variable, i'm assuming since its inside an object, and it doesnt
     //watch it. probably needs an issue open on github
 
     //it still makes vue complain about mutation outside mutation handlers -> solved below with deep array cloning
-    updateTableData(id){
-        console.log("update table data id ", id)
-        for(let item in this.tableData){
-            console.log("item of table data", item)
-            if(this.tableData[item].id==id){
-                // this.tableData[item].editable = bool;
-                let changed = this.tableData[item]
-                 this.tableData.splice( item, 1, changed); // at index position 1, remove 0 elements, then add "baz" to that position
-                console.log("updated item: ", this.tableData[item].editable)
-            }
+    updateTableData(id) {
+      console.log("update table data id ", id);
+      for (let item in this.tableData) {
+        console.log("item of table data", item);
+        if (this.tableData[item].id == id) {
+          // this.tableData[item].editable = bool;
+          let changed = this.tableData[item];
+          this.tableData.splice(item, 1, changed); // at index position 1, remove 0 elements, then add "baz" to that position
+          console.log("updated item: ", this.tableData[item].editable);
         }
+      }
     },
 
-
-    addEditableToData(){
-      for(let item in this.tableData){
-            this.tableData[item].editable = false;
-        }       
+    addEditableToData() {
+      for (let item in this.tableData) {
+        this.tableData[item].editable = false;
+      }
     },
 
     handleDelete(item) {
-
       //   swal({
       //     title: "Are you sure?",
       //     text: `You won't be able to revert this!`,
@@ -352,7 +314,7 @@ export default {
     //   console.log("GET itinerarys now: ", this.getAdminItinerarys);
     //     for(let item in this.getAdminItinerarys){
     //         this.getAdminItinerarys[item].editable = false;
-    //     }     
+    //     }
 
     //     //more shitfuck to clone the state array coming from store to stop vue from complaining about messing with state outside mutators
     //     let clone = JSON.parse(JSON.stringify(this.getAdminItinerarys));
@@ -361,13 +323,13 @@ export default {
     // });
     this.$store.dispatch(GET_ADMIN_INVOICES).then(() => {
       console.log("GET invoices now: ", this.getAdminInvoices);
-        for(let item in this.getAdminInvoices){
-            this.getAdminInvoices[item].editable = false;
-        }     
+      for (let item in this.getAdminInvoices) {
+        this.getAdminInvoices[item].editable = false;
+      }
 
-        //more shitfuck to clone the state array coming from store to stop vue from complaining about messing with state outside mutators
-        let clone = JSON.parse(JSON.stringify(this.getAdminInvoices));
-        console.log("b? ", clone)
+      //more shitfuck to clone the state array coming from store to stop vue from complaining about messing with state outside mutators
+      let clone = JSON.parse(JSON.stringify(this.getAdminInvoices));
+      console.log("b? ", clone);
       this.tableData = clone;
     });
   },

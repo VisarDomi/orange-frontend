@@ -50,7 +50,7 @@
               <md-table-row
                 slot="md-table-row"
                 slot-scope="{ item }"
-                @click.native="open_reservation(item)"
+                @click.native="openReservation(item)"
               >
                 <!-- ["Employee", "Date", "Destination", "Code"] -->
                 <md-table-cell md-label="Employee" md-sort-by="code">
@@ -202,17 +202,10 @@ export default {
         confirmButtonClass: "md-button md-info"
       });
     },
-    open_reservation(item) {
-      this.$store
-        .dispatch(GET_COMPANY_RESERVATION, { reservationId: item.id })
-        .then(() => {
-          console.log("after dispatch reservation");
-        });
+    openReservation(item) {
       this.$router.push({
         name: "CompanyReservationDetail",
-        params: {
-          id: item.id
-        }
+        params: { id: item.id }
       });
     },
     handleDelete(item) {
@@ -245,19 +238,15 @@ export default {
       if (indexToDelete >= 0) {
         this.tableData.splice(indexToDelete, 1);
       }
+    },
+    async whileCreating() {
+      let payload = { companyId: getUser().company_id };
+      await this.$store.dispatch(GET_COMPANY_RESERVATIONS, payload);
+      this.tableData = this.getCompanyReservations;
     }
   },
   created() {
-    let payload = {
-      companyId: getUser().company_id
-    };
-    this.$store.dispatch(GET_COMPANY_RESERVATIONS, payload).then(() => {
-      console.log(
-        "this.getCompanyReservations now: ",
-        this.getCompanyReservations
-      );
-      this.tableData = this.getCompanyReservations;
-    });
+    this.whileCreating()
   },
   mounted() {
     // Fuse search initialization.

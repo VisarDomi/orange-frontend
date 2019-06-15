@@ -25,7 +25,7 @@
           <md-card-expand>
             <md-card-actions md-alignment="space-between">
               <!-- <div>
-                <md-button class="md-warning" @click.native="open_driver(driver)">Details</md-button>
+                <md-button class="md-warning" @click.native="openDriver(driver)">Details</md-button>
               </div>-->
               <md-card-expand-trigger>
                 <md-button class="md-button md-warning">
@@ -60,7 +60,7 @@
                   <md-input v-model="driver.status" :disabled="!driver.statusEditable"></md-input>
                 </md-field>
                 <div>
-                  <md-button class="md-danger" @click.native="delete_driver(driver, index)">Delete</md-button>
+                  <md-button class="md-danger" @click.native="deleteDriver(driver, index)">Delete</md-button>
                 </div>
               </md-card-content>
             </md-card-expand-content>
@@ -124,7 +124,7 @@ export default {
       console.log(driverData);
       this.$store.dispatch(UPDATE_DRIVER, driverData);
     },
-    delete_driver(driver, index) {
+    deleteDriver(driver, index) {
       this.$store.dispatch(DELETE_DRIVER, driver).then(() => {
         this.$store.dispatch(GET_DRIVERS);
       });
@@ -134,7 +134,7 @@ export default {
     addDriver() {
       this.$router.push({ name: "CreateDriver" });
     },
-    open_driver(driver) {
+    openDriver(driver) {
       this.$store.dispatch(GET_DRIVER, { driverId: driver.id });
       this.$router.push({
         name: "DriverDetail",

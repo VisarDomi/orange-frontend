@@ -5,7 +5,7 @@
         <h3>Reservation stops</h3>
         <div class="md-card md-card-timeline md-theme-default md-card-plain">
           <ul class="timeline timeline-simple">
-            <li class="timeline-inverted" v-for="stop of getCompanyReservation.stops" >
+            <li class="timeline-inverted" v-for="stop of getCompanyReservation.stops">
               <div class="timeline-badge warning">
                 <i class="md-icon md-icon-font md-theme-default">person</i>
               </div>
@@ -14,9 +14,7 @@
                   <span class="badge badge-warning">{{stop.employee_full_name}}</span>
                 </div>
                 <div class="timeline-body">
-                  <p>
-                    {{stop.pickup}}
-                  </p>
+                  <p>{{stop.pickup}}</p>
                 </div>
                 <h6>
                   <h6>
@@ -27,7 +25,7 @@
               </div>
             </li>
 
-            <li class="timeline-inverted"  >
+            <li class="timeline-inverted">
               <div class="timeline-badge danger">
                 <i class="md-icon md-icon-font md-theme-default">directions</i>
               </div>
@@ -36,8 +34,7 @@
                   <span class="badge badge-danger">{{getCompanyReservation.destination}}</span>
                 </div>
                 <div class="timeline-body">
-                  <p>
-                  </p>
+                  <p></p>
                 </div>
                 <h6>
                   <h6>
@@ -46,8 +43,6 @@
                 </h6>
               </div>
             </li>
-
-
           </ul>
         </div>
       </div>
@@ -70,7 +65,6 @@
             <md-card-content>
               <div class="md-layout md-gutter md-size-100">
                 <div class="md-layout md-layout-item md-small-size-100 md-size-100">
-
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
                       <label>Date</label>
@@ -114,6 +108,8 @@
 import { UserCard } from "@/pages";
 import { GET_COMPANY_RESERVATION } from "@/store/actions.type";
 import { mapGetters } from "vuex";
+import { getUser } from "@/store/services/userstorage";
+
 export default {
   name: "CompanyReservationDetail",
   components: {
@@ -130,22 +126,25 @@ export default {
       time: ""
     };
   },
-  methods: {},
+  methods: {
+    async whileCreating() {
+      let payload = {
+        companyId: getUser().company_id,
+        reservationId: this.$route.params.id
+      };
+      await this.$store.dispatch(GET_COMPANY_RESERVATION, payload);
+      this.name = this.getCompanyReservation.name;
+      this.date = this.getCompanyReservation.date;
+      this.destination = this.getCompanyReservation.destination;
+      this.employees = this.getCompanyReservation.employees;
+      this.pickup = this.getCompanyReservation.pickup;
+      this.status = this.getCompanyReservation.status;
+      this.time = this.getCompanyReservation.time;
+    }
+  },
   mounted() {},
   created() {
-    this.$store
-      .dispatch(GET_COMPANY_RESERVATION, {
-        reservationId: this.$route.params.id
-      })
-      .then(() => {
-        this.name = this.getCompanyReservation.name;
-        this.date = this.getCompanyReservation.date;
-        this.destination = this.getCompanyReservation.destination;
-        this.employees = this.getCompanyReservation.employees;
-        this.pickup = this.getCompanyReservation.pickup;
-        this.status = this.getCompanyReservation.status;
-        this.time = this.getCompanyReservation.time;
-      });
+    this.whileCreating();
   },
   computed: {
     ...mapGetters(["getCompanyReservation"])

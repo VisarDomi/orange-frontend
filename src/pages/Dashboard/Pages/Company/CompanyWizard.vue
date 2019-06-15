@@ -34,6 +34,7 @@ import { SimpleWizard, WizardTab } from "@/components";
 import { mapGetters } from "vuex";
 import { CREATE_COMPANY_RESERVATION } from "@/store/actions.type";
 import { SET_COMPANY_RESERVATION } from "@/store/mutations.type";
+import { getUser } from "@/store/services/userstorage";
 
 export default {
   data() {
@@ -59,8 +60,10 @@ export default {
       this.wizardModel = { ...this.wizardModel, ...model };
     },
     wizardComplete() {
-      console.log("COMPLETED");
-      let payload = this.getCompanyReservation;
+      let payload = {
+        reservation: this.getCompanyReservation,
+        companyId: getUser().company_id
+      };
       this.$store.dispatch(CREATE_COMPANY_RESERVATION, payload);
 
       this.$router.push({ name: "CompanyReservations" });
