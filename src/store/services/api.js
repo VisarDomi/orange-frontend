@@ -33,16 +33,19 @@ export const ApiService = {
     });
   },
   post(resource, params) {
-    console.log(`post resource and params are:`, resource, params);
+    console.log(`post resource is:`, resource);
+    console.log(`post params are:`, params);
     return Vue.axios.post(`${resource}`, params);
   },
   login(resource, body, params) {
-    console.log(`login(resource, body, params) are:`, resource, body, params);
+    console.log(`login resource is:`, resource);
+    console.log(`login body is:`, body);
+    console.log(`login params are:`, params);
     return Vue.axios.post(`${resource}`, body, params);
   },
   put(resource, params) {
-    console.log(`put params are:`, params);
     console.log(`put resource is:`, resource);
+    console.log(`put params are:`, params);
     return Vue.axios.put(`${resource}`, params);
   },
   delete(resource) {

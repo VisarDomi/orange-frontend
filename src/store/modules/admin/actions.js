@@ -52,7 +52,7 @@ export const actions = {
     );
   },
 
-  async [GET_ADMIN_RESERVATIONS](context) {
+  async [GET_ADMIN_RESERVATIONS](context, payload) {
     await AdminService.getReservations().then(({ data }) => {
       context.commit(SET_ADMIN_RESERVATIONS, data);
     });
@@ -66,14 +66,12 @@ export const actions = {
   },
 
   async [UPDATE_ADMIN_RESERVATION](context, payload) {
-    const { reservationId, driverId } = payload;
-    let reservation = { driver_id: driverId + "" };
+    const { reservationId, reservation } = payload;
     await AdminService.putReservation(reservationId, reservation).then(
       ({ data }) => {
         context.commit(SET_ADMIN_RESERVATION, data);
       }
     );
-    await context.dispatch(GET_DRIVER, { driverId });
   },
 
   async [CREATE_ADMIN_ITINERARY](context, payload) {

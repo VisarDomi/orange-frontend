@@ -34,8 +34,8 @@ export const actions = {
           Object.assign({}, error).request.status
         );
         let status = Object.assign({}, error).request.status;
+        console.log("status is: ", status);
         if (status == 401) {
-          console.log("status is: ", status);
           payload = { badEmail: true };
           context.commit(SET_BAD_EMAIL, payload);
         } else if (status == 403) {
