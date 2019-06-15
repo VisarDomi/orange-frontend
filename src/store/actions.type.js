@@ -43,6 +43,16 @@ export const GET_DRIVER_RESERVATIONS = "getDriverReservations";
 export const GET_DRIVER_RESERVATION = "getDriverReservation";
 export const UPDATE_DRIVER_RESERVATION = "updateDriverReservation";
 
+// secretary
+export const CREATE_SECRETARY = "createSecretary";
+export const GET_SECRETARYS = "getSecretarys";
+export const GET_SECRETARY = "getSecretary";
+export const DELETE_SECRETARY = "deleteSecretary";
+export const UPDATE_SECRETARY = "updateSecretary";
+export const GET_SECRETARY_RESERVATIONS = "getSecretaryReservations";
+export const GET_SECRETARY_RESERVATION = "getSecretaryReservation";
+export const UPDATE_SECRETARY_RESERVATION = "updateSecretaryReservation";
+
 // company
 export const CREATE_COMPANY = "createCompany";
 export const GET_COMPANYS = "getCompanys";

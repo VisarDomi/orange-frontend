@@ -22,6 +22,10 @@
           :link="{ name: 'Employees', icon: 'face', path: '/company-employees' }"
         >
         </sidebar-item>
+        <sidebar-item v-if="this.isHeadSecretary"
+          :link="{ name: 'Secretaries', icon: 'face', path: '/company-secretaries' }"
+        >
+        </sidebar-item>
         <sidebar-item
           :link="{ name: 'Invoices', icon: 'credit_card', path: '/company-invoices' }"
         >
@@ -75,6 +79,8 @@ import UserMenu from "./Extra/CompanyUserMenu.vue";
 import { ZoomCenterTransition } from "vue2-transitions";
 import { LOGOUT } from "@/store/actions.type";
 
+import { getUser } from "@/store/services/userstorage"
+
 export default {
   components: {
     TopNavbar,
@@ -89,7 +95,8 @@ export default {
       sidebarBackground: "orange",
       sidebarBackgroundImage: "./img/sidebar-2.jpg",
       sidebarMini: false,
-      sidebarImg: true
+      sidebarImg: true,
+      isHeadSecretary: false
     };
   },
   methods: {
@@ -105,6 +112,7 @@ export default {
     }
   },
   mounted() {
+    this.isHeadSecretary = (getUser().secretary_role == "head_secretary")
     let docClasses = document.body.classList;
     let isWindows = navigator.platform.startsWith("Win");
     if (isWindows) {
