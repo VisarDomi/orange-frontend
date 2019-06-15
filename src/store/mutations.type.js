@@ -41,6 +41,11 @@ export const SET_DRIVERS = "setDrivers";
 export const SET_DRIVER = "setDriver";
 export const SET_DRIVER_RESERVATIONS = "setDriverReservations";
 export const SET_DRIVER_RESERVATION = "setDriverReservation";
+// driver
+export const SET_SECRETARYS = "setSecretarys";
+export const SET_SECRETARY = "setSecretary";
+export const SET_SECRETARY_RESERVATIONS = "setSecretaryReservations";
+export const SET_SECRETARY_RESERVATION = "setSecretaryReservation";
 
 // company
 export const SET_COMPANYS = "setCompanys";

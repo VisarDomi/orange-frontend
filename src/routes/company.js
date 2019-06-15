@@ -9,7 +9,9 @@ import CompanyEmployees from "@/pages/Dashboard/Pages/Company/CompanyEmployees.v
 import CompanyEmployeeDetail from "@/pages/Dashboard/Pages/Company/CompanyEmployeeDetail.vue";
 import CompanyInvoices from "@/pages/Dashboard/Pages/Company/CompanyInvoices.vue";
 import CompanyInvoiceDetail from "@/pages/Dashboard/Pages/Company/CompanyInvoiceDetail.vue";
-
+import CompanySecretaries from "@/pages/Dashboard/Pages/Company/CompanySecretarys.vue";
+import CompanySecretaryDetail from "@/pages/Dashboard/Pages/Company/CompanySecretaryDetail.vue";
+import CompanyCreateSecretary from "@/pages/Dashboard/Pages/Company/CompanyCreateSecretary.vue";
 import { setMeta } from './common';
 
 export const company = {
@@ -51,6 +53,24 @@ export const company = {
       name: "CompanyEmployeeDetail",
       components: { default: CompanyEmployeeDetail },
       meta: setMeta("Company Employee Detail")
+    },
+    {
+      path: "/company-secretaries",
+      name: "CompanySecretaries",
+      components: { default: CompanySecretaries },
+      meta: setMeta("Company Secretaries")
+    },
+    {
+      path: "/company-secretarydetail-:id",
+      name: "CompanySecretaryDetail",
+      components: { default: CompanySecretaryDetail },
+      meta: setMeta("Company Secretary Detail")
+    },
+    {
+      path: "/company-createsecretary",
+      name: "CompanyCreateSecretary",
+      components: { default: CompanyCreateSecretary },
+      meta: setMeta("Company Create Secretary")
     },
     {
       path: "/company-invoices",
