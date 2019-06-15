@@ -265,7 +265,6 @@ export default {
     }
   },
   created() {
-    console.log("this.$route.params.id", this.$route.params.id)
     this.$store.dispatch(GET_ADMIN_INVOICE, { invoiceId: this.$route.params.id });
   },
   computed: {

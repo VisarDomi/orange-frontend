@@ -136,8 +136,8 @@ export default {
       if (this.getRole == "admin") {
         roleName = "Administrator";
       }
-      if (this.getRole == "company") {
-        roleName = "Company";
+      if (this.getRole == "secretary") {
+        roleName = "Secretary";
       }
       if (this.getRole == "employee") {
         roleName = "Employee";

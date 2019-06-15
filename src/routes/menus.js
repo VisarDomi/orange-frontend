@@ -172,6 +172,7 @@ export const tablesMenu = {
   ]
 };
 
+let fullScreenMeta = setMeta("Full Screen Map");
 export const mapsMenu = {
   path: "/maps",
   component: DashboardLayout,
@@ -187,23 +188,13 @@ export const mapsMenu = {
     {
       path: "full-screen",
       name: "FullScreenMap",
+      components: { default: FullScreenMap },
       meta: {
+        ...fullScreenMeta,
         hideContent: true,
         hideFooter: true,
-        navbarAbsolute: true,
-        title: `Full Screen Map`,
-        metaTags: [
-          {
-            name: "description",
-            content: `The Full Screen Map page of Orange Limo.`
-          },
-          {
-            property: "og:description",
-            content: `The Full Screen Map page of Orange Limo.`
-          }
-        ]
-      },
-      components: { default: FullScreenMap }
+        navbarAbsolute: true
+      }
     },
     {
       path: "vector-map",

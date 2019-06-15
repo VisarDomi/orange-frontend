@@ -23,6 +23,16 @@
             </div>
 
             <div class="md-layout">
+              <label class="md-layout-item md-size-15 md-form-label">Address</label>
+              <div class="md-layout-item">
+                <md-field>
+                  <label>Employee address</label>
+                  <md-input v-model="address" placeholder="Employee home address"></md-input>
+                </md-field>
+              </div>
+            </div>
+
+            <div class="md-layout">
               <label class="md-layout-item md-size-15 md-form-label">Email</label>
               <div class="md-layout-item">
                 <md-field>
@@ -38,16 +48,6 @@
                 <md-field>
                   <label>Employee password</label>
                   <md-input v-model="user.password" placeholder="Password of employee"></md-input>
-                </md-field>
-              </div>
-            </div>
-
-            <div class="md-layout">
-              <label class="md-layout-item md-size-15 md-form-label">Address</label>
-              <div class="md-layout-item">
-                <md-field>
-                  <label>Employee address</label>
-                  <md-input v-model="address" placeholder="Employee home address"></md-input>
                 </md-field>
               </div>
             </div>
@@ -77,7 +77,7 @@
 </template>
 <script>
 import { CREATE_EMPLOYEE } from "@/store/actions.type";
-import { getUser } from "@/store/services/userstorage"
+import { getUser } from "@/store/services/userstorage";
 
 export default {
   name: "CompanyCreateEmployee",
@@ -126,10 +126,13 @@ export default {
     },
 
     async onSubmit() {
-      let payload = {
+      let employee = {
         full_name: this.name,
         address: this.address,
-        user: this.user,
+        user: this.user
+      };
+      let payload = {
+        employee: employee,
         companyId: getUser().company_id
       };
 

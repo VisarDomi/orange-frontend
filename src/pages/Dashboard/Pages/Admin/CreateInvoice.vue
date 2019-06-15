@@ -16,18 +16,15 @@
         <div class="md-layout">
           <label class="md-layout-item md-size-20 md-form-label">Company name</label>
           <div class="md-layout-item">
-            <md-field
-
-            >
+            <md-field>
               <md-input
-                v-model="completed_invoice.from_business_name"
+                v-model="completed_invoice.ref"
                 data-vv-name="required"
                 type="text"
                 v-validate="modelValidations.required"
                 required
                 placeholder="Orange Limo"
               ></md-input>
-
             </md-field>
           </div>
           <!-- <label class="md-layout-item md-size-20 md-label-on-right">
@@ -41,13 +38,12 @@
             <md-field>
               <label>Address</label>
               <md-input
-              data-vv-name="required"
+                data-vv-name="required"
                 type="text"
                 required
                 v-model="completed_invoice.from_addressline_1"
                 placeholder="Write the primary address"
               ></md-input>
-
             </md-field>
           </div>
           <!-- <label class="md-layout-item md-size-20 md-label-on-right">
@@ -74,9 +70,7 @@
         <div class="md-layout">
           <label class="md-layout-item md-size-20 md-form-label">City</label>
           <div class="md-layout-item">
-            <md-field
-
-            >
+            <md-field>
               <md-input
                 v-model="completed_invoice.from_city"
                 data-vv-name="required"
@@ -84,7 +78,6 @@
                 v-validate="modelValidations.required"
                 required
               ></md-input>
-
             </md-field>
           </div>
           <!-- <label class="md-layout-item md-size-20 md-label-on-right">
@@ -95,9 +88,7 @@
         <div class="md-layout">
           <label class="md-layout-item md-size-20 md-form-label">Zip code</label>
           <div class="md-layout-item">
-            <md-field
-
-            >
+            <md-field>
               <md-input
                 v-model="completed_invoice.from_postcode"
                 data-vv-name="number"
@@ -105,7 +96,6 @@
                 v-validate="modelValidations.number"
                 required
               ></md-input>
-
             </md-field>
           </div>
           <!-- <label class="md-layout-item md-size-20 md-label-on-right">
@@ -116,9 +106,7 @@
         <div class="md-layout">
           <label class="md-layout-item md-size-20 md-form-label">Phone</label>
           <div class="md-layout-item">
-            <md-field
-
-            >
+            <md-field>
               <md-input
                 v-model="completed_invoice.from_phone"
                 data-vv-name="required"
@@ -126,7 +114,6 @@
                 v-validate="modelValidations.required"
                 required
               ></md-input>
-
             </md-field>
           </div>
           <!-- <label class="md-layout-item md-size-20 md-label-on-right">
@@ -137,9 +124,7 @@
         <div class="md-layout">
           <label class="md-layout-item md-size-20 md-form-label">VAT</label>
           <div class="md-layout-item">
-            <md-field
-
-            >
+            <md-field>
               <md-input
                 v-model="completed_invoice.from_vat"
                 data-vv-name="required"
@@ -147,7 +132,6 @@
                 v-validate="modelValidations.required"
                 required
               ></md-input>
-
             </md-field>
           </div>
           <!-- <label class="md-layout-item md-size-20 md-label-on-right">
@@ -174,9 +158,7 @@
         <div class="md-layout">
           <label class="md-layout-item md-size-20 md-form-label">Company name</label>
           <div class="md-layout-item">
-            <md-field
-
-            >
+            <md-field>
               <md-input
                 v-model="completed_invoice.to_client_name"
                 data-vv-name="required"
@@ -184,7 +166,6 @@
                 v-validate="modelValidations.required"
                 required
               ></md-input>
-
             </md-field>
           </div>
           <!-- <label class="md-layout-item md-size-20 md-label-on-right">
@@ -204,7 +185,6 @@
                 v-model="completed_invoice.to_addressline_1"
                 placeholder="Write the primary address"
               ></md-input>
-         
             </md-field>
           </div>
           <!-- <label class="md-layout-item md-size-20 md-label-on-right">
@@ -231,9 +211,7 @@
         <div class="md-layout">
           <label class="md-layout-item md-size-20 md-form-label">City</label>
           <div class="md-layout-item">
-            <md-field
-
-            >
+            <md-field>
               <md-input
                 v-model="completed_invoice.to_city"
                 data-vv-name="required"
@@ -241,7 +219,6 @@
                 v-validate="modelValidations.required"
                 required
               ></md-input>
-
             </md-field>
           </div>
           <!-- <label class="md-layout-item md-size-20 md-label-on-right">
@@ -252,9 +229,7 @@
         <div class="md-layout">
           <label class="md-layout-item md-size-20 md-form-label">Zip code</label>
           <div class="md-layout-item">
-            <md-field
-
-            >
+            <md-field>
               <md-input
                 v-model="completed_invoice.to_postcode"
                 data-vv-name="number"
@@ -262,7 +237,6 @@
                 v-validate="modelValidations.number"
                 required
               ></md-input>
-
             </md-field>
           </div>
           <!-- <label class="md-layout-item md-size-20 md-label-on-right">
@@ -273,9 +247,7 @@
         <div class="md-layout">
           <label class="md-layout-item md-size-20 md-form-label">Phone</label>
           <div class="md-layout-item">
-            <md-field
-
-            >
+            <md-field>
               <md-input
                 v-model="completed_invoice.to_phone"
                 data-vv-name="required"
@@ -283,7 +255,6 @@
                 v-validate="modelValidations.required"
                 required
               ></md-input>
-
             </md-field>
           </div>
           <!-- <label class="md-layout-item md-size-20 md-label-on-right">
@@ -294,9 +265,7 @@
         <div class="md-layout">
           <label class="md-layout-item md-size-20 md-form-label">VAT</label>
           <div class="md-layout-item">
-            <md-field
-
-            >
+            <md-field>
               <md-input
                 v-model="completed_invoice.to_vat"
                 data-vv-name="required"
@@ -304,7 +273,6 @@
                 v-validate="modelValidations.required"
                 required
               ></md-input>
-
             </md-field>
           </div>
           <!-- <label class="md-layout-item md-size-20 md-label-on-right">
@@ -331,9 +299,7 @@
         <div class="md-layout">
           <label class="md-layout-item md-size-20 md-form-label">Invoice #</label>
           <div class="md-layout-item">
-            <md-field
-
-            >
+            <md-field>
               <md-input
                 v-model="completed_invoice.ref"
                 data-vv-name="number"
@@ -341,7 +307,6 @@
                 v-validate="modelValidations.number"
                 disabled
               ></md-input>
-
             </md-field>
           </div>
           <!-- <label class="md-layout-item md-size-20 md-label-on-right">
@@ -351,8 +316,14 @@
 
         <div class="md-layout">
           <label class="md-layout-item md-size-20 md-form-label">Invoice Date</label>
-          <md-datepicker class="md-layout-item" v-model="completed_invoice.date" md-immediately required 
-                        data-vv-name="required" v-validate="modelValidations.required"/>
+          <md-datepicker
+            class="md-layout-item"
+            v-model="completed_invoice.date"
+            md-immediately
+            required
+            data-vv-name="required"
+            v-validate="modelValidations.required"
+          />
           <!-- <label class="md-layout-item md-size-20 md-label-on-right">
             <code>required</code>
           </label>-->
@@ -410,14 +381,8 @@
       <md-table-row>
         <md-table-cell md-numeric>{{this.rowCounter+1}}</md-table-cell>
         <md-table-cell>
-          <md-field
-
-          >
-            <md-input
-              v-model="invoice_item.description"
-              type="text"
-            ></md-input>
-
+          <md-field>
+            <md-input v-model="invoice_item.description" type="text"></md-input>
           </md-field>
         </md-table-cell>
 
@@ -426,67 +391,50 @@
         </md-table-cell>
 
         <md-table-cell>
-          <md-field
-
-          >
+          <md-field>
             <md-input
               v-model="invoice_item.quantity"
               data-vv-name="number"
               type="number"
               v-validate="modelValidations.number"
-
             ></md-input>
-
           </md-field>
         </md-table-cell>
         <md-table-cell>
-          <md-field
-
-          >
+          <md-field>
             <md-input
               v-model="invoice_item.price"
               data-vv-name="number"
               type="number"
               v-validate="modelValidations.number"
-
             ></md-input>
-
           </md-field>
         </md-table-cell>
         <md-table-cell>
-          <md-field
-
-          >
+          <md-field>
             <md-input
               v-model="invoice_item.discount"
               data-vv-name="range"
               type="text"
-
               v-validate="modelValidations.range"
             ></md-input>
-
           </md-field>
         </md-table-cell>
         <md-table-cell>
-          <md-field
-
-          >
+          <md-field>
             <md-input
               v-model="invoice_item.tax"
               data-vv-name="range"
               type="text"
-
               v-validate="modelValidations.range"
             ></md-input>
-
           </md-field>
         </md-table-cell>
         <md-table-cell>{{invoice_item.total | money}}</md-table-cell>
         <md-table-cell>
           <md-button class="md-just-icon md-round md-warning" @click="addItem()">
             <md-icon>add</md-icon>
-          </md-button>
-&nbsp;
+          </md-button>&nbsp;
         </md-table-cell>
       </md-table-row>
     </md-table>
@@ -508,9 +456,7 @@
         <div class="md-layout">
           <label class="md-layout-item md-size-20 md-form-label">Account name</label>
           <div class="md-layout-item">
-            <md-field
-
-            >
+            <md-field>
               <md-input
                 v-model="completed_invoice.payment_account_name"
                 data-vv-name="required"
@@ -518,7 +464,6 @@
                 v-validate="modelValidations.required"
                 required
               ></md-input>
-
             </md-field>
           </div>
           <!-- <label class="md-layout-item md-size-20 md-label-on-right">
@@ -541,9 +486,7 @@
         <div class="md-layout">
           <label class="md-layout-item md-size-20 md-form-label">Account number</label>
           <div class="md-layout-item">
-            <md-field
-
-            >
+            <md-field>
               <md-input
                 v-model="completed_invoice.payment_account_number"
                 data-vv-name="number"
@@ -551,7 +494,6 @@
                 v-validate="modelValidations.number"
                 required
               ></md-input>
-
             </md-field>
           </div>
           <!-- <label class="md-layout-item md-size-20 md-label-on-right">
@@ -606,44 +548,39 @@ export default {
   data() {
     return {
       completed_invoice: {
-        from_business_name: "",
-        from_addressline_1: "",
-        from_addressline_2: "",
-        from_city: "",
-        from_postcode: "",
-        from_phone: "",
-        from_vat: "",
-        to_client_name: "",
-        to_addressline_1: "",
-        to_addressline_2: "",
-        to_city: "",
-        to_postcode: "",
-        to_phone: "",
-        to_vat: "",
         ref: "",
-        date: "",
-        due: "",
-        payment_account_name: "",
-        payment_account_sortcode: "",
-        payment_account_number: "",
-        invoice_notes: "",
-        discount: "",
-        sub_total: "",
-        tax: "",
-        grand_total: ""
-      },
-      invoice_id: null,
-      invoice_item: {
-        serial: "",
-        description: "",
-        date: "",
-        quantity: "",
-        price: "",
-        discount: "",
+        datum: "",
+        rechnungNr: "",
+        uidNr: "",
+        bankName: "",
+        bic: "",
+        iban: "",
+        an_name: "",
+        an_company: "",
+        an_company_address: "",
+        an_company_postcode: "",
+        an_company_city: "",
+        an_company_state: "",
+        rechnungsersteller: "",
+        zahlungsform: "",
+        rechnung_datum: "",
+        zahlungsziel: "",
         tax: "",
         total: "",
+        items: []
+      },
+      invoice_item: {
+        pickupDate: "",
+        pickupAddress: "",
+        kst: "",
+        ordererName: "",
+        message: "",
+        nStops: "",
+        destination: "",
+        price: "",
         rowData: []
       },
+      invoice_id: null,
       rowCounter: 0,
       selectedClose: null,
       touched: {
@@ -709,67 +646,82 @@ export default {
     },
     validate() {
       this.$validator.validateAll().then(isValid => {
-        console.log("is valid on validate() function")
+        console.log("is valid on validate() function");
         // this.$emit("on-submit", this.registerForm, isValid);
       });
     },
-    generateInvoice() {
-      console.log("generating invoice")
+    async generateInvoice() {
+      console.log("generating invoice");
       //ose ktu, me for loop
       // this.$validator.validate().then(valid => {
-        // if (!valid) {
-          // make notification appear here
-          // console.log("not valid")
-        // }else{
-          // console.log("valid form trying to go to the rest of the code")
-          let invoice_grand_total = 0;
-          let invoice_discount = 0;
-          let invoice_tax = 0;
-          let invoice_sub_total = 0;
-          for (let item of this.invoice_item.rowData) {
-            let item_price = parseFloat(item.quantity) * parseFloat(item.price);
-            let item_discount_amount =
-              item_price * (parseFloat(item.discount) / 100);
-            invoice_discount += item_discount_amount;
+      // if (!valid) {
+      // make notification appear here
+      // console.log("not valid")
+      // }else{
+      // console.log("valid form trying to go to the rest of the code")
 
-            let item_tax_amount =
-              (item_price - item_discount_amount) * (parseFloat(item.tax) / 100);
-            invoice_tax += item_tax_amount;
-            invoice_grand_total += parseFloat(item.total);
-          }
-          invoice_sub_total = invoice_grand_total - invoice_discount;
+      // let invoice_grand_total = 0;
+      // let invoice_discount = 0;
+      // let invoice_tax = 0;
+      // let invoice_sub_total = 0;
+      // for (let item of this.invoice_item.rowData) {
+      //   let item_price = parseFloat(item.quantity) * parseFloat(item.price);
+      //   let item_discount_amount =
+      //     item_price * (parseFloat(item.discount) / 100);
+      //   invoice_discount += item_discount_amount;
+      //   let item_tax_amount =
+      //     (item_price - item_discount_amount) * (parseFloat(item.tax) / 100);
+      //   invoice_tax += item_tax_amount;
+      //   invoice_grand_total += parseFloat(item.total);
+      // }
+      // invoice_sub_total = invoice_grand_total - invoice_discount;
+      // this.completed_invoice.grand_total = invoice_grand_total + "";
+      // this.completed_invoice.discount = invoice_discount + "";
+      // this.completed_invoice.tax = invoice_tax + "";
+      // this.completed_invoice.sub_total = invoice_sub_total + "";
 
-          this.completed_invoice.grand_total = invoice_grand_total + "";
-          this.completed_invoice.discount = invoice_discount + "";
-          this.completed_invoice.tax = invoice_tax + "";
-          this.completed_invoice.sub_total = invoice_sub_total + "";
-          console.log(this.invoice_item.rowData)
-          console.log(this.getAdminInvoice.id)
-          console.log(UPDATE_ADMIN_INVOICE)
-          console.log(this.getAdminInvoice.reservation_id)
-          console.log(this.completed_invoice)
-          this.$store
-            .dispatch(UPDATE_ADMIN_INVOICE, {
-              reservationId: this.getAdminInvoice.reservation_id,
-              invoiceId: this.getAdminInvoice.id,
-              invoice: this.completed_invoice,
-              items: this.invoice_item.rowData
-            })
-            .then(() => {
-              //Then go to the page
-              console.log("Updated invoice.");
-              this.$router.push({ name: "InvoiceDetail"        
-              ,params: {
+      let invoice = {
+        ref: this.completed_invoice.ref,
+        datum: this.completed_invoice.datum,
+        rechnung_nr: this.completed_invoice.rechnungNr,
+        uid_nr: this.completed_invoice.uidNr,
+        bank_name: this.completed_invoice.bankName,
+        bic: this.completed_invoice.bic,
+        iban: this.completed_invoice.iban,
+        an_name: this.completed_invoice.an_name,
+        an_company: this.completed_invoice.an_company,
+        an_company_address: this.completed_invoice.an_company_address,
+        an_company_postcode: this.completed_invoice.an_company_postcode,
+        an_company_city: this.completed_invoice.an_company_city,
+        an_company_state: this.completed_invoice.an_company_state,
+        rechnungsersteller: this.completed_invoice.rechnungsersteller,
+        zahlungsform: this.completed_invoice.zahlungsform,
+        rechnung_datum: this.completed_invoice.rechnung_datum,
+        zahlungsziel: this.completed_invoice.zahlungsziel,
+        tax: this.completed_invoice.tax,
+        total: this.completed_invoice.total,
+        items: this.invoice_item.rowData
+      }
+      await this.$store.dispatch(CREATE_ADMIN_INVOICE, {
+        reservationId: this.$route.params.id,
+        invoice: invoice
+      });
+
+      //Then go to the page
+      console.log("Updated invoice.");
+      this.$router.push({
+        name: "InvoiceDetail",
+        params: {
           id: this.getAdminInvoice.id
-        } });
-            });          
-        // }
-      // });
+        }
+      });
 
+      // }
+      // });
     }
   },
   computed: {
-    ...mapGetters(['getAdminInvoice'])
+    ...mapGetters(["getAdminInvoice"])
   },
   watch: {
     range() {
@@ -797,33 +749,34 @@ export default {
   margin-right: 1%;
   margin-left: 1%;
 }
-
 </style>
 
 <style>
-
 .md-card-wizard[data-color="green"] .moving-tab {
-    background-color: orange;
-
+  background-color: orange;
 }
 
-
-   .md-card .md-card-header-green .card-text  {
-      background: orange;
-  }
+.md-card .md-card-header-green .card-text {
+  background: orange;
+}
 .md-datepicker-dialog .md-datepicker-header {
-    background: orange !important;
+  background: orange !important;
 }
-.md-datepicker-today, .md-datepicker-today:hover, .md-datepicker-today:focus, .md-datepicker-selected, .md-datepicker-selected:hover, .md-datepicker-selected:focus {
-    background-color: orange!important;
-    color: #FFFFFF !important;
+.md-datepicker-today,
+.md-datepicker-today:hover,
+.md-datepicker-today:focus,
+.md-datepicker-selected,
+.md-datepicker-selected:hover,
+.md-datepicker-selected:focus {
+  background-color: orange !important;
+  color: #ffffff !important;
 }
 
-.md-button.md-primary{
+.md-button.md-primary {
   background-color: orange !important;
 }
 
-.md-button.md-primary:hover{
+.md-button.md-primary:hover {
   background-color: orange !important;
 }
 </style>

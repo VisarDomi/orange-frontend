@@ -580,6 +580,42 @@ export default {
         itineraryId: item.id
       });
       this.tableData.splice(item.tableId, 1);
+    },
+    async whileCreating() {
+      let payload = { companyId: this.$route.params.id };
+      await this.$store.dispatch(GET_EMPLOYEES, payload);
+      for (let employee of this.getEmployees) {
+        // don't change getters without mutations
+        this.employeesData.push({ ...employee });
+        // spread operator is not needed
+      }
+      for (let employee of this.employeesData) {
+        console.log("employee object is: ", employee);
+        employee.nameEditable = false;
+        employee.addressEditable = false;
+      }
+      console.log("Added new fields to employees: ", this.employeesData);
+
+      //get itinerarys this needs to be get companyitineraries
+      await this.$store.dispatch(GET_COMPANY_ITINERARYS, payload);
+      console.log("GET itinerarys now: ", this.getCompanyItinerarys);
+      let table_id = 0;
+      for (let item in this.getCompanyItinerarys) {
+        this.getCompanyItinerarys[item].editable = false;
+        this.getCompanyItinerarys[item].tableId = table_id;
+        table_id += 1;
+      }
+
+      //?ktu duhet te jet ndryshe
+      //more shitfuck to clone the state array coming from store to stop vue from complaining about messing with state outside mutators
+      let clone = JSON.parse(JSON.stringify(this.getCompanyItinerarys));
+      console.log("b? ", clone);
+      this.tableData = clone;
+
+      //this is for company details
+      await this.$store.dispatch(GET_COMPANY, payload);
+      this.name = this.getCompany.name;
+      this.paymentFrequency = this.getCompany.payment_frequency;
     }
   },
   mounted() {
@@ -591,49 +627,7 @@ export default {
     });
   },
   created() {
-    this.$store
-      .dispatch(GET_EMPLOYEES, { companyId: this.$route.params.id })
-      .then(() => {
-        for (let employee of this.getEmployees) {
-          // don't change getters without mutations
-          this.employeesData.push({ ...employee });
-          // spread operator is not needed
-        }
-        for (let employee of this.employeesData) {
-          console.log("employee object is: ", employee);
-          employee.nameEditable = false;
-          employee.addressEditable = false;
-        }
-        console.log("Added new fields to employees: ", this.employeesData);
-      });
-
-    //get itinerarys this needs to be get companyitineraries
-    this.$store
-      .dispatch(GET_COMPANY_ITINERARYS, { companyId: this.$route.params.id })
-      .then(() => {
-        console.log("GET itinerarys now: ", this.getCompanyItinerarys);
-        let table_id = 0;
-        for (let item in this.getCompanyItinerarys) {
-          this.getCompanyItinerarys[item].editable = false;
-          this.getCompanyItinerarys[item].tableId = table_id;
-          table_id += 1;
-        }
-
-        //more shitfuck to clone the state array coming from store to stop vue from complaining about messing with state outside mutators
-        let clone = JSON.parse(JSON.stringify(this.getCompanyItinerarys));
-        console.log("b? ", clone);
-        this.tableData = clone;
-      });
-    console.log("this.$route.params.id", this.$route.params.id);
-    //this is for company details
-    this.$store
-      .dispatch(GET_COMPANY, {
-        companyId: this.$route.params.id
-      })
-      .then(() => {
-        this.name = this.getCompany.name;
-        this.paymentFrequency = this.getCompany.payment_frequency;
-      });
+    this.whileCreating();
   },
 
   computed: {

@@ -17,9 +17,8 @@ import { EmployeeService } from "../../services/api";
 
 export const actions = {
   async [CREATE_EMPLOYEE](context, payload) {
-    const { companyId } = payload;
-    delete payload.companyId;
-    await EmployeeService.createEmployee(companyId, payload);
+    const { companyId, employee } = payload;
+    await EmployeeService.createEmployee(companyId, employee);
   },
   async [GET_EMPLOYEES](context, payload) {
     const { companyId } = payload;

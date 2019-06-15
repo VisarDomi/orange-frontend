@@ -70,12 +70,10 @@ export const actions = {
     );
   },
 
-  async [GET_COMPANY_RESERVATIONS](context) {
+  async [GET_COMPANY_RESERVATIONS](context, payload) {
     const { companyId } = payload;
     await ReservationService.getReservations(companyId).then(({ data }) => {
       context.commit(SET_COMPANY_RESERVATIONS, data);
-      console.log("setting reservations", data);
-      return data;
     });
   },
 

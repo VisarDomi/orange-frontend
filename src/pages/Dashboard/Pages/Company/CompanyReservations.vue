@@ -47,23 +47,28 @@
                 </md-field>
               </md-table-toolbar>
 
-              <md-table-row slot="md-table-row" slot-scope="{ item }" @click.native="open_reservation(item)">
+              <md-table-row
+                slot="md-table-row"
+                slot-scope="{ item }"
+                @click.native="open_reservation(item)"
+              >
                 <!-- ["Employee", "Date", "Destination", "Code"] -->
                 <md-table-cell md-label="Employee" md-sort-by="code">
                   <span v-for="stop in item.stops" :key="stop.id">
-                  {{
-                  stop.employee_full_name
-                  }},</span>
+                    {{
+                    stop.employee_full_name
+                    }},
+                  </span>
                 </md-table-cell>
                 <md-table-cell md-label="Date" md-sort-by="date">
                   {{
-                  item.date 
-                  }} 
+                  item.date
+                  }}
                 </md-table-cell>
                 <md-table-cell md-label="Destination">{{ item.destination }}</md-table-cell>
                 <md-table-cell md-label="KSt">{{ item.code }}</md-table-cell>
                 <!-- <md-table-cell md-label="Destination">{{ item.destination }}</md-table-cell>
-                <md-table-cell md-label="Status" style="justify-content:left;">{{ item.status }}</md-table-cell> -->
+                <md-table-cell md-label="Status" style="justify-content:left;">{{ item.status }}</md-table-cell>-->
               </md-table-row>
             </md-table>
             <div class="footer-table md-table">
@@ -102,8 +107,12 @@ import { Pagination } from "@/components";
 import users from "../../Tables/users";
 import Fuse from "fuse.js";
 import swal from "sweetalert2";
-import { GET_COMPANY_RESERVATIONS, GET_COMPANY_RESERVATION } from "@/store/actions.type";
+import {
+  GET_COMPANY_RESERVATIONS,
+  GET_COMPANY_RESERVATION
+} from "@/store/actions.type";
 import { mapGetters } from "vuex";
+import { getUser } from "@/store/services/userstorage";
 
 export default {
   name: "CompanyReservations",
@@ -239,8 +248,14 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch(GET_COMPANY_RESERVATIONS).then(() => {
-      console.log("GET getCompanyReservations now: ", this.getCompanyReservations);
+    let payload = {
+      companyId: getUser().company_id
+    };
+    this.$store.dispatch(GET_COMPANY_RESERVATIONS, payload).then(() => {
+      console.log(
+        "this.getCompanyReservations now: ",
+        this.getCompanyReservations
+      );
       this.tableData = this.getCompanyReservations;
     });
   },
@@ -277,19 +292,16 @@ export default {
 </style>
 
 <style>
-.pagination.pagination-success > .page-item.active > a{
-   background-color: orange;
-    border-color: orange;
-
+.pagination.pagination-success > .page-item.active > a {
+  background-color: orange;
+  border-color: orange;
 }
 
 .md-select-menu .md-list-item.md-selected .md-list-item-button {
-    background-color: orange;
-
+  background-color: orange;
 }
 
-
 .md-select-menu .md-list-item .md-list-item-button:hover {
-    background-color: orange !important;
+  background-color: orange !important;
 }
 </style>
