@@ -1,4 +1,4 @@
-import { AdminService, ItineraryService } from "../../services/api";
+import { AdminService, ItineraryService, InvoiceService } from "../../services/api";
 import {
   CREATE_ADMIN_INVOICE,
   GET_ADMIN_INVOICE,
@@ -25,7 +25,7 @@ import {
 export const actions = {
   async [CREATE_ADMIN_INVOICE](context, payload) {
     const { reservationId, invoice } = payload;
-    await AdminService.postInvoice(reservationId, invoice).then(({ data }) => {
+    await Invoice.postInvoice(reservationId, invoice).then(({ data }) => {
       context.commit(SET_ADMIN_INVOICE, data);
     });
   },
@@ -45,7 +45,7 @@ export const actions = {
 
   async [UPDATE_ADMIN_INVOICE](context, payload) {
     const { reservationId, invoiceId, invoice } = payload;
-    await AdminService.putInvoice(reservationId, invoiceId, invoice).then(
+    await InvoiceService.putInvoice(reservationId, invoiceId, invoice).then(
       ({ data }) => {
         context.commit(SET_ADMIN_INVOICE, data);
       }

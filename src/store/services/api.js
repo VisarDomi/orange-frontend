@@ -165,28 +165,11 @@ export const DriverService = {
 };
 
 export const AdminService = {
-  postInvoice(reservationId, invoice) {
-    return ApiService.post(
-      `admin/reservation/${reservationId}/invoice`,
-      invoice
-    );
-  },
   getInvoices() {
     return ApiService.get(`admin/invoice/all`);
   },
   getInvoice(invoiceId) {
     return ApiService.get(`admin/invoice/${invoiceId}`);
-  },
-  putInvoice(reservationId, invoiceId, invoice) {
-    return ApiService.put(
-      `admin/reservation/${reservationId}/invoice/${invoiceId}`,
-      invoice
-    );
-  },
-  deleteInvoice(reservationId, invoiceId) {
-    return ApiService.delete(
-      `admin/reservation/${reservationId}/invoice/${invoiceId}`
-    );
   },
   getReservations() {
     return ApiService.get(`admin/reservation/all`);
