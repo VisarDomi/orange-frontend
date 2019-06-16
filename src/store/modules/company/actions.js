@@ -83,9 +83,7 @@ export const actions = {
     });
   },
   async [GET_COMPANY_INVOICE](context, payload) {
-    console.log("??")
     const { companyId, invoiceId } = payload;
-    console.log("??")
     await CompanyService.getInvoice(companyId, invoiceId).then(({ data }) => {
       context.commit(SET_COMPANY_INVOICE, data);
     });

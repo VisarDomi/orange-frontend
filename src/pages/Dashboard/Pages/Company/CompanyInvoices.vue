@@ -152,6 +152,7 @@ export default {
     return {
       currentSort: "name",
       currentSortOrder: "asc",
+      companyId: getUser().company_id,
       pagination: {
         perPage: 10,
         currentPage: 1,
@@ -192,7 +193,11 @@ export default {
       });
     },
     async openInvoice(item) {
-      await this.$store.dispatch(GET_COMPANY_INVOICE, { invoiceId: item.id });
+      let payload = {
+        companyId: this.companyId,
+        invoiceId: item.id
+      };
+      await this.$store.dispatch(GET_COMPANY_INVOICE, payload);
       this.$router.push({
         name: "CompanyInvoiceDetail",
         params: { id: item.id }
@@ -230,7 +235,7 @@ export default {
       }
     },
     async whileCreating() {
-      let payload = { companyId: getUser().company_id };
+      let payload = { companyId: this.companyId };
       await this.$store.dispatch(GET_COMPANY_INVOICES, payload);
       this.tableData = this.getCompanyInvoices;
     }

@@ -25,7 +25,7 @@ import {
 export const actions = {
   async [CREATE_ADMIN_INVOICE](context, payload) {
     const { reservationId, invoice } = payload;
-    await Invoice.postInvoice(reservationId, invoice).then(({ data }) => {
+    await InvoiceService.postInvoice(reservationId, invoice).then(({ data }) => {
       context.commit(SET_ADMIN_INVOICE, data);
     });
   },

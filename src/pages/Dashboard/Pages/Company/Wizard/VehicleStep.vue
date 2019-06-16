@@ -98,10 +98,9 @@ export default {
       return false;
     },
     economyLimoSelected() {
-      if (
-        !this.getCompanyReservation.stops.length > 2 &&
-        this.controllLuggage()
-      ) {
+      let nrStops = this.getCompanyReservation.stops.length;
+      let is_limo = this.controllLuggage();
+      if (nrStops < 3 && is_limo) {
         this.model.economyLimo = true;
         this.model.economyBus = false;
         this.model.businessBus = false;
@@ -120,10 +119,9 @@ export default {
       this.message = "Please Continue";
     },
     businessLimoSelected() {
-      if (
-        !this.getCompanyReservation.stops.length > 3 &&
-        this.controllLuggage()
-      ) {
+      let nrStops = this.getCompanyReservation.stops.length;
+      let is_limo = this.controllLuggage();
+      if (nrStops < 3 && is_limo) {
         this.model.economyLimo = false;
         this.model.economyBus = false;
         this.model.businessBus = false;
