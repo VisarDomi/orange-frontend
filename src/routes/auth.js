@@ -1,11 +1,11 @@
-import AuthLayout from "@/pages/Dashboard/Layout/AuthLayout.vue";
+const AuthLayout = () => import("@/pages/Dashboard/Layout/AuthLayout.vue");
 
 // Auth pages
-import Role from "@/pages/Dashboard/Pages/Auth/Role.vue";
-import Logout from "@/pages/Dashboard/Pages/Auth/Logout.vue";
-import Login from "@/pages/Dashboard/Pages/Auth/Login.vue";
-import Register from "@/pages/Dashboard/Pages/Auth/Register.vue";
-import Lock from "@/pages/Dashboard/Pages/Auth/Lock.vue";
+const Role = () => import("@/pages/Dashboard/Pages/Auth/Role.vue");
+const Logout = () => import("@/pages/Dashboard/Pages/Auth/Logout.vue");
+const Login = () => import("@/pages/Dashboard/Pages/Auth/Login.vue");
+const Register = () => import("@/pages/Dashboard/Pages/Auth/Register.vue");
+const Lock = () => import("@/pages/Dashboard/Pages/Auth/Lock.vue");
 
 import { setMeta } from './common';
 

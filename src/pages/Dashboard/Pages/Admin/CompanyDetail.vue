@@ -483,16 +483,16 @@ export default {
     //create employee methods------------
     async addEmployee() {
       let payload = {
-        companyId : this.$route.params.id
-      }
+        companyId: this.$route.params.id
+      };
       let employee = {
-        user:{
+        user: {
           email: this.employee.user.email,
-          password: this.employee.user.password,
+          password: this.employee.user.password
         },
         full_name: this.employee.full_name,
-        address: this.employee.address,
-      }
+        address: this.employee.address
+      };
       let employeeData = {
         employee: employee,
         companyId: this.$route.params.id
@@ -529,7 +529,7 @@ export default {
 
       payload = { companyId: this.$route.params.id };
       await this.$store.dispatch(GET_COMPANY_ITINERARYS, payload);
-      
+
       console.log("GET itinerarys now: ", this.getCompanyItinerarys);
       let table_id = 0;
       for (let index in this.getCompanyItinerarys) {
@@ -551,10 +551,10 @@ export default {
     async delete_employee(employee, index) {
       // console.log("EMPLOYEE: ", employee)
       let payload = {
-        companyId : this.$route.params.id,
+        companyId: this.$route.params.id,
         employeeId: employee.id
-      }
-      await this.$store.dispatch(DELETE_EMPLOYEE, payload)
+      };
+      await this.$store.dispatch(DELETE_EMPLOYEE, payload);
       await this.$store.dispatch(GET_EMPLOYEES, payload);
 
       this.employeesData.splice(index, 1);

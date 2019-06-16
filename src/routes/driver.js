@@ -1,7 +1,7 @@
-import DriverDashboardLayout from "@/pages/Dashboard/Layout/DriverDashboardLayout.vue";
-import DriverIncomingReservations from "@/pages/Dashboard/Pages/Driver/DriverIncomingReservations.vue";
-import DriverAcceptedReservations from "@/pages/Dashboard/Pages/Driver/DriverAcceptedReservations.vue";
-import DriverReservationDetails from "@/pages/Dashboard/Pages/Driver/DriverReservationDetails.vue";
+const DriverDashboardLayout = () => import("@/pages/Dashboard/Layout/DriverDashboardLayout.vue");
+const DriverIncomingReservations = () => import("@/pages/Dashboard/Pages/Driver/DriverIncomingReservations.vue");
+const DriverAcceptedReservations = () => import("@/pages/Dashboard/Pages/Driver/DriverAcceptedReservations.vue");
+const DriverReservationDetails = () => import("@/pages/Dashboard/Pages/Driver/DriverReservationDetails.vue");
 
 import { setMeta } from './common';
 

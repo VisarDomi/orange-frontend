@@ -1,24 +1,24 @@
-import DashboardLayout from "@/pages/Dashboard/Layout/DashboardLayout.vue";
+const DashboardLayout = () => import("@/pages/Dashboard/Layout/DashboardLayout.vue");
 
 // Admin pages
-import Dashboard from "@/pages/Dashboard/Pages/Admin/Dashboard.vue";
-import Reservations from "@/pages/Dashboard/Pages/Admin/Reservations.vue";
-import ReservationDetail from "@/pages/Dashboard/Pages/Admin/ReservationDetail.vue";
-import CreateDriver from "@/pages/Dashboard/Pages/Admin/CreateDriver.vue";
-import Drivers from "@/pages/Dashboard/Pages/Admin/Drivers.vue";
-import DriverDetail from "@/pages/Dashboard/Pages/Admin/DriverDetail.vue";
-import CreateInvoice from "@/pages/Dashboard/Pages/Admin/CreateInvoice.vue";
-import Invoices from "@/pages/Dashboard/Pages/Admin/Invoices.vue";
-import InvoiceDetail from "@/pages/Dashboard/Pages/Admin/InvoiceDetail.vue";
-import ItineraryDetail from "@/pages/Dashboard/Pages/Admin/ItineraryDetail.vue";
-import Itineraries from "@/pages/Dashboard/Pages/Admin/Itineraries.vue";
-import Companies from "@/pages/Dashboard/Pages/Admin/Companies.vue";
-import CompanyDetail from "@/pages/Dashboard/Pages/Admin/CompanyDetail.vue";
-import CreateCompany from "@/pages/Dashboard/Pages/Admin/CreateCompany.vue";
+const Dashboard = () => import("@/pages/Dashboard/Pages/Admin/Dashboard.vue");
+const Reservations = () => import("@/pages/Dashboard/Pages/Admin/Reservations.vue");
+const ReservationDetail = () => import("@/pages/Dashboard/Pages/Admin/ReservationDetail.vue");
+const CreateDriver = () => import("@/pages/Dashboard/Pages/Admin/CreateDriver.vue");
+const Drivers = () => import("@/pages/Dashboard/Pages/Admin/Drivers.vue");
+const DriverDetail = () => import("@/pages/Dashboard/Pages/Admin/DriverDetail.vue");
+const CreateInvoice = () => import("@/pages/Dashboard/Pages/Admin/CreateInvoice.vue");
+const Invoices = () => import("@/pages/Dashboard/Pages/Admin/Invoices.vue");
+const InvoiceDetail = () => import("@/pages/Dashboard/Pages/Admin/InvoiceDetail.vue");
+const ItineraryDetail = () => import("@/pages/Dashboard/Pages/Admin/ItineraryDetail.vue");
+const Itineraries = () => import("@/pages/Dashboard/Pages/Admin/Itineraries.vue");
+const Companies = () => import("@/pages/Dashboard/Pages/Admin/Companies.vue");
+const CompanyDetail = () => import("@/pages/Dashboard/Pages/Admin/CompanyDetail.vue");
+const CreateCompany = () => import("@/pages/Dashboard/Pages/Admin/CreateCompany.vue");
 // Old
-import Calendar from "@/pages/Dashboard/Pages/Admin/Calendar.vue";
-import Charts from "@/pages/Dashboard/Pages/Admin/Charts.vue";
-import Widgets from "@/pages/Dashboard/Pages/Admin/Widgets.vue";
+const Calendar = () => import("@/pages/Dashboard/Pages/Admin/Calendar.vue");
+const Charts = () => import("@/pages/Dashboard/Pages/Admin/Charts.vue");
+const Widgets = () => import("@/pages/Dashboard/Pages/Admin/Widgets.vue");
 
 import { setMeta } from "./common";
 

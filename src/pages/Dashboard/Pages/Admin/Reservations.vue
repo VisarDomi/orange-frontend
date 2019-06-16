@@ -238,7 +238,6 @@ export default {
         "Status",
         "Destination",
         "Date",
-        "Drivers",
         "KSt"
       ],
       searchQuery: "",

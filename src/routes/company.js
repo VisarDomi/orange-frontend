@@ -1,17 +1,18 @@
-import CompanyDashboardLayout from "@/pages/Dashboard/Layout/CompanyDashboardLayout.vue";
+const CompanyDashboardLayout = () => import("@/pages/Dashboard/Layout/CompanyDashboardLayout.vue");
 
 // Company pages
-import CompanyWizard from "@/pages/Dashboard/Pages/Company/CompanyWizard.vue";
-import CompanyReservations from "@/pages/Dashboard/Pages/Company/CompanyReservations.vue";
-import CompanyReservationDetail from "@/pages/Dashboard/Pages/Company/CompanyReservationDetail.vue";
-import CompanyCreateEmployee from "@/pages/Dashboard/Pages/Company/CompanyCreateEmployee.vue";
-import CompanyEmployees from "@/pages/Dashboard/Pages/Company/CompanyEmployees.vue";
-import CompanyEmployeeDetail from "@/pages/Dashboard/Pages/Company/CompanyEmployeeDetail.vue";
-import CompanyInvoices from "@/pages/Dashboard/Pages/Company/CompanyInvoices.vue";
-import CompanyInvoiceDetail from "@/pages/Dashboard/Pages/Company/CompanyInvoiceDetail.vue";
-import CompanySecretaries from "@/pages/Dashboard/Pages/Company/CompanySecretarys.vue";
-import CompanySecretaryDetail from "@/pages/Dashboard/Pages/Company/CompanySecretaryDetail.vue";
-import CompanyCreateSecretary from "@/pages/Dashboard/Pages/Company/CompanyCreateSecretary.vue";
+const CompanyWizard = () => import("@/pages/Dashboard/Pages/Company/CompanyWizard.vue");
+const CompanyReservations = () => import("@/pages/Dashboard/Pages/Company/CompanyReservations.vue");
+const CompanyReservationDetail = () => import("@/pages/Dashboard/Pages/Company/CompanyReservationDetail.vue");
+const CompanyCreateEmployee = () => import("@/pages/Dashboard/Pages/Company/CompanyCreateEmployee.vue");
+const CompanyEmployees = () => import("@/pages/Dashboard/Pages/Company/CompanyEmployees.vue");
+const CompanyEmployeeDetail = () => import("@/pages/Dashboard/Pages/Company/CompanyEmployeeDetail.vue");
+const CompanyInvoices = () => import("@/pages/Dashboard/Pages/Company/CompanyInvoices.vue");
+const CompanyInvoiceDetail = () => import("@/pages/Dashboard/Pages/Company/CompanyInvoiceDetail.vue");
+const CompanySecretaries = () => import("@/pages/Dashboard/Pages/Company/CompanySecretarys.vue");
+const CompanySecretaryDetail = () => import("@/pages/Dashboard/Pages/Company/CompanySecretaryDetail.vue");
+const CompanyCreateSecretary = () => import("@/pages/Dashboard/Pages/Company/CompanyCreateSecretary.vue");
+
 import { setMeta } from './common';
 
 export const company = {

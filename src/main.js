@@ -54,7 +54,14 @@ ApiService.init();
 // configure router
 const router = new VueRouter({
   mode: "history",
-  routes, // short for routes: routes
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    } else {
+      return { x: 0, y: 0 };
+    }
+  },
+  routes: routes,
   linkExactActiveClass: "nav-item active"
 });
 
@@ -84,9 +91,9 @@ router.beforeEach((to, from, next) => {
     if (getToken() != null) {
       console.log("should reroute to respective role homepage");
       let role = "";
-      role = getUser().role
+      role = getUser().role;
       console.log("role is", role);
-      loginReroute(router, role)
+      loginReroute(router, role);
     } else {
       next();
     }

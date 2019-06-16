@@ -1,7 +1,8 @@
-import EmployeeDashboardLayout from "@/pages/Dashboard/Layout/EmployeeDashboardLayout.vue";
-import EmployeeReservations from "@/pages/Dashboard/Pages/Employee/EmployeeReservations.vue";
+const DashboardLayout = () => import("@/pages/Dashboard/Layout/DashboardLayout.vue");
+const EmployeeDashboardLayout = () => import("@/pages/Dashboard/Layout/EmployeeDashboardLayout.vue");
+const EmployeeReservations = () => import("@/pages/Dashboard/Pages/Employee/EmployeeReservations.vue");
 // Employee pages
-import EmployeeReservationDetail from "@/pages/Dashboard/Pages/Employee/EmployeeReservationDetail.vue";
+const EmployeeReservationDetail = () => import("@/pages/Dashboard/Pages/Employee/EmployeeReservationDetail.vue");
 
 import { setMeta } from './common';
 
