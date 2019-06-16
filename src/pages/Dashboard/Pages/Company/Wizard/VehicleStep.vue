@@ -89,18 +89,10 @@ export default {
       let luggages = [
         this.getCompanyReservation.big_luggage,
         this.getCompanyReservation.small_luggage
-<<<<<<< HEAD
-      ]
-      for(let combination of combinations){
-        if(JSON.stringify(luggages)==JSON.stringify(combination)){
-          console.log("testing luggage: true")
-          return true
-=======
       ];
       for (let combination of combinations) {
         if (JSON.stringify(luggages) == JSON.stringify(combination)) {
           return true;
->>>>>>> 4b0acac460683001f5e867b30d93ca22b154d6fc
         }
       }
       return false;

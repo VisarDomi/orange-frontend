@@ -246,22 +246,7 @@ export default {
     }
   },
   created() {
-<<<<<<< HEAD
-    let payload = {
-      companyId: getUser().company_id
-    };
-    console.log("????")
-    this.$store.dispatch(GET_COMPANY_RESERVATIONS, payload).then(() => {
-      console.log(
-        "this.getCompanyReservations now: ",
-        this.getCompanyReservations
-      );
-      this.tableData = this.getCompanyReservations;
-    });
-    console.log("????")
-=======
     this.whileCreating()
->>>>>>> 4b0acac460683001f5e867b30d93ca22b154d6fc
   },
   mounted() {
     // Fuse search initialization.

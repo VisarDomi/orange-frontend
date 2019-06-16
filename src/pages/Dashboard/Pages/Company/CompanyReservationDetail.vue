@@ -108,11 +108,7 @@
 import { UserCard } from "@/pages";
 import { GET_COMPANY_RESERVATION } from "@/store/actions.type";
 import { mapGetters } from "vuex";
-<<<<<<< HEAD
-import { getUser } from "@/store/services/userstorage"
-=======
 import { getUser } from "@/store/services/userstorage";
->>>>>>> 4b0acac460683001f5e867b30d93ca22b154d6fc
 
 export default {
   name: "CompanyReservationDetail",
@@ -131,24 +127,12 @@ export default {
     };
   },
   methods: {
-<<<<<<< HEAD
-    async whileCreated(){
-      console.log("WERE")
-      let payload = {
-        companyId : getUser().company_id,
-        reservationId : this.$route.params.id
-      }
-      console.log("WERE")
-      await this.$store.dispatch(GET_COMPANY_RESERVATION, payload)
-        
-=======
     async whileCreating() {
       let payload = {
         companyId: getUser().company_id,
         reservationId: this.$route.params.id
       };
       await this.$store.dispatch(GET_COMPANY_RESERVATION, payload);
->>>>>>> 4b0acac460683001f5e867b30d93ca22b154d6fc
       this.name = this.getCompanyReservation.name;
       this.date = this.getCompanyReservation.date;
       this.destination = this.getCompanyReservation.destination;
@@ -160,12 +144,7 @@ export default {
   },
   mounted() {},
   created() {
-<<<<<<< HEAD
-    this.whileCreated()
-      
-=======
     this.whileCreating();
->>>>>>> 4b0acac460683001f5e867b30d93ca22b154d6fc
   },
   computed: {
     ...mapGetters(["getCompanyReservation"])

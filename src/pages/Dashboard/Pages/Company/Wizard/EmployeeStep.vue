@@ -317,7 +317,6 @@ import { SET_EMPLOYEE_STEP } from "@/store/mutations.type";
 import { mapGetters } from "vuex";
 import { getUser } from "@/store/services/userstorage"
 import { SlideYDownTransition } from "vue2-transitions";
-import { getUser } from "@/store/services/userstorage";
 
 export default {
   components: {
@@ -386,11 +385,7 @@ export default {
         for (let selected of this.selectedEmployees) {
           if (employee.id == selected) {
             employeeStops.push({
-<<<<<<< HEAD
-              employee_id: String(employee.id),
-=======
               employee_id: employee.id + "",
->>>>>>> 4b0acac460683001f5e867b30d93ca22b154d6fc
               pickup: employee.address,
               time: "14:00:00",
               full_name: employee.full_name
@@ -454,16 +449,8 @@ export default {
     }
   },
   created() {
-<<<<<<< HEAD
-    let payload = {
-      companyId : getUser().company_id
-    }
-    this.$store.dispatch(GET_EMPLOYEES, payload);
-    console.log(this.getEmployees)
-=======
     let payload = { companyId: getUser().company_id };
     this.$store.dispatch(GET_EMPLOYEES, payload);
->>>>>>> 4b0acac460683001f5e867b30d93ca22b154d6fc
   },
   computed: {
     ...mapGetters(["getEmployees"])
