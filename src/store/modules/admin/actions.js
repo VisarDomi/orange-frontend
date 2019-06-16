@@ -32,7 +32,6 @@ export const actions = {
       return data;
     });
   },
-
   async [GET_ADMIN_INVOICES](context, payload) {
     await AdminService.getInvoices().then(({ data }) => {
       console.log("Setting admin invoice data...");
@@ -40,14 +39,12 @@ export const actions = {
       return data;
     });
   },
-
   async [GET_ADMIN_INVOICE](context, payload) {
     const { invoiceId } = payload;
     await AdminService.getInvoice(invoiceId).then(({ data }) => {
       context.commit(SET_ADMIN_INVOICE, data);
     });
   },
-
   async [UPDATE_ADMIN_INVOICE](context, payload) {
     const { reservationId, invoiceId, invoice } = payload;
     delete invoice.reservationId;
@@ -66,7 +63,6 @@ export const actions = {
       return data;
     });
   },
-
   async [GET_ADMIN_RESERVATION](context, payload) {
     const { reservationId } = payload;
     await AdminService.getReservation(reservationId).then(({ data }) => {
@@ -75,7 +71,6 @@ export const actions = {
       return data;
     });
   },
-
   async [UPDATE_ADMIN_RESERVATION](context, payload) {
     const { reservationId, driverId } = payload;
     let reservation = {
@@ -98,7 +93,6 @@ export const actions = {
       return data;
     });
   },
-
   async [GET_ADMIN_ITINERARY](context, payload) {
     const { itineraryId } = payload;
     await AdminService.getItinerary(itineraryId).then(({ data }) => {
@@ -107,7 +101,6 @@ export const actions = {
       return data;
     });
   },
-
   async [CREATE_ADMIN_ITINERARY](context, payload) {
     await AdminService.createItinerary(payload).then(({ data }) => {
       console.log("Setting admin itinerary data...");
@@ -115,7 +108,6 @@ export const actions = {
       return data;
     });
   },
-
   async [UPDATE_ADMIN_ITINERARY](context, payload) {
     const { itineraryId, itinerary } = payload;
 
@@ -125,7 +117,6 @@ export const actions = {
       return data;
     });
   },
-
   async [DELETE_ADMIN_ITINERARY](context, payload) {
     const { itineraryId } = payload;
     await AdminService.deleteItinerary(itineraryId).then(({ data }) => {

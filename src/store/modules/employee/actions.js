@@ -18,7 +18,11 @@ import { EmployeeService } from "../../services/api";
 export const actions = {
   async [CREATE_EMPLOYEE](context, payload) {
     const { companyId, employee } = payload;
-    await EmployeeService.createEmployee(companyId, employee);
+    await EmployeeService.createEmployee(companyId, employee).then(
+      ({ data }) => {
+        context.commit(SET_EMPLOYEE, data);
+      }
+    );
   },
   async [GET_EMPLOYEES](context, payload) {
     const { companyId } = payload;
@@ -49,11 +53,7 @@ export const actions = {
 
   async [DELETE_EMPLOYEE](context, payload) {
     const { companyId, employeeId } = payload;
-    await EmployeeService.deleteEmployee(companyId, employeeId).then(
-      ({ data }) => {
-        context.commit(SET_EMPLOYEE, data);
-      }
-    );
+    await EmployeeService.deleteEmployee(companyId, employeeId)
   },
 
   async [GET_EMPLOYEE_RESERVATIONS](context) {

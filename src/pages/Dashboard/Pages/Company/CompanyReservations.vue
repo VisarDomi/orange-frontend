@@ -251,6 +251,7 @@ export default {
     let payload = {
       companyId: getUser().company_id
     };
+    console.log("????")
     this.$store.dispatch(GET_COMPANY_RESERVATIONS, payload).then(() => {
       console.log(
         "this.getCompanyReservations now: ",
@@ -258,6 +259,7 @@ export default {
       );
       this.tableData = this.getCompanyReservations;
     });
+    console.log("????")
   },
   mounted() {
     // Fuse search initialization.

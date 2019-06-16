@@ -32,6 +32,7 @@ import PaymentStep from "./Wizard/PaymentStep.vue";
 import swal from "sweetalert2";
 import { SimpleWizard, WizardTab } from "@/components";
 import { mapGetters } from "vuex";
+import { getUser } from "@/store/services/userstorage"
 import { CREATE_COMPANY_RESERVATION } from "@/store/actions.type";
 import { SET_COMPANY_RESERVATION } from "@/store/mutations.type";
 
@@ -58,10 +59,13 @@ export default {
     onStepValidated(validated, model) {
       this.wizardModel = { ...this.wizardModel, ...model };
     },
-    wizardComplete() {
+    async wizardComplete() {
       console.log("COMPLETED");
-      let payload = this.getCompanyReservation;
-      this.$store.dispatch(CREATE_COMPANY_RESERVATION, payload);
+      let payload = {
+        companyId : getUser().company_id,
+        reservation: this.getCompanyReservation
+      }
+      await this.$store.dispatch(CREATE_COMPANY_RESERVATION, payload);
 
       this.$router.push({ name: "CompanyReservations" });
       // swal({

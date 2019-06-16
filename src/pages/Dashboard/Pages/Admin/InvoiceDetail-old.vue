@@ -38,46 +38,46 @@
                     <small>From,</small>
                     <br>
                     <br>
-                    <h6>{{getCompanyInvoice.from_business_name}}</h6>
+                    <h6>{{getAdminInvoice.from_business_name}}</h6>
                     <address>
-                      {{getCompanyInvoice.from_addressline_1}}
+                      {{getAdminInvoice.from_addressline_1}}
                       <br>
-                      {{getCompanyInvoice.from_addressline_2}}
+                      {{getAdminInvoice.from_addressline_2}}
                       <br>
-                      {{getCompanyInvoice.from_city}}, {{getCompanyInvoice.from_postcode}}
+                      {{getAdminInvoice.from_city}}, {{getAdminInvoice.from_postcode}}
                       <br>
-                      Phone: {{getCompanyInvoice.from_phone}}
+                      Phone: {{getAdminInvoice.from_phone}}
                       <br>
-                      VAT: {{getCompanyInvoice.from_vat}}
+                      VAT: {{getAdminInvoice.from_vat}}
                     </address>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-4">
                     <small>To,</small>
                     <br>
                     <br>
-                    <h6>{{getCompanyInvoice.to_client_name}}</h6>
+                    <h6>{{getAdminInvoice.to_client_name}}</h6>
                     <address>
-                      {{getCompanyInvoice.to_addressline_1}}
+                      {{getAdminInvoice.to_addressline_1}}
                       <br>
-                      {{getCompanyInvoice.to_addressline_2}}
+                      {{getAdminInvoice.to_addressline_2}}
                       <br>
-                      {{getCompanyInvoice.to_city}}, {{getCompanyInvoice.to_postcode}}
+                      {{getAdminInvoice.to_city}}, {{getAdminInvoice.to_postcode}}
                       <br>
-                      Phone: {{getCompanyInvoice.to_phone}}
+                      Phone: {{getAdminInvoice.to_phone}}
                       <br>
-                      VAT: {{getCompanyInvoice.to_vat}}
+                      VAT: {{getAdminInvoice.to_vat}}
                     </address>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-4">
                     <div class="invoice-details">
                       <small>
                         Invoice No -
-                        <span class="badge badge-warning">#{{getCompanyInvoice.ref}}</span>
+                        <span class="badge badge-warning">#{{getAdminInvoice.ref}}</span>
                       </small>
                       <br>
-                      <small>Sent - {{getCompanyInvoice.date | prettyDate}}</small>
+                      <small>Sent - {{getAdminInvoice.date | prettyDate}}</small>
                       <br>
-                      <small>Due - {{getCompanyInvoice.due | prettyDate}}</small>
+                      <small>Due - {{getAdminInvoice.due | prettyDate}}</small>
                       <br>
                     </div>
                   </div>
@@ -91,9 +91,9 @@
                 <div class="row gutters">
                   <div class="col-lg-6 col-md-6 col-sm-6">
                     <p>
-                      <b>Hello, {{getCompanyInvoice.to_client_name}}</b>
+                      <b>Hello, {{getAdminInvoice.to_client_name}}</b>
                     </p>
-                    <p>{{getCompanyInvoice.invoice_notes}}</p>
+                    <p>{{getAdminInvoice.invoice_notes}}</p>
                     <br>
                   </div>
                   <div class="col-lg-6 col-md-6 col-sm-6"></div>
@@ -117,7 +117,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr v-for="item in getCompanyInvoice.items" :key="item.id">
+                          <tr v-for="item in getAdminInvoice.items" :key="item.id">
                             <td>
                               {{item.description}}
                               <!-- <p class="m-0 text-muted">
@@ -165,14 +165,14 @@
                             </td>
                             <td>
                               <h5 class="text-warning">
-                                <strong>{{parseFloat(getCompanyInvoice.grand_total) | money}}</strong>
+                                <strong>{{parseFloat(getAdminInvoice.grand_total) | money}}</strong>
                               </h5>
                               <p>
-                                <!-- {{getCompanyInvoice.sub_total | money}} -->
+                                <!-- {{getAdminInvoice.sub_total | money}} -->
                                 <!-- <br> -->
-                                {{parseFloat(getCompanyInvoice.discount) | money}}
+                                {{parseFloat(getAdminInvoice.discount) | money}}
                                 <br>
-                                {{parseFloat(getCompanyInvoice.tax) | money}}
+                                {{parseFloat(getAdminInvoice.tax) | money}}
                                 <br>
                               </p>
                             </td>
@@ -208,9 +208,9 @@
                           <td style="text-align: left;">
                             <br>
                             <br>
-                            <p>{{getCompanyInvoice.payment_account_name}}</p>
-                            <p>{{getCompanyInvoice.payment_account_sortcode}}</p>
-                            <p>{{getCompanyInvoice.payment_account_number}}</p>
+                            <p>{{getAdminInvoice.payment_account_name}}</p>
+                            <p>{{getAdminInvoice.payment_account_sortcode}}</p>
+                            <p>{{getAdminInvoice.payment_account_number}}</p>
                           </td>
                         </tr>
                       </tbody>
@@ -232,13 +232,12 @@
 
 <script>
 import * as html2pdf from "html2pdf.js";
-import { GET_COMPANY_INVOICE } from "@/store/actions.type";
+import { GET_ADMIN_INVOICE } from "@/store/actions.type";
 import { mapGetters } from "vuex";
-import { getUser } from "@/store/services/userstorage"
 // const moment = require('moment');
 
 export default {
-  name: "InvoiceDetail",
+  name: "InvoiceDetailOld",
   data() {
     return {
       invoice_subtotal: "",
@@ -263,22 +262,13 @@ export default {
         .from(element)
         .set(opt)
         .save();
-    },
-    whileCreated(){
-      console.log("this.$route.params.id", this.$route.params.id)
-      let payload = {
-        companyId : getUser().company_id,
-        invoiceId : this.$route.params.id
-      }
-      this.$store.dispatch(GET_COMPANY_INVOICE, payload);
-      console.log("this company.invoice.items ", this.getCompanyInvoice.items)
     }
   },
   created() {
-    this.whileCreated()
+    this.$store.dispatch(GET_ADMIN_INVOICE, { invoiceId: this.$route.params.id });
   },
   computed: {
-    ...mapGetters(["getCompanyInvoice"])
+    ...mapGetters(["getAdminInvoice"])
   }
 };
 </script>

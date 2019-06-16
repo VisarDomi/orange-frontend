@@ -6,227 +6,223 @@
       </div>
     </div>
 
-    <!-- Row start -->
-    <div class="row gutters generate">
-      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-        <div class="card">
-          <div class="card-body p-0">
-            <div class="invoice-container">
-              <div class="invoice-header">
-                <!-- Row start -->
-                <div class="row gutters">
-                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                    <div class="invoice-logo">
-                      <span class="text-warning">Orange Limo</span>
-                    </div>
-                  </div>
-                  <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="btn-group float-right">
-                      <!-- <a href="#" class="btn btn-outline-danger btn-sm ml-2">
-															<i class="icon-printer"></i> Print
-                      </a>-->
-                    </div>
-                  </div>
-                </div>
-                <!-- Row end -->
-              </div>
+    <div class="md-layout generate">
+      <img src="/img/RechnungInvoiceHead.JPG" alt>
 
-              <div class="invoice-address">
-                <!-- Row start -->
-                <div class="row gutters">
-                  <div class="col-lg-4 col-md-4 col-sm-4">
-                    <small>From,</small>
-                    <br>
-                    <br>
-                    <h6>{{getAdminInvoice.from_business_name}}</h6>
-                    <address>
-                      {{getAdminInvoice.from_addressline_1}}
-                      <br>
-                      {{getAdminInvoice.from_addressline_2}}
-                      <br>
-                      {{getAdminInvoice.from_city}}, {{getAdminInvoice.from_postcode}}
-                      <br>
-                      Phone: {{getAdminInvoice.from_phone}}
-                      <br>
-                      VAT: {{getAdminInvoice.from_vat}}
-                    </address>
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-4">
-                    <small>To,</small>
-                    <br>
-                    <br>
-                    <h6>{{getAdminInvoice.to_client_name}}</h6>
-                    <address>
-                      {{getAdminInvoice.to_addressline_1}}
-                      <br>
-                      {{getAdminInvoice.to_addressline_2}}
-                      <br>
-                      {{getAdminInvoice.to_city}}, {{getAdminInvoice.to_postcode}}
-                      <br>
-                      Phone: {{getAdminInvoice.to_phone}}
-                      <br>
-                      VAT: {{getAdminInvoice.to_vat}}
-                    </address>
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-4">
-                    <div class="invoice-details">
-                      <small>
-                        Invoice No -
-                        <span class="badge badge-warning">#{{getAdminInvoice.ref}}</span>
-                      </small>
-                      <br>
-                      <small>Sent - {{getAdminInvoice.date | prettyDate}}</small>
-                      <br>
-                      <small>Due - {{getAdminInvoice.due | prettyDate}}</small>
-                      <br>
-                    </div>
-                  </div>
-                </div>
-                <!-- Row end -->
-              </div>
+      <br>
 
-              <div class="invoice-body" style="padding: 3rem 1.5rem 0rem 1.5rem;">
-                <!-- Row start -->
+      <div class="md-layout-item md-layout md-size-100">
+        <div class="md-layout-item md-size-60">
+          <h4>
+            <strong style="font-weight:400;">OT Limousinenservice</strong>
+          </h4>
+        </div>
 
-                <div class="row gutters">
-                  <div class="col-lg-6 col-md-6 col-sm-6">
-                    <p>
-                      <b>Hello, {{getAdminInvoice.to_client_name}}</b>
-                    </p>
-                    <p>{{getAdminInvoice.invoice_notes}}</p>
-                    <br>
-                  </div>
-                  <div class="col-lg-6 col-md-6 col-sm-6"></div>
-                </div>
-                <!-- Row end -->
+        <div class="md-layout-item md-layout md-size-40">
+          <div class="md-layout-item md-layout md-size-100">
+            <div class="md-layout-item" style="padding-left: 0px;">
+              <p
+                style="text-align: left;margin-top: 25px;margin-bottom: 0px;font-size: 10px; height: 15px;"
+              >Datum:</p>
+              <p
+                style="text-align: left;margin-top: 0px;margin-bottom: 0px;font-size: 10px;height: 15px;"
+              >Rechnung Nr.:</p>
+              <p
+                style="text-align: left;margin-top: 0px;margin-bottom: 0px;font-size: 10px;height: 15px;"
+              >UID Nr.:</p>
+            </div>
 
-                <!-- Row start -->
-                <div class="row gutters">
-                  <div class="col-lg-12 col-md-12 col-sm-12">
-                    <div class="table-responsive">
-                      <table class="table">
-                        <thead>
-                          <tr>
-                            <th>Items</th>
-                            <th>Date</th>
-                            <th>Quantity</th>
-                            <th>Price</th>
-                            <th>Discount (%)</th>
-                            <th>Tax (%)</th>
-                            <th style="text-align: right;">Sub Total</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr v-for="item in getAdminInvoice.items" :key="item.id">
-                            <td>
-                              {{item.description}}
-                              <!-- <p class="m-0 text-muted">
-                                <small>Reference site about Lorem Ipsum, giving information on its origins</small>
-                              </p>-->
-                            </td>
-                            <td>{{item.date | prettyDate}}</td>
-                            <td>{{item.quantity}}</td>
-                            <td>{{item.price}}</td>
-                            <td>{{item.discount}}</td>
-                            <td>{{item.tax}}</td>
-                            <td style="text-align: right;">{{parseFloat(item.total) | money}}</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-                <!-- Row end -->
-
-                <!-- Row start -->
-
-                <div class="invoice-payment" style="padding: 0 0 0 1.5rem;">
-                  <div class="row gutters">
-                    <div class="col-lg-6 col-md-6 col-sm-12"></div>
-                    <div
-                      class="col-lg-2 col-md-6 col-sm-12"
-                      style="    background-color: #E9EFF5 !important;"
-                    ></div>
-                    <div class="col-lg-4 col-md-6 col-sm-12 order-last" style="padding-left: 0;">
-                      <table class="table no-border m-0" style="height: 100%;">
-                        <tbody>
-                          <tr>
-                            <td>
-                              <h5 class="text-warning">
-                                <strong>Grand Total</strong>
-                              </h5>
-                              <p>
-                                <!-- Subtotal -->
-                                <!-- <br> -->
-                                Discounted
-                                <br>Taxed
-                                <br>
-                              </p>
-                            </td>
-                            <td>
-                              <h5 class="text-warning">
-                                <strong>{{parseFloat(getAdminInvoice.grand_total) | money}}</strong>
-                              </h5>
-                              <p>
-                                <!-- {{getAdminInvoice.sub_total | money}} -->
-                                <!-- <br> -->
-                                {{parseFloat(getAdminInvoice.discount) | money}}
-                                <br>
-                                {{parseFloat(getAdminInvoice.tax) | money}}
-                                <br>
-                              </p>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-                <!-- Row end -->
-              </div>
-
-              <div class="invoice-body" style="padding: 3rem 1.5rem 0rem;">
-                <div class="row" style="     padding-bottom: 1rem;">
-                  <div
-                    class="col-lg-6 col-md-6 col-sm-12"
-                    style="    margin-left: 15px;
-    padding-right: 0px;
-    padding-left: 0px;"
-                  >
-                    <table class="table no-border m-0">
-                      <tbody>
-                        <tr>
-                          <td style="text-align: left;">
-                            <h5 class="text-warning">
-                              <strong>Payment details</strong>
-                              <p>&nbsp;</p>
-                              <p>Account Name:</p>
-                              <p>Sort Code:</p>
-                              <p>Account Number:</p>
-                            </h5>
-                          </td>
-                          <td style="text-align: left;">
-                            <br>
-                            <br>
-                            <p>{{getAdminInvoice.payment_account_name}}</p>
-                            <p>{{getAdminInvoice.payment_account_sortcode}}</p>
-                            <p>{{getAdminInvoice.payment_account_number}}</p>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <div class="col-lg-6 col-md-6 col-sm-12"></div>
-                </div>
-              </div>
-
-              <div class="invoice-footer">Thank you for your Business.</div>
+            <div class="md-layout-item">
+              <p
+                style="text-align: left;margin-top: 25px;margin-bottom: 0px;font-size: 10px;height: 15px;"
+              >3. Juni 2019</p>
+              <p
+                style="text-align: left;margin-top: 0px;margin-bottom: 0px;font-size: 10px;height: 15px;"
+              >AHG9</p>
+              <p
+                style="text-align: left;margin-top: 0px;margin-bottom: 0px;font-size: 10px;height: 15px;"
+              >ATU73409</p>
             </div>
           </div>
         </div>
       </div>
+
+      <div class="md-layout-item md-layout md-size-100">
+        <div class="md-layout-item md-layout md-size-60">
+          <br>
+          <br>
+          <div class="md-layout-item md-size-20" style="padding-left: 0;">
+            <p
+              style="text-align: left;margin-top: 25px;margin-bottom: 0px;font-size: 10px; height: 15px;"
+            >An:</p>
+          </div>
+
+          <div class="md-layout-item md-size-60">
+            <p
+              style="text-align: left;margin-top: 25px;margin-bottom: 0px;font-size: 10px; height: 15px;"
+            >Susanna Reidl</p>
+            <p
+              style="text-align: left;margin-top: 0px;margin-bottom: 0px;font-size: 10px; height: 15px;"
+            >BWM Headquarters GmbH</p>
+            <p
+              style="text-align: left;margin-top: 0px;margin-bottom: 0px;font-size: 10px; height: 15px;"
+            >Geiss strasse 3/8 .OG</p>
+            <p
+              style="text-align: left;margin-top: 0px;margin-bottom: 0px;font-size: 10px; height: 15px;"
+            >1120 Wien Osterreich</p>
+          </div>
+        </div>
+
+        <div class="md-layout-item md-layout md-size-40">
+          <div class="md-layout-item">
+            <p
+              style="text-align: left;margin-top: 25px;margin-bottom: 0px;font-size: 10px; height: 15px;"
+            >Bank Austria</p>
+            <p
+              style="text-align: left;margin-top: 0px;margin-bottom: 0px;font-size: 10px;height: 15px;"
+            >BIC: L302398234l</p>
+            <p
+              style="text-align: left;margin-top: 0px;margin-bottom: 0px;font-size: 10px;height: 15px;"
+            >IBAN: AT023423033</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="md-layout-item md-layout md-size-100">
+        <div class="md-layout-item md-size-60">
+          <br>
+          <br>
+          <table
+            style="background: #887617; border: 1px solid #c49a00; width: 95%; font-size: 8px;"
+          >
+            <tr style="background: #887617; ">
+              <th
+                style="background: #887617; color:white; border-right: 1px solid #c49a00; 
+              border-left: 1px solid #c49a00;  font-weight:100; padding:0px;
+               border-bottom: none;"
+              >Rechnungs Ersteller</th>
+              <th
+                style="background: #887617; color:white; font-weight:100; padding:0px; border-bottom: none; border-right:none;"
+              >Zahlungs Form</th>
+            </tr>
+            <tr style=" background:white;">
+              <td
+                style=";text-align:center; border-right: 1px solid #c49a00;border-left: 1px solid #c49a00; padding:0px; border-bottom: none;"
+              >Alfreds Futterkiste</td>
+              <td
+                style="text-align:center; padding:0px; border-bottom: none; border-right: none;"
+              >Monats Abrechnung</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="md-layout-item md-size-40">
+          <br>
+          <br>
+          <table
+            style="background: #887617; border: 1px solid #c49a00; width: 80%; height: 40px; float:right; font-size:8px;"
+          >
+            <tr style="background: #887617; ">
+              <th
+                style="background: #887617; color:white; border-right: 1px solid #c49a00; 
+              border-left: 1px solid #c49a00;  font-weight:100; padding:0px;
+               border-bottom: none;"
+              >Rechnungs Datum</th>
+            </tr>
+            <tr style=" background:white;">
+              <td
+                style="text-align:center; padding:0px; border-bottom: none; border-right: none;"
+              >Mai 2019</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div
+        class="md-layout-item md-layout md-size-100"
+        style="padding-left: 0px; padding-right:0px;"
+      >
+        <table style="width: 100%;  margin-top:20px; font-size:8px; text-align:center;">
+          <tr>
+            <th
+              style="width:80px; border-top:1px solid black; border-left: 1px solid black;"
+            >Pickup Date</th>
+            <th style="width:50px;border-top:1px solid black;">KSt</th>
+            <th style="width:70px;border-top:1px solid black;">Orderer</th>
+            <th style="width:90px;border-top:1px solid black;">Message</th>
+            <th style="width:40px;border-top:1px solid black;">Stops</th>
+            <th style="border-top:1px solid black;">Pickup</th>
+            <th style="border-top:1px solid black;">Destination</th>
+            <th style="width:50px;border-top:1px solid black;">Price</th>
+          </tr>
+          <tr>
+            <td style="border-left: 1px solid black;">24-05-2019 10:10</td>
+            <td>UT2032493</td>
+            <td>Herr Kari Pidhis</td>
+            <td>Herrn Palla Modhe OS834</td>
+            <td>5</td>
+            <td>Flughafen Wien (VIE), Wien-Flughafen, Schwechat, Osterreich</td>
+            <td>Hotel Wien, Bytha Zjarrit, Wien, Osterreich</td>
+            <td>34.00</td>
+          </tr>
+
+          <!-- dont include this in vfor -->
+
+          <tr>
+            <td style="border:none;"></td>
+            <td style="border:none;"></td>
+            <td style="border:none;"></td>
+            <td style="border:none;"></td>
+            <td style="border:none;"></td>
+            <td style="border:none;"></td>
+            <td style="border:none;text-align:right;">Netto:</td>
+            <td style="border-left:1px solid black;">309.09E</td>
+          </tr>
+
+          <tr>
+            <td style="border:none;"></td>
+            <td style="border:none;"></td>
+            <td style="border:none;"></td>
+            <td style="border:none;"></td>
+            <td style="border:none;"></td>
+            <td style="border:none;"></td>
+            <td style="border:none;text-align:right;">10% MwSt:</td>
+            <td style="border-left:1px solid black;">309.09E</td>
+          </tr>
+
+          <tr>
+            <td style="border:none;"></td>
+            <td style="border:none;"></td>
+            <td style="border:none;"></td>
+            <td style="border:none;"></td>
+            <td style="border:none;"></td>
+            <td style="border:none;"></td>
+            <td style="border:none;text-align:right;">Brutto:</td>
+            <td style="border-left:1px solid black;">309.09E</td>
+          </tr>
+        </table>
+        <br>
+        <br>
+      </div>
+
+      <div class="md-layout-item md-size-100">
+        <p style="font-size:10px;">Zahlungsziel 14 Tage ab dem Rechnungsdatum.</p>
+        <br>
+        <br>
+      </div>
+
+      <div class="md-layout-item md-size-100">
+        <h3 style="text-align:center; font-size: 10px;">OT Limousinenservice KG</h3>
+        <h3 style="text-align:center; font-size: 10px;">Danke fur Ihre Zusammenarbeit!</h3>
+      </div>
+
+      <div class="md-layout-item md-size-100">
+        <br>
+        <p
+          style="color: orange; text-align: center; font-size:9px;"
+        >Steinhagegasse 9/12, 1120 Wien Osterreich Tel.: 0676/463-3237 Office@ot-limo.at</p>
+      </div>
     </div>
-    <!-- Row end -->
   </div>
 </template>
 
@@ -240,17 +236,34 @@ export default {
   name: "InvoiceDetail",
   data() {
     return {
-      invoice_subtotal: "",
-      invoice_tax: "",
-      invoice_discount: "",
-      grand_total: ""
+      invoice: {
+        ref: "ASD",
+        datum: "1999-12-31",
+        rechnung_nr: "123",
+        uid_nr: "523",
+        bank_name: "asdf",
+        bic: "adf",
+        iban: "234df",
+        an_name: "asdf",
+        an_company: "qwer",
+        an_company_address: "wefioj",
+        an_company_postcode: "2314",
+        an_company_city: "sdf",
+        an_company_state: "sdf3er",
+        rechnungsersteller: "asdfwe",
+        zahlungsform: "credit",
+        rechnung_datum: "2000-12-31",
+        zahlungsziel: "14",
+        tax: "10",
+        total: "999"
+      }
     };
   },
   components: {},
   methods: {
     exportPDF() {
       const element = document.querySelector(".generate");
-      let invoiceId = this.$route.params.id
+      let invoiceId = this.$route.params.id;
       const opt = {
         margin: 8,
         filename: `invoice-${invoiceId}.pdf`,
@@ -263,18 +276,45 @@ export default {
         .set(opt)
         .save();
     }
-  },
-  created() {
-    this.$store.dispatch(GET_ADMIN_INVOICE, { invoiceId: this.$route.params.id });
-  },
-  computed: {
-    ...mapGetters(["getAdminInvoice"])
   }
+  //   created() {
+  //     console.log("this.$route.params.id", this.$route.params.id)
+  //     this.$store.dispatch(GET_ADMIN_INVOICE, { invoiceId: this.$route.params.id });
+  //   },
+  //   computed: {
+  //     ...mapGetters(["getAdminInvoice"])
+  //   }
 };
 </script>
 
-<style scoped src="@/assets/css/bootstrap.min.css">
-</style>
 
-<style scoped src="@/assets/css/invoice.css">
+<style scoped>
+table,
+tr,
+thead,
+td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.bordered-black {
+  border: 1px solid black;
+}
+
+th,
+td {
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+  padding: 4px;
+}
 </style>

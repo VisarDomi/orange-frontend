@@ -108,30 +108,36 @@ export default {
         }
       }
     },
-    saveSecreatry(secretary) {
+    async saveSecreatry(secretary) {
       secretary.nameEditable = false;
       
       let secretaryData = {
-        // full_name: secretary.full_name,
+        secretary: {
+          full_name: secretary.full_name
+        },
         // status: secretary.status,
+        company_id: getUser().company_id,
         secretaryId: secretary.id
       };
       console.log(secretaryData);
-      this.$store.dispatch(UPDATE_SECRETARY, secretaryData);
+      await this.$store.dispatch(UPDATE_SECRETARY, secretaryData);
     },
-    delete_secretary(secretary, index) {
-      this.$store.dispatch(DELETE_SECRETARY, secretary).then(() => {
-        let payload = { company_id: getUser().company_id };
-        this.$store.dispatch(GET_SECRETARYS, payload);
-      });
+    async delete_secretary(secretary, index) {
+      let secretaryData = {
+        secretaryId: secretary.id,
+        company_id: getUser().company_id
+      }
+      await this.$store.dispatch(DELETE_SECRETARY, secretaryData)
+      let payload = { company_id: getUser().company_id };
+      this.$store.dispatch(GET_SECRETARYS, payload);
 
       this.secretarysData.splice(index, 1);
     },
     addSecretary() {
       this.$router.push({ name: "CompanyCreateSecretary" });
     },
-    open_secretary(secretary) {
-      this.$store.dispatch(GET_SECRETARY, { secretaryId: secretary.id });
+    async open_secretary(secretary) {
+      await this.$store.dispatch(GET_SECRETARY, { secretaryId: secretary.id });
       this.$router.push({
         name: "SecretaryDetail",
         params: {

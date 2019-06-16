@@ -42,20 +42,24 @@
                 </md-field>
               </md-table-toolbar>
 
-              <md-table-row slot="md-table-row" slot-scope="{ item }"  @click.native="open_invoice(item)">
+              <md-table-row
+                slot="md-table-row"
+                slot-scope="{ item }"
+                @click.native="open_invoice(item)"
+              >
                 <md-table-cell md-label="Date recieved" md-sort-by="code">
                   {{
-                  item.date 
+                  item.date
                   }}
                 </md-table-cell>
                 <md-table-cell md-label="Date due" md-sort-by="date">
                   {{
-                  item.due 
+                  item.due
                   }}
                 </md-table-cell>
                 <md-table-cell md-label="Amount">{{ item.grand_total }}</md-table-cell>
                 <!-- <md-table-cell md-label="Employee">Figure out employee</md-table-cell>
-                <md-table-cell md-label="Destination">{{item.destination}}</md-table-cell> -->
+                <md-table-cell md-label="Destination">{{item.destination}}</md-table-cell>-->
                 <!-- <md-table-cell md-label="Status" style="justify-content:left;">{{ item.status }}</md-table-cell> -->
               </md-table-row>
             </md-table>
@@ -95,8 +99,12 @@ import { Pagination } from "@/components";
 import users from "../../Tables/users";
 import Fuse from "fuse.js";
 import swal from "sweetalert2";
-import { GET_COMPANY_INVOICES, GET_COMPANY_INVOICE } from "@/store/actions.type";
+import {
+  GET_COMPANY_INVOICES,
+  GET_COMPANY_INVOICE
+} from "@/store/actions.type";
 import { mapGetters } from "vuex";
+import { getUser } from "@/store/services/userstorage";
 
 export default {
   name: "CompanyInvoices",
@@ -183,12 +191,11 @@ export default {
         confirmButtonClass: "md-button md-info"
       });
     },
-    open_invoice(item) {
-      this.$store
-        .dispatch(GET_COMPANY_INVOICE, { invoiceId: item.id })
-        .then(() => {
-          console.log("after dispatch invoice");
-        });
+    async open_invoice(item) {
+      await this.$store.dispatch(GET_COMPANY_INVOICE, { invoiceId: item.id });
+
+      console.log("after dispatch invoice");
+
       this.$router.push({
         name: "CompanyInvoiceDetail",
         params: {
@@ -226,13 +233,18 @@ export default {
       if (indexToDelete >= 0) {
         this.tableData.splice(indexToDelete, 1);
       }
+    },
+    async whileCreated(){
+      let payload = {
+        companyId: getUser().company_id
+      };
+      await this.$store.dispatch(GET_COMPANY_INVOICES, payload)
+      console.log("GET invoices now: ", this.getCompanyInvoices);
+      this.tableData = this.getCompanyInvoices;
     }
   },
   created() {
-    this.$store.dispatch(GET_COMPANY_INVOICES).then(() => {
-      console.log("GET invoices now: ", this.getCompanyInvoices);
-      this.tableData = this.getCompanyInvoices;
-    });
+    this.whileCreated()
   },
   mounted() {
     // Fuse search initialization.

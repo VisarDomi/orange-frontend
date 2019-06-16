@@ -67,9 +67,9 @@ export const UPDATE_ADMIN_ITINERARY = "updateAdminItinerary";
 export const DELETE_ADMIN_ITINERARY = "deleteAdminItinerary";
 
 // itinerary company
-// export const CREATE_COMPANY_ITINERARY = "createCompanyItinerary";
-// export const GET_COMPANY_ITINERARYS = "getCompanyItinerarys";
-// export const GET_COMPANY_ITINERARY = "getCompanyItinerary";
-// export const UPDATE_COMPANY_ITINERARY = "updateCompanyItinerary";
-// export const DELETE_COMPANY_ITINERARY = "deleteCompanyItinerary";
+export const CREATE_COMPANY_ITINERARY = "createCompanyItinerary";
+export const GET_COMPANY_ITINERARYS = "getCompanyItinerarys";
+export const GET_COMPANY_ITINERARY = "getCompanyItinerary";
+export const UPDATE_COMPANY_ITINERARY = "updateCompanyItinerary";
+export const DELETE_COMPANY_ITINERARY = "deleteCompanyItinerary";
 

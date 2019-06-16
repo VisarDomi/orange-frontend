@@ -32,7 +32,7 @@
                       <md-button
                         v-else="editingName"
                         class="md-just-icon md-warning md-simple"
-                        @click="saveChanges('name')"
+                        @click="saveCompany('name')"
                       >
                         <md-icon>done</md-icon>
                       </md-button>
@@ -52,7 +52,7 @@
                       <md-button
                         v-else="editingPayment"
                         class="md-just-icon md-warning md-simple"
-                        @click="saveChanges('payment')"
+                        @click="saveCompany('payment')"
                       >
                         <md-icon>done</md-icon>
                       </md-button>
@@ -149,19 +149,19 @@
                 <md-table-cell md-label="Actions">
                   <md-button
                     class="md-just-icon md-warning md-simple"
-                    @click.native="handleEdit(item)"
+                    @click.native="handleItineraryEdit(item)"
                   >
                     <md-icon>edit</md-icon>
                   </md-button>
                   <md-button
                     class="md-just-icon md-success md-simple"
-                    @click.native="handleDone(item)"
+                    @click.native="handleItineraryDone(item)"
                   >
                     <md-icon>done</md-icon>
                   </md-button>
                   <md-button
                     class="md-just-icon md-danger md-simple"
-                    @click.native="handleDelete(item)"
+                    @click.native="handleItineraryDelete(item)"
                   >
                     <md-icon>delete</md-icon>
                   </md-button>
@@ -200,13 +200,14 @@
     <div class="md-layout">
       <md-button class="md-warning mx-auto" @click="addItinerary()">Add new itinerary</md-button>
     </div>
+
     <!-- here starts the company employees -->
     <div class="md-layout">
       <div class="md-layout-item md-size-40">
-        <md-button class="md-warning mx-auto" @click="addEmployee()">Add new employee</md-button>
+        <md-button class="md-warning mx-auto" @click="showEmployeeForm()">Add new employee</md-button>
         <!-- employee creation form -->
 
-        <form @submit.prevent="onSubmit" v-if="!formCollapsed">
+        <form @submit.prevent="addEmployee" v-if="!formCollapsed">
           <div class="md-layout">
             <div
               class="md-layout-item md-xlarge-size-100 md-large-size-100 md-medium-size-70 md-small-size-100"
@@ -224,7 +225,7 @@
                     <div class="md-layout-item">
                       <md-field>
                         <label>Employee email</label>
-                        <md-input v-model="email" placeholder="Email"></md-input>
+                        <md-input v-model="employee.user.email" placeholder="Email"></md-input>
                       </md-field>
                     </div>
                   </div>
@@ -234,7 +235,7 @@
                     <div class="md-layout-item">
                       <md-field>
                         <label>Employee password</label>
-                        <md-input v-model="password" placeholder="Password"></md-input>
+                        <md-input v-model="employee.user.password" placeholder="Password"></md-input>
                       </md-field>
                     </div>
                   </div>
@@ -244,7 +245,7 @@
                     <div class="md-layout-item">
                       <md-field>
                         <label>Employee name</label>
-                        <md-input v-model="name" placeholder="Name and surname"></md-input>
+                        <md-input v-model="employee.full_name" placeholder="Name and surname"></md-input>
                       </md-field>
                     </div>
                   </div>
@@ -254,7 +255,7 @@
                     <div class="md-layout-item">
                       <md-field>
                         <label>Employee address</label>
-                        <md-input v-model="address" placeholder="Employee home address"></md-input>
+                        <md-input v-model="employee.address" placeholder="Employee home address"></md-input>
                       </md-field>
                     </div>
                   </div>
@@ -308,7 +309,7 @@
                     <md-button
                       v-if="!employee.nameEditable"
                       class="md-just-icon md-warning md-simple"
-                      @click="enableNameEditing(employee.id)"
+                      @click="enableEmployeeNameEditing(employee.id)"
                     >
                       <md-icon>edit</md-icon>
                     </md-button>
@@ -326,7 +327,7 @@
                     <md-button
                       v-if="!employee.addressEditable"
                       class="md-just-icon md-warning md-simple"
-                      @click="employee.addressEditable=true"
+                      @click="enableEmployeeAddressEditing(employee.id)"
                     >
                       <md-icon>edit</md-icon>
                     </md-button>
@@ -362,7 +363,6 @@ import { PricingCard, TestimonialCard } from "@/components";
 import { Pagination } from "@/components";
 import {
   CREATE_EMPLOYEE,
-  GET_EMPLOYEE,
   GET_EMPLOYEES,
   UPDATE_EMPLOYEE,
   DELETE_EMPLOYEE,
@@ -405,8 +405,8 @@ export default {
       employeesData: [],
       formCollapsed: true,
       //--end create employee
-      name: "",
-      paymentFrequency: "",
+      payment_frequency: "",
+      full_name: "",
       //so far for the details of company, below, the table needed variables
       currentSort: "name",
       currentSortOrder: "asc",
@@ -424,7 +424,7 @@ export default {
     };
   },
   methods: {
-    enableNameEditing(id) {
+    enableEmployeeNameEditing(id) {
       for (let employee in this.employeesData) {
         if (this.employeesData[employee].id == id) {
           this.employeesData[employee].nameEditable = true;
@@ -434,19 +434,29 @@ export default {
         }
       }
     },
-    saveChanges(editing) {
+    enableEmployeeAddressEditing(id) {
+      for (let employee in this.employeesData) {
+        if (this.employeesData[employee].id == id) {
+          this.employeesData[employee].addressEditable = true;
+          let cloneEmployee = { ...this.employeesData[employee] };
+          this.employeesData.splice(employee, 1);
+          this.employeesData.splice(employee, 0, cloneEmployee);
+        }
+      }
+    },
+    saveCompany(editing) {
       if (editing == "name") {
         this.editingName = false;
       } else {
         this.editingPayment = false;
       }
       let company = {
-        full_name: this.name,
-        payment_frequency: this.paymentFrequency,
+        name: this.full_name,
+        payment_frequency: this.payment_frequency,
         code: "placeholder",
         companyId: this.$route.params.id
       };
-      console.log(company);
+      // console.log(company);
       this.$store.dispatch(UPDATE_COMPANY, company);
     },
     saveEmployee(employee, editing) {
@@ -461,37 +471,46 @@ export default {
         companyId: this.$route.params.id,
         employeeId: employee.id
       };
-      console.log(employeeData);
+      // console.log(employeeData);
       this.$store.dispatch(UPDATE_EMPLOYEE, employeeData);
     },
+
     //create employee methods------------
-    async onSubmit() {
+    async addEmployee() {
+      let payload = {
+        companyId : this.$route.params.id
+      }
       let employee = {
-        email: this.email,
-        password: this.password,
-        name: this.name,
-        address: this.address,
+        user:{
+          email: this.employee.user.email,
+          password: this.employee.user.password,
+        },
+        full_name: this.employee.full_name,
+        address: this.employee.address,
+      }
+      let employeeData = {
+        employee: employee,
         companyId: this.$route.params.id
       };
 
-      await this.$store.dispatch(CREATE_EMPLOYEE, employee);
-      await this.$store.dispatch(GET_EMPLOYEES);
+      await this.$store.dispatch(CREATE_EMPLOYEE, employeeData);
+      await this.$store.dispatch(GET_EMPLOYEES, payload);
       this.employeesData = [];
       for (let employee of this.getEmployees) {
         this.employeesData.push({ ...employee });
         // spread operator is not needed
       }
       for (let employee of this.employeesData) {
-        console.log("employee object is: ", employee);
+        // console.log("employee object is: ", employee);
         employee.nameEditable = false;
         employee.addressEditable = false;
       }
-      console.log("Added new fields to employees: ", this.employeesData);
+      // console.log("Added new fields to employees: ", this.employeesData);
 
-      this.email = "";
-      this.password = "";
-      this.name = "";
-      this.address = "";
+      this.employee.user.email = "";
+      this.employee.user.password = "";
+      this.employee.full_name = "";
+      this.employee.address = "";
       this.formCollapsed = true;
     },
     async addItinerary() {
@@ -505,7 +524,7 @@ export default {
       await this.$store.dispatch(GET_COMPANY_ITINERARYS, {
         companyId: this.$route.params.id
       });
-      console.log("GET itinerarys now: ", this.getCompanyItinerarys);
+      // console.log("GET itinerarys now: ", this.getCompanyItinerarys);
       let table_id = 0;
       for (let index in this.getCompanyItinerarys) {
         this.getCompanyItinerarys[index].editable = false;
@@ -515,29 +534,23 @@ export default {
 
       //more shitfuck to clone the state array coming from store to stop vue from complaining about messing with state outside mutators
       let clone = JSON.parse(JSON.stringify(this.getCompanyItinerarys));
-      console.log("b? ", clone);
+      // console.log("b? ", clone);
       this.tableData = clone;
     },
     //end create employee methods ------
     //company employee methods ---------------------
-    addEmployee() {
+    showEmployeeForm() {
       this.formCollapsed = false;
     },
-    open_employee(employee) {
-      console.log("open_employee");
-      this.$store.dispatch(GET_EMPLOYEE, { employeeId: employee.id });
-      this.$router.push({
-        name: "CompanyEmployeeDetail",
-        params: {
-          id: employee.id
-        }
-      });
-    },
-    delete_employee(employee, index) {
-      console.log(employee);
-      this.$store.dispatch(DELETE_EMPLOYEE, employee).then(() => {
-        this.$store.dispatch(GET_EMPLOYEES);
-      });
+    async delete_employee(employee, index) {
+      // console.log("EMPLOYEE: ", employee)
+      let payload = {
+        companyId : this.$route.params.id,
+        employeeId: employee.id
+      }
+      await this.$store.dispatch(DELETE_EMPLOYEE, payload)
+      await this.$store.dispatch(GET_EMPLOYEES, payload);
+
       this.employeesData.splice(index, 1);
     },
     //end company employees methods --------------------
@@ -551,7 +564,7 @@ export default {
         return b[sortBy].localeCompare(a[sortBy]);
       });
     },
-    handleEdit(item) {
+    handleItineraryEdit(item) {
       item.editable = true;
 
       //swal isnt working for now, to be fixed too
@@ -563,17 +576,17 @@ export default {
       //     confirmButtonClass: "md-button md-info"
       //   }).fire();
     },
-    handleDone(item) {
+    handleItineraryDone(item) {
       item.editable = false;
       let itinerary = item;
       delete itinerary.editable;
       delete itinerary.timestamp;
       delete itinerary.tableId;
       delete itinerary.name;
-      console.log(itinerary);
+      // console.log(itinerary);
       this.$store.dispatch(UPDATE_COMPANY_ITINERARY, itinerary);
     },
-    handleDelete(item) {
+    handleItineraryDelete(item) {
       //add swal here too eventually
       this.$store.dispatch(DELETE_COMPANY_ITINERARY, {
         companyId: item.company_id,
@@ -590,15 +603,15 @@ export default {
         // spread operator is not needed
       }
       for (let employee of this.employeesData) {
-        console.log("employee object is: ", employee);
+        // console.log("employee object is: ", employee);
         employee.nameEditable = false;
         employee.addressEditable = false;
       }
-      console.log("Added new fields to employees: ", this.employeesData);
+      // console.log("Added new fields to employees: ", this.employeesData);
 
       //get itinerarys this needs to be get companyitineraries
       await this.$store.dispatch(GET_COMPANY_ITINERARYS, payload);
-      console.log("GET itinerarys now: ", this.getCompanyItinerarys);
+      // console.log("GET itinerarys now: ", this.getCompanyItinerarys);
       let table_id = 0;
       for (let item in this.getCompanyItinerarys) {
         this.getCompanyItinerarys[item].editable = false;
@@ -609,13 +622,14 @@ export default {
       //?ktu duhet te jet ndryshe
       //more shitfuck to clone the state array coming from store to stop vue from complaining about messing with state outside mutators
       let clone = JSON.parse(JSON.stringify(this.getCompanyItinerarys));
-      console.log("b? ", clone);
+      // console.log("b? ", clone);
       this.tableData = clone;
 
       //this is for company details
       await this.$store.dispatch(GET_COMPANY, payload);
-      this.name = this.getCompany.name;
-      this.paymentFrequency = this.getCompany.payment_frequency;
+      // console.log("company: ", this.getCompany)
+      this.full_name = this.getCompany.name;
+      this.payment_frequency = this.getCompany.payment_frequency;
     }
   },
   mounted() {
@@ -637,10 +651,10 @@ export default {
      * Returns a page from the searched data or the whole data. Search is performed in the watch section below
      */
     queriedData() {
-      console.log("Table data is: ", this.tableData);
+      // console.log("Table data is: ", this.tableData);
       let result = this.tableData;
       if (result == undefined) {
-        console.log("returning nothing");
+        // console.log("returning nothing");
         return [];
       }
       if (this.searchedData.length > 0) {

@@ -114,6 +114,8 @@
 import { UserCard } from "@/pages";
 import { GET_COMPANY_RESERVATION } from "@/store/actions.type";
 import { mapGetters } from "vuex";
+import { getUser } from "@/store/services/userstorage"
+
 export default {
   name: "CompanyReservationDetail",
   components: {
@@ -130,22 +132,29 @@ export default {
       time: ""
     };
   },
-  methods: {},
+  methods: {
+    async whileCreated(){
+      console.log("WERE")
+      let payload = {
+        companyId : getUser().company_id,
+        reservationId : this.$route.params.id
+      }
+      console.log("WERE")
+      await this.$store.dispatch(GET_COMPANY_RESERVATION, payload)
+        
+      this.name = this.getCompanyReservation.name;
+      this.date = this.getCompanyReservation.date;
+      this.destination = this.getCompanyReservation.destination;
+      this.employees = this.getCompanyReservation.employees;
+      this.pickup = this.getCompanyReservation.pickup;
+      this.status = this.getCompanyReservation.status;
+      this.time = this.getCompanyReservation.time;
+    }
+  },
   mounted() {},
   created() {
-    this.$store
-      .dispatch(GET_COMPANY_RESERVATION, {
-        reservationId: this.$route.params.id
-      })
-      .then(() => {
-        this.name = this.getCompanyReservation.name;
-        this.date = this.getCompanyReservation.date;
-        this.destination = this.getCompanyReservation.destination;
-        this.employees = this.getCompanyReservation.employees;
-        this.pickup = this.getCompanyReservation.pickup;
-        this.status = this.getCompanyReservation.status;
-        this.time = this.getCompanyReservation.time;
-      });
+    this.whileCreated()
+      
   },
   computed: {
     ...mapGetters(["getCompanyReservation"])

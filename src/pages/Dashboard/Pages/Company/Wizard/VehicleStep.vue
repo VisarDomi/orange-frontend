@@ -92,6 +92,7 @@ export default {
       ]
       for(let combination of combinations){
         if(JSON.stringify(luggages)==JSON.stringify(combination)){
+          console.log("testing luggage: true")
           return true
         }
       }

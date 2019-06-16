@@ -194,7 +194,11 @@ export const AdminService = {
   },
   putReservation(reservationId, reservation) {
     return ApiService.put(`admin/reservation/${reservationId}`, reservation);
-  }
+  },
+  
+
+
+
 };
 
 export const InvoiceService = {

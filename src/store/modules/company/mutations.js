@@ -34,7 +34,6 @@ export const mutations = {
     state.companyReservation.destination = data.destination;
     state.companyReservation.date = data.date;
     state.companyReservation.time = data.time;
-    state.companyReservation.status = "unassigned";
     // state.companyReservation.payment_method = data.paymentMethod;
     state.companyReservation.big_luggage = data.bigLuggage;
     state.companyReservation.small_luggage = data.smallLuggage;
