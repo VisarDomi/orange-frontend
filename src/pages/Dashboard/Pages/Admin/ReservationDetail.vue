@@ -75,21 +75,21 @@
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
                       <label>Destination</label>
-                      <md-input v-model="destination" disabled></md-input>
+                      <md-input v-model="getAdminReservation.destination" disabled></md-input>
                     </md-field>
                   </div>
 
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
                       <label>Date of pickup</label>
-                      <md-input :value="this.date " disabled></md-input>
+                      <md-input v-model="getAdminReservation.date" disabled></md-input>
                     </md-field>
                   </div>
 
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
                       <label>Time of pickup</label>
-                      <md-input v-model="time" disabled></md-input>
+                      <md-input v-model="getAdminReservation.time" disabled></md-input>
                     </md-field>
                   </div>
 
@@ -113,10 +113,11 @@
                       <md-input v-model="getAdminReservation.vehicle_type" disabled></md-input>
                     </md-field>
                   </div>
+
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
-                      <label>KSt</label>
-                      <md-input v-model="code" disabled></md-input>
+                      <label>Reservation Status</label>
+                      <md-input v-model="getAdminReservation.status" disabled></md-input>
                     </md-field>
                   </div>
 
@@ -129,8 +130,8 @@
 
                   <div class="md-layout-item md-small-size-100 md-size-100">
                     <md-field>
-                      <label>Status</label>
-                      <md-input v-model="status" disabled></md-input>
+                      <label>Driver status</label>
+                      <md-input v-model="driverStatus" disabled></md-input>
                     </md-field>
                   </div>
                 </div>
@@ -180,6 +181,7 @@ import { mapGetters } from "vuex";
 import {
   GET_ADMIN_RESERVATION,
   UPDATE_ADMIN_RESERVATION,
+  UPDATE_DRIVER,
   GET_DRIVERS,
   GET_DRIVER,
   GET_COMPANY
@@ -190,44 +192,11 @@ export default {
   components: {},
   data() {
     return {
-      code: "",
-      date: "",
-      destination: "",
-      employees: "",
-      pickup: "",
-      status: "",
-      time: "",
       driverName: "",
+      driverStatus: "",
       companyName: "",
       employeeNames: "",
-      selectedDriver: "",
-
-      invoice: {
-        ref: "ref2",
-        date: "2018-12-31",
-        due: "2019-12-31",
-        from_business_name: "adsf",
-        from_addressline_1: "adsfasd",
-        from_addressline_2: "wer",
-        from_city: "werf",
-        from_postcode: "sdf",
-        from_vat: "sdsf",
-        from_phone: "sdqwf",
-        to_client_name: "sdaflk",
-        to_addressline_1: "werjo",
-        to_addressline_2: "wer",
-        to_city: "werg",
-        to_postcode: "edfg",
-        to_vat: "sdwef",
-        to_phone: "sdrf",
-        payment_account_name: "weroui",
-        payment_account_sortcode: "weroi",
-        payment_account_number: "235890",
-        invoice_notes: "aerguiopd",
-        sub_total: "213",
-        tax: "123",
-        grand_total: "569"
-      }
+      selectedDriver: ""
     };
   },
   methods: {
@@ -236,12 +205,21 @@ export default {
     },
     async assignDrivers() {
       console.log("selectedDriver", this.selectedDriver);
-      let payload = {
-        reservationId: this.$route.params.id,
-        status: this.status,
-        driver_id: this.selectedDriver
+      let reservation = {
+        status: "waiting",
+        driver_id: this.selectedDriver + ""
       };
-      await this.$store.dispatch(UPDATE_ADMIN_RESERVATION, payload);
+      let payload_reservation = {
+        reservationId: this.$route.params.id,
+        reservation: reservation
+      };
+      await this.$store.dispatch(UPDATE_ADMIN_RESERVATION, payload_reservation);
+      let driver = { status: "choosing" };
+      let payload_driver = {
+        driverId: this.getAdminReservation.driver_id,
+        driver: driver
+      };
+      await this.$store.dispatch(UPDATE_DRIVER, payload_driver);
       // changeDriverName
       this.changeDriverName();
 
@@ -249,43 +227,30 @@ export default {
     },
     changeDriverName() {
       this.driverName = this.getDriver.full_name;
-      this.status = this.getAdminReservation.status;
+      this.driverStatus = this.getDriver.status;
     },
-    async updateData() {
+    async whileCreating() {
       let payload = { reservationId: this.$route.params.id };
       await this.$store.dispatch(GET_ADMIN_RESERVATION, payload);
 
-      this.name = this.getAdminReservation.name;
-      this.destination = this.getAdminReservation.destination;
-      this.date = this.getAdminReservation.date;
-      this.time = this.getAdminReservation.time;
-      this.employees = this.getAdminReservation.employees;
-      this.pickup = this.getAdminReservation.pickup;
-
-      await this.$store.dispatch(GET_DRIVERS)
-      console.log(this.getDrivers);
-    },
-    async updateDriver() {
-      await this.updateData();
-
+      await this.$store.dispatch(GET_DRIVERS);
       let driverId = this.getAdminReservation.driver_id;
       let companyId = this.getAdminReservation.company_id;
       console.log("driverId is", driverId);
       if (driverId) {
-        await this.$store.dispatch(GET_DRIVER, { driverId })
+        await this.$store.dispatch(GET_DRIVER, { driverId });
         this.changeDriverName();
       }
       if (companyId) {
-        await this.$store.dispatch(GET_COMPANY, { companyId })
+        await this.$store.dispatch(GET_COMPANY, { companyId });
         this.companyName = this.getCompany.name;
       }
     }
   },
-  mounted() {
-    // this.$store.dispatch(ADMIN_GET_RESERVATION) //get reservation with store then store it in variable, then get it with mapGetters and plug it into POST invoice
-    this.updateDriver();
+  mounted() {},
+  created() {
+    this.whileCreating();
   },
-  created() {},
   computed: {
     ...mapGetters([
       "getAdminReservation",

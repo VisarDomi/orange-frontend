@@ -46,11 +46,9 @@ export const actions = {
     });
   },
   async [UPDATE_COMPANY](context, payload) {
-    const { companyId } = payload;
-    delete payload.companyId;
-    await CompanyService.putCompany(companyId, payload).then(({ data }) => {
+    const { companyId, company } = payload;
+    await CompanyService.putCompany(companyId, company).then(({ data }) => {
       context.commit(SET_COMPANY, data);
-      return data;
     });
   },
 

@@ -29,9 +29,8 @@ export const actions = {
   },
 
   async [UPDATE_DRIVER](context, payload) {
-    const { driverId } = payload;
-    delete payload.driverId;
-    await DriverService.putDriver(driverId, payload).then(({ data }) => {
+    const { driverId, driver } = payload;
+    await DriverService.putDriver(driverId, driver).then(({ data }) => {
       context.commit(SET_DRIVER, data);
     });
   },

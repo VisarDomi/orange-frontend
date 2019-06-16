@@ -21,7 +21,7 @@
           <md-card-expand>
             <md-card-actions md-alignment="space-between">
               <div>
-                <md-button class="md-warning" @click.native="open_reservation(reservation)">Details</md-button>
+                <md-button class="md-warning" @click.native="openReservation(reservation)">Details</md-button>
               </div>
             </md-card-actions>
 
@@ -59,7 +59,7 @@ export default {
     };
   },
   methods: {
-    open_reservation(reservation) {
+    openReservation(reservation) {
       console.log("open reservation");
 
       this.$router.push({

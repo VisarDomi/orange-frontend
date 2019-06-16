@@ -12,7 +12,6 @@
           </md-card-header>
 
           <md-card-content>
-
             <div class="md-layout">
               <label class="md-layout-item md-size-15 md-form-label">Employees</label>
               <div class="md-layout-item">
@@ -30,16 +29,6 @@
                       :key="employee.id"
                     >{{employee.full_name}}</md-option>
                   </md-select>
-                </md-field>
-              </div>
-            </div>
-
-            <div class="md-layout">
-              <label class="md-layout-item md-size-15 md-form-label">Pickup</label>
-              <div class="md-layout-item">
-                <md-field>
-                  <label>Pickup Address</label>
-                  <md-input v-model="pickup" placeholder="placeholder"></md-input>
                 </md-field>
               </div>
             </div>
@@ -114,16 +103,6 @@
               </div>
             </div>
 
-            <div class="md-layout">
-              <label class="md-layout-item md-size-15 md-form-label">Reservation code</label>
-              <div class="md-layout-item">
-                <md-field>
-                  <label>Reservation code</label>
-                  <md-input v-model="code" placeholder="placeholder"></md-input>
-                </md-field>
-              </div>
-            </div>
-
             <div class="md-layout" style="margin-top:50px;">
               <div class="md-layout-item mx-auto md-size-30">
                 <md-button class="md-warning" type="submit">Create reservation</md-button>
@@ -137,9 +116,12 @@
 </template>
 
 <script>
-import { GET_EMPLOYEES, CREATE_COMPANY_RESERVATION } from "@/store/actions.type";
-
+import {
+  GET_EMPLOYEES,
+  CREATE_COMPANY_RESERVATION
+} from "@/store/actions.type";
 import { mapGetters } from "vuex";
+import { getUser } from "@/store/services/userstorage";
 
 export default {
   name: "CompanyCreateReservation",
@@ -147,32 +129,31 @@ export default {
   data() {
     return {
       selectedEmployees: [],
-      pickup: "",
       destination: "",
-      status: "",
       hours: "",
       minutes: "",
-      date: "",
-      code: ""
+      date: ""
     };
   },
   methods: {
-    onSubmit() {
+    async onSubmit() {
       let fixed_time = this.hours + ":" + this.minutes + ":00";
-      console.log("selected employees ", this.selectedEmployees)
-      let form = {
-        code: this.code,
+      console.log("selected employees ", this.selectedEmployees);
+      let reservation = {
         date: this.date,
         time: fixed_time,
         destination: this.destination,
-        pickup: this.pickup,
-        employee_ids: this.selectedEmployees
+        stops: []
       };
-      console.log("credentials are", form);
 
-      this.$store.dispatch(CREATE_COMPANY_RESERVATION, form).then(() => {
-        this.$router.push({ name: "CompanyReservations" });
-      });
+      let payload = {
+        companyId: getUser().company_id,
+        reservation: reservation
+      };
+      console.log("credentials are", payload);
+
+      await this.$store.dispatch(CREATE_COMPANY_RESERVATION, payload);
+      this.$router.push({ name: "CompanyReservations" });
     },
     onFileChange(e) {
       let files = e.target.files || e.dataTransfer.files;
@@ -212,7 +193,10 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch(GET_EMPLOYEES);
+    let payload = {
+      companyId: getUser().company_id
+    }
+    this.$store.dispatch(GET_EMPLOYEES, payload);
   },
   mounted() {
     this.onResponsiveInverted();

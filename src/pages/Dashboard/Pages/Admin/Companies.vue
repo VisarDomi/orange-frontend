@@ -25,7 +25,7 @@
           <md-card-expand>
             <md-card-actions md-alignment="space-between">
               <div>
-                <md-button class="md-warning" @click.native="open_company(company)">Details</md-button>
+                <md-button class="md-warning" @click.native="openCompany(company)">Details</md-button>
               </div>
             </md-card-actions>
 
@@ -64,7 +64,7 @@ export default {
     addCompany() {
       this.$router.push({ name: "CreateCompany" });
     },
-    open_company(company) {
+    openCompany(company) {
       this.$store.dispatch(GET_COMPANY, { companyId: company.id });
       this.$router.push({
         name: "CompanyDetail",

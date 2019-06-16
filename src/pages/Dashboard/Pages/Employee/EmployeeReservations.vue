@@ -42,7 +42,7 @@
                 </md-field>
               </md-table-toolbar>
 
-              <md-table-row slot="md-table-row" slot-scope="{ item }" @click.native="open_reservation(item)">
+              <md-table-row slot="md-table-row" slot-scope="{ item }" @click.native="openReservation(item)">
                 <!-- ["Employee", "Date", "Destination", "Code"] -->
                 <md-table-cell md-label="Employee" md-sort-by="code">
                   <span v-for="employee in item.employees" :key="employee.id">
@@ -185,7 +185,7 @@ export default {
         confirmButtonClass: "md-button md-info"
       });
     },
-    open_reservation(item) {
+    openReservation(item) {
       this.$store
         .dispatch(GET_EMPLOYEE_RESERVATION, { reservationId: item.id })
         .then(() => {

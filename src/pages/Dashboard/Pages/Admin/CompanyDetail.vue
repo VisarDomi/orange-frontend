@@ -291,7 +291,7 @@
             <md-card-expand>
               <md-card-actions md-alignment="space-between">
                 <!-- <div>
-                  <md-button class="md-warning" @click.native="open_employee(employee)">Details</md-button>
+                  <md-button class="md-warning" @click.native="openEmployee(employee)">Details</md-button>
                 </div>-->
                 <md-card-expand-trigger>
                   <md-button class="md-button md-warning">
@@ -342,7 +342,7 @@
                   <div>
                     <md-button
                       class="md-danger"
-                      @click.native="delete_employee(employee, index)"
+                      @click.native="deleteEmployee(employee, index)"
                     >Delete</md-button>
                   </div>
                 </md-card-content>
@@ -451,13 +451,15 @@ export default {
         this.editingPayment = false;
       }
       let company = {
-        name: this.full_name,
-        payment_frequency: this.payment_frequency,
-        code: "placeholder",
-        companyId: this.$route.params.id
+        name: this.name,
+        payment_frequency: this.paymentFrequency,
+        code: "placeholder"
       };
-      // console.log(company);
-      this.$store.dispatch(UPDATE_COMPANY, company);
+      let payload = {
+        companyId: this.$route.params.id,
+        company: company
+      };
+      this.$store.dispatch(UPDATE_COMPANY, payload);
     },
     saveEmployee(employee, editing) {
       if (editing == "employeeName") {
@@ -467,12 +469,15 @@ export default {
       }
       let employeeData = {
         full_name: employee.full_name,
-        address: employee.address,
-        companyId: this.$route.params.id,
-        employeeId: employee.id
+        address: employee.address
       };
-      // console.log(employeeData);
-      this.$store.dispatch(UPDATE_EMPLOYEE, employeeData);
+      let payload = {
+        companyId: this.$route.params.id,
+        employeeId: employee.id,
+        employee: employeeData
+      };
+      console.log(payload);
+      this.$store.dispatch(UPDATE_EMPLOYEE, payload);
     },
 
     //create employee methods------------
@@ -521,10 +526,11 @@ export default {
         price: "499"
       };
       await this.$store.dispatch(CREATE_COMPANY_ITINERARY, newItinerary);
-      await this.$store.dispatch(GET_COMPANY_ITINERARYS, {
-        companyId: this.$route.params.id
-      });
-      // console.log("GET itinerarys now: ", this.getCompanyItinerarys);
+
+      payload = { companyId: this.$route.params.id };
+      await this.$store.dispatch(GET_COMPANY_ITINERARYS, payload);
+      
+      console.log("GET itinerarys now: ", this.getCompanyItinerarys);
       let table_id = 0;
       for (let index in this.getCompanyItinerarys) {
         this.getCompanyItinerarys[index].editable = false;

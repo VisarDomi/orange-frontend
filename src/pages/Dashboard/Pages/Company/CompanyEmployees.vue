@@ -25,7 +25,7 @@
           <md-card-expand>
             <md-card-actions md-alignment="space-between">
               <div>
-                <md-button class="md-warning" @click.native="open_employee(employee)">Details</md-button>
+                <md-button class="md-warning" @click.native="openEmployee(employee)">Details</md-button>
               </div>
             </md-card-actions>
 
@@ -67,7 +67,7 @@ export default {
     addEmployee() {
       this.$router.push({ name: "CompanyCreateEmployee" });
     },
-    open_employee(employee) {
+    openEmployee(employee) {
       let payload = {
         companyId: this.companyId,
         employeeId: employee.id
@@ -75,9 +75,7 @@ export default {
       this.$store.dispatch(GET_EMPLOYEE, payload);
       this.$router.push({
         name: "CompanyEmployeeDetail",
-        params: {
-          id: employee.id
-        }
+        params: { id: employee.id }
       });
     },
 

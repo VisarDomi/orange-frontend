@@ -35,6 +35,7 @@ import { mapGetters } from "vuex";
 import { getUser } from "@/store/services/userstorage"
 import { CREATE_COMPANY_RESERVATION } from "@/store/actions.type";
 import { SET_COMPANY_RESERVATION } from "@/store/mutations.type";
+import { getUser } from "@/store/services/userstorage";
 
 export default {
   data() {
@@ -59,6 +60,7 @@ export default {
     onStepValidated(validated, model) {
       this.wizardModel = { ...this.wizardModel, ...model };
     },
+<<<<<<< HEAD
     async wizardComplete() {
       console.log("COMPLETED");
       let payload = {
@@ -66,6 +68,14 @@ export default {
         reservation: this.getCompanyReservation
       }
       await this.$store.dispatch(CREATE_COMPANY_RESERVATION, payload);
+=======
+    wizardComplete() {
+      let payload = {
+        reservation: this.getCompanyReservation,
+        companyId: getUser().company_id
+      };
+      this.$store.dispatch(CREATE_COMPANY_RESERVATION, payload);
+>>>>>>> 4b0acac460683001f5e867b30d93ca22b154d6fc
 
       this.$router.push({ name: "CompanyReservations" });
       // swal({

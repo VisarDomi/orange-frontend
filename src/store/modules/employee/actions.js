@@ -41,10 +41,8 @@ export const actions = {
   },
 
   async [UPDATE_EMPLOYEE](context, payload) {
-    const { companyId, employeeId } = payload;
-    delete payload.employeeId;
-    delete payload.companyId;
-    await EmployeeService.putEmployee(companyId, employeeId, payload).then(
+    const { companyId, employeeId, employee } = payload;
+    await EmployeeService.putEmployee(companyId, employeeId, employee).then(
       ({ data }) => {
         context.commit(SET_EMPLOYEE, data);
       }

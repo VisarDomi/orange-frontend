@@ -45,7 +45,11 @@
               <md-table-row
                 slot="md-table-row"
                 slot-scope="{ item }"
+<<<<<<< HEAD
                 @click.native="open_invoice(item)"
+=======
+                @click.native="openInvoice(item)"
+>>>>>>> 4b0acac460683001f5e867b30d93ca22b154d6fc
               >
                 <md-table-cell md-label="Date recieved" md-sort-by="code">
                   {{
@@ -191,11 +195,20 @@ export default {
         confirmButtonClass: "md-button md-info"
       });
     },
+<<<<<<< HEAD
     async open_invoice(item) {
       await this.$store.dispatch(GET_COMPANY_INVOICE, { invoiceId: item.id });
 
       console.log("after dispatch invoice");
 
+=======
+    openInvoice(item) {
+      this.$store
+        .dispatch(GET_COMPANY_INVOICE, { invoiceId: item.id })
+        .then(() => {
+          console.log("after dispatch invoice");
+        });
+>>>>>>> 4b0acac460683001f5e867b30d93ca22b154d6fc
       this.$router.push({
         name: "CompanyInvoiceDetail",
         params: {
@@ -234,17 +247,27 @@ export default {
         this.tableData.splice(indexToDelete, 1);
       }
     },
+<<<<<<< HEAD
     async whileCreated(){
       let payload = {
         companyId: getUser().company_id
       };
       await this.$store.dispatch(GET_COMPANY_INVOICES, payload)
       console.log("GET invoices now: ", this.getCompanyInvoices);
+=======
+    async whileCreating() {
+      let payload = { companyId: getUser().company_id };
+      await this.$store.dispatch(GET_COMPANY_INVOICES, payload);
+>>>>>>> 4b0acac460683001f5e867b30d93ca22b154d6fc
       this.tableData = this.getCompanyInvoices;
     }
   },
   created() {
+<<<<<<< HEAD
     this.whileCreated()
+=======
+    this.whileCreating();
+>>>>>>> 4b0acac460683001f5e867b30d93ca22b154d6fc
   },
   mounted() {
     // Fuse search initialization.

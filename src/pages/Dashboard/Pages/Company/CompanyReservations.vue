@@ -50,10 +50,10 @@
               <md-table-row
                 slot="md-table-row"
                 slot-scope="{ item }"
-                @click.native="open_reservation(item)"
+                @click.native="openReservation(item)"
               >
                 <!-- ["Employee", "Date", "Destination", "Code"] -->
-                <md-table-cell md-label="Employee" md-sort-by="code">
+                <md-table-cell md-label="Employee" md-sort-by="date">
                   <span v-for="stop in item.stops" :key="stop.id">
                     {{
                     stop.employee_full_name
@@ -66,7 +66,7 @@
                   }}
                 </md-table-cell>
                 <md-table-cell md-label="Destination">{{ item.destination }}</md-table-cell>
-                <md-table-cell md-label="KSt">{{ item.code }}</md-table-cell>
+                <!-- <md-table-cell md-label="KSt">{{ item.kst }}</md-table-cell> -->
                 <!-- <md-table-cell md-label="Destination">{{ item.destination }}</md-table-cell>
                 <md-table-cell md-label="Status" style="justify-content:left;">{{ item.status }}</md-table-cell>-->
               </md-table-row>
@@ -166,7 +166,7 @@ export default {
         perPageOptions: [5, 10, 25, 50],
         total: 0
       },
-      footerTable: ["Employee", "Date", "Destination", "KSt"],
+      footerTable: ["Employee", "Date", "Destination"],
       searchQuery: "",
       propsToSearch: ["name", "email", "age"],
       tableData: [],
@@ -202,17 +202,10 @@ export default {
         confirmButtonClass: "md-button md-info"
       });
     },
-    open_reservation(item) {
-      this.$store
-        .dispatch(GET_COMPANY_RESERVATION, { reservationId: item.id })
-        .then(() => {
-          console.log("after dispatch reservation");
-        });
+    openReservation(item) {
       this.$router.push({
         name: "CompanyReservationDetail",
-        params: {
-          id: item.id
-        }
+        params: { id: item.id }
       });
     },
     handleDelete(item) {
@@ -245,9 +238,15 @@ export default {
       if (indexToDelete >= 0) {
         this.tableData.splice(indexToDelete, 1);
       }
+    },
+    async whileCreating() {
+      let payload = { companyId: getUser().company_id };
+      await this.$store.dispatch(GET_COMPANY_RESERVATIONS, payload);
+      this.tableData = this.getCompanyReservations;
     }
   },
   created() {
+<<<<<<< HEAD
     let payload = {
       companyId: getUser().company_id
     };
@@ -260,6 +259,9 @@ export default {
       this.tableData = this.getCompanyReservations;
     });
     console.log("????")
+=======
+    this.whileCreating()
+>>>>>>> 4b0acac460683001f5e867b30d93ca22b154d6fc
   },
   mounted() {
     // Fuse search initialization.
