@@ -1,4 +1,3 @@
-const DashboardLayout = () => import("@/pages/Dashboard/Layout/DashboardLayout.vue");
 const EmployeeDashboardLayout = () => import("@/pages/Dashboard/Layout/EmployeeDashboardLayout.vue");
 const EmployeeReservations = () => import("@/pages/Dashboard/Pages/Employee/EmployeeReservations.vue");
 // Employee pages

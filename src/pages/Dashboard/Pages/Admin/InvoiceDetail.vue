@@ -270,20 +270,19 @@ export default {
         image: { type: "jpeg", quality: 1 },
         html2canvas: { scale: 2 }
       };
-
       html2pdf()
         .from(element)
         .set(opt)
         .save();
     }
+  },
+  created() {
+    let payload = { invoiceId: this.$route.params.id };
+    this.$store.dispatch(GET_ADMIN_INVOICE, payload);
+  },
+  computed: {
+    ...mapGetters(["getAdminInvoice"])
   }
-  //   created() {
-  //     console.log("this.$route.params.id", this.$route.params.id)
-  //     this.$store.dispatch(GET_ADMIN_INVOICE, { invoiceId: this.$route.params.id });
-  //   },
-  //   computed: {
-  //     ...mapGetters(["getAdminInvoice"])
-  //   }
 };
 </script>
 
