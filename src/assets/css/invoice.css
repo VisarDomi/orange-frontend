@@ -424,15 +424,15 @@
             /* Fallback Color */
             background-image: -webkit-gradient(linear, left top, left bottom, from(#f4f5fb), to(#ffffff));
             /* Saf4+, Chrome */
-            background-image: -webkit-linear-gradient(right, #f4f5fb, #ffffff);
+            background-image: -webkit-linear-gradient(to left, #f4f5fb, #ffffff);
             /* Chrome 10+, Saf5.1+, iOS 5+ */
-            background-image: -moz-linear-gradient(right, #f4f5fb, #ffffff);
+            background-image: -moz-linear-gradient(to left, #f4f5fb, #ffffff);
             /* FF3.6 */
-            background-image: -ms-linear-gradient(right, #f4f5fb, #ffffff);
+            background-image: -ms-linear-gradient(to left, #f4f5fb, #ffffff);
             /* IE10 */
-            background-image: -o-linear-gradient(right, #f4f5fb, #ffffff);
+            background-image: -o-linear-gradient(to left, #f4f5fb, #ffffff);
             /* Opera 11.10+ */
-            background-image: linear-gradient(right, #f4f5fb, #ffffff);
+            background-image: linear-gradient(to left, #f4f5fb, #ffffff);
             line-height: 40px;
             display: inline-block;
             text-align: center;
@@ -871,15 +871,15 @@
       /* Fallback Color */
       background-image: -webkit-gradient(linear, left top, left bottom, from(#f68d60), to(#fd7274));
       /* Saf4+, Chrome */
-      background-image: -webkit-linear-gradient(right, #f68d60, #fd7274);
+      background-image: -webkit-linear-gradient(to left, #f68d60, #fd7274);
       /* Chrome 10+, Saf5.1+, iOS 5+ */
-      background-image: -moz-linear-gradient(right, #f68d60, #fd7274);
+      background-image: -moz-linear-gradient(to left, #f68d60, #fd7274);
       /* FF3.6 */
-      background-image: -ms-linear-gradient(right, #f68d60, #fd7274);
+      background-image: -ms-linear-gradient(to left, #f68d60, #fd7274);
       /* IE10 */
-      background-image: -o-linear-gradient(right, #f68d60, #fd7274);
+      background-image: -o-linear-gradient(to left, #f68d60, #fd7274);
       /* Opera 11.10+ */
-      background-image: linear-gradient(right, #f68d60, #fd7274);
+      background-image: linear-gradient(to left, #f68d60, #fd7274);
       -webkit-border-radius: 30px;
       -moz-border-radius: 30px;
       border-radius: 30px; }
