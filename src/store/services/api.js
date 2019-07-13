@@ -8,7 +8,7 @@ const API_URL = "https://orange-backend.ml/api";
 export const ApiService = {
   init() {
     axios.defaults.headers.common = {
-      "Secure-Api-Key": "asdfasdfetye1a2",
+      "Secure-Api-Key": "asdfasdfetye1a2-v3",
       "Content-Type": "application/json"
     };
     Vue.use(VueAxios, axios);

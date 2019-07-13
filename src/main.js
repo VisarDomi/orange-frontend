@@ -9,13 +9,6 @@ import { yearFormat, hourFormat, prettyDate } from "./common/date.filter";
 import ErrorFilter from "./common/error.filter";
 import * as VueGoogleMaps from "vue2-google-maps";
 
-Vue.use(VueGoogleMaps, {
-  load: {
-    key: "AIzaSyBzlLYISGjL_ovJwAehh6ydhB56fCCpPQw",
-    libraries: "places"
-  }
-});
-
 // Plugins
 import App from "./App";
 import Chartist from "chartist";
@@ -26,6 +19,12 @@ import store from "./store";
 import "./registerServiceWorker";
 console.log("first");
 console.log("getToken()", getToken());
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: "AIzaSyBzlLYISGjL_ovJwAehh6ydhB56fCCpPQw",
+    libraries: "places"
+  }
+});
 // plugin setup
 Vue.use(VueRouter);
 Vue.use(DashboardPlugin);
