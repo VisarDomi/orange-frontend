@@ -25,7 +25,7 @@ import { setMeta } from "./common";
 export const admin = {
   path: "",
   name: "Home",
-  redirect: "/dashboard",
+  redirect: "/reservations",
   component: DashboardLayout,
   children: [
     {
