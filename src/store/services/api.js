@@ -3,12 +3,12 @@ import axios from "axios";
 import VueAxios from "vue-axios";
 import { getToken } from "./jwt";
 
-const API_URL = "https://orange-backend.ml/api";
+const API_URL = "http://127.0.0.1:5000/api";
 
 export const ApiService = {
   init() {
     axios.defaults.headers.common = {
-      "Secure-Api-Key": "asdfasdfetye1a2-v3",
+      "Secure-Api-Key": "asdfasdfetye1a1-v4",
       "Content-Type": "application/json"
     };
     Vue.use(VueAxios, axios);
